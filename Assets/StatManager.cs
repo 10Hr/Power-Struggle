@@ -4,8 +4,7 @@ using UnityEngine;
 using Mirror;
 using UnityEngine.UI;
 
-public class StatManager : NetworkBehaviour
-{
+public class StatManager : NetworkBehaviour {
     private GameObject player1;
     private GameObject player2;
     private GameObject player3;
