@@ -15,8 +15,21 @@ public class StatManager : NetworkBehaviour {
 
     public void getCount() { count++; }
 
-    void Awake() { playerManager = GameObject.Find("PlayerManager").GetComponent<PlayerManager>(); }
-  
+    void Awake() { 
+        playerManager = GameObject.Find("PlayerManager").GetComponent<PlayerManager>();
+        //GameObject.Find("Main Camera").SetActive(false);
+    }
+
+    private void Update()
+    {
+        //NEVER HAPPENS
+        if (player4 != null)
+        {
+            Debug.Log("ALL 4 ARE HERE");
+            getREADYBABYWOOOOOOOOOOOO();
+        }
+    }
+
     public void Increment() {
         //Get the button that is being pressed
         GameObject thisButton = UnityEngine.EventSystems.EventSystem.current.currentSelectedGameObject;
@@ -314,16 +327,16 @@ public class StatManager : NetworkBehaviour {
 
     void getREADYBABYWOOOOOOOOOOOO() {
 
-        if (player1.GetComponent<PlayerScript>().Available == player1.GetComponent<PlayerScript>().Max) 
+        if (player1.GetComponent<PlayerScript>().Available == 0)//player1.GetComponent<PlayerScript>().Max) 
             player1.GetComponent<PlayerScript>().ReadyUp();
 
-        if (player2.GetComponent<PlayerScript>().Available == player2.GetComponent<PlayerScript>().Max) 
+        if (player2.GetComponent<PlayerScript>().Available == 0)//player2.GetComponent<PlayerScript>().Max) 
             player2.GetComponent<PlayerScript>().ReadyUp();
         
-        if (player3.GetComponent<PlayerScript>().Available == player3.GetComponent<PlayerScript>().Max) 
+        if (player3.GetComponent<PlayerScript>().Available == 0)//player3.GetComponent<PlayerScript>().Max) 
             player3.GetComponent<PlayerScript>().ReadyUp();
     
-        if (player4.GetComponent<PlayerScript>().Available == player4.GetComponent<PlayerScript>().Max) 
+        if (player4.GetComponent<PlayerScript>().Available == 0)//player4.GetComponent<PlayerScript>().Max) 
             player4.GetComponent<PlayerScript>().ReadyUp();
 
         if (player1.GetComponent<PlayerScript>().ReadyUp() == true && player2.GetComponent<PlayerScript>().ReadyUp() == true && player3.GetComponent<PlayerScript>().ReadyUp() == true && player4.GetComponent<PlayerScript>().ReadyUp() == true) {

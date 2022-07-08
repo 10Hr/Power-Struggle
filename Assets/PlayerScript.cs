@@ -87,17 +87,11 @@ public class PlayerScript : NetworkBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        // GameObject newCard;
-        //newCard = Instantiate(GameObject.Find("Main Camera").GetComponent<InstantiatePrefab>().chaPrefab);
-        //newCard.transform.position = new Vector3(0, 0, 0);
-        //newCard.GetComponent<SpriteRenderer>().enabled = true;
-
-
 
         if (isLocalPlayer)
         {
             //assign cameras
-            GameObject.Find("Main Camera").SetActive(false);
+            //GameObject.Find("Main Camera").SetActive(false);
             camera1.SetActive(false);
             camera2.SetActive(false);
             camera3.SetActive(false);
@@ -125,22 +119,6 @@ public class PlayerScript : NetworkBehaviour
                     break;
             }
         }
-        //GameObject.Find("Main Camera").SetActive(false);
-
-        /*if (isLocalPlayer)
-        {
-            for (int i = 1; i < 5; i++)
-            {
-                if (i != playerCount)
-                {
-                    GameObject.Find("playerCamera" + i).SetActive(false);
-                    Debug.Log("Camera disabled: " + i);
-                }
-            }
-            GameObject.Find("Main Camera").SetActive(false);
-            //GameObject.Find("playerCamera" + playerCount).SetActive(false); ;
-        }*/
-
     }
 
     // Update is called once per frame
@@ -152,29 +130,35 @@ public class PlayerScript : NetworkBehaviour
             return;
         }
 
-        float moveHorizontal = Input.GetAxis("Horizontal");
-        float moveVertical = Input.GetAxis("Vertical");
-        Vector3 movement = new Vector3(moveHorizontal * 0.1f, moveVertical * 0.1f, 0);
-        transform.position = transform.position + movement;
-
         if ((readied && deck == null) || (readied && deck.GetComponent<DeckScript>().Type != highest))
         {
+            Debug.Log("I want to get my deck");
             highest = FindHighestStat();
             deck = new GameObject("deck");
             deck.AddComponent<DeckScript>();
+            Debug.Log("My deck is " + highest);
         }
-        if (deck != null && GameObject.Find("deck").GetComponent<DeckScript>().cards.Count != 0)
+        if (deck != null && deck.GetComponent<DeckScript>().cards.Count != 0)//GameObject.Find("deck").GetComponent<DeckScript>().cards.Count != 0)
         {
+            Debug.Log("I want to draw");
             while (hand.Count != 8)
             {
                 Draw();
             }
+            Debug.Log("I drew " + hand.Count);
         }
         if (availablePoints == 0 && readied)
         {
             foreach (GameObject b in buttons)
             {
                 b.SetActive(false);
+            }
+        }
+        else
+        {
+            foreach (GameObject b in buttons)
+            {
+                b.SetActive(true);
             }
         }
     }
@@ -217,19 +201,19 @@ public class PlayerScript : NetworkBehaviour
         switch (deck.GetComponent<DeckScript>().Type)
         {
             case "charisma":
-                 cardReplacement = Instantiate(GameObject.Find("Main Camera").GetComponent<InstantiatePrefab>().chaPrefab);
+                 cardReplacement = Instantiate(camera1.GetComponent<InstantiatePrefab>().chaPrefab);
                 break;
 
             case "cunning":
-                 cardReplacement = Instantiate(GameObject.Find("Main Camera").GetComponent<InstantiatePrefab>().cunPrefab);
+                 cardReplacement = Instantiate(camera1.GetComponent<InstantiatePrefab>().cunPrefab);
                 break;
 
             case "strength":
-                 cardReplacement = Instantiate(GameObject.Find("Main Camera").GetComponent<InstantiatePrefab>().strPrefab);
+                 cardReplacement = Instantiate(camera1.GetComponent<InstantiatePrefab>().strPrefab);
                 break;
 
             case "intelligence":
-                 cardReplacement = Instantiate(GameObject.Find("Main Camera").GetComponent<InstantiatePrefab>().intPrefab);
+                 cardReplacement = Instantiate(camera1.GetComponent<InstantiatePrefab>().intPrefab);
                 break;
 
             default:
@@ -247,31 +231,12 @@ public class PlayerScript : NetworkBehaviour
         cardReplacement.GetComponent<SpriteRenderer>().sortingOrder = 1;
         cardReplacement.GetComponent<CardScript>().name = hand[hand.Count - 1].GetComponent<CardScript>().name;
         hand[hand.Count - 1].SetActive(false);
-        if (isLocalPlayer)
-        {
-            Debug.Log("Worked");
-            GameObject funnyCard = Instantiate(GameObject.Find("Main Camera").GetComponent<InstantiatePrefab>().intPrefab);
-            funnyCard.GetComponent<SpriteRenderer>().enabled = true;
-            funnyCard.transform.position = new Vector3(10, 10, 0);
-            CmdSpawnCards(funnyCard);
-        }
     }
 
     public bool ReadyUp() {
-
-        if (availablePoints == 0)
-            readied = true;
-        return readied;
-    }
-
-    [Command]
-    void CmdSpawnCards(GameObject card)
-    {
-        Debug.Log("Worked");
-
-        NetworkServer.Spawn(card);
-        
-        //NetworkServer.Spawn(card);
+        readied = true;
+        Debug.Log("I am READY!");
+        return true;
     }
 
 }
