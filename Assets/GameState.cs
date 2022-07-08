@@ -53,6 +53,7 @@ public class GameState : MonoBehaviour
             case GameStates.Setup:
                 if (allReady)
                 {
+                    Debug.Log("Switching Game State");
                     currentState = GameStates.Passive;
                 }
                 break;
@@ -60,6 +61,7 @@ public class GameState : MonoBehaviour
             case GameStates.Passive:
                 if (passivesSelected)
                 {
+                    Debug.Log("Switching Game State");
                     currentState = GameStates.StartEvent;
                 }
                 break;

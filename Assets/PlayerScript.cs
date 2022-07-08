@@ -241,9 +241,16 @@ public class PlayerScript : NetworkBehaviour
         hand[hand.Count - 1].SetActive(false);
     }
 
-    public void ReadyUp() {
+    public bool ReadyUp() {
         Debug.Log("I am READY!");
-        readied = true;
+
+        if (availablePoints == 0)
+        {
+            readied = true;
+            return true;
+        }
+        else
+            return false;
     }
 
 }

@@ -19,6 +19,7 @@ public class PlayerManager : NetworkBehaviour {
     public int playerCount;
     NetworkIdentity[] listObjects;
     StatManager stats;
+    GameState gameManager;
 
     bool p1ready, p2ready, p3ready, p4ready;
     
@@ -34,7 +35,8 @@ public class PlayerManager : NetworkBehaviour {
     // Start is called before the first frame update
     void Awake()
     {
-        playerIDs = new List<NetworkIdentity>();   
+        playerIDs = new List<NetworkIdentity>();
+        gameManager = GameObject.Find("FSM").GetComponent<GameState>();
     }
 
     // Update is called once per frame
@@ -108,21 +110,26 @@ public class PlayerManager : NetworkBehaviour {
     public void readyUP() {
         string bntTag = UnityEngine.EventSystems.EventSystem.current.currentSelectedGameObject.tag;
         if (bntTag == "Player1") {
-            p1ready = true;
+            if (player1.GetComponent<PlayerScript>().ReadyUp())
+                p1ready = true;
         }
         else if (bntTag == "Player2") {
-            p2ready = true;
+            if (player1.GetComponent<PlayerScript>().ReadyUp())
+                p2ready = true;
         }
         else if (bntTag == "Player3") {
-            p3ready = true;
+            if (player1.GetComponent<PlayerScript>().ReadyUp())
+                p3ready = true;
         }
         else if (bntTag == "Player4") {
-            p4ready = true;
+            if (player1.GetComponent<PlayerScript>().ReadyUp())
+                p4ready = true;
         }
 
         if (p1ready && p2ready && p3ready && p4ready) {
             Debug.Log("All players are ready!");
             //start game
+            gameManager.AllReady = true;
         }
 
     }
