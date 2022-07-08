@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Mirror;
 
 //List of game states
 public enum GameStates
@@ -12,7 +13,7 @@ public enum GameStates
     Event //event
 }
 
-public class GameState : MonoBehaviour
+public class GameState : NetworkBehaviour
 {
     private GameStates currentState;
     private bool allReady = false;
