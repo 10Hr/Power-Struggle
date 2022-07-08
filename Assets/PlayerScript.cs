@@ -191,15 +191,13 @@ public class PlayerScript : NetworkBehaviour
         }
     }
 
-    public void Draw()
-    {
+    public void Draw() {
 
         hand.Add(deck.GetComponent<DeckScript>().cards[0]);
         deck.GetComponent<DeckScript>().cards.RemoveAt(0);
         GameObject cardReplacement;
         
-        switch (deck.GetComponent<DeckScript>().Type)
-        {
+        switch (deck.GetComponent<DeckScript>().Type) {
             case "charisma":
                  cardReplacement = Instantiate(camera1.GetComponent<InstantiatePrefab>().chaPrefab);
                 break;
@@ -233,10 +231,10 @@ public class PlayerScript : NetworkBehaviour
         hand[hand.Count - 1].SetActive(false);
     }
 
-    public bool ReadyUp() {
+    public void ReadyUp() {
         readied = true;
         Debug.Log("I am READY!");
-        return true;
+
     }
 
 }

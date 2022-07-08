@@ -20,6 +20,9 @@ public class PlayerManager : NetworkBehaviour {
     NetworkIdentity[] listObjects;
     StatManager stats;
 
+    bool p1ready, p2ready, p3ready, p4ready;
+    
+
 
     public void getCount() { playerCount++; } //player count
 
@@ -102,5 +105,29 @@ public class PlayerManager : NetworkBehaviour {
             return null;
     }
 
+    public void readyUP() {
+        string bntTag = UnityEngine.EventSystems.EventSystem.current.currentSelectedGameObject.tag;
+        if (bntTag == "Player1") {
+            player1.GetComponent<PlayerScript>().ReadyUp();
+            p1ready = true;
+        }
+        else if (bntTag == "Player2") {
+            player2.GetComponent<PlayerScript>().ReadyUp();
+            p2ready = true;
+        }
+        else if (bntTag == "Player3") {
+            player3.GetComponent<PlayerScript>().ReadyUp();
+            p3ready = true;
+        }
+        else if (bntTag == "Player4") {
+            player4.GetComponent<PlayerScript>().ReadyUp();
+            p4ready = true;
+        }
 
+        if (p1ready && p2ready && p3ready && p4ready) {
+            Debug.Log("All players are ready!");
+            //start game
+        }
+
+    }
 }

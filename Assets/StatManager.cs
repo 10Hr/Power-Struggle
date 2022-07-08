@@ -324,25 +324,4 @@ public class StatManager : NetworkBehaviour {
 
     }
 
-
-    void getREADYBABYWOOOOOOOOOOOO() {
-
-        if (player1.GetComponent<PlayerScript>().Available == 0)//player1.GetComponent<PlayerScript>().Max) 
-            player1.GetComponent<PlayerScript>().ReadyUp();
-
-        if (player2.GetComponent<PlayerScript>().Available == 0)//player2.GetComponent<PlayerScript>().Max) 
-            player2.GetComponent<PlayerScript>().ReadyUp();
-        
-        if (player3.GetComponent<PlayerScript>().Available == 0)//player3.GetComponent<PlayerScript>().Max) 
-            player3.GetComponent<PlayerScript>().ReadyUp();
-    
-        if (player4.GetComponent<PlayerScript>().Available == 0)//player4.GetComponent<PlayerScript>().Max) 
-            player4.GetComponent<PlayerScript>().ReadyUp();
-
-        if (player1.GetComponent<PlayerScript>().ReadyUp() == true && player2.GetComponent<PlayerScript>().ReadyUp() == true && player3.GetComponent<PlayerScript>().ReadyUp() == true && player4.GetComponent<PlayerScript>().ReadyUp() == true) {
-            Debug.Log("All players are ready! WOOOOOOOOOOOO!!?!");
-        }
-
-    }
-
 }
