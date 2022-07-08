@@ -108,19 +108,15 @@ public class PlayerManager : NetworkBehaviour {
     public void readyUP() {
         string bntTag = UnityEngine.EventSystems.EventSystem.current.currentSelectedGameObject.tag;
         if (bntTag == "Player1") {
-            player1.GetComponent<PlayerScript>().ReadyUp();
             p1ready = true;
         }
         else if (bntTag == "Player2") {
-            player2.GetComponent<PlayerScript>().ReadyUp();
             p2ready = true;
         }
         else if (bntTag == "Player3") {
-            player3.GetComponent<PlayerScript>().ReadyUp();
             p3ready = true;
         }
         else if (bntTag == "Player4") {
-            player4.GetComponent<PlayerScript>().ReadyUp();
             p4ready = true;
         }
 
