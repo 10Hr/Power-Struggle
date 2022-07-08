@@ -26,7 +26,6 @@ public class StatManager : NetworkBehaviour {
         if (player4 != null)
         {
             Debug.Log("ALL 4 ARE HERE");
-            getREADYBABYWOOOOOOOOOOOO();
         }
     }
 
