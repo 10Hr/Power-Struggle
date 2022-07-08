@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 //List of game states
-enum GameStates
+public enum GameStates
 {
     Setup, //players picking stats
     Passive, //players picking passive
@@ -14,7 +14,6 @@ enum GameStates
 
 public class GameState : MonoBehaviour
 {
-    //fields
     private GameStates currentState;
     private bool allReady = false;
     private bool passivesSelected = false;
@@ -27,6 +26,10 @@ public class GameState : MonoBehaviour
     public bool PassivesSelected
     {
         set { passivesSelected = value; }
+    }
+    public GameStates CurrentState
+    {
+        get { return currentState; }
     }
 
     // Start is called before the first frame update

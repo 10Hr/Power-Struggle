@@ -21,6 +21,8 @@ public class PlayerScript : NetworkBehaviour
     [SyncVar]
     private int playerCount;
     StatManager stats;
+    GameState gameManager;
+    GameStates currentState;
 
 
 
@@ -82,6 +84,8 @@ public class PlayerScript : NetworkBehaviour
         camera4 = GameObject.Find("playerCamera4");
 
         canvas = GameObject.FindGameObjectWithTag("MainCanvas");
+
+        gameManager = GameObject.Find("FSM").GetComponent<GameState>();
     }
 
     // Start is called before the first frame update
@@ -130,44 +134,50 @@ public class PlayerScript : NetworkBehaviour
             return;
         }
 
-        if ((readied && deck == null) || (readied && deck.GetComponent<DeckScript>().Type != highest))
-        {
-            Debug.Log("I want to get my deck");
-            highest = FindHighestStat();
-            deck = new GameObject("deck");
-            deck.AddComponent<DeckScript>();
-            Debug.Log("My deck is " + highest);
-        }
-        if (deck != null && deck.GetComponent<DeckScript>().cards.Count != 0)//GameObject.Find("deck").GetComponent<DeckScript>().cards.Count != 0)
-        {
-            Debug.Log("I want to draw");
-            while (hand.Count != 8)
-            {
-                Draw();
-            }
-            Debug.Log("I drew " + hand.Count);
-        }
-        if (availablePoints == 0 && readied)
-        {
-            foreach (GameObject b in buttons)
-            {
-                b.SetActive(false);
-            }
-        }
-        else
-        {
-            foreach (GameObject b in buttons)
-            {
-                b.SetActive(true);
-            }
-        }
-    }
+        currentState = gameManager.CurrentState;
 
-    void GetPlayerIDServer() {
-        if (isServer) {
-            //NetworkServer.//FindLocalObject(playerManager.GetID(0));
+        switch (currentState)
+        {
+            case GameStates.Setup:
+                //Repeat all of this in turn
+                if ((readied && deck == null) || (readied && deck.GetComponent<DeckScript>().Type != highest))
+                {
+                    Debug.Log("I want to get my deck");
+                    highest = FindHighestStat();
+                    deck = new GameObject("deck");
+                    deck.AddComponent<DeckScript>();
+                    Debug.Log("My deck is " + highest);
+                }
+                if (deck != null && deck.GetComponent<DeckScript>().cards.Count != 0)
+                {
+                    Debug.Log("I want to draw");
+                    while (hand.Count != 8)
+                    {
+                        Draw();
+                    }
+                    Debug.Log("I drew " + hand.Count);
+                }
+                if (availablePoints == 0 && readied)
+                {
+                    foreach (GameObject b in buttons)
+                    {
+                        b.SetActive(false);
+                    }
+                }
+                else
+                {
+                    foreach (GameObject b in buttons)
+                    {
+                        b.SetActive(true);
+                    }
+                }
+                break;
+            case GameStates.Passive:
+                break;
+            default:
+                break;
         }
-
+        
     }
 
     public string FindHighestStat()
@@ -232,9 +242,8 @@ public class PlayerScript : NetworkBehaviour
     }
 
     public void ReadyUp() {
-        readied = true;
         Debug.Log("I am READY!");
-
+        readied = true;
     }
 
 }
