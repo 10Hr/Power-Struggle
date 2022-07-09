@@ -146,6 +146,7 @@ public class PlayerScript : NetworkBehaviour
                     highest = FindHighestStat();
                     deck = new GameObject("deck");
                     deck.AddComponent<DeckScript>();
+                    deck.GetComponent<DeckScript>().getOwner(netID);
                     Debug.Log("My deck is " + highest);
                 }
                 if (deck != null && deck.GetComponent<DeckScript>().cards.Count != 0)

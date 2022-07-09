@@ -8,8 +8,14 @@ using Mirror;
 public class DeckScript : NetworkBehaviour
 {
     private string type;
-    //public Sprite[] spriteArray;
     public List<GameObject> cards = new List<GameObject>();
+    private GameObject player1;
+    private GameObject player2;
+    private GameObject player3;
+    private GameObject player4;
+    private GameObject thisPlayer;
+    private NetworkIdentity thisID;
+    PlayerManager playerManager;
 
     public string Type
     {
@@ -19,21 +25,37 @@ public class DeckScript : NetworkBehaviour
 
     private void Awake()
     {
-        if (!isLocalPlayer)
+        playerManager = GameObject.Find("PlayerManager").GetComponent<PlayerManager>();
+
+        //type = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerScript>().Highest;
+    }
+
+    public void getOwner(NetworkIdentity netID)
+    {
+        thisID = netID;
+        if (playerManager.getPlayer(0).GetComponent<NetworkIdentity>() == thisID)
         {
-            return;
+            thisPlayer = playerManager.getPlayer(0);
         }
-        type = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerScript>().Highest;
+        else if(playerManager.getPlayer(1).GetComponent<NetworkIdentity>() == thisID)
+        {
+            thisPlayer = playerManager.getPlayer(1);
+        }
+        else if(playerManager.getPlayer(2).GetComponent<NetworkIdentity>() == thisID)
+        {
+            thisPlayer = playerManager.getPlayer(2);
+        }
+        else if(playerManager.getPlayer(3).GetComponent<NetworkIdentity>() == thisID)
+        {
+            thisPlayer = playerManager.getPlayer(3);
+        }
+        type = thisPlayer.GetComponent<PlayerScript>().Highest;
+        CreateDeck();
     }
 
     // Start is called before the first frame update
-    void Start()
+    void CreateDeck()
     {
-
-        if (!isLocalPlayer)
-        {
-            return;
-        }
 
         string path = null;
         string line = null;
