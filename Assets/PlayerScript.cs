@@ -5,33 +5,49 @@ using Mirror;
 //CLIENT SCRIPT
 public class PlayerScript : NetworkBehaviour
 {
+
+    //Fields
+
+    //Networking attributes
     NetworkIdentity netID;
-    private GameObject deck;
+    [SyncVar]
+    private int playerCount;
+
+    //Player attributes
     private int charisma = 0;
     private int cunning = 0;
     private int intelligence = 0;
     private int strength = 0;
     private string highest;
-    public List<GameObject> hand = new List<GameObject>();
-    private List<GameObject> realHand = new List<GameObject>();
     private int availablePoints = 8;
     private int maxPoints = 8;
     private bool readied = false;
-    public GameObject[] buttons;
-    [SyncVar]
-    private int playerCount;
+
+    //player belongings
+    private GameObject deck;
+
+    //data structures
+    public List<GameObject> buttons;
+    public GameObject[] childButtons;
+    public GameObject[] player1GUI;
+    public GameObject[] player2GUI;
+    public GameObject[] player3GUI;
+    public GameObject[] player4GUI;
+    public List<GameObject> hand = new List<GameObject>();
+    private List<GameObject> realHand = new List<GameObject>();
+
+    //Other Objects
     StatManager stats;
     GameState gameManager;
     GameStates currentState;
-
-
-
     GameObject camera1;
     GameObject camera2;
     GameObject camera3;
     GameObject camera4;
     GameObject canvas;
 
+
+    //Stat Properties
     public int Charisma
     {
         get { return charisma; }
@@ -52,10 +68,14 @@ public class PlayerScript : NetworkBehaviour
         get { return strength; }
         set { strength = value; }
     }
+
+    //highest stat peroperty
     public string Highest
     {
         get { return highest; }
     }
+
+    //stat check propeties
     public int Available
     {
         get { return availablePoints; }
@@ -69,6 +89,8 @@ public class PlayerScript : NetworkBehaviour
 
     public void getCount() { playerCount++; }
     //before start
+
+    //initializations
     void Awake()
     {
         //get net ID and send it to player manager
@@ -76,7 +98,10 @@ public class PlayerScript : NetworkBehaviour
         playerCount = GameObject.Find("PlayerManager").GetComponent<PlayerManager>().AddNet(netID);
 
         //add all increment and decrement buttons to list
-        buttons = GameObject.FindGameObjectsWithTag("Change");
+        player1GUI = GameObject.FindGameObjectsWithTag("Player1");
+        player2GUI = GameObject.FindGameObjectsWithTag("Player2");
+        player3GUI = GameObject.FindGameObjectsWithTag("Player3");
+        player4GUI = GameObject.FindGameObjectsWithTag("Player4");
 
         camera1 = GameObject.Find("playerCamera1");
         camera2 = GameObject.Find("playerCamera2");
@@ -89,6 +114,8 @@ public class PlayerScript : NetworkBehaviour
     }
 
     // Start is called before the first frame update
+    //assign camera
+    //remove other players GUI
     void Start()
     {
 
@@ -104,21 +131,70 @@ public class PlayerScript : NetworkBehaviour
             switch (playerCount)
             {
                 case 1:
+                    //camera setup
                     camera1.SetActive(true);
                     canvas.GetComponent<Canvas>().worldCamera = camera1.GetComponent<Camera>();
+
+                    //gui setup
+                    foreach (GameObject g in player2GUI)
+                        g.SetActive(false);
+                    foreach (GameObject g in player3GUI)
+                        g.SetActive(false);
+                    foreach (GameObject g in player4GUI)
+                        g.SetActive(false);
+
+                    //get this players add/sub buttons
+                    childButtons = GameObject.FindGameObjectsWithTag("Change");
+                    foreach (GameObject c in childButtons)
+                        buttons.Add(c.transform.parent.gameObject);
+
                     break;
                 case 2:
                     camera2.SetActive(true);
                     canvas.GetComponent<Canvas>().worldCamera = camera2.GetComponent<Camera>();
+
+                    foreach (GameObject g in player1GUI)
+                        g.SetActive(false);
+                    foreach (GameObject g in player3GUI)
+                        g.SetActive(false);
+                    foreach (GameObject g in player4GUI)
+                        g.SetActive(false);
+
+                    childButtons = GameObject.FindGameObjectsWithTag("Change");
+                    foreach (GameObject c in childButtons)
+                        buttons.Add(c.transform.parent.gameObject);
                     break;
                 case 3:
                     camera3.SetActive(true);
                     canvas.GetComponent<Canvas>().worldCamera = camera3.GetComponent<Camera>();
+
+                    foreach (GameObject g in player1GUI)
+                        g.SetActive(false);
+                    foreach (GameObject g in player2GUI)
+                        g.SetActive(false);
+                    foreach (GameObject g in player4GUI)
+                        g.SetActive(false);
+
+                    childButtons = GameObject.FindGameObjectsWithTag("Change");
+                    foreach (GameObject c in childButtons)
+                        buttons.Add(c.transform.parent.gameObject);
                     break;
                 case 4:
                     camera4.SetActive(true);
                     canvas.GetComponent<Canvas>().worldCamera = camera4.GetComponent<Camera>();
+
+                    foreach (GameObject g in player1GUI)
+                        g.SetActive(false);
+                    foreach (GameObject g in player2GUI)
+                        g.SetActive(false);
+                    foreach (GameObject g in player3GUI)
+                        g.SetActive(false);
+
+                    childButtons = GameObject.FindGameObjectsWithTag("Change");
+                    foreach (GameObject c in childButtons)
+                        buttons.Add(c.transform.parent.gameObject);
                     break;
+
                 default:
                     break;
             }
@@ -126,6 +202,7 @@ public class PlayerScript : NetworkBehaviour
     }
 
     // Update is called once per frame
+    //FSM CODE
     void Update()
     {
 
@@ -181,6 +258,7 @@ public class PlayerScript : NetworkBehaviour
         
     }
 
+    //Finds players highest stat
     public string FindHighestStat()
     {
 
@@ -202,6 +280,9 @@ public class PlayerScript : NetworkBehaviour
         }
     }
 
+    //Create players deck
+    //Create players hand
+    //spawn hand in game
     public void Draw() {
 
         hand.Add(deck.GetComponent<DeckScript>().cards[0]);
@@ -242,6 +323,7 @@ public class PlayerScript : NetworkBehaviour
         hand[hand.Count - 1].SetActive(false);
     }
 
+    //sets player up for passive phase
     public bool ReadyUp() {
         Debug.Log("I am READY!");
 

@@ -114,15 +114,15 @@ public class PlayerManager : NetworkBehaviour {
                 p1ready = true;
         }
         else if (bntTag == "Player2") {
-            if (player1.GetComponent<PlayerScript>().ReadyUp())
+            if (player2.GetComponent<PlayerScript>().ReadyUp())
                 p2ready = true;
         }
         else if (bntTag == "Player3") {
-            if (player1.GetComponent<PlayerScript>().ReadyUp())
+            if (player3.GetComponent<PlayerScript>().ReadyUp())
                 p3ready = true;
         }
         else if (bntTag == "Player4") {
-            if (player1.GetComponent<PlayerScript>().ReadyUp())
+            if (player4.GetComponent<PlayerScript>().ReadyUp())
                 p4ready = true;
         }
 
