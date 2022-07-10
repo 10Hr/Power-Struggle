@@ -233,6 +233,9 @@ public class PlayerScript : NetworkBehaviour
                     Debug.Log("I want to draw");
                     while (hand.Count != 8)
                     {
+                        //attempt to make cards show
+                        if (!NetworkClient.ready)
+                            NetworkClient.Ready();
                         Draw();
                     }
                     Debug.Log("I drew " + hand.Count);
@@ -287,6 +290,7 @@ public class PlayerScript : NetworkBehaviour
     //spawn hand in game
     public void Draw() {
 
+        Debug.Log("Command recieved from client");
         hand.Add(deck.GetComponent<DeckScript>().cards[0]);
         deck.GetComponent<DeckScript>().cards.RemoveAt(0);
 
@@ -314,22 +318,22 @@ public class PlayerScript : NetworkBehaviour
 
 
 
+
+
         realHand.Add(cardReplacement);
         cardReplacement.AddComponent<CardScript>();
         cardReplacement.GetComponent<CardScript>().Effect = hand[hand.Count - 1].GetComponent<CardScript>().Effect;
         cardReplacement.GetComponent<CardScript>().Title = hand[hand.Count - 1].GetComponent<CardScript>().Title;
         cardReplacement.GetComponent<CardScript>().Stat = hand[hand.Count - 1].GetComponent<CardScript>().Stat;
         cardReplacement.transform.position = new Vector3(hand.Count * 2, 0, 0);
+        Debug.Log("Adjusted position");
+        NetworkServer.Spawn(cardReplacement, this.connectionToClient);
+        //CmdSpawnCard(cardReplacement);
         cardReplacement.GetComponent<SpriteRenderer>().enabled = true;
+        Debug.Log("Renderer Enabled");
         cardReplacement.GetComponent<SpriteRenderer>().sortingOrder = 1;
         cardReplacement.GetComponent<CardScript>().name = hand[hand.Count - 1].GetComponent<CardScript>().name;
         hand[hand.Count - 1].SetActive(false);
-
-        //attempt to make cards show
-        if (!NetworkClient.ready)
-            NetworkClient.Ready();
-        NetworkServer.Spawn(cardReplacement, this.connectionToClient);
-        //CmdSpawnCard(cardReplacement);
 
     }
 
