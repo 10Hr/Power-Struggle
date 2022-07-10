@@ -25,7 +25,7 @@ public class PlayerScript : NetworkBehaviour
 
     //player belongings
     private GameObject deck;
-    [SyncVar]
+    //[SyncVar]
     GameObject cardReplacement;
 
     //data structures
@@ -290,7 +290,12 @@ public class PlayerScript : NetworkBehaviour
         hand.Add(deck.GetComponent<DeckScript>().cards[0]);
         deck.GetComponent<DeckScript>().cards.RemoveAt(0);
 
-        
+        //attempt to make cards show
+        //if (!NetworkClient.ready)
+        //    NetworkClient.Ready();
+        //CmdSpawnCard(cardReplacement);
+
+
         switch (deck.GetComponent<DeckScript>().Type) {
             case "charisma":
                  cardReplacement = Instantiate(camera1.GetComponent<InstantiatePrefab>().chaPrefab);
@@ -312,11 +317,6 @@ public class PlayerScript : NetworkBehaviour
                 cardReplacement = null;
                 break;
         }
-
-        //attempt to make cards show
-        if (!NetworkClient.ready)
-            NetworkClient.Ready();
-        CmdSpawnCard(cardReplacement);
         realHand.Add(cardReplacement);
         cardReplacement.AddComponent<CardScript>();
         cardReplacement.GetComponent<CardScript>().Effect = hand[hand.Count - 1].GetComponent<CardScript>().Effect;
@@ -345,14 +345,14 @@ public class PlayerScript : NetworkBehaviour
 
     //attempt to make cards show
     //currently kicks player trying to spawn cards
-    [Command]
-    public void CmdSpawnCard(GameObject card)
-    {
-        //Goes through
-        Debug.Log("Recieved command from client");
+    //[Command]
+    //public void CmdSpawnCard(GameObject card)
+    //{
+    //    //Goes through
+    //    Debug.Log("Recieved command from client");
 
-        //Mirror doesnt allow, disconnects client
-        NetworkServer.Spawn(card, this.connectionToClient);
-    }
+    //    //Mirror doesnt allow, disconnects client
+    //    NetworkServer.Spawn(card, this.connectionToClient);
+    //}
 
 }
