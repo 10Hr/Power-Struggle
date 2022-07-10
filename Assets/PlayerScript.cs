@@ -327,13 +327,15 @@ public class PlayerScript : NetworkBehaviour
         cardReplacement.GetComponent<CardScript>().Stat = hand[hand.Count - 1].GetComponent<CardScript>().Stat;
         cardReplacement.transform.position = new Vector3(hand.Count * 2, 0, 0);
         Debug.Log("Adjusted position");
-        NetworkServer.Spawn(cardReplacement, this.connectionToClient);
-        //CmdSpawnCard(cardReplacement);
+
         cardReplacement.GetComponent<SpriteRenderer>().enabled = true;
         Debug.Log("Renderer Enabled");
         cardReplacement.GetComponent<SpriteRenderer>().sortingOrder = 1;
         cardReplacement.GetComponent<CardScript>().name = hand[hand.Count - 1].GetComponent<CardScript>().name;
         hand[hand.Count - 1].SetActive(false);
+
+        NetworkServer.Spawn(cardReplacement, this.connectionToClient);
+        //CmdSpawnCard(cardReplacement);
 
     }
 
