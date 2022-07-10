@@ -33,6 +33,9 @@ public class DeckScript : NetworkBehaviour
     public void getOwner(NetworkIdentity netID)
     {
         thisID = netID;
+
+        // server kicks people trying to spawn cards
+        //comment this first if out to test player 2 spawning cards
         if (playerManager.getPlayer(0).GetComponent<NetworkIdentity>() == thisID)
         {
             thisPlayer = playerManager.getPlayer(0);
