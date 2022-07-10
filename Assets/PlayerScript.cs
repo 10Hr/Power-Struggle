@@ -290,12 +290,6 @@ public class PlayerScript : NetworkBehaviour
         hand.Add(deck.GetComponent<DeckScript>().cards[0]);
         deck.GetComponent<DeckScript>().cards.RemoveAt(0);
 
-        //attempt to make cards show
-        //if (!NetworkClient.ready)
-        //    NetworkClient.Ready();
-        //CmdSpawnCard(cardReplacement);
-
-
         switch (deck.GetComponent<DeckScript>().Type) {
             case "charisma":
                  cardReplacement = Instantiate(camera1.GetComponent<InstantiatePrefab>().chaPrefab);
@@ -317,6 +311,9 @@ public class PlayerScript : NetworkBehaviour
                 cardReplacement = null;
                 break;
         }
+
+
+
         realHand.Add(cardReplacement);
         cardReplacement.AddComponent<CardScript>();
         cardReplacement.GetComponent<CardScript>().Effect = hand[hand.Count - 1].GetComponent<CardScript>().Effect;
@@ -327,6 +324,12 @@ public class PlayerScript : NetworkBehaviour
         cardReplacement.GetComponent<SpriteRenderer>().sortingOrder = 1;
         cardReplacement.GetComponent<CardScript>().name = hand[hand.Count - 1].GetComponent<CardScript>().name;
         hand[hand.Count - 1].SetActive(false);
+
+        //attempt to make cards show
+        if (!NetworkClient.ready)
+            NetworkClient.Ready();
+        NetworkServer.Spawn(cardReplacement, this.connectionToClient);
+        //CmdSpawnCard(cardReplacement);
 
     }
 
