@@ -11,6 +11,8 @@ public class PlayerManager : NetworkBehaviour {
     NetworkIdentity player3ID;
     NetworkIdentity player4ID;
     List<NetworkIdentity> playerIDs;
+    [SyncVar]
+    List<GameObject> decks;
     private GameObject player1;
     private GameObject player2;
     private GameObject player3;
@@ -37,6 +39,7 @@ public class PlayerManager : NetworkBehaviour {
     {
         playerIDs = new List<NetworkIdentity>();
         gameManager = GameObject.Find("FSM").GetComponent<GameState>();
+        decks = new List<GameObject>();
     }
 
     // Update is called once per frame
@@ -142,16 +145,33 @@ public class PlayerManager : NetworkBehaviour {
 
     }
 
-    public GameObject DeckMaker(string highest, int pNum, GameObject camera1, NetworkConnection conn)
+    public void DeckMaker(string highest, int pNum, GameObject camera1, NetworkConnection conn)
     {
         GameObject deck = Instantiate(camera1.GetComponent<InstantiatePrefab>().deckPrefab);
         deck.name = "Deck " + pNum;
+        deck.tag = "Deck " + pNum;
         deck.GetComponent<DeckScript>().CreateDeck(highest);
-        //if (isServer)
-        //{
-            NetworkServer.Spawn(deck, conn);
-        //}
+        decks.Add(deck);
+        NetworkServer.Spawn(deck, conn);
+        RpcChangeName(deck, pNum);
+    }
 
-        return deck;
+    [ClientRpc]
+    public void RpcChangeName(GameObject deck, int pNum) {
+        deck.name = "Deck " + pNum;
+        deck.tag = "Deck " + pNum;
+    }
+
+    public GameObject getDeck(int pNum) {
+        foreach (GameObject d in decks) {
+            Debug.Log(d.tag);
+            if (d.tag == "Deck " + pNum) {
+                Debug.Log("Deck " + pNum + " is " + d);
+                return d;  // problem child??????
+            }
+
+    }
+            Debug.Log("No deck found!");
+        return null;
     }
 }

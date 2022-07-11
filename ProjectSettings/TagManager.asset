@@ -14,6 +14,10 @@ TagManager:
   - Change4
   - Change1
   - MainCanvas
+  - Deck 1
+  - Deck 2
+  - Deck 3
+  - Deck 4
   layers:
   - Default
   - TransparentFX

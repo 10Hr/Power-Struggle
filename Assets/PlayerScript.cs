@@ -12,6 +12,7 @@ public class PlayerScript : NetworkBehaviour
     NetworkIdentity netID;
     [SyncVar]
     private int playerCount;
+    private int playerNum;
 
     //Player attributes
     private int charisma = 0;
@@ -99,6 +100,7 @@ public class PlayerScript : NetworkBehaviour
         //get net ID and send it to player manager
         netID = netIdentity; // runs
         playerCount = GameObject.Find("PlayerManager").GetComponent<PlayerManager>().AddNet(netID);
+        playerNum = playerCount;
 
         //add all increment and decrement buttons to list
         player1GUI = GameObject.FindGameObjectsWithTag("Player1");
@@ -226,8 +228,12 @@ public class PlayerScript : NetworkBehaviour
                     Debug.Log("I want to get my deck");
                     highest = FindHighestStat();
                     //deck = playerManager.DeckMaker(highest, playerCount, camera1, connectionToClient);
+
                     CmdSpawnDeck();
-                    Debug.Log("My deck is " + highest);
+                   // Debug.Log("My deck is " + highest);
+                    getDeck();
+                    Debug.Log("I got my deck");
+                    break;
                 }
                 if (deck != null && deck.GetComponent<DeckScript>().cards.Count != 0)
                 {
@@ -336,7 +342,7 @@ public class PlayerScript : NetworkBehaviour
         cardReplacement.GetComponent<CardScript>().name = hand[hand.Count - 1].GetComponent<CardScript>().name;
         hand[hand.Count - 1].SetActive(false);
 
-        NetworkServer.Spawn(cardReplacement, this.connectionToClient);
+        //NetworkServer.Spawn(cardReplacement, this.connectionToClient);
         //CmdSpawnCard(cardReplacement);
 
     }
@@ -355,10 +361,12 @@ public class PlayerScript : NetworkBehaviour
     }
 
     [Command]
-    public void CmdSpawnDeck()
-    {
-        deck = playerManager.DeckMaker(highest, playerCount, camera1, connectionToClient);
-        
+    public void CmdSpawnDeck() {
+        playerManager.DeckMaker(highest, playerNum, camera1, connectionToClient);
+
+    }
+    public void getDeck() {
+        deck = playerManager.getDeck(playerNum);
     }
 
 }
