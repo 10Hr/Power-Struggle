@@ -142,14 +142,21 @@ public class PlayerManager : NetworkBehaviour {
 
     }
 
-    public GameObject DeckMaker(string highest, int pNum)
+    public GameObject DeckMaker(string highest, int pNum, GameObject camera1, NetworkConnection conn)
     {
-        GameObject deck = new GameObject();
-        deck.AddComponent<NetworkIdentity>();
-        deck.AddComponent<DeckScript>();
+        GameObject deck = Instantiate(camera1.GetComponent<InstantiatePrefab>().deckPrefab);
         deck.name = "Deck " + pNum;
         deck.GetComponent<DeckScript>().CreateDeck(highest);
+        //if (isServer)
+        //{
+            NetworkServer.Spawn(deck, conn);
+        //}
 
         return deck;
     }
+
+    //public void DeckSpawner(GameObject deck, NetworkConnectionToClient conn)
+    //{
+    //    NetworkServer.Spawn(deck, conn);
+    //}
 }

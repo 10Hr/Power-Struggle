@@ -225,17 +225,9 @@ public class PlayerScript : NetworkBehaviour
                 {
                     Debug.Log("I want to get my deck");
                     highest = FindHighestStat();
-                    deck = playerManager.DeckMaker(highest, playerCount);
-                    
-                 //   deck = new GameObject("deck");
-                 //   deck.AddComponent<NetworkIdentity>();
-                 //   deck.AddComponent<DeckScript>();
-                 //   deck.name = "Deck " + playerCount;
-                 ////   deck.GetComponent<DeckScript>().getOwner(netID);
-                 //   deck.GetComponent<DeckScript>().CreateDeck(Highest);
-
-
+                    deck = playerManager.DeckMaker(highest, playerCount, camera1, connectionToClient);
                     Debug.Log("My deck is " + highest);
+                    //CmdSpawnDeck(deck, connectionToClient);
                 }
                 if (deck != null && deck.GetComponent<DeckScript>().cards.Count != 0)
                 {
@@ -299,7 +291,6 @@ public class PlayerScript : NetworkBehaviour
     //spawn hand in game
     public void Draw() {
 
-        Debug.Log("Command recieved from client");
         hand.Add(deck.GetComponent<DeckScript>().cards[0]);
         deck.GetComponent<DeckScript>().cards.RemoveAt(0);
 
@@ -363,16 +354,10 @@ public class PlayerScript : NetworkBehaviour
             return false;
     }
 
-    //attempt to make cards show
-    //currently kicks player trying to spawn cards
     //[Command]
-    //public void CmdSpawnCard(GameObject card)
+    //public void CmdSpawnDeck(GameObject deck, NetworkConnectionToClient conn)
     //{
-    //    //Goes through
-    //    Debug.Log("Recieved command from client");
-
-    //    //Mirror doesnt allow, disconnects client
-    //    NetworkServer.Spawn(card, this.connectionToClient);
+    //    playerManager.DeckSpawner(deck, conn);
     //}
 
 }

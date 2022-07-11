@@ -8,18 +8,20 @@ public class InstantiatePrefab : MonoBehaviour
     public GameObject chaPrefab;
     public GameObject cunPrefab;
     public GameObject intPrefab;
+    public GameObject deckPrefab;
 
     // Start is called before the first frame update
     void Start()
     {
-        Instantiate(strPrefab);
-        Instantiate(chaPrefab);
-        Instantiate(cunPrefab);
-        Instantiate(intPrefab);
-        cunPrefab.GetComponent<SpriteRenderer>().enabled = false;
-        chaPrefab.GetComponent<SpriteRenderer>().enabled = false;
-        strPrefab.GetComponent<SpriteRenderer>().enabled = false;
-        intPrefab.GetComponent<SpriteRenderer>().enabled = false;
+        //Instantiate(deckPrefab);
+        //Instantiate(strPrefab);
+        //Instantiate(chaPrefab);
+        //Instantiate(cunPrefab);
+        //Instantiate(intPrefab);
+        //cunPrefab.GetComponent<SpriteRenderer>().enabled = false;
+        //chaPrefab.GetComponent<SpriteRenderer>().enabled = false;
+        //strPrefab.GetComponent<SpriteRenderer>().enabled = false;
+        //intPrefab.GetComponent<SpriteRenderer>().enabled = false;
     }
 
     // Update is called once per frame 
