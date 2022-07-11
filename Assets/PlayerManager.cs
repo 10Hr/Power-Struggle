@@ -154,9 +154,4 @@ public class PlayerManager : NetworkBehaviour {
 
         return deck;
     }
-
-    //public void DeckSpawner(GameObject deck, NetworkConnectionToClient conn)
-    //{
-    //    NetworkServer.Spawn(deck, conn);
-    //}
 }

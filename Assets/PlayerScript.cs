@@ -221,13 +221,13 @@ public class PlayerScript : NetworkBehaviour
         {
             case GameStates.Setup:
                 //Repeat all of this in turn
-                if ((readied && deck == null) || (readied && deck.GetComponent<DeckScript>().Type != highest))
+                if ((readied && deck == null)) //|| (readied && deck.GetComponent<DeckScript>().Type != highest))
                 {
                     Debug.Log("I want to get my deck");
                     highest = FindHighestStat();
-                    deck = playerManager.DeckMaker(highest, playerCount, camera1, connectionToClient);
+                    //deck = playerManager.DeckMaker(highest, playerCount, camera1, connectionToClient);
+                    CmdSpawnDeck();
                     Debug.Log("My deck is " + highest);
-                    //CmdSpawnDeck(deck, connectionToClient);
                 }
                 if (deck != null && deck.GetComponent<DeckScript>().cards.Count != 0)
                 {
@@ -354,10 +354,11 @@ public class PlayerScript : NetworkBehaviour
             return false;
     }
 
-    //[Command]
-    //public void CmdSpawnDeck(GameObject deck, NetworkConnectionToClient conn)
-    //{
-    //    playerManager.DeckSpawner(deck, conn);
-    //}
+    [Command]
+    public void CmdSpawnDeck()
+    {
+        deck = playerManager.DeckMaker(highest, playerCount, camera1, connectionToClient);
+        
+    }
 
 }
