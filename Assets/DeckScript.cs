@@ -30,36 +30,10 @@ public class DeckScript : NetworkBehaviour
         //type = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerScript>().Highest;
     }
 
-    public void getOwner(NetworkIdentity netID)
-    {
-        thisID = netID;
-
-        // server kicks people trying to spawn cards
-        //comment this first if out to test player 2 spawning cards
-        if (playerManager.getPlayer(0).GetComponent<NetworkIdentity>() == thisID)
-        {
-            thisPlayer = playerManager.getPlayer(0);
-        }
-        else if(playerManager.getPlayer(1).GetComponent<NetworkIdentity>() == thisID)
-        {
-            thisPlayer = playerManager.getPlayer(1);
-        }
-        else if(playerManager.getPlayer(2).GetComponent<NetworkIdentity>() == thisID)
-        {
-            thisPlayer = playerManager.getPlayer(2);
-        }
-        else if(playerManager.getPlayer(3).GetComponent<NetworkIdentity>() == thisID)
-        {
-            thisPlayer = playerManager.getPlayer(3);
-        }
-        type = thisPlayer.GetComponent<PlayerScript>().Highest;
-        CreateDeck();
-    }
-
     // Start is called before the first frame update
-    void CreateDeck()
-    {
+    public void CreateDeck(string highest) {
 
+        type = highest;
         string path = null;
         string line = null;
         StreamReader input = null;

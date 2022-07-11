@@ -69,6 +69,14 @@ public class PlayerManager : NetworkBehaviour {
 
     }
 
+        public void getOwner(NetworkIdentity netID)
+    {
+       // thisID = netID;
+
+        
+        //CreateDeck();
+    }
+
     public void setPlayer(int whichPlayer) {
         //each time a player connects, assign their IDs to fields
             updateList();

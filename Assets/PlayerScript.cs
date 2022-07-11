@@ -224,8 +224,11 @@ public class PlayerScript : NetworkBehaviour
                     Debug.Log("I want to get my deck");
                     highest = FindHighestStat();
                     deck = new GameObject("deck");
+                    deck.AddComponent<NetworkIdentity>();
                     deck.AddComponent<DeckScript>();
-                    deck.GetComponent<DeckScript>().getOwner(netID);
+                    deck.name = "Deck " + playerCount;
+                 //   deck.GetComponent<DeckScript>().getOwner(netID);
+                    deck.GetComponent<DeckScript>().CreateDeck(Highest);
                     Debug.Log("My deck is " + highest);
                 }
                 if (deck != null && deck.GetComponent<DeckScript>().cards.Count != 0)
@@ -327,6 +330,8 @@ public class PlayerScript : NetworkBehaviour
         cardReplacement.GetComponent<CardScript>().Stat = hand[hand.Count - 1].GetComponent<CardScript>().Stat;
         cardReplacement.transform.position = new Vector3(hand.Count * 2, 0, 0);
         Debug.Log("Adjusted position");
+
+        Debug.Log(cardReplacement);
 
         cardReplacement.GetComponent<SpriteRenderer>().enabled = true;
         Debug.Log("Renderer Enabled");
