@@ -141,4 +141,15 @@ public class PlayerManager : NetworkBehaviour {
         }
 
     }
+
+    public GameObject DeckMaker(string highest, int pNum)
+    {
+        GameObject deck = new GameObject();
+        deck.AddComponent<NetworkIdentity>();
+        deck.AddComponent<DeckScript>();
+        deck.name = "Deck " + pNum;
+        deck.GetComponent<DeckScript>().CreateDeck(highest);
+
+        return deck;
+    }
 }

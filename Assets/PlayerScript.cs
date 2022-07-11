@@ -39,6 +39,7 @@ public class PlayerScript : NetworkBehaviour
     private List<GameObject> realHand = new List<GameObject>();
 
     //Other Objects
+    PlayerManager playerManager;
     StatManager stats;
     GameState gameManager;
     GameStates currentState;
@@ -113,6 +114,7 @@ public class PlayerScript : NetworkBehaviour
         canvas = GameObject.FindGameObjectWithTag("MainCanvas");
 
         gameManager = GameObject.Find("FSM").GetComponent<GameState>();
+        playerManager = GameObject.Find("PlayerManager").GetComponent<PlayerManager>();
     }
 
     // Start is called before the first frame update
@@ -223,12 +225,16 @@ public class PlayerScript : NetworkBehaviour
                 {
                     Debug.Log("I want to get my deck");
                     highest = FindHighestStat();
-                    deck = new GameObject("deck");
-                    deck.AddComponent<NetworkIdentity>();
-                    deck.AddComponent<DeckScript>();
-                    deck.name = "Deck " + playerCount;
-                 //   deck.GetComponent<DeckScript>().getOwner(netID);
-                    deck.GetComponent<DeckScript>().CreateDeck(Highest);
+                    deck = playerManager.DeckMaker(highest, playerCount);
+                    
+                 //   deck = new GameObject("deck");
+                 //   deck.AddComponent<NetworkIdentity>();
+                 //   deck.AddComponent<DeckScript>();
+                 //   deck.name = "Deck " + playerCount;
+                 ////   deck.GetComponent<DeckScript>().getOwner(netID);
+                 //   deck.GetComponent<DeckScript>().CreateDeck(Highest);
+
+
                     Debug.Log("My deck is " + highest);
                 }
                 if (deck != null && deck.GetComponent<DeckScript>().cards.Count != 0)
