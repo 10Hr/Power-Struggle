@@ -44,7 +44,7 @@ public class StatManager : NetworkBehaviour {
                     {
                         player1.GetComponent<PlayerScript>().Available -= 1;
 
-                        Debug.Log(playerManager.getPlayer(0) + " is also " + player1);
+                        //Debug.Log(playerManager.getPlayer(0) + " is also " + player1);
                         switch (thisButName) {
                             case "addCharisma":
                                 player1.GetComponent<PlayerScript>().Charisma++;
@@ -72,7 +72,7 @@ public class StatManager : NetworkBehaviour {
                     player2 = playerManager.getPlayer(1);
                     if (player2.GetComponent<PlayerScript>().Available > 0) {
                         player2.GetComponent<PlayerScript>().Available -= 1;
-                    Debug.Log(playerManager.getPlayer(1) + " is also " + player2);
+                    //Debug.Log(playerManager.getPlayer(1) + " is also " + player2);
                         switch (thisButName) {
                             case "addCharisma":
                                 player2.GetComponent<PlayerScript>().Charisma++;

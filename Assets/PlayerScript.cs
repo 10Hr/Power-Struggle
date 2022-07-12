@@ -25,7 +25,7 @@ public class PlayerScript : NetworkBehaviour
     private bool readied = false;
 
     //player belongings
-    private GameObject deck;
+    public GameObject deck;
     //[SyncVar]
     GameObject cardReplacement;
 
@@ -227,17 +227,14 @@ public class PlayerScript : NetworkBehaviour
                 {
                     Debug.Log("I want to get my deck");
                     highest = FindHighestStat();
-                    //deck = playerManager.DeckMaker(highest, playerCount, camera1, connectionToClient);
-
                     CmdSpawnDeck();
-                   // Debug.Log("My deck is " + highest);
-                    getDeck();
-                    Debug.Log("I got my deck");
+                    Debug.Log("I got my deck, it has " + deck.GetComponent<DeckScript>().cards.Count + " cards");
                     break;
                 }
                 if (deck != null && deck.GetComponent<DeckScript>().cards.Count != 0)
                 {
                     Debug.Log("I want to draw");
+                    Debug.Log("My deck has " + deck.GetComponent<DeckScript>().cards.Count + " cards");
                     while (hand.Count != 8)
                     {
                         //attempt to make cards show
@@ -299,6 +296,7 @@ public class PlayerScript : NetworkBehaviour
 
         hand.Add(deck.GetComponent<DeckScript>().cards[0]);
         deck.GetComponent<DeckScript>().cards.RemoveAt(0);
+        Debug.Log("drew card, I still have " + deck.GetComponent<DeckScript>().cards.Count);
 
         switch (deck.GetComponent<DeckScript>().Type) {
             case "charisma":
@@ -360,13 +358,14 @@ public class PlayerScript : NetworkBehaviour
             return false;
     }
 
+    //if weird error try playerCount
     [Command]
     public void CmdSpawnDeck() {
-        playerManager.DeckMaker(highest, playerNum, camera1, connectionToClient);
+        playerManager.DeckMaker(highest, playerNum);
 
     }
-    public void getDeck() {
-        deck = playerManager.getDeck(playerNum);
-    }
+    //public void getDeck() {
+    //    deck = playerManager.getDeck(playerNum);
+    //}
 
 }

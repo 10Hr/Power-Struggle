@@ -11,12 +11,16 @@ public class PlayerManager : NetworkBehaviour {
     NetworkIdentity player3ID;
     NetworkIdentity player4ID;
     List<NetworkIdentity> playerIDs;
-    [SyncVar]
-    List<GameObject> decks;
+    //[SyncVar]
+    //List<GameObject> decks;
     private GameObject player1;
     private GameObject player2;
     private GameObject player3;
     private GameObject player4;
+    public GameObject deck1;
+    public GameObject deck2;
+    public GameObject deck3;
+    public GameObject deck4;
     [SyncVar]
     public int playerCount;
     NetworkIdentity[] listObjects;
@@ -24,12 +28,12 @@ public class PlayerManager : NetworkBehaviour {
     GameState gameManager;
 
     bool p1ready, p2ready, p3ready, p4ready;
-    
+
 
 
     public void getCount() { playerCount++; } //player count
 
-    public void updateList() { 
+    public void updateList() {
         listObjects = FindObjectsOfType<NetworkIdentity>();
     }
 
@@ -39,7 +43,11 @@ public class PlayerManager : NetworkBehaviour {
     {
         playerIDs = new List<NetworkIdentity>();
         gameManager = GameObject.Find("FSM").GetComponent<GameState>();
-        decks = new List<GameObject>();
+        deck1 = GameObject.Find("Deck1");
+        deck2 = GameObject.Find("Deck2");
+        deck3 = GameObject.Find("Deck3");
+        deck4 = GameObject.Find("Deck4");
+        //decks = new List<GameObject>();
     }
 
     // Update is called once per frame
@@ -47,74 +55,74 @@ public class PlayerManager : NetworkBehaviour {
 
     public int AddNet(NetworkIdentity playerID) {
         playerIDs.Add(playerID);
-       
-        
+
+
         if (playerIDs[0] != null && playerIDs.Count == 1) {
             player1ID = playerIDs[0];
             setPlayer(0);
-        }  
+        }
         else if (playerIDs[1] != null && playerIDs.Count == 2) {
             player2ID = playerIDs[1];
-//            Debug.Log("Player 2 is " + player2ID);
+            //            Debug.Log("Player 2 is " + player2ID);
             setPlayer(1);
-        }  
+        }
         else if (playerIDs[2] != null && playerIDs.Count == 3) {
             player3ID = playerIDs[2];
             setPlayer(2);
-        }  
+        }
         else if (playerIDs[3] != null && playerIDs.Count == 4) {
             player4ID = playerIDs[3];
-           setPlayer(3);
-        }  
+            setPlayer(3);
+        }
 
         //stats.beginFind(); //error causer
         return playerIDs.Count;
 
     }
 
-        public void getOwner(NetworkIdentity netID)
+    public void getOwner(NetworkIdentity netID)
     {
-       // thisID = netID;
+        // thisID = netID;
 
-        
+
         //CreateDeck();
     }
 
     public void setPlayer(int whichPlayer) {
         //each time a player connects, assign their IDs to fields
-            updateList();
- 
-            foreach(NetworkIdentity obj in listObjects) {    // gets player object    
-               // Debug.Log("obj.GetComponent<NetworkIdentity>() " + obj.GetComponent<NetworkIdentity>() + " player1ID " + player1ID + " playercount " + playerCount + " whichPlayer " + whichPlayer);
-                if (obj.GetComponent<NetworkIdentity>() == player1ID && playerCount == 1 && whichPlayer == 0) {
-                    player1 = obj.gameObject;
-                    Debug.Log("Player 1 is created!");
-                }  
-                else if (obj.GetComponent<NetworkIdentity>() == player2ID && playerCount == 2 && whichPlayer == 1) {
-                    player2 = obj.gameObject;
-                    Debug.Log("Player 2 is created!");
-                }
-                else if (obj.GetComponent<NetworkIdentity>() == player3ID && playerCount == 3 && whichPlayer == 2) {
-                    player3 = obj.gameObject;
-                    Debug.Log("Player 3 is created!");
-                }
-                else if (obj.GetComponent<NetworkIdentity>() == player4ID && playerCount == 4 && whichPlayer == 3) {
-                    player4 = obj.gameObject; 
-                    Debug.Log("Player 4 is created!");
-                }
-            }  
+        updateList();
+
+        foreach (NetworkIdentity obj in listObjects) {    // gets player object    
+                                                          // Debug.Log("obj.GetComponent<NetworkIdentity>() " + obj.GetComponent<NetworkIdentity>() + " player1ID " + player1ID + " playercount " + playerCount + " whichPlayer " + whichPlayer);
+            if (obj.GetComponent<NetworkIdentity>() == player1ID && playerCount == 1 && whichPlayer == 0) {
+                player1 = obj.gameObject;
+                Debug.Log("Player 1 is created!");
+            }
+            else if (obj.GetComponent<NetworkIdentity>() == player2ID && playerCount == 2 && whichPlayer == 1) {
+                player2 = obj.gameObject;
+                Debug.Log("Player 2 is created!");
+            }
+            else if (obj.GetComponent<NetworkIdentity>() == player3ID && playerCount == 3 && whichPlayer == 2) {
+                player3 = obj.gameObject;
+                Debug.Log("Player 3 is created!");
+            }
+            else if (obj.GetComponent<NetworkIdentity>() == player4ID && playerCount == 4 && whichPlayer == 3) {
+                player4 = obj.gameObject;
+                Debug.Log("Player 4 is created!");
+            }
+        }
     }
 
     public GameObject getPlayer(int whichPlayer) {
-        if (whichPlayer == 0) 
+        if (whichPlayer == 0)
             return player1;
-        else if (whichPlayer == 1) 
+        else if (whichPlayer == 1)
             return player2;
-        else if (whichPlayer == 2) 
+        else if (whichPlayer == 2)
             return player3;
-        else if (whichPlayer == 3) 
+        else if (whichPlayer == 3)
             return player4;
-        else 
+        else
             return null;
     }
 
@@ -145,33 +153,40 @@ public class PlayerManager : NetworkBehaviour {
 
     }
 
-    public void DeckMaker(string highest, int pNum, GameObject camera1, NetworkConnection conn)
+    public void DeckMaker(string highest, int pNum)
     {
-        GameObject deck = Instantiate(camera1.GetComponent<InstantiatePrefab>().deckPrefab);
-        deck.name = "Deck " + pNum;
-        deck.tag = "Deck " + pNum;
-        deck.GetComponent<DeckScript>().CreateDeck(highest);
-        decks.Add(deck);
-        NetworkServer.Spawn(deck, conn);
-        RpcChangeName(deck, pNum);
-    }
+        switch (pNum)
+        {
+            case 1:
+                //deck1.GetComponent<DeckScript>().CreateDeck(highest);
+                //player1.GetComponent<PlayerScript>().deck = deck1;
+                RPCGiveDeck(deck1, player1, highest);
+                break;
 
+            case 2:
+                //deck2.GetComponent<DeckScript>().CreateDeck(highest);
+                //player2.GetComponent<PlayerScript>().deck = deck2;
+                RPCGiveDeck(deck2, player2, highest);
+                break;
+
+            case 3:
+                //deck3.GetComponent<DeckScript>().CreateDeck(highest);
+                //player3.GetComponent<PlayerScript>().deck = deck3;
+                break;
+
+            case 4:
+                //deck4.GetComponent<DeckScript>().CreateDeck(highest);
+                //player4.GetComponent<PlayerScript>().deck = deck4;
+                break;
+
+            default:
+                break;
+        }
+    }
     [ClientRpc]
-    public void RpcChangeName(GameObject deck, int pNum) {
-        deck.name = "Deck " + pNum;
-        deck.tag = "Deck " + pNum;
-    }
-
-    public GameObject getDeck(int pNum) {
-        foreach (GameObject d in decks) {
-            Debug.Log(d.tag);
-            if (d.tag == "Deck " + pNum) {
-                Debug.Log("Deck " + pNum + " is " + d);
-                return d;  // problem child??????
-            }
-
-    }
-            Debug.Log("No deck found!");
-        return null;
+    public void RPCGiveDeck(GameObject deck, GameObject player, string highest)
+    {
+        deck.GetComponent<DeckScript>().CreateDeck(highest);
+        player.GetComponent<PlayerScript>().deck = deck;
     }
 }
