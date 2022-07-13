@@ -23,9 +23,12 @@ public class PlayerScript : NetworkBehaviour
     private int availablePoints = 8;
     private int maxPoints = 8;
     private bool readied = false;
+    [SyncVar]
+    string myName;
 
     //player belongings
-    public GameObject deck;
+    //public GameObject deck;
+    public bool hasDeck = false;
     //[SyncVar]
     GameObject cardReplacement;
 
@@ -101,6 +104,9 @@ public class PlayerScript : NetworkBehaviour
         netID = netIdentity; // runs
         playerCount = GameObject.Find("PlayerManager").GetComponent<PlayerManager>().AddNet(netID);
         playerNum = playerCount;
+
+        myName = "player " + playerCount;
+        this.name = myName;
 
         //add all increment and decrement buttons to list
         player1GUI = GameObject.FindGameObjectsWithTag("Player1");
@@ -223,27 +229,28 @@ public class PlayerScript : NetworkBehaviour
         {
             case GameStates.Setup:
                 //Repeat all of this in turn
-                if ((readied && deck == null)) //|| (readied && deck.GetComponent<DeckScript>().Type != highest))
+                if ((readied && !hasDeck)) //|| (readied && deck.GetComponent<DeckScript>().Type != highest))
                 {
                     Debug.Log("I want to get my deck");
                     highest = FindHighestStat();
-                    CmdSpawnDeck();
-                    Debug.Log("I got my deck, it has " + deck.GetComponent<DeckScript>().cards.Count + " cards");
+                    CmdSpawnDeck(highest, playerNum);
+                    hasDeck = true;
+                   // Debug.Log("I got my deck, it has " + deck.GetComponent<DeckScript>().cards.Count + " cards");
                     break;
                 }
-                if (deck != null && deck.GetComponent<DeckScript>().cards.Count != 0)
-                {
-                    Debug.Log("I want to draw");
-                    Debug.Log("My deck has " + deck.GetComponent<DeckScript>().cards.Count + " cards");
-                    while (hand.Count != 8)
-                    {
-                        //attempt to make cards show
-                        if (!NetworkClient.ready)
-                            NetworkClient.Ready();
-                        Draw();
-                    }
-                    Debug.Log("I drew " + hand.Count);
-                }
+                //if (hasDeck && deck.GetComponent<DeckScript>().cards.Count != 0)
+                //{
+                //    Debug.Log("I want to draw");
+                //    Debug.Log("My deck has " + deck.GetComponent<DeckScript>().cards.Count + " cards");
+                //    while (hand.Count != 8)
+                //    {
+                //        //attempt to make cards show
+                //        if (!NetworkClient.ready)
+                //            NetworkClient.Ready();
+                //        Draw();
+                //    }
+                //    Debug.Log("I drew " + hand.Count);
+                //}
                 if (availablePoints == 0 && readied)
                 {
                     foreach (GameObject b in buttons)
@@ -294,51 +301,51 @@ public class PlayerScript : NetworkBehaviour
     //spawn hand in game
     public void Draw() {
 
-        hand.Add(deck.GetComponent<DeckScript>().cards[0]);
-        deck.GetComponent<DeckScript>().cards.RemoveAt(0);
-        Debug.Log("drew card, I still have " + deck.GetComponent<DeckScript>().cards.Count);
+        //hand.Add(deck.GetComponent<DeckScript>().cards[0]);
+        //deck.GetComponent<DeckScript>().cards.RemoveAt(0);
+        //Debug.Log("drew card, I still have " + deck.GetComponent<DeckScript>().cards.Count);
 
-        switch (deck.GetComponent<DeckScript>().Type) {
-            case "charisma":
-                 cardReplacement = Instantiate(camera1.GetComponent<InstantiatePrefab>().chaPrefab);
-                break;
+        //switch (deck.GetComponent<DeckScript>().Type) {
+        //    case "charisma":
+        //         cardReplacement = Instantiate(camera1.GetComponent<InstantiatePrefab>().chaPrefab);
+        //        break;
 
-            case "cunning":
-                 cardReplacement = Instantiate(camera1.GetComponent<InstantiatePrefab>().cunPrefab);
-                break;
+        //    case "cunning":
+        //         cardReplacement = Instantiate(camera1.GetComponent<InstantiatePrefab>().cunPrefab);
+        //        break;
 
-            case "strength":
-                 cardReplacement = Instantiate(camera1.GetComponent<InstantiatePrefab>().strPrefab);
-                break;
+        //    case "strength":
+        //         cardReplacement = Instantiate(camera1.GetComponent<InstantiatePrefab>().strPrefab);
+        //        break;
 
-            case "intelligence":
-                 cardReplacement = Instantiate(camera1.GetComponent<InstantiatePrefab>().intPrefab);
-                break;
+        //    case "intelligence":
+        //         cardReplacement = Instantiate(camera1.GetComponent<InstantiatePrefab>().intPrefab);
+        //        break;
 
-            default:
-                cardReplacement = null;
-                break;
-        }
-
-
+        //    default:
+        //        cardReplacement = null;
+        //        break;
+        //}
 
 
 
-        realHand.Add(cardReplacement);
-        cardReplacement.AddComponent<CardScript>();
-        cardReplacement.GetComponent<CardScript>().Effect = hand[hand.Count - 1].GetComponent<CardScript>().Effect;
-        cardReplacement.GetComponent<CardScript>().Title = hand[hand.Count - 1].GetComponent<CardScript>().Title;
-        cardReplacement.GetComponent<CardScript>().Stat = hand[hand.Count - 1].GetComponent<CardScript>().Stat;
-        cardReplacement.transform.position = new Vector3(hand.Count * 2, 0, 0);
-        Debug.Log("Adjusted position");
 
-        Debug.Log(cardReplacement);
 
-        cardReplacement.GetComponent<SpriteRenderer>().enabled = true;
-        Debug.Log("Renderer Enabled");
-        cardReplacement.GetComponent<SpriteRenderer>().sortingOrder = 1;
-        cardReplacement.GetComponent<CardScript>().name = hand[hand.Count - 1].GetComponent<CardScript>().name;
-        hand[hand.Count - 1].SetActive(false);
+        //realHand.Add(cardReplacement);
+        //cardReplacement.AddComponent<CardScript>();
+        //cardReplacement.GetComponent<CardScript>().Effect = hand[hand.Count - 1].GetComponent<CardScript>().Effect;
+        //cardReplacement.GetComponent<CardScript>().Title = hand[hand.Count - 1].GetComponent<CardScript>().Title;
+        //cardReplacement.GetComponent<CardScript>().Stat = hand[hand.Count - 1].GetComponent<CardScript>().Stat;
+        //cardReplacement.transform.position = new Vector3(hand.Count * 2, 0, 0);
+        //Debug.Log("Adjusted position");
+
+        //Debug.Log(cardReplacement);
+
+        //cardReplacement.GetComponent<SpriteRenderer>().enabled = true;
+        //Debug.Log("Renderer Enabled");
+        //cardReplacement.GetComponent<SpriteRenderer>().sortingOrder = 1;
+        //cardReplacement.GetComponent<CardScript>().name = hand[hand.Count - 1].GetComponent<CardScript>().name;
+        //hand[hand.Count - 1].SetActive(false);
 
         //NetworkServer.Spawn(cardReplacement, this.connectionToClient);
         //CmdSpawnCard(cardReplacement);
@@ -360,7 +367,7 @@ public class PlayerScript : NetworkBehaviour
 
     //if weird error try playerCount
     [Command]
-    public void CmdSpawnDeck() {
+    public void CmdSpawnDeck(string highest, int playerNum) {
         playerManager.DeckMaker(highest, playerNum);
 
     }

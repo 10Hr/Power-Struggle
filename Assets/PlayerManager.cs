@@ -17,12 +17,18 @@ public class PlayerManager : NetworkBehaviour {
     private GameObject player2;
     private GameObject player3;
     private GameObject player4;
+    [SyncVar]
     public GameObject deck1;
+    [SyncVar]
     public GameObject deck2;
+    [SyncVar]
     public GameObject deck3;
+    [SyncVar]
     public GameObject deck4;
     [SyncVar]
     public int playerCount;
+    [SyncVar]
+    string thisName;
     NetworkIdentity[] listObjects;
     StatManager stats;
     GameState gameManager;
@@ -155,28 +161,53 @@ public class PlayerManager : NetworkBehaviour {
 
     public void DeckMaker(string highest, int pNum)
     {
+        deck1 = GameObject.Find("Deck1");
+        deck2 = GameObject.Find("Deck2");
+        deck3 = GameObject.Find("Deck3");
+        deck4 = GameObject.Find("Deck4");
+
         switch (pNum)
         {
             case 1:
+
                 //deck1.GetComponent<DeckScript>().CreateDeck(highest);
-                //player1.GetComponent<PlayerScript>().deck = deck1;
+
+                //deck1 = Instantiate(this.GetComponent<InstantiatePrefab>().deckPrefab);
+                //NetworkServer.Spawn(deck1);
+                //GameObject trySpawn = Instantiate(this.GetComponent<InstantiatePrefab>().cunPrefab);
+                //thisName = "trySpawn";
+                //trySpawn.name = thisName;
+                //NetworkServer.Spawn(trySpawn);
+                //trySpawn.name = thisName;
+                Debug.Log(deck1);
+                Debug.Log(highest);
                 RPCGiveDeck(deck1, player1, highest);
                 break;
 
             case 2:
                 //deck2.GetComponent<DeckScript>().CreateDeck(highest);
-                //player2.GetComponent<PlayerScript>().deck = deck2;
+
+                //deck2 = Instantiate(this.GetComponent<InstantiatePrefab>().deckPrefab);
+                //NetworkServer.Spawn(deck2);
+                Debug.Log(deck2);
+                Debug.Log(highest);
                 RPCGiveDeck(deck2, player2, highest);
                 break;
 
             case 3:
-                //deck3.GetComponent<DeckScript>().CreateDeck(highest);
-                //player3.GetComponent<PlayerScript>().deck = deck3;
+                deck3.GetComponent<DeckScript>().CreateDeck(highest);
+
+                //deck3 = Instantiate(this.GetComponent<InstantiatePrefab>().deckPrefab);
+                //NetworkServer.Spawn(deck3);
+                //RPCGiveDeck(deck3, player3, highest);
                 break;
 
             case 4:
-                //deck4.GetComponent<DeckScript>().CreateDeck(highest);
-                //player4.GetComponent<PlayerScript>().deck = deck4;
+                deck4.GetComponent<DeckScript>().CreateDeck(highest);
+
+                //deck4 = Instantiate(this.GetComponent<InstantiatePrefab>().deckPrefab);
+                //NetworkServer.Spawn(deck4);
+                //RPCGiveDeck(deck4, player4, highest);
                 break;
 
             default:
@@ -186,7 +217,8 @@ public class PlayerManager : NetworkBehaviour {
     [ClientRpc]
     public void RPCGiveDeck(GameObject deck, GameObject player, string highest)
     {
-        deck.GetComponent<DeckScript>().CreateDeck(highest);
-        player.GetComponent<PlayerScript>().deck = deck;
+            Debug.Log(deck);
+            Debug.Log(highest);
+            deck.GetComponent<DeckScript>().CreateDeck(highest);
     }
 }
