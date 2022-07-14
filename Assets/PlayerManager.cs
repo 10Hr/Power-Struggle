@@ -254,48 +254,6 @@ public class PlayerManager : NetworkBehaviour {
         }
     }
 
-    [Command(requiresAuthority = false)]
-    public void CMDSpawnCard(GameObject deck, int pNum)
-    {
-        GameObject prefab;
-        switch (deck.GetComponent<DeckScript>().Type)
-        {
-            case "charisma":
-                prefab = this.GetComponent<InstantiatePrefab>().chaPrefab;
-                break;
-            case "cunning":
-                prefab = this.GetComponent<InstantiatePrefab>().cunPrefab;
-                break;
-            case "intelligence":
-                prefab = this.GetComponent<InstantiatePrefab>().intPrefab;
-                break;
-            case "strength":
-                prefab = this.GetComponent<InstantiatePrefab>().strPrefab;
-                break;
-            default:
-                Debug.Log("The deck is null.");
-                prefab = null;
-                break;
-        }
-        GameObject cardToSpawn = Instantiate(prefab);
-        NetworkServer.Spawn(cardToSpawn);
-        switch (pNum)
-        {
-            case 1:
-                hand1[hand1.Count - 1] = cardToSpawn;
-                break;
-            case 2:
-                hand2[hand2.Count - 1] = cardToSpawn;
-                break;
-            case 3:
-                hand3[hand3.Count - 1] = cardToSpawn;
-                break;
-            case 4:
-                hand4[hand4.Count - 1] = cardToSpawn;
-                break;
-        }
-    }
-
     //Gets the correct sprite/prefab for the card and instatiates and spawns it
     //adjusts the hand to represent the spawned cards
     public void Draw(GameObject deck, List<GameObject> hand, int pNum)
