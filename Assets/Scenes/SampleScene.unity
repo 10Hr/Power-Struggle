@@ -6406,6 +6406,10 @@ MonoBehaviour:
   deck3: {fileID: 0}
   deck4: {fileID: 0}
   playerCount: 0
+  hand1: []
+  hand2: []
+  hand3: []
+  hand4: []
 --- !u!4 &866009261
 Transform:
   m_ObjectHideFlags: 0

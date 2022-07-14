@@ -27,7 +27,16 @@ public class PlayerManager : NetworkBehaviour {
     public GameObject deck4;
     [SyncVar]
     public int playerCount;
-    [SyncVar]
+
+    public List<GameObject> hand1 = new List<GameObject>();
+    public List<GameObject> hand2 = new List<GameObject>();
+    public List<GameObject> hand3 = new List<GameObject>();
+    public List<GameObject> hand4 = new List<GameObject>();
+    public List<GameObject> rhand1 = new List<GameObject>();
+    public List<GameObject> rhand2 = new List<GameObject>();
+    public List<GameObject> rhand3 = new List<GameObject>();
+    public List<GameObject> rhand4 = new List<GameObject>();
+
     string thisName;
     NetworkIdentity[] listObjects;
     StatManager stats;
@@ -169,56 +178,193 @@ public class PlayerManager : NetworkBehaviour {
         switch (pNum)
         {
             case 1:
-
-                //deck1.GetComponent<DeckScript>().CreateDeck(highest);
-
-                //deck1 = Instantiate(this.GetComponent<InstantiatePrefab>().deckPrefab);
-                //NetworkServer.Spawn(deck1);
-                //GameObject trySpawn = Instantiate(this.GetComponent<InstantiatePrefab>().cunPrefab);
-                //thisName = "trySpawn";
-                //trySpawn.name = thisName;
-                //NetworkServer.Spawn(trySpawn);
-                //trySpawn.name = thisName;
-                Debug.Log(deck1);
-                Debug.Log(highest);
                 RPCGiveDeck(deck1, player1, highest);
+                deck1.GetComponent<DeckScript>().CreateDeck(highest);
+                for (int i = 0; i < deck1.GetComponent<DeckScript>().cards.Count; i++)
+                {
+                    NetworkServer.Spawn(deck1.GetComponent<DeckScript>().cards[i]);
+                    RPCTell();
+                }
                 break;
 
             case 2:
-                //deck2.GetComponent<DeckScript>().CreateDeck(highest);
-
-                //deck2 = Instantiate(this.GetComponent<InstantiatePrefab>().deckPrefab);
-                //NetworkServer.Spawn(deck2);
-                Debug.Log(deck2);
-                Debug.Log(highest);
                 RPCGiveDeck(deck2, player2, highest);
+                deck2.GetComponent<DeckScript>().CreateDeck(highest);
+                for (int i = 0; i < deck2.GetComponent<DeckScript>().cards.Count; i++)
+                    NetworkServer.Spawn(deck2.GetComponent<DeckScript>().cards[i]);
                 break;
 
             case 3:
+                RPCGiveDeck(deck3, player3, highest);
                 deck3.GetComponent<DeckScript>().CreateDeck(highest);
-
-                //deck3 = Instantiate(this.GetComponent<InstantiatePrefab>().deckPrefab);
-                //NetworkServer.Spawn(deck3);
-                //RPCGiveDeck(deck3, player3, highest);
+                for (int i = 0; i < deck3.GetComponent<DeckScript>().cards.Count; i++)
+                    NetworkServer.Spawn(deck3.GetComponent<DeckScript>().cards[i]);
                 break;
 
             case 4:
+                RPCGiveDeck(deck4, player4, highest);
                 deck4.GetComponent<DeckScript>().CreateDeck(highest);
-
-                //deck4 = Instantiate(this.GetComponent<InstantiatePrefab>().deckPrefab);
-                //NetworkServer.Spawn(deck4);
-                //RPCGiveDeck(deck4, player4, highest);
+                for (int i = 0; i < deck4.GetComponent<DeckScript>().cards.Count; i++)
+                    NetworkServer.Spawn(deck4.GetComponent<DeckScript>().cards[i]);
                 break;
 
             default:
                 break;
         }
     }
+
+    //cards only spawned on respective player
+    public void HandMaker(int pNum)
+    {
+        switch (pNum)
+        {
+            case 1:
+                //NetworkServer.Spawn(deck1.GetComponent<DeckScript>().cards[0]);
+                hand1.Add(deck1.GetComponent<DeckScript>().cards[0]);
+                //Debug.Log(hand1[hand1.Count - 1]);
+                deck1.GetComponent<DeckScript>().cards.RemoveAt(0);
+                Draw(deck1, hand1, pNum);
+                break;
+
+            case 2:
+                //NetworkServer.Spawn(deck2.GetComponent<DeckScript>().cards[0]);
+                hand2.Add(deck2.GetComponent<DeckScript>().cards[0]);
+                //Debug.Log(hand2[hand2.Count - 1]);
+                deck2.GetComponent<DeckScript>().cards.RemoveAt(0);
+                Draw(deck2, hand2, pNum);
+                break;
+
+            case 3:
+                hand3.Add(deck3.GetComponent<DeckScript>().cards[0]);
+                Debug.Log(hand3.Count);
+                deck3.GetComponent<DeckScript>().cards.RemoveAt(0);
+                Draw(deck3, hand3, pNum);
+                break;
+
+            case 4:
+                hand4.Add(deck4.GetComponent<DeckScript>().cards[0]);
+                Debug.Log(hand4.Count);
+                deck4.GetComponent<DeckScript>().cards.RemoveAt(0);
+                Draw(deck4, hand4, pNum);
+                break;
+
+            default:
+                Debug.Log("Invalid player.");
+                break;
+        }
+    }
+
+    [Command(requiresAuthority = false)]
+    public void CMDSpawnCard(GameObject deck, int pNum)
+    {
+        GameObject prefab;
+        switch (deck.GetComponent<DeckScript>().Type)
+        {
+            case "charisma":
+                prefab = this.GetComponent<InstantiatePrefab>().chaPrefab;
+                break;
+            case "cunning":
+                prefab = this.GetComponent<InstantiatePrefab>().cunPrefab;
+                break;
+            case "intelligence":
+                prefab = this.GetComponent<InstantiatePrefab>().intPrefab;
+                break;
+            case "strength":
+                prefab = this.GetComponent<InstantiatePrefab>().strPrefab;
+                break;
+            default:
+                Debug.Log("The deck is null.");
+                prefab = null;
+                break;
+        }
+        GameObject cardToSpawn = Instantiate(prefab);
+        NetworkServer.Spawn(cardToSpawn);
+        switch (pNum)
+        {
+            case 1:
+                hand1[hand1.Count - 1] = cardToSpawn;
+                break;
+            case 2:
+                hand2[hand2.Count - 1] = cardToSpawn;
+                break;
+            case 3:
+                hand3[hand3.Count - 1] = cardToSpawn;
+                break;
+            case 4:
+                hand4[hand4.Count - 1] = cardToSpawn;
+                break;
+        }
+        //hand[hand.Count - 1] = cardToSpawn;
+        //Debug.Log(hand[hand.Count - 1]);
+    }
+
+    //[ClientRpc]
+    public void Draw(GameObject deck, List<GameObject> hand, int pNum)
+    {
+        //Debug.Log(hand.Count);
+        if (deck.GetComponent<DeckScript>().cards.Count >= 0)
+        {
+            GameObject prefab;
+            switch (deck.GetComponent<DeckScript>().Type)
+            {
+                case "charisma":
+                    prefab = this.GetComponent<InstantiatePrefab>().chaPrefab;
+                    break;
+                case "cunning":
+                    prefab = this.GetComponent<InstantiatePrefab>().cunPrefab;
+                    break;
+                case "intelligence":
+                    prefab = this.GetComponent<InstantiatePrefab>().intPrefab;
+                    break;
+                case "strength":
+                    prefab = this.GetComponent<InstantiatePrefab>().strPrefab;
+                    break;
+                default:
+                    Debug.Log("The deck is null.");
+                    prefab = null;
+                    break;
+            }
+            GameObject cardToSpawn = Instantiate(prefab);
+            NetworkServer.Spawn(cardToSpawn);
+            switch (pNum)
+            {
+                case 1:
+                    hand1[hand1.Count - 1] = cardToSpawn;
+                    break;
+                case 2:
+                    hand2[hand2.Count - 1] = cardToSpawn;
+                    break;
+                case 3:
+                    hand3[hand3.Count - 1] = cardToSpawn;
+                    break;
+                case 4:
+                    hand4[hand4.Count - 1] = cardToSpawn;
+                    break;
+            }
+
+
+            //Debug.Log(hand[hand.Count - 1]);
+            /////////////////////////////////////CMDSpawnCard(deck, pNum);
+            //Debug.Log(hand[hand.Count - 1]);
+            //cardReplacement.AddComponent<CardScript>();
+            //cardReplacement.GetComponent<CardScript>().Effect = hand[hand.Count - 1].GetComponent<CardScript>().Effect;
+            //cardReplacement.GetComponent<CardScript>().Title = hand[hand.Count - 1].GetComponent<CardScript>().Title;
+            //cardReplacement.GetComponent<CardScript>().Stat = hand[hand.Count - 1].GetComponent<CardScript>().Stat;
+            //cardReplacement.transform.position = new Vector3(hand.Count * 2, 0, 0);
+            //Debug.Log("Adjusted position");
+        }
+    }
+
     [ClientRpc]
     public void RPCGiveDeck(GameObject deck, GameObject player, string highest)
     {
-            Debug.Log(deck);
-            Debug.Log(highest);
+        if (!isServer)
             deck.GetComponent<DeckScript>().CreateDeck(highest);
+    }
+
+    [ClientRpc]
+    public void RPCTell()
+    {
+        Debug.Log("Told");
     }
 }

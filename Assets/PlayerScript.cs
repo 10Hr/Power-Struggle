@@ -27,7 +27,6 @@ public class PlayerScript : NetworkBehaviour
     string myName;
 
     //player belongings
-    //public GameObject deck;
     public bool hasDeck = false;
     //[SyncVar]
     GameObject cardReplacement;
@@ -39,8 +38,9 @@ public class PlayerScript : NetworkBehaviour
     public GameObject[] player2GUI;
     public GameObject[] player3GUI;
     public GameObject[] player4GUI;
-    public List<GameObject> hand = new List<GameObject>();
-    private List<GameObject> realHand = new List<GameObject>();
+    public int handCount = 0;
+    //public List<GameObject> hand = new List<GameObject>();
+    //private List<GameObject> realHand = new List<GameObject>();
 
     //Other Objects
     PlayerManager playerManager;
@@ -238,19 +238,12 @@ public class PlayerScript : NetworkBehaviour
                    // Debug.Log("I got my deck, it has " + deck.GetComponent<DeckScript>().cards.Count + " cards");
                     break;
                 }
-                //if (hasDeck && deck.GetComponent<DeckScript>().cards.Count != 0)
-                //{
-                //    Debug.Log("I want to draw");
-                //    Debug.Log("My deck has " + deck.GetComponent<DeckScript>().cards.Count + " cards");
-                //    while (hand.Count != 8)
-                //    {
-                //        //attempt to make cards show
-                //        if (!NetworkClient.ready)
-                //            NetworkClient.Ready();
-                //        Draw();
-                //    }
-                //    Debug.Log("I drew " + hand.Count);
-                //}
+                if (hasDeck && handCount < 8)
+                {
+                    handCount++;
+                    Debug.Log("I want to draw");
+                    CmdDraw(playerCount);
+                }
                 if (availablePoints == 0 && readied)
                 {
                     foreach (GameObject b in buttons)
@@ -299,7 +292,12 @@ public class PlayerScript : NetworkBehaviour
     //Create players deck
     //Create players hand
     //spawn hand in game
-    public void Draw() {
+    [Command]
+    public void CmdDraw(int playerCount) {
+
+        playerManager.HandMaker(playerCount);
+
+
 
         //hand.Add(deck.GetComponent<DeckScript>().cards[0]);
         //deck.GetComponent<DeckScript>().cards.RemoveAt(0);
@@ -371,8 +369,4 @@ public class PlayerScript : NetworkBehaviour
         playerManager.DeckMaker(highest, playerNum);
 
     }
-    //public void getDeck() {
-    //    deck = playerManager.getDeck(playerNum);
-    //}
-
 }
