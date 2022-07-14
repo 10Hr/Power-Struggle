@@ -3623,6 +3623,7 @@ MonoBehaviour:
   cunPrefab: {fileID: 5974593963203953216, guid: fda67e1ccca4b0e458aaf63e1c8df11b, type: 3}
   intPrefab: {fileID: 1266152840080254701, guid: 9847f9fd61dd58e4bb635505b26f8d6c, type: 3}
   deckPrefab: {fileID: 0}
+  cardPrefab: {fileID: 0}
 --- !u!1 &525825698
 GameObject:
   m_ObjectHideFlags: 0
@@ -6410,6 +6411,10 @@ MonoBehaviour:
   hand2: []
   hand3: []
   hand4: []
+  rhand1: []
+  rhand2: []
+  rhand3: []
+  rhand4: []
 --- !u!4 &866009261
 Transform:
   m_ObjectHideFlags: 0
@@ -6442,6 +6447,7 @@ MonoBehaviour:
   cunPrefab: {fileID: 5974593963203953216, guid: fda67e1ccca4b0e458aaf63e1c8df11b, type: 3}
   intPrefab: {fileID: 1266152840080254701, guid: 9847f9fd61dd58e4bb635505b26f8d6c, type: 3}
   deckPrefab: {fileID: 6059198062976835479, guid: 2293e4b23104aae40bdec37dcd6e06ae, type: 3}
+  cardPrefab: {fileID: 5160951999355860241, guid: 93506a8a58790c3459c89a5d44e61ae1, type: 3}
 --- !u!1 &879585968
 GameObject:
   m_ObjectHideFlags: 0
@@ -6812,6 +6818,7 @@ MonoBehaviour:
   cunPrefab: {fileID: 5974593963203953216, guid: fda67e1ccca4b0e458aaf63e1c8df11b, type: 3}
   intPrefab: {fileID: 1266152840080254701, guid: 9847f9fd61dd58e4bb635505b26f8d6c, type: 3}
   deckPrefab: {fileID: 6059198062976835479, guid: 2293e4b23104aae40bdec37dcd6e06ae, type: 3}
+  cardPrefab: {fileID: 5160951999355860241, guid: 93506a8a58790c3459c89a5d44e61ae1, type: 3}
 --- !u!1 &908697130
 GameObject:
   m_ObjectHideFlags: 0
@@ -16036,6 +16043,7 @@ MonoBehaviour:
   - {fileID: 1266152840080254701, guid: 9847f9fd61dd58e4bb635505b26f8d6c, type: 3}
   - {fileID: 1868180166901093663, guid: f84f293c161539041956466f4c32fb3e, type: 3}
   - {fileID: 6059198062976835479, guid: 2293e4b23104aae40bdec37dcd6e06ae, type: 3}
+  - {fileID: 5160951999355860241, guid: 93506a8a58790c3459c89a5d44e61ae1, type: 3}
   playerCount: 0
 --- !u!4 &2133326653
 Transform:

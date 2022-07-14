@@ -2,8 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
+using Mirror;
 
-public class CardScript : MonoBehaviour
+public class CardScript : NetworkBehaviour
 {
 
     private string title;

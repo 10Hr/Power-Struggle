@@ -95,14 +95,6 @@ public class PlayerManager : NetworkBehaviour {
 
     }
 
-    public void getOwner(NetworkIdentity netID)
-    {
-        // thisID = netID;
-
-
-        //CreateDeck();
-    }
-
     public void setPlayer(int whichPlayer) {
         //each time a player connects, assign their IDs to fields
         updateList();
@@ -168,42 +160,47 @@ public class PlayerManager : NetworkBehaviour {
 
     }
 
+    //Find decks objects in scene
+    //Depending on player spawn that deck
+    //create deck properties for both server and all clients
     public void DeckMaker(string highest, int pNum)
     {
+        //get deck objects
         deck1 = GameObject.Find("Deck1");
         deck2 = GameObject.Find("Deck2");
         deck3 = GameObject.Find("Deck3");
         deck4 = GameObject.Find("Deck4");
 
+        //depending on player
         switch (pNum)
         {
             case 1:
+                //create deck properties for server and clients
                 RPCGiveDeck(deck1, player1, highest);
-                deck1.GetComponent<DeckScript>().CreateDeck(highest);
+                deck1.GetComponent<DeckScript>().CreateDeck(highest, this.GetComponent<InstantiatePrefab>().cardPrefab);
+
+                //spawns all the cards in that deck
                 for (int i = 0; i < deck1.GetComponent<DeckScript>().cards.Count; i++)
-                {
                     NetworkServer.Spawn(deck1.GetComponent<DeckScript>().cards[i]);
-                    RPCTell();
-                }
                 break;
 
             case 2:
                 RPCGiveDeck(deck2, player2, highest);
-                deck2.GetComponent<DeckScript>().CreateDeck(highest);
-                for (int i = 0; i < deck2.GetComponent<DeckScript>().cards.Count; i++)
+                deck2.GetComponent<DeckScript>().CreateDeck(highest, this.GetComponent<InstantiatePrefab>().cardPrefab);
+                for (int i = 0; i < deck2.GetComponent<DeckScript>().cards.Count; i++) 
                     NetworkServer.Spawn(deck2.GetComponent<DeckScript>().cards[i]);
                 break;
 
             case 3:
                 RPCGiveDeck(deck3, player3, highest);
-                deck3.GetComponent<DeckScript>().CreateDeck(highest);
+                deck3.GetComponent<DeckScript>().CreateDeck(highest, this.GetComponent<InstantiatePrefab>().cardPrefab);
                 for (int i = 0; i < deck3.GetComponent<DeckScript>().cards.Count; i++)
                     NetworkServer.Spawn(deck3.GetComponent<DeckScript>().cards[i]);
                 break;
 
             case 4:
                 RPCGiveDeck(deck4, player4, highest);
-                deck4.GetComponent<DeckScript>().CreateDeck(highest);
+                deck4.GetComponent<DeckScript>().CreateDeck(highest, this.GetComponent<InstantiatePrefab>().cardPrefab);
                 for (int i = 0; i < deck4.GetComponent<DeckScript>().cards.Count; i++)
                     NetworkServer.Spawn(deck4.GetComponent<DeckScript>().cards[i]);
                 break;
@@ -213,37 +210,40 @@ public class PlayerManager : NetworkBehaviour {
         }
     }
 
-    //cards only spawned on respective player
+    
+    //Creates players hands depending on which player is ready to draw
+    //draws the cards after hand is created
+    //draws cards 1 at a time (1 per call of this method)
     public void HandMaker(int pNum)
     {
+        //Depending on Player
         switch (pNum)
         {
             case 1:
-                //NetworkServer.Spawn(deck1.GetComponent<DeckScript>().cards[0]);
+                //add the card to the hand
+                // NOTE: LISTS ITEMS SHIFT FOWARD IF ONE IS REMOVED
+                // SO IF cards[0] IS REMOVED cards[1] WILL TAKE ITS PLACE
                 hand1.Add(deck1.GetComponent<DeckScript>().cards[0]);
-                //Debug.Log(hand1[hand1.Count - 1]);
+                //remove the card from the deck
                 deck1.GetComponent<DeckScript>().cards.RemoveAt(0);
+                //instaniate and spawn card
                 Draw(deck1, hand1, pNum);
                 break;
 
             case 2:
-                //NetworkServer.Spawn(deck2.GetComponent<DeckScript>().cards[0]);
                 hand2.Add(deck2.GetComponent<DeckScript>().cards[0]);
-                //Debug.Log(hand2[hand2.Count - 1]);
                 deck2.GetComponent<DeckScript>().cards.RemoveAt(0);
                 Draw(deck2, hand2, pNum);
                 break;
 
             case 3:
                 hand3.Add(deck3.GetComponent<DeckScript>().cards[0]);
-                Debug.Log(hand3.Count);
                 deck3.GetComponent<DeckScript>().cards.RemoveAt(0);
                 Draw(deck3, hand3, pNum);
                 break;
 
             case 4:
                 hand4.Add(deck4.GetComponent<DeckScript>().cards[0]);
-                Debug.Log(hand4.Count);
                 deck4.GetComponent<DeckScript>().cards.RemoveAt(0);
                 Draw(deck4, hand4, pNum);
                 break;
@@ -294,16 +294,16 @@ public class PlayerManager : NetworkBehaviour {
                 hand4[hand4.Count - 1] = cardToSpawn;
                 break;
         }
-        //hand[hand.Count - 1] = cardToSpawn;
-        //Debug.Log(hand[hand.Count - 1]);
     }
 
-    //[ClientRpc]
+    //Gets the correct sprite/prefab for the card and instatiates and spawns it
+    //adjusts the hand to represent the spawned cards
     public void Draw(GameObject deck, List<GameObject> hand, int pNum)
     {
-        //Debug.Log(hand.Count);
-        if (deck.GetComponent<DeckScript>().cards.Count >= 0)
+        //As long as the deck has cards to draw
+        if (deck.GetComponent<DeckScript>().cards.Count >= 0) //Looking back on it, this should be in HandMaker I believe
         {
+            //get correct prefab
             GameObject prefab;
             switch (deck.GetComponent<DeckScript>().Type)
             {
@@ -324,8 +324,10 @@ public class PlayerManager : NetworkBehaviour {
                     prefab = null;
                     break;
             }
+            //Instantiate and spawn
             GameObject cardToSpawn = Instantiate(prefab);
             NetworkServer.Spawn(cardToSpawn);
+            //update hand
             switch (pNum)
             {
                 case 1:
@@ -342,6 +344,7 @@ public class PlayerManager : NetworkBehaviour {
                     break;
             }
 
+            //TODO
 
             //Debug.Log(hand[hand.Count - 1]);
             /////////////////////////////////////CMDSpawnCard(deck, pNum);
@@ -355,16 +358,13 @@ public class PlayerManager : NetworkBehaviour {
         }
     }
 
+    //Is Called on all clients and server
+    //doesnt work on server to prevent the host having multiple copies
+    //creates deck properties for clients
     [ClientRpc]
     public void RPCGiveDeck(GameObject deck, GameObject player, string highest)
     {
         if (!isServer)
-            deck.GetComponent<DeckScript>().CreateDeck(highest);
-    }
-
-    [ClientRpc]
-    public void RPCTell()
-    {
-        Debug.Log("Told");
+            deck.GetComponent<DeckScript>().CreateDeck(highest, this.GetComponent<InstantiatePrefab>().cardPrefab);
     }
 }

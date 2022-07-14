@@ -9,6 +9,7 @@ public class InstantiatePrefab : MonoBehaviour
     public GameObject cunPrefab;
     public GameObject intPrefab;
     public GameObject deckPrefab;
+    public GameObject cardPrefab;
 
     // Start is called before the first frame update
     void Start()

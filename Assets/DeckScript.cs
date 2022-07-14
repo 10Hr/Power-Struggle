@@ -31,7 +31,7 @@ public class DeckScript : NetworkBehaviour
     }
 
     // Start is called before the first frame update
-    public void CreateDeck(string highest) {
+    public void CreateDeck(string highest, GameObject prefab) {
 
         type = highest;
         string path = null;
@@ -49,11 +49,12 @@ public class DeckScript : NetworkBehaviour
                 while ((line = input.ReadLine()) != null)
                 {
                     string[] data = line.Split(',');
-                    cards.Add(new GameObject("card"));
+                    //cards.Add(new GameObject("card"));
+                    cards.Add(Instantiate(prefab));
                     cards[cards.Count - 1].name = data[0];
                     cards[cards.Count - 1].AddComponent<SpriteRenderer>();
                     cards[cards.Count - 1].AddComponent<CardScript>();
-                    cards[cards.Count - 1].AddComponent<NetworkIdentity>();
+                    //cards[cards.Count - 1].AddComponent<NetworkIdentity>();
                     cards[cards.Count - 1].GetComponent<CardScript>().Title = data[0];
                     cards[cards.Count - 1].GetComponent<CardScript>().Effect = data[1];
                     cards[cards.Count - 1].GetComponent<CardScript>().Stat = data[2];
@@ -70,11 +71,12 @@ public class DeckScript : NetworkBehaviour
                 while ((line = input.ReadLine()) != null)
                 {
                     string[] data = line.Split(',');
-                    cards.Add(new GameObject("card"));
+                    //cards.Add(new GameObject("card"));
+                    cards.Add(Instantiate(prefab));
                     cards[cards.Count - 1].name = data[0];
                     cards[cards.Count - 1].AddComponent<SpriteRenderer>();
                     cards[cards.Count - 1].AddComponent<CardScript>();
-                    cards[cards.Count - 1].AddComponent<NetworkIdentity>();
+                    //cards[cards.Count - 1].AddComponent<NetworkIdentity>();
                     cards[cards.Count - 1].GetComponent<CardScript>().Title = data[0];
                     cards[cards.Count - 1].GetComponent<CardScript>().Effect = data[1];
                     cards[cards.Count - 1].GetComponent<CardScript>().Stat = data[2];
@@ -91,11 +93,12 @@ public class DeckScript : NetworkBehaviour
                 while ((line = input.ReadLine()) != null)
                 {
                     string[] data = line.Split(',');
-                    cards.Add(new GameObject("card"));
+                    //cards.Add(new GameObject("card"));
+                    cards.Add(Instantiate(prefab));
                     cards[cards.Count - 1].name = data[0];
                     cards[cards.Count - 1].AddComponent<SpriteRenderer>();
                     cards[cards.Count - 1].AddComponent<CardScript>();
-                    cards[cards.Count - 1].AddComponent<NetworkIdentity>();
+                    //cards[cards.Count - 1].AddComponent<NetworkIdentity>();
                     cards[cards.Count - 1].GetComponent<CardScript>().Title = data[0];
                     cards[cards.Count - 1].GetComponent<CardScript>().Effect = data[1];
                     cards[cards.Count - 1].GetComponent<CardScript>().Stat = data[2];
@@ -112,11 +115,12 @@ public class DeckScript : NetworkBehaviour
                 while ((line = input.ReadLine()) != null)
                 {
                     string[] data = line.Split(',');
-                    cards.Add(new GameObject("card"));
+                    //cards.Add(new GameObject("card"));
+                    cards.Add(Instantiate(prefab));
                     cards[cards.Count - 1].name = data[0];
                     cards[cards.Count - 1].AddComponent<SpriteRenderer>();
                     cards[cards.Count - 1].AddComponent<CardScript>();
-                    cards[cards.Count - 1].AddComponent<NetworkIdentity>();
+                    //cards[cards.Count - 1].AddComponent<NetworkIdentity>();
                     cards[cards.Count - 1].GetComponent<CardScript>().Title = data[0];
                     cards[cards.Count - 1].GetComponent<CardScript>().Effect = data[1];
                     cards[cards.Count - 1].GetComponent<CardScript>().Stat = data[2];
