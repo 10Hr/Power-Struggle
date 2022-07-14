@@ -294,13 +294,20 @@ public class PlayerManager : NetworkBehaviour {
                     cardToSpawn.GetComponent<CardScript>().Title = hand1[hand1.Count - 1].GetComponent<CardScript>().Title;
                     cardToSpawn.GetComponent<CardScript>().Stat = hand1[hand1.Count - 1].GetComponent<CardScript>().Stat;
                     hand1[hand1.Count - 1] = cardToSpawn;
-                    Debug.Log(hand1[hand1.Count - 1].GetComponent<CardScript>().Effect + " " + hand1[hand1.Count - 1].GetComponent<CardScript>().Title + " " + hand1[hand1.Count - 1].GetComponent<CardScript>().Stat);
+                    hand1[hand1.Count - 1].transform.position = new Vector3(hand1.Count * 2, 0, 0);
+                    //Debug.Log("Moved card " + (hand1.Count - 1) + " by " + (hand1.Count - 1) * 2);
+                    AdjustCards(hand1[hand1.Count - 1].GetComponent<CardScript>().Title, hand1[hand1.Count - 1].GetComponent<CardScript>().Effect, hand1[hand1.Count - 1].GetComponent<CardScript>().Stat);
                     break;
                 case 2:
+                    cardToSpawn.GetComponent<CardScript>().Effect = hand2[hand2.Count - 1].GetComponent<CardScript>().Effect;
+                    cardToSpawn.GetComponent<CardScript>().Title = hand2[hand2.Count - 1].GetComponent<CardScript>().Title;
+                    cardToSpawn.GetComponent<CardScript>().Stat = hand2[hand2.Count - 1].GetComponent<CardScript>().Stat;
                     hand2[hand2.Count - 1] = cardToSpawn;
                     hand2[hand2.Count - 1].transform.position = new Vector3(hand2.Count * 2, 0, 0);
+                    AdjustCards(hand2[hand2.Count - 1].GetComponent<CardScript>().Title, hand2[hand2.Count - 1].GetComponent<CardScript>().Effect, hand2[hand2.Count - 1].GetComponent<CardScript>().Stat);
                     break;
                 case 3:
+                   // NetworkTransform.
                     hand3[hand3.Count - 1] = cardToSpawn;
                     hand3[hand2.Count - 1].transform.position = new Vector3(hand3.Count * 2, 0, 0);
                     break;
@@ -332,5 +339,13 @@ public class PlayerManager : NetworkBehaviour {
     {
         if (!isServer)
             deck.GetComponent<DeckScript>().CreateDeck(highest, this.GetComponent<InstantiatePrefab>().cardPrefab);
+    }
+
+    //List<GameObject> hand, GameObject cardToSpawn
+    [ClientRpc]
+    public void AdjustCards(string Effect, string Title, string Stat)
+    {
+        //Debug.Log(hand1[hand1.Count - 1].GetComponent<CardScript>().Effect + " " + hand1[hand1.Count - 1].GetComponent<CardScript>().Title + " " + hand1[hand1.Count - 1].GetComponent<CardScript>().Stat);
+        Debug.Log(Title + " " + Effect + " " + Stat);
     }
 }
