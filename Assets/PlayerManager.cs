@@ -32,10 +32,6 @@ public class PlayerManager : NetworkBehaviour {
     public List<GameObject> hand2 = new List<GameObject>();
     public List<GameObject> hand3 = new List<GameObject>();
     public List<GameObject> hand4 = new List<GameObject>();
-    public List<GameObject> rhand1 = new List<GameObject>();
-    public List<GameObject> rhand2 = new List<GameObject>();
-    public List<GameObject> rhand3 = new List<GameObject>();
-    public List<GameObject> rhand4 = new List<GameObject>();
 
     string thisName;
     NetworkIdentity[] listObjects;
