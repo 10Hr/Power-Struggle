@@ -285,20 +285,28 @@ public class PlayerManager : NetworkBehaviour {
             //Instantiate and spawn
             GameObject cardToSpawn = Instantiate(prefab);
             NetworkServer.Spawn(cardToSpawn);
+            cardToSpawn.AddComponent<CardScript>();
             //update hand
             switch (pNum)
             {
                 case 1:
+                    cardToSpawn.GetComponent<CardScript>().Effect = hand1[hand1.Count - 1].GetComponent<CardScript>().Effect;
+                    cardToSpawn.GetComponent<CardScript>().Title = hand1[hand1.Count - 1].GetComponent<CardScript>().Title;
+                    cardToSpawn.GetComponent<CardScript>().Stat = hand1[hand1.Count - 1].GetComponent<CardScript>().Stat;
                     hand1[hand1.Count - 1] = cardToSpawn;
+                    Debug.Log(hand1[hand1.Count - 1].GetComponent<CardScript>().Effect + " " + hand1[hand1.Count - 1].GetComponent<CardScript>().Title + " " + hand1[hand1.Count - 1].GetComponent<CardScript>().Stat);
                     break;
                 case 2:
                     hand2[hand2.Count - 1] = cardToSpawn;
+                    hand2[hand2.Count - 1].transform.position = new Vector3(hand2.Count * 2, 0, 0);
                     break;
                 case 3:
                     hand3[hand3.Count - 1] = cardToSpawn;
+                    hand3[hand2.Count - 1].transform.position = new Vector3(hand3.Count * 2, 0, 0);
                     break;
                 case 4:
                     hand4[hand4.Count - 1] = cardToSpawn;
+                    hand4[hand4.Count - 1].transform.position = new Vector3(hand4.Count * 2, 0, 0);
                     break;
             }
 
