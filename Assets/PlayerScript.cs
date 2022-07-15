@@ -262,6 +262,7 @@ public class PlayerScript : NetworkBehaviour
                 }
                 break;
             case GameStates.Passive:
+                
                 break;
             default:
                 break;

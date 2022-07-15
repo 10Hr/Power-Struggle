@@ -62,7 +62,14 @@ public class PlayerManager : NetworkBehaviour {
     }
 
     // Update is called once per frame
-    void Update() { listObjects = FindObjectsOfType<NetworkIdentity>(); }
+    void Update() { 
+
+        listObjects = FindObjectsOfType<NetworkIdentity>(); 
+
+        if (hand1.Count == 8 && hand2.Count == 8 && hand3.Count == 8 && hand4.Count == 8 && !gameManager.AllDrawn) 
+            gameManager.AllDrawn = true;
+        
+    }
 
     public int AddNet(NetworkIdentity playerID) {
         playerIDs.Add(playerID);
@@ -248,6 +255,8 @@ public class PlayerManager : NetworkBehaviour {
                 Debug.Log("Invalid player.");
                 break;
         }
+
+
     }
 
     //Gets the correct sprite/prefab for the card and instatiates and spawns it

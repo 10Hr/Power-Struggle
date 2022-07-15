@@ -17,6 +17,7 @@ public class GameState : NetworkBehaviour
 {
     private GameStates currentState;
     private bool allReady = false;
+    private bool allDrawn = false;
     private bool passivesSelected = false;
 
     //properties
@@ -31,6 +32,11 @@ public class GameState : NetworkBehaviour
     public GameStates CurrentState
     {
         get { return currentState; }
+    }
+    public bool AllDrawn
+    {
+        set { allDrawn = value; }
+        get { return allDrawn; }
     }
 
     // Start is called before the first frame update
