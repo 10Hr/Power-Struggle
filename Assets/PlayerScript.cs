@@ -268,8 +268,27 @@ public class PlayerScript : NetworkBehaviour
                 break;
             case GameStates.Passive:
                 if (!called) {
-                    passiveManager = GameObject.Find("PassiveManager").GetComponent<PassiveManager>(); 
+                    // uncomment to run passive code, might actually work better in readyup??
+            /* 
+                    passiveManager = GameObject.Find("PassiveManager").GetComponent<PassiveManager>(); // if these two lones are put here then they will run as soon as player 1 is ready.
                     passiveManager.selectPassive(FindHighestStat());
+                    if (playerNum == 2) {
+                        //  GameObject.Find("passiveChoice1").transform.Rotate(0, 0, 90);
+                        // GameObject.Find("passiveChoice2").transform.Rotate(0, 0, 90);
+                            GameObject.Find("passiveChoicePivot").transform.Rotate(0, 0, 90);
+                    }
+                    if (playerNum == 3) {
+                        // GameObject.Find("passiveChoice1").transform.Rotate(0, 0, 90);
+                        // GameObject.Find("passiveChoice2").transform.Rotate(0, 0, 90);
+                            GameObject.Find("passiveChoicePivot").transform.Rotate(0, 0, 180);
+                    }
+                    if (playerNum == 4) {
+                        //GameObject.Find("passiveChoice1").transform.Rotate(0, 0, 90);
+                        //  GameObject.Find("passiveChoice2").transform.Rotate(0, 0, 90);
+                        GameObject.Find("passiveChoicePivot").transform.Rotate(0, 0, 270);
+                    }
+
+            */
                     called = true;
                 }
                 break;
@@ -342,7 +361,7 @@ public class PlayerScript : NetworkBehaviour
         if (availablePoints == 0)
         {
             readied = true;
-            // this code allows for testing of the passive phase without having to wait for the other players to ready up
+            // this code allows for testing of the passive phase without having to wait for the other players to ready up if put here
             /* 
             passiveManager = GameObject.Find("PassiveManager").GetComponent<PassiveManager>(); // if these two lones are put here then they will run as soon as player 1 is ready.
             passiveManager.selectPassive(FindHighestStat());
