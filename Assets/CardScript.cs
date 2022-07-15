@@ -56,34 +56,27 @@ public class CardScript : NetworkBehaviour
         else
         {
             if (currentSprite = cardBack)
-            {
-                gameObject.GetComponent<SpriteRenderer>().sprite = cardFront;
-            }
+               gameObject.GetComponent<SpriteRenderer>().sprite = cardFront;
+            
             //Debug.Log("I have Authority");
         }
     }
 
-    public void Enlarge()
-    {
-        if (hovered)
-        {
+    public void Enlarge() {
+        if (hovered) {
             this.transform.localScale = new Vector3(1.25f, 1.25f, 0);
             this.GetComponent<SpriteRenderer>().sortingOrder = 9;
         }
-        if (!hovered)
-        {
+        if (!hovered) {
             this.transform.localScale = new Vector3(1f, 1f, 0);
             this.GetComponent<SpriteRenderer>().sortingOrder = sortingDefault;
         }
     }
     
-    public void OnMouseEnter()
-    {
+    public void OnMouseEnter() {
         hovered = true;
     }
-    public void OnMouseExit()
-    {
+    public void OnMouseExit() {
         hovered = false;
-
     }
 }

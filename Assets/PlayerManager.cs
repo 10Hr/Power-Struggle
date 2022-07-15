@@ -63,12 +63,12 @@ public class PlayerManager : NetworkBehaviour {
 
     // Update is called once per frame
     void Update() { 
-
         listObjects = FindObjectsOfType<NetworkIdentity>(); 
 
         if (hand1.Count == 8 && hand2.Count == 8 && hand3.Count == 8 && hand4.Count == 8 && !gameManager.AllDrawn) 
             gameManager.AllDrawn = true;
         
+
     }
 
     public int AddNet(NetworkIdentity playerID) {
@@ -406,33 +406,21 @@ public class PlayerManager : NetworkBehaviour {
     [ClientRpc]
     public void RPCEnlarge(List<GameObject> hand1, List<GameObject> hand2, List<GameObject> hand3, List<GameObject> hand4)
     {
-        for (int i = 0; i < hand1.Count; i++)
-        {
-            if (hand1[i].GetComponent<CardScript>().hasAuthority)
-            {
+        for (int i = 0; i < hand1.Count; i++)        
+            if (hand1[i].GetComponent<CardScript>().hasAuthority)           
                 hand1[i].GetComponent<CardScript>().Enlarge();
-            }
-        }
-        for (int i = 0; i < hand2.Count; i++)
-        {
-            if (hand2[i].GetComponent<CardScript>().hasAuthority)
-            {
+             
+        for (int i = 0; i < hand2.Count; i++)        
+            if (hand2[i].GetComponent<CardScript>().hasAuthority)            
                 hand2[i].GetComponent<CardScript>().Enlarge();
-            }
-        }
-        for (int i = 0; i < hand3.Count; i++)
-        {
+        
+        for (int i = 0; i < hand3.Count; i++)        
             if (hand3[i].GetComponent<CardScript>().hasAuthority)
-            {
                 hand3[i].GetComponent<CardScript>().Enlarge();
-            }
-        }
+              
         for (int i = 0; i < hand4.Count; i++)
-        {
             if (hand4[i].GetComponent<CardScript>().hasAuthority)
-            {
                 hand4[i].GetComponent<CardScript>().Enlarge();
-            }
-        }
+            
     }
 }
