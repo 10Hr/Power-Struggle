@@ -14,6 +14,8 @@ public class CardScript : NetworkBehaviour
     private string effect;
     private string stat;
     public bool hovered;
+    public bool selected = false;
+    public bool prevSelected = false;
     public int sortingDefault;
 
     public string Title
@@ -78,5 +80,12 @@ public class CardScript : NetworkBehaviour
     }
     public void OnMouseExit() {
         hovered = false;
+    }
+    [ClientRpc]
+    public void OnMouseDown()
+    {
+        prevSelected = selected;
+        selected = !selected;
+        
     }
 }
