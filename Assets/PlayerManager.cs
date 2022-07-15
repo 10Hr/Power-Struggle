@@ -294,16 +294,15 @@ public class PlayerManager : NetworkBehaviour {
                     cardToSpawn.GetComponent<CardScript>().Title = hand1[hand1.Count - 1].GetComponent<CardScript>().Title;
                     cardToSpawn.GetComponent<CardScript>().Stat = hand1[hand1.Count - 1].GetComponent<CardScript>().Stat;
                     hand1[hand1.Count - 1] = cardToSpawn;
-                    //Debug.Log(hand1[hand1.Count - 1].GetComponent<CardScript>().netIdentity);
+                    player1.GetComponent<PlayerScript>().hand.Add(hand1[hand1.Count - 1]);
                     AdjustCards(hand1, pNum);
-                    //hand1[hand1.Count - 1].transform.position = new Vector3(hand1.Count * 2, 0, 0);
                     break;
                 case 2:
                     cardToSpawn.GetComponent<CardScript>().Effect = hand2[hand2.Count - 1].GetComponent<CardScript>().Effect;
                     cardToSpawn.GetComponent<CardScript>().Title = hand2[hand2.Count - 1].GetComponent<CardScript>().Title;
                     cardToSpawn.GetComponent<CardScript>().Stat = hand2[hand2.Count - 1].GetComponent<CardScript>().Stat;
                     hand2[hand2.Count - 1] = cardToSpawn;
-                    //hand2[hand2.Count - 1].transform.position = new Vector3(hand2.Count * 2, 0, 0);
+                    player2.GetComponent<PlayerScript>().hand.Add(hand2[hand2.Count - 1]);
                     AdjustCards(hand2, pNum);
                     break;
                 case 3:
@@ -311,7 +310,7 @@ public class PlayerManager : NetworkBehaviour {
                     cardToSpawn.GetComponent<CardScript>().Title = hand3[hand3.Count - 1].GetComponent<CardScript>().Title;
                     cardToSpawn.GetComponent<CardScript>().Stat = hand3[hand3.Count - 1].GetComponent<CardScript>().Stat;
                     hand3[hand3.Count - 1] = cardToSpawn;
-                    //hand3[hand3.Count - 1].transform.position = new Vector3(hand3.Count * 2, 0, 0);
+                    player3.GetComponent<PlayerScript>().hand.Add(hand3[hand3.Count - 1]);
                     AdjustCards(hand3, pNum);
                     break;
                 case 4:
@@ -319,7 +318,7 @@ public class PlayerManager : NetworkBehaviour {
                     cardToSpawn.GetComponent<CardScript>().Title = hand4[hand4.Count - 1].GetComponent<CardScript>().Title;
                     cardToSpawn.GetComponent<CardScript>().Stat = hand4[hand4.Count - 1].GetComponent<CardScript>().Stat;
                     hand4[hand4.Count - 1] = cardToSpawn;
-                    //hand4[hand4.Count - 1].transform.position = new Vector3(hand4.Count * 2, 0, 0);
+                    player4.GetComponent<PlayerScript>().hand.Add(hand4[hand4.Count - 1]);
                     AdjustCards(hand4, pNum);
                     break;
             }

@@ -25,6 +25,7 @@ public class PlayerScript : NetworkBehaviour
     private int availablePoints = 8;
     private int maxPoints = 8;
     private bool readied = false;
+    public int numSelected = 0;
     [SyncVar]
     string myName;
 
@@ -41,7 +42,7 @@ public class PlayerScript : NetworkBehaviour
     public GameObject[] player3GUI;
     public GameObject[] player4GUI;
     public int handCount = 0;
-    //public List<GameObject> hand = new List<GameObject>();
+    public List<GameObject> hand = new List<GameObject>();
     //private List<GameObject> realHand = new List<GameObject>();
 
     //Other Objects
@@ -267,7 +268,26 @@ public class PlayerScript : NetworkBehaviour
                 
                 break;
             case GameStates.Turn:
-                
+                for (int i = 0; i < hand.Count; i++)
+                {
+                    if (hand[i].GetComponent<CardScript>().selected)
+                    {
+                        numSelected++;
+                    }
+                    else if (!hand[i].GetComponent<CardScript>().selected && hand[i].GetComponent<CardScript>().prevSelected)
+                    {
+                        numSelected--;
+                    }
+                }
+                if (numSelected == 3)
+                {
+                    Debug.Log("You may lock in");
+                    //show lockIn button
+                }
+                else
+                {
+                    //hide lockIn button
+                }
                 break;
             default:
                 break;
