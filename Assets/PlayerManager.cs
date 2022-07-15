@@ -347,9 +347,6 @@ public class PlayerManager : NetworkBehaviour {
     [ClientRpc]
     public void AdjustCards(List<GameObject> hand, int pNum)
     {
-        //Debug.Log(hand1[hand1.Count - 1].GetComponent<CardScript>().Effect + " " + hand1[hand1.Count - 1].GetComponent<CardScript>().Title + " " + hand1[hand1.Count - 1].GetComponent<CardScript>().Stat);
-        //Debug.Log(Title + " " + Effect + " " + Stat);
-        Debug.Log(pNum);
         switch (pNum)
         {
             case 1:
@@ -358,19 +355,16 @@ public class PlayerManager : NetworkBehaviour {
                 break;
             case 2:
                 hand[hand.Count - 1].transform.position = new Vector3(18, (hand.Count * 1.25f) + .25f, 0);
-                //hand[hand.Count - 1].transform.rotation = new Quaternion(0, 0, 90, 0);
                 hand[hand.Count - 1].transform.Rotate(0, 0, 90);
                 hand[hand.Count - 1].transform.localScale -= new Vector3(0.2f, 0.2f, 0);
                 break;
             case 3:
                 hand[hand.Count - 1].transform.position = new Vector3(16 - (hand.Count * 1.25f), 14, 0);
-                //hand[hand.Count - 1].transform.rotation = new Quaternion(0, 0, 180, 0);
                 hand[hand.Count - 1].transform.Rotate(0, 0, 180);
                 hand[hand.Count - 1].transform.localScale -= new Vector3(0.2f, 0.2f, 0);
                 break;
             case 4:
                 hand[hand.Count - 1].transform.position = new Vector3(1, 10 - (hand.Count * 1.25f), 0);
-                //hand[hand.Count - 1].transform.rotation = new Quaternion(0, 0, 270, 0);
                 hand[hand.Count - 1].transform.Rotate(0, 0, 270);
                 hand[hand.Count - 1].transform.localScale -= new Vector3(0.2f, 0.2f, 0);
                 break;
