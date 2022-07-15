@@ -13,6 +13,8 @@ public class CardScript : NetworkBehaviour
     private string title;
     private string effect;
     private string stat;
+    public bool hovered;
+    public int sortingDefault;
 
     public string Title
     {
@@ -33,7 +35,7 @@ public class CardScript : NetworkBehaviour
     }
 
     // Start is called before the first frame update
-    void Awake()
+    void Start()
     {
 
     }
@@ -44,7 +46,7 @@ public class CardScript : NetworkBehaviour
         
     }
     //THIS IS CALLED FROM A CLIENT RPC IN PLAYERMANAGER
-    public void flip()
+    public void Flip()
     {
         Sprite currentSprite = gameObject.GetComponent<SpriteRenderer>().sprite;
         if (!hasAuthority)
@@ -59,5 +61,29 @@ public class CardScript : NetworkBehaviour
             }
             //Debug.Log("I have Authority");
         }
+    }
+
+    public void Enlarge()
+    {
+        if (hovered)
+        {
+            this.transform.localScale = new Vector3(1.25f, 1.25f, 0);
+            this.GetComponent<SpriteRenderer>().sortingOrder = 9;
+        }
+        if (!hovered)
+        {
+            this.transform.localScale = new Vector3(1f, 1f, 0);
+            this.GetComponent<SpriteRenderer>().sortingOrder = sortingDefault;
+        }
+    }
+    
+    public void OnMouseEnter()
+    {
+        hovered = true;
+    }
+    public void OnMouseExit()
+    {
+        hovered = false;
+
     }
 }

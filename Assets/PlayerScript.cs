@@ -58,12 +58,12 @@ public class PlayerScript : NetworkBehaviour
     public int Charisma
     {
         get { return charisma; }
-        set { charisma = value;}
+        set { charisma = value; }
     }
     public int Cunning
     {
         get { return cunning; }
-        set { cunning = value;}
+        set { cunning = value; }
     }
     public int Intelligence
     {
@@ -233,17 +233,17 @@ public class PlayerScript : NetworkBehaviour
                 //Repeat all of this in turn
                 if (readied && !hasDeck)
                 {
-                    Debug.Log("I want to get my deck");
+                    //Debug.Log("I want to get my deck");
                     highest = FindHighestStat();
                     CmdSpawnDeck(highest, playerNum);
                     hasDeck = true;
-                   
+
                     break;
                 }
                 if (hasDeck && handCount < 8)
                 {
                     handCount++;
-                    Debug.Log("I want to draw");
+                    //Debug.Log("I want to draw");
                     CmdDraw(playerCount);
                 }
                 if (availablePoints == 0 && readied)
@@ -266,7 +266,10 @@ public class PlayerScript : NetworkBehaviour
             default:
                 break;
         }
-        
+
+        if(handCount > 0)
+        CmdEnlarge();
+
     }
 
     //Finds players highest stat
@@ -295,14 +298,14 @@ public class PlayerScript : NetworkBehaviour
     //Create players hand
     //spawn hand in game
     [Command]
-    public void CmdDraw(int playerCount) 
+    public void CmdDraw(int playerCount)
     {
         playerManager.HandMaker(playerCount, connectionToClient);
     }
 
     //sets player up for passive phase
     public bool ReadyUp() {
-        Debug.Log("I am READY!");
+        //Debug.Log("I am READY!");
 
         if (availablePoints == 0)
         {
@@ -318,5 +321,11 @@ public class PlayerScript : NetworkBehaviour
     public void CmdSpawnDeck(string highest, int playerNum) {
         playerManager.DeckMaker(highest, playerNum);
 
+    }
+
+    [Command]
+    public void CmdEnlarge()
+    {
+        playerManager.Enlarge();
     }
 }

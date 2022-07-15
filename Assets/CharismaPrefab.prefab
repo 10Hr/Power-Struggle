@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: -2953369625757150518}
   - component: {fileID: 9175665964486833027}
   - component: {fileID: -939347681107771943}
+  - component: {fileID: -5179688532532965620}
   m_Layer: 0
   m_Name: CharismaPrefab
   m_TagString: Untagged
@@ -119,3 +120,31 @@ MonoBehaviour:
   syncInterval: 0.1
   cardFront: {fileID: 21300000, guid: 41a962c94c99f2f49996322b6e912e95, type: 3}
   cardBack: {fileID: 21300000, guid: f171745d4aaa84b458825a73488ebc22, type: 3}
+  hovered: 0
+  sortingDefault: 0
+--- !u!61 &-5179688532532965620
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7391875820136023039}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 2.5, y: 3.5}
+    newSize: {x: 2.5, y: 3.5}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 2.5, y: 3.5}
+  m_EdgeRadius: 0

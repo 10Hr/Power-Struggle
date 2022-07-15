@@ -254,7 +254,6 @@ public class PlayerManager : NetworkBehaviour {
     //adjusts the hand to represent the spawned cards
     public void Draw(GameObject deck, List<GameObject> hand, int pNum, NetworkConnectionToClient conn)
     {
-        Debug.Log(conn);
         //As long as the deck has cards to draw
         if (deck.GetComponent<DeckScript>().cards.Count >= 0) //Looking back on it, this should be in HandMaker... It shouldn't be causing the problem though.
         {
@@ -355,21 +354,29 @@ public class PlayerManager : NetworkBehaviour {
             case 1:
                 hand[hand.Count - 1].transform.position = new Vector3((hand.Count * 1.25f) + 3.5f, -2, 0);
                 hand[hand.Count - 1].transform.localScale -= new Vector3(0.2f, 0.2f, 0);
+                hand[hand.Count - 1].GetComponent<SpriteRenderer>().sortingOrder = 8 - hand.Count;
+                hand[hand.Count - 1].GetComponent<CardScript>().sortingDefault = hand[hand.Count - 1].GetComponent<SpriteRenderer>().sortingOrder;
                 break;
             case 2:
                 hand[hand.Count - 1].transform.position = new Vector3(18, (hand.Count * 1.25f) + .25f, 0);
                 hand[hand.Count - 1].transform.Rotate(0, 0, 90);
                 hand[hand.Count - 1].transform.localScale -= new Vector3(0.2f, 0.2f, 0);
+                hand[hand.Count - 1].GetComponent<SpriteRenderer>().sortingOrder = 8 - hand.Count;
+                hand[hand.Count - 1].GetComponent<CardScript>().sortingDefault = hand[hand.Count - 1].GetComponent<SpriteRenderer>().sortingOrder;
                 break;
             case 3:
                 hand[hand.Count - 1].transform.position = new Vector3(16 - (hand.Count * 1.25f), 14, 0);
                 hand[hand.Count - 1].transform.Rotate(0, 0, 180);
                 hand[hand.Count - 1].transform.localScale -= new Vector3(0.2f, 0.2f, 0);
+                hand[hand.Count - 1].GetComponent<SpriteRenderer>().sortingOrder = 8 - hand.Count;
+                hand[hand.Count - 1].GetComponent<CardScript>().sortingDefault = hand[hand.Count - 1].GetComponent<SpriteRenderer>().sortingOrder;
                 break;
             case 4:
                 hand[hand.Count - 1].transform.position = new Vector3(1, 10 - (hand.Count * 1.25f), 0);
                 hand[hand.Count - 1].transform.Rotate(0, 0, 270);
                 hand[hand.Count - 1].transform.localScale -= new Vector3(0.2f, 0.2f, 0);
+                hand[hand.Count - 1].GetComponent<SpriteRenderer>().sortingOrder = 8 - hand.Count;
+                hand[hand.Count - 1].GetComponent<CardScript>().sortingDefault = hand[hand.Count - 1].GetComponent<SpriteRenderer>().sortingOrder;
                 break;
         }
 
@@ -377,8 +384,46 @@ public class PlayerManager : NetworkBehaviour {
         //{
        // Debug.Log(hand[hand.Count - 1].GetComponent<NetworkIdentity>().connectionToClient);
         //Debug.Log(hand[hand.Count - 1].GetComponent<NetworkIdentity>().hasAuthority);
-        hand[hand.Count - 1].GetComponent<CardScript>().flip();
+        hand[hand.Count - 1].GetComponent<CardScript>().Flip();
         //}
         
+    }
+
+    public void Enlarge()
+    {
+        RPCEnlarge(hand1, hand2, hand3, hand4);
+    }
+    
+    [ClientRpc]
+    public void RPCEnlarge(List<GameObject> hand1, List<GameObject> hand2, List<GameObject> hand3, List<GameObject> hand4)
+    {
+        for (int i = 0; i < hand1.Count; i++)
+        {
+            if (hand1[i].GetComponent<CardScript>().hasAuthority)
+            {
+                hand1[i].GetComponent<CardScript>().Enlarge();
+            }
+        }
+        for (int i = 0; i < hand2.Count; i++)
+        {
+            if (hand2[i].GetComponent<CardScript>().hasAuthority)
+            {
+                hand2[i].GetComponent<CardScript>().Enlarge();
+            }
+        }
+        for (int i = 0; i < hand3.Count; i++)
+        {
+            if (hand3[i].GetComponent<CardScript>().hasAuthority)
+            {
+                hand3[i].GetComponent<CardScript>().Enlarge();
+            }
+        }
+        for (int i = 0; i < hand4.Count; i++)
+        {
+            if (hand4[i].GetComponent<CardScript>().hasAuthority)
+            {
+                hand4[i].GetComponent<CardScript>().Enlarge();
+            }
+        }
     }
 }
