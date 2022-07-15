@@ -117,3 +117,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
+  cardFront: {fileID: 21300000, guid: 41a962c94c99f2f49996322b6e912e95, type: 3}
+  cardBack: {fileID: 21300000, guid: 09a1cff1f921b834b93f2c83a755a162, type: 3}
