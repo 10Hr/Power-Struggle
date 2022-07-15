@@ -4,28 +4,26 @@ using UnityEngine;
 using Mirror;
 public class Passive : NetworkBehaviour
 {
-
     private string passiveType;
     private string passiveName;
     private string passiveDescription;
 
     // properties
-    private string PassiveType
+    public string PassiveType
     {
         get { return passiveType; }
         set { passiveType = value; }
     }
-    private string PassiveName
+    public string PassiveName
     {
         get { return passiveName; }
         set { passiveName = value; }
     }
-    private string PassiveDescription
+    public string PassiveDescription
     {
         get { return passiveDescription; }
         set { passiveDescription = value; }
     }
-
 
 
 }

@@ -21,6 +21,7 @@ public class NewNetworkManager : NetworkManager
     NetworkIdentity[] listObjects;
     PlayerManager playerManager;
     StatManager statManager;
+    PassiveManager passive;
     public int playerCount;
 
     #region Unity Callbacks
@@ -240,7 +241,9 @@ public class NewNetworkManager : NetworkManager
     /// This is invoked when a host is started.
     /// <para>StartHost has multiple signatures, but they all cause this hook to be called.</para>
     /// </summary>
-    public override void OnStartHost() {}
+    public override void OnStartHost() {
+
+    }
 
     /// <summary>
     /// This is invoked when a server is started - including when a host is started.
@@ -251,7 +254,7 @@ public class NewNetworkManager : NetworkManager
     /// <summary>
     /// This is invoked when the client is started.
     /// </summary>
-    public override void OnStartClient() { }
+    public override void OnStartClient() {}
 
     /// <summary>
     /// This is called when a host is stopped.

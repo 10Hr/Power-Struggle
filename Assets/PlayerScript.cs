@@ -31,6 +31,7 @@ public class PlayerScript : NetworkBehaviour
 
     //player belongings
     public bool hasDeck = false;
+    public bool called = false;
     //[SyncVar]
     GameObject cardReplacement;
 
@@ -48,6 +49,7 @@ public class PlayerScript : NetworkBehaviour
     //Other Objects
     PlayerManager playerManager;
     StatManager stats;
+    PassiveManager passiveManager;
     GameState gameManager;
     GameStates currentState;
     GameObject camera1;
@@ -265,7 +267,10 @@ public class PlayerScript : NetworkBehaviour
                 }
                 break;
             case GameStates.Passive:
-                
+                if (!called) {
+                    passiveManager.selectPassive(highest);
+                    called = true;
+                }
                 break;
             case GameStates.Turn:
                 for (int i = 0; i < hand.Count; i++)

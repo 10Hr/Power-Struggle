@@ -1,15 +1,12 @@
 Default,mitigateLosses,Ignore penalties from getting 4th in an event but half rewards from getting 1st
 Default,Copycat,Draw 1 out of your 3 cards from another players deck
 Default,Veteran,At the beginning of every trimester, gain 1 point in all stats.
-
 Charisma,Encore,Play 4 cards per turn and draw 4 after *
 Charisma,Lasting effects,The last card you played also has the effect of the first
 Charisma,Natural Ally,Once per turn target one person that. person can not target you this turn
-
 Intelligence,Tactician,Once per playing round, change out one of your face down cards with one in your hand
 Intelligence,Precise,Your attacks never miss their target
 Intelligence,See Deck,See another person's hand once per turn and disable 1 card *
-
 Cunning,Shady business,Redirect an enemy card that targets another player to a player of your choosing **
 Cunning,Blackmarket,You can put a card from your hand back in the deck and draw a new one. The first time is free, but every time after that costs 50pp
 Cunning,Wire Tapping,At the start of a trimester, choose 1 event from a random 5 that will be in the treimester.

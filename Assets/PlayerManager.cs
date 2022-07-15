@@ -33,6 +33,8 @@ public class PlayerManager : NetworkBehaviour {
     public List<GameObject> hand4 = new List<GameObject>();
     NetworkIdentity[] listObjects;
     GameState gameManager;
+    PassiveManager passiveManager;
+
     bool p1ready, p2ready, p3ready, p4ready;
 
 
@@ -53,6 +55,7 @@ public class PlayerManager : NetworkBehaviour {
         deck2 = GameObject.Find("Deck2");
         deck3 = GameObject.Find("Deck3");
         deck4 = GameObject.Find("Deck4");
+        passiveManager = GameObject.Find("PassiveManager").GetComponent<PassiveManager>();
         //decks = new List<GameObject>();
     }
 

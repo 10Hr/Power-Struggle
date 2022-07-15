@@ -3,20 +3,24 @@ using System.Collections.Generic;
 using UnityEngine;
 using Mirror;
 using System.IO;
+using UnityEngine.UI;
 public class PassiveManager : NetworkBehaviour
 {
-    // Start is called before the first frame update
+    private List<Passive> passives = new List<Passive>();
+    private List<Passive> choices = new List<Passive>();
+    private GameObject passiveChoice1;
+    private GameObject passiveChoice2;
+    private GameObject passiveChoice3;
 
 
-    private string passiveType;
-    private string passiveName;
-    private string passiveDescription;
-    private List<GameObject> passives = new List<GameObject>();
-
-
-
-
+    void Awake() { getPassivesFromFile(); 
     
+    passiveChoice1 = GameObject.Find("passiveChoice1");
+    passiveChoice2 = GameObject.Find("passiveChoice2");
+    passiveChoice3 = GameObject.Find("passiveChoice3");
+
+     }
+
     //Type, Name, Desc
     // add thing to turn periods to commas in description
     public void getPassivesFromFile() {
@@ -28,18 +32,35 @@ public class PassiveManager : NetworkBehaviour
         input = new StreamReader(path);
         line = null;
 
-    while ((line = input.ReadLine()) != null)
-                {
-                    string[] data = line.Split(',');
-                    passives.Add(new GameObject("passive"));
-                }
-                input.Close();
+        while ((line = input.ReadLine()) != null) {
+            string[] data = line.Split(',');
+            passives.Add(new Passive());
+            passives[passives.Count - 1].PassiveType = data[0];
+            passives[passives.Count - 1].PassiveName = data[1];
+            passives[passives.Count - 1].PassiveDescription = data[2];
+        }
+        input.Close();
+    }
+
+    public void selectPassive(string highest) {
+        foreach (Passive p in passives) 
+            if (p.PassiveType == highest) 
+                choices.Add(p);
+                // be awesome
+    
+        passiveChoice1.GetComponent<Text>().text = choices[0].PassiveName;
+        passiveChoice2.GetComponent<Text>().text = choices[1].PassiveName;
+        passiveChoice3.GetComponent<Text>().text = choices[2].PassiveName;
+
+        //select passive
+        //add to player
+        //add to player manager
+
+
 
     }
+
     void effect() {
-        //do stuff
-    }
-
-    void Start() {}
-    void Update() {}
+        //do stuff 
+        }
 }
