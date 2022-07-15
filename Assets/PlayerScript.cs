@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Mirror;
+using System;
+
 //CLIENT SCRIPT
 public class PlayerScript : NetworkBehaviour
 {

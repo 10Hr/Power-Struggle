@@ -27,17 +27,12 @@ public class PlayerManager : NetworkBehaviour {
     public GameObject deck4;
     [SyncVar]
     public int playerCount;
-
     public List<GameObject> hand1 = new List<GameObject>();
     public List<GameObject> hand2 = new List<GameObject>();
     public List<GameObject> hand3 = new List<GameObject>();
     public List<GameObject> hand4 = new List<GameObject>();
-
-    string thisName;
     NetworkIdentity[] listObjects;
-    StatManager stats;
     GameState gameManager;
-
     bool p1ready, p2ready, p3ready, p4ready;
 
 
