@@ -210,7 +210,7 @@ public class PlayerManager : NetworkBehaviour {
     //Creates players hands depending on which player is ready to draw
     //draws the cards after hand is created
     //draws cards 1 at a time (1 per call of this method)
-    public void HandMaker(int pNum)
+    public void HandMaker(int pNum)  //Shorter name for PlayerNum
     {
         //Depending on Player
         switch (pNum)
@@ -255,7 +255,7 @@ public class PlayerManager : NetworkBehaviour {
     public void Draw(GameObject deck, List<GameObject> hand, int pNum)
     {
         //As long as the deck has cards to draw
-        if (deck.GetComponent<DeckScript>().cards.Count >= 0) //Looking back on it, this should be in HandMaker I believe
+        if (deck.GetComponent<DeckScript>().cards.Count >= 0) //Looking back on it, this should be in HandMaker... It shouldn't be causing the problem though.
         {
             //get correct prefab
             GameObject prefab;
@@ -290,26 +290,32 @@ public class PlayerManager : NetworkBehaviour {
                     cardToSpawn.GetComponent<CardScript>().Title = hand1[hand1.Count - 1].GetComponent<CardScript>().Title;
                     cardToSpawn.GetComponent<CardScript>().Stat = hand1[hand1.Count - 1].GetComponent<CardScript>().Stat;
                     hand1[hand1.Count - 1] = cardToSpawn;
-                    hand1[hand1.Count - 1].transform.position = new Vector3(hand1.Count * 2, 0, 0);
-                    //Debug.Log("Moved card " + (hand1.Count - 1) + " by " + (hand1.Count - 1) * 2);
-                    AdjustCards(hand1[hand1.Count - 1].GetComponent<CardScript>().Title, hand1[hand1.Count - 1].GetComponent<CardScript>().Effect, hand1[hand1.Count - 1].GetComponent<CardScript>().Stat);
+                    AdjustCards(hand1, pNum);
+                    //hand1[hand1.Count - 1].transform.position = new Vector3(hand1.Count * 2, 0, 0);
                     break;
                 case 2:
                     cardToSpawn.GetComponent<CardScript>().Effect = hand2[hand2.Count - 1].GetComponent<CardScript>().Effect;
                     cardToSpawn.GetComponent<CardScript>().Title = hand2[hand2.Count - 1].GetComponent<CardScript>().Title;
                     cardToSpawn.GetComponent<CardScript>().Stat = hand2[hand2.Count - 1].GetComponent<CardScript>().Stat;
                     hand2[hand2.Count - 1] = cardToSpawn;
-                    hand2[hand2.Count - 1].transform.position = new Vector3(hand2.Count * 2, 0, 0);
-                    AdjustCards(hand2[hand2.Count - 1].GetComponent<CardScript>().Title, hand2[hand2.Count - 1].GetComponent<CardScript>().Effect, hand2[hand2.Count - 1].GetComponent<CardScript>().Stat);
+                    //hand2[hand2.Count - 1].transform.position = new Vector3(hand2.Count * 2, 0, 0);
+                    AdjustCards(hand2, pNum);
                     break;
                 case 3:
-                   // NetworkTransform.
+                    cardToSpawn.GetComponent<CardScript>().Effect = hand3[hand3.Count - 1].GetComponent<CardScript>().Effect;
+                    cardToSpawn.GetComponent<CardScript>().Title = hand3[hand3.Count - 1].GetComponent<CardScript>().Title;
+                    cardToSpawn.GetComponent<CardScript>().Stat = hand3[hand3.Count - 1].GetComponent<CardScript>().Stat;
                     hand3[hand3.Count - 1] = cardToSpawn;
-                    hand3[hand2.Count - 1].transform.position = new Vector3(hand3.Count * 2, 0, 0);
+                    //hand3[hand3.Count - 1].transform.position = new Vector3(hand3.Count * 2, 0, 0);
+                    AdjustCards(hand3, pNum);
                     break;
                 case 4:
+                    cardToSpawn.GetComponent<CardScript>().Effect = hand4[hand4.Count - 1].GetComponent<CardScript>().Effect;
+                    cardToSpawn.GetComponent<CardScript>().Title = hand4[hand4.Count - 1].GetComponent<CardScript>().Title;
+                    cardToSpawn.GetComponent<CardScript>().Stat = hand4[hand4.Count - 1].GetComponent<CardScript>().Stat;
                     hand4[hand4.Count - 1] = cardToSpawn;
-                    hand4[hand4.Count - 1].transform.position = new Vector3(hand4.Count * 2, 0, 0);
+                    //hand4[hand4.Count - 1].transform.position = new Vector3(hand4.Count * 2, 0, 0);
+                    AdjustCards(hand4, pNum);
                     break;
             }
 
@@ -339,9 +345,35 @@ public class PlayerManager : NetworkBehaviour {
 
     //List<GameObject> hand, GameObject cardToSpawn
     [ClientRpc]
-    public void AdjustCards(string Effect, string Title, string Stat)
+    public void AdjustCards(List<GameObject> hand, int pNum)
     {
         //Debug.Log(hand1[hand1.Count - 1].GetComponent<CardScript>().Effect + " " + hand1[hand1.Count - 1].GetComponent<CardScript>().Title + " " + hand1[hand1.Count - 1].GetComponent<CardScript>().Stat);
-        Debug.Log(Title + " " + Effect + " " + Stat);
+        //Debug.Log(Title + " " + Effect + " " + Stat);
+        Debug.Log(pNum);
+        switch (pNum)
+        {
+            case 1:
+                hand[hand.Count - 1].transform.position = new Vector3((hand.Count * 1.25f) + 3.5f, -2, 0);
+                hand[hand.Count - 1].transform.localScale -= new Vector3(0.2f, 0.2f, 0);
+                break;
+            case 2:
+                hand[hand.Count - 1].transform.position = new Vector3(18, (hand.Count * 1.25f) + .25f, 0);
+                //hand[hand.Count - 1].transform.rotation = new Quaternion(0, 0, 90, 0);
+                hand[hand.Count - 1].transform.Rotate(0, 0, 90);
+                hand[hand.Count - 1].transform.localScale -= new Vector3(0.2f, 0.2f, 0);
+                break;
+            case 3:
+                hand[hand.Count - 1].transform.position = new Vector3(16 - (hand.Count * 1.25f), 14, 0);
+                //hand[hand.Count - 1].transform.rotation = new Quaternion(0, 0, 180, 0);
+                hand[hand.Count - 1].transform.Rotate(0, 0, 180);
+                hand[hand.Count - 1].transform.localScale -= new Vector3(0.2f, 0.2f, 0);
+                break;
+            case 4:
+                hand[hand.Count - 1].transform.position = new Vector3(1, 10 - (hand.Count * 1.25f), 0);
+                //hand[hand.Count - 1].transform.rotation = new Quaternion(0, 0, 270, 0);
+                hand[hand.Count - 1].transform.Rotate(0, 0, 270);
+                hand[hand.Count - 1].transform.localScale -= new Vector3(0.2f, 0.2f, 0);
+                break;
+        }
     }
 }

@@ -227,15 +227,17 @@ public class PlayerScript : NetworkBehaviour
 
         switch (currentState)
         {
+            //setup stage of the game
+            //Get your deck and draw your cards
             case GameStates.Setup:
                 //Repeat all of this in turn
-                if ((readied && !hasDeck)) //|| (readied && deck.GetComponent<DeckScript>().Type != highest))
+                if (readied && !hasDeck)
                 {
                     Debug.Log("I want to get my deck");
                     highest = FindHighestStat();
                     CmdSpawnDeck(highest, playerNum);
                     hasDeck = true;
-                   // Debug.Log("I got my deck, it has " + deck.GetComponent<DeckScript>().cards.Count + " cards");
+                   
                     break;
                 }
                 if (hasDeck && handCount < 8)
@@ -293,61 +295,9 @@ public class PlayerScript : NetworkBehaviour
     //Create players hand
     //spawn hand in game
     [Command]
-    public void CmdDraw(int playerCount) {
-
+    public void CmdDraw(int playerCount) 
+    {
         playerManager.HandMaker(playerCount);
-
-
-
-        //hand.Add(deck.GetComponent<DeckScript>().cards[0]);
-        //deck.GetComponent<DeckScript>().cards.RemoveAt(0);
-        //Debug.Log("drew card, I still have " + deck.GetComponent<DeckScript>().cards.Count);
-
-        //switch (deck.GetComponent<DeckScript>().Type) {
-        //    case "charisma":
-        //         cardReplacement = Instantiate(camera1.GetComponent<InstantiatePrefab>().chaPrefab);
-        //        break;
-
-        //    case "cunning":
-        //         cardReplacement = Instantiate(camera1.GetComponent<InstantiatePrefab>().cunPrefab);
-        //        break;
-
-        //    case "strength":
-        //         cardReplacement = Instantiate(camera1.GetComponent<InstantiatePrefab>().strPrefab);
-        //        break;
-
-        //    case "intelligence":
-        //         cardReplacement = Instantiate(camera1.GetComponent<InstantiatePrefab>().intPrefab);
-        //        break;
-
-        //    default:
-        //        cardReplacement = null;
-        //        break;
-        //}
-
-
-
-
-
-        //realHand.Add(cardReplacement);
-        //cardReplacement.AddComponent<CardScript>();
-        //cardReplacement.GetComponent<CardScript>().Effect = hand[hand.Count - 1].GetComponent<CardScript>().Effect;
-        //cardReplacement.GetComponent<CardScript>().Title = hand[hand.Count - 1].GetComponent<CardScript>().Title;
-        //cardReplacement.GetComponent<CardScript>().Stat = hand[hand.Count - 1].GetComponent<CardScript>().Stat;
-        //cardReplacement.transform.position = new Vector3(hand.Count * 2, 0, 0);
-        //Debug.Log("Adjusted position");
-
-        //Debug.Log(cardReplacement);
-
-        //cardReplacement.GetComponent<SpriteRenderer>().enabled = true;
-        //Debug.Log("Renderer Enabled");
-        //cardReplacement.GetComponent<SpriteRenderer>().sortingOrder = 1;
-        //cardReplacement.GetComponent<CardScript>().name = hand[hand.Count - 1].GetComponent<CardScript>().name;
-        //hand[hand.Count - 1].SetActive(false);
-
-        //NetworkServer.Spawn(cardReplacement, this.connectionToClient);
-        //CmdSpawnCard(cardReplacement);
-
     }
 
     //sets player up for passive phase
