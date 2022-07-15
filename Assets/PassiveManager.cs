@@ -38,19 +38,24 @@ public class PassiveManager : NetworkBehaviour
             passives[passives.Count - 1].PassiveType = data[0];
             passives[passives.Count - 1].PassiveName = data[1];
             passives[passives.Count - 1].PassiveDescription = data[2];
+
+            if (passives[passives.Count - 1].PassiveDescription.Contains(".")) 
+                passives[passives.Count - 1].PassiveDescription = passives[passives.Count - 1].PassiveDescription.Replace(".", ",");
         }
         input.Close();
     }
 
     public void selectPassive(string highest) {
+        Debug.Log(highest);
         foreach (Passive p in passives) 
-            if (p.PassiveType == highest) 
+            if (p.PassiveType == highest)
                 choices.Add(p);
-                // be awesome
     
-        passiveChoice1.GetComponent<Text>().text = choices[0].PassiveName;
-        passiveChoice2.GetComponent<Text>().text = choices[1].PassiveName;
-        passiveChoice3.GetComponent<Text>().text = choices[2].PassiveName;
+       // passiveChoice1.GetComponent<Text>().text = "Name: " + choices[0].PassiveName + "\n" + "Description: " + choices[0].PassiveDescription;
+        //passiveChoice2.GetComponent<Text>().text = "Name: " + choices[1].PassiveName + "\n" + "Description: " + choices[1].PassiveDescription;
+        passiveChoice3.GetComponent<Text>().text = "Name: " + choices[0].PassiveName + "\n" + "Description: " + choices[0].PassiveDescription +
+                                                   "\n\nName: " + choices[1].PassiveName + "\n" + "Description: " + choices[1].PassiveDescription +
+                                                   "\n\nName: " + choices[2].PassiveName + "\n" + "Description: " + choices[2].PassiveDescription;
 
         //select passive
         //add to player
