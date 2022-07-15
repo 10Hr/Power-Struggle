@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: -8016287902433009731}
   - component: {fileID: 8924485087108723424}
   - component: {fileID: -710457509808601789}
+  - component: {fileID: -900706642656830520}
   m_Layer: 0
   m_Name: IntelligencePrefab
   m_TagString: Untagged
@@ -137,3 +138,19 @@ MonoBehaviour:
   showGizmos: 0
   showOverlay: 0
   overlayColor: {r: 0, g: 0, b: 0, a: 0.5}
+--- !u!114 &-900706642656830520
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1266152840080254701}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d492299dda364ef40ad5fb5f8c21e59c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
+  cardFront: {fileID: 21300000, guid: 41a962c94c99f2f49996322b6e912e95, type: 3}
+  cardBack: {fileID: 21300000, guid: 1bb5db65ec801c5429cccc6595bdf943, type: 3}

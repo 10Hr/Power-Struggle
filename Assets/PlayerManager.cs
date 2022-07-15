@@ -210,7 +210,7 @@ public class PlayerManager : NetworkBehaviour {
     //Creates players hands depending on which player is ready to draw
     //draws the cards after hand is created
     //draws cards 1 at a time (1 per call of this method)
-    public void HandMaker(int pNum)  //Shorter name for PlayerNum
+    public void HandMaker(int pNum, NetworkConnectionToClient conn)  //Shorter name for PlayerNum
     {
         //Depending on Player
         switch (pNum)
@@ -223,25 +223,25 @@ public class PlayerManager : NetworkBehaviour {
                 //remove the card from the deck
                 deck1.GetComponent<DeckScript>().cards.RemoveAt(0);
                 //instaniate and spawn card
-                Draw(deck1, hand1, pNum);
+                Draw(deck1, hand1, pNum, conn);
                 break;
 
             case 2:
                 hand2.Add(deck2.GetComponent<DeckScript>().cards[0]);
                 deck2.GetComponent<DeckScript>().cards.RemoveAt(0);
-                Draw(deck2, hand2, pNum);
+                Draw(deck2, hand2, pNum, conn);
                 break;
 
             case 3:
                 hand3.Add(deck3.GetComponent<DeckScript>().cards[0]);
                 deck3.GetComponent<DeckScript>().cards.RemoveAt(0);
-                Draw(deck3, hand3, pNum);
+                Draw(deck3, hand3, pNum, conn);
                 break;
 
             case 4:
                 hand4.Add(deck4.GetComponent<DeckScript>().cards[0]);
                 deck4.GetComponent<DeckScript>().cards.RemoveAt(0);
-                Draw(deck4, hand4, pNum);
+                Draw(deck4, hand4, pNum, conn);
                 break;
 
             default:
@@ -252,8 +252,9 @@ public class PlayerManager : NetworkBehaviour {
 
     //Gets the correct sprite/prefab for the card and instatiates and spawns it
     //adjusts the hand to represent the spawned cards
-    public void Draw(GameObject deck, List<GameObject> hand, int pNum)
+    public void Draw(GameObject deck, List<GameObject> hand, int pNum, NetworkConnectionToClient conn)
     {
+        Debug.Log(conn);
         //As long as the deck has cards to draw
         if (deck.GetComponent<DeckScript>().cards.Count >= 0) //Looking back on it, this should be in HandMaker... It shouldn't be causing the problem though.
         {
@@ -280,8 +281,8 @@ public class PlayerManager : NetworkBehaviour {
             }
             //Instantiate and spawn
             GameObject cardToSpawn = Instantiate(prefab);
-            NetworkServer.Spawn(cardToSpawn);
-            cardToSpawn.AddComponent<CardScript>();
+            //cardToSpawn.AddComponent<CardScript>();
+            NetworkServer.Spawn(cardToSpawn, conn);
             //update hand
             switch (pNum)
             {
@@ -290,6 +291,7 @@ public class PlayerManager : NetworkBehaviour {
                     cardToSpawn.GetComponent<CardScript>().Title = hand1[hand1.Count - 1].GetComponent<CardScript>().Title;
                     cardToSpawn.GetComponent<CardScript>().Stat = hand1[hand1.Count - 1].GetComponent<CardScript>().Stat;
                     hand1[hand1.Count - 1] = cardToSpawn;
+                    //Debug.Log(hand1[hand1.Count - 1].GetComponent<CardScript>().netIdentity);
                     AdjustCards(hand1, pNum);
                     //hand1[hand1.Count - 1].transform.position = new Vector3(hand1.Count * 2, 0, 0);
                     break;
@@ -318,6 +320,7 @@ public class PlayerManager : NetworkBehaviour {
                     AdjustCards(hand4, pNum);
                     break;
             }
+
 
             //TODO
 
@@ -369,5 +372,13 @@ public class PlayerManager : NetworkBehaviour {
                 hand[hand.Count - 1].transform.localScale -= new Vector3(0.2f, 0.2f, 0);
                 break;
         }
+
+        //if (hasAuthority)
+        //{
+       // Debug.Log(hand[hand.Count - 1].GetComponent<NetworkIdentity>().connectionToClient);
+        //Debug.Log(hand[hand.Count - 1].GetComponent<NetworkIdentity>().hasAuthority);
+        hand[hand.Count - 1].GetComponent<CardScript>().flip();
+        //}
+        
     }
 }

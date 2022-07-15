@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 5895223404129811528}
   - component: {fileID: -2953369625757150518}
   - component: {fileID: 9175665964486833027}
+  - component: {fileID: -939347681107771943}
   m_Layer: 0
   m_Name: CharismaPrefab
   m_TagString: Untagged
@@ -102,3 +103,17 @@ MonoBehaviour:
   visible: 0
   m_AssetId: 16c0192d6cbfa8d4a9d80e0fa11a8a1d
   hasSpawned: 0
+--- !u!114 &-939347681107771943
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7391875820136023039}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d492299dda364ef40ad5fb5f8c21e59c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1

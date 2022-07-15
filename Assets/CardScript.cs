@@ -7,6 +7,9 @@ using Mirror;
 public class CardScript : NetworkBehaviour
 {
 
+    public Sprite cardFront;
+    public Sprite cardBack;
+
     private string title;
     private string effect;
     private string stat;
@@ -30,14 +33,31 @@ public class CardScript : NetworkBehaviour
     }
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
         
+    }
+    //THIS IS CALLED FROM A CLIENT RPC IN PLAYERMANAGER
+    public void flip()
+    {
+        Sprite currentSprite = gameObject.GetComponent<SpriteRenderer>().sprite;
+        if (!hasAuthority)
+        {
+            //Debug.Log("No Authority");
+        }
+        else
+        {
+            if (currentSprite = cardBack)
+            {
+                gameObject.GetComponent<SpriteRenderer>().sprite = cardFront;
+            }
+            //Debug.Log("I have Authority");
+        }
     }
 }

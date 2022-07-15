@@ -297,7 +297,7 @@ public class PlayerScript : NetworkBehaviour
     [Command]
     public void CmdDraw(int playerCount) 
     {
-        playerManager.HandMaker(playerCount);
+        playerManager.HandMaker(playerCount, connectionToClient);
     }
 
     //sets player up for passive phase

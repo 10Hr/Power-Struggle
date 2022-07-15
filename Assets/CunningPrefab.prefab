@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 7976559495980727141}
   - component: {fileID: 2519269143950773433}
   - component: {fileID: 4241810306992809634}
+  - component: {fileID: -7653238967256237772}
   m_Layer: 0
   m_Name: CunningPrefab
   m_TagString: Untagged
@@ -102,3 +103,17 @@ MonoBehaviour:
   visible: 0
   m_AssetId: fda67e1ccca4b0e458aaf63e1c8df11b
   hasSpawned: 0
+--- !u!114 &-7653238967256237772
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5974593963203953216}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d492299dda364ef40ad5fb5f8c21e59c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
