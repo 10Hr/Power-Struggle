@@ -69,7 +69,8 @@ public class GameState : NetworkBehaviour
                 if (passivesSelected)
                 {
                     Debug.Log("Switching Game State");
-                    currentState = GameStates.StartEvent;
+                    //make start event later
+                    currentState = GameStates.Turn;
                 }
                 break;
 
