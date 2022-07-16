@@ -35,7 +35,8 @@ public class PlayerManager : NetworkBehaviour {
     GameState gameManager;
     PassiveManager passiveManager;
 
-    bool p1ready, p2ready, p3ready, p4ready;
+    [SyncVar]
+    public bool p1ready, p2ready, p3ready, p4ready;
 
 
 
@@ -134,6 +135,8 @@ public class PlayerManager : NetworkBehaviour {
             return null;
     }
 
+    //command ignore authority????
+    //called on client locally = bad
     public void readyUP() {
         string bntTag = UnityEngine.EventSystems.EventSystem.current.currentSelectedGameObject.tag;
         if (bntTag == "Player1") {

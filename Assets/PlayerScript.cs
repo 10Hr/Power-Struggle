@@ -26,6 +26,7 @@ public class PlayerScript : NetworkBehaviour
     private int maxPoints = 8;
     private bool readied = false;
     public int numSelected = 0;
+    public List<int> statsList;
     [SyncVar]
     string myName;
 
@@ -128,6 +129,11 @@ public class PlayerScript : NetworkBehaviour
 
         gameManager = GameObject.Find("FSM").GetComponent<GameState>();
         playerManager = GameObject.Find("PlayerManager").GetComponent<PlayerManager>();
+
+        statsList.Add(cunning);
+        statsList.Add(charisma);
+        statsList.Add(intelligence);
+        statsList.Add(strength);
     }
 
     // Start is called before the first frame update
@@ -293,8 +299,10 @@ public class PlayerScript : NetworkBehaviour
                 }
                 break;
             case GameStates.Turn:
+                Debug.Log("bruh1");
                 for (int i = 0; i < hand.Count; i++)
                 {
+                    Debug.Log("bruh2");
                     if (hand[i].GetComponent<CardScript>().selected)
                     {
                         numSelected++;
@@ -343,6 +351,21 @@ public class PlayerScript : NetworkBehaviour
         {
             return "intelligence";
         }
+
+        //for (int i = 0; i < 4; i++)
+        //{
+        //    if (statsList[i] > maxPoints/2)
+        //    {
+        //        if (statsList[i] == cunning)
+        //            return "cunning";
+        //        else if (statsList[i] == strength)
+        //            return "strength";
+        //        else if (statsList[i] == intelligence)
+        //            return "intelligence";
+        //        else
+        //            return "charisma";
+        //    }
+        //}
     }
 
     //Create players deck
@@ -356,7 +379,7 @@ public class PlayerScript : NetworkBehaviour
 
     //sets player up for passive phase
     public bool ReadyUp() {
-        //Debug.Log("I am READY!");
+        Debug.Log("I am READY!");
 
         if (availablePoints == 0)
         {
@@ -366,6 +389,7 @@ public class PlayerScript : NetworkBehaviour
             passiveManager = GameObject.Find("PassiveManager").GetComponent<PassiveManager>(); // if these two lones are put here then they will run as soon as player 1 is ready.
             passiveManager.selectPassive(FindHighestStat());
             GameObject.Find("passiveChoicePivot").transform.Rotate(0, 0, 90 * (playerNum - 1));
+            CmdChangeGameState();
 
             return true;
         }
@@ -384,5 +408,11 @@ public class PlayerScript : NetworkBehaviour
     public void CmdEnlarge()
     {
         playerManager.Enlarge();
+    }
+
+    [Command]
+    public void CmdChangeGameState()
+    {
+        gameManager.PassivesSelected = true;
     }
 }
