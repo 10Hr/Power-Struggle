@@ -8,15 +8,15 @@ public class PassiveManager : NetworkBehaviour
 {
     private List<Passive> passives = new List<Passive>();
     private List<Passive> choices = new List<Passive>();
-    private GameObject passiveChoice1;
-    private GameObject passiveChoice2;
+   // private GameObject passiveChoice1;
+    //private GameObject passiveChoice2;
     private GameObject passiveChoice3;
 
 
     void Awake() { getPassivesFromFile(); 
     
-    passiveChoice1 = GameObject.Find("passiveChoice1");
-    passiveChoice2 = GameObject.Find("passiveChoice2");
+    //passiveChoice1 = GameObject.Find("passiveChoice1");
+    //passiveChoice2 = GameObject.Find("passiveChoice2");
     passiveChoice3 = GameObject.Find("passiveChoice3");
 
      }
