@@ -46,7 +46,7 @@ public class PassiveManager : NetworkBehaviour
     }
 
     public void selectPassive(string highest) {
-        Debug.Log(highest);
+        //Debug.Log(highest);
         foreach (Passive p in passives) 
             if (p.PassiveType == highest)
                 choices.Add(p);
