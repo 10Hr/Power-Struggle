@@ -17,6 +17,12 @@ public class PlayerManager : NetworkBehaviour {
     private GameObject player2;
     private GameObject player3;
     private GameObject player4;
+
+    private int p1available = 8;
+    private int p2available = 8;
+    private int p3available = 8;
+    private int p4available = 8;
+
     [SyncVar]
     public GameObject deck1;
     [SyncVar]
@@ -136,21 +142,33 @@ public class PlayerManager : NetworkBehaviour {
 
     public void readyUP() {
         string bntTag = UnityEngine.EventSystems.EventSystem.current.currentSelectedGameObject.tag;
+        Debug.Log("bntTag " + bntTag);
         if (bntTag == "Player1") {
-            if (player1.GetComponent<PlayerScript>().ReadyUp())
+            if (player1.GetComponent<PlayerScript>().ReadyUp()) {
                 p1ready = true;
+                iDidsomething("Player1 " + p1ready);
+                //Debug.Log("Player 1 is ready!" + p1ready);
+            }
         }
         else if (bntTag == "Player2") {
-            if (player2.GetComponent<PlayerScript>().ReadyUp())
+            Debug.Log("Player 2 button found");
+            if (player2.GetComponent<PlayerScript>().ReadyUp()) {
                 p2ready = true;
+                iDidsomething("Player2 " + p2ready);
+                //Debug.Log("Player 2 is ready!" + p2ready);
+            }
         }
         else if (bntTag == "Player3") {
-            if (player3.GetComponent<PlayerScript>().ReadyUp())
+            if (player3.GetComponent<PlayerScript>().ReadyUp()) {
                 p3ready = true;
+                Debug.Log("Player 3 is ready!" + p3ready);
+                }
         }
         else if (bntTag == "Player4") {
-            if (player4.GetComponent<PlayerScript>().ReadyUp())
+            if (player4.GetComponent<PlayerScript>().ReadyUp()) {
                 p4ready = true;
+                Debug.Log("Player 4 is ready!" + p4ready);
+            }
         }
 
         if (p1ready && p2ready && p3ready && p4ready) {
@@ -159,6 +177,29 @@ public class PlayerManager : NetworkBehaviour {
             gameManager.AllReady = true;
         }
 
+    }
+    [Command(requiresAuthority = false)]
+    void iDidsomething(string pp) {
+        Debug.Log("I did something " + pp);
+    }
+
+   //[Command(requiresAuthority = false)]
+    public void returnAvailability(int playerNum, int aval) {
+        switch(playerNum) {
+            case 1:
+                p1available = aval;
+                break;
+            case 2:
+                p2available = aval;
+                break;
+            case 3:
+                p3available = aval;
+                break;
+            case 4:
+                p4available = aval;
+                break;
+        }
+    
     }
 
     //Find decks objects in scene

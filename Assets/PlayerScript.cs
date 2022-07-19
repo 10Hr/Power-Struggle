@@ -17,11 +17,16 @@ public class PlayerScript : NetworkBehaviour
     private int playerNum;
 
     //Player attributes
+    [SyncVar]
     private int charisma = 0;
+    [SyncVar]
     private int cunning = 0;
+    [SyncVar]
     private int intelligence = 0;
+    [SyncVar]
     private int strength = 0;
     private string highest;
+    [SyncVar]
     private int availablePoints = 8;
     private int maxPoints = 8;
     private bool readied = false;
@@ -90,7 +95,7 @@ public class PlayerScript : NetworkBehaviour
     //stat check propeties
     public int Available
     {
-        get { return availablePoints; }
+        get { return availablePoints;}
         set { availablePoints = value; }
     }
     public int Max
@@ -354,10 +359,16 @@ public class PlayerScript : NetworkBehaviour
         playerManager.HandMaker(playerCount, connectionToClient);
     }
 
+    [Command]
+    void CmdreturnAvailable(int availablePoints) {
+        playerManager.returnAvailability(playerNum, availablePoints);
+    }
+
+
     //sets player up for passive phase
     public bool ReadyUp() {
         //Debug.Log("I am READY!");
-
+        CmdreturnAvailable(availablePoints);
         if (availablePoints == 0)
         {
             readied = true;
