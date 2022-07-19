@@ -15,7 +15,7 @@ public enum GameStates
 
 public class GameState : NetworkBehaviour
 {
-    private GameStates currentState;
+    public GameStates currentState;
     private bool allReady = false;
     private bool allDrawn = false;
     private bool passivesSelected = false;
@@ -23,6 +23,7 @@ public class GameState : NetworkBehaviour
     //properties
     public bool AllReady
     {
+        get { return allReady; }
         set { allReady = value; }
     }
     public bool PassivesSelected

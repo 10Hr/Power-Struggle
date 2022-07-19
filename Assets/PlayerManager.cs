@@ -69,8 +69,8 @@ public class PlayerManager : NetworkBehaviour {
     void Update() { 
         listObjects = FindObjectsOfType<NetworkIdentity>(); 
 
-        if (hand1.Count == 8 && hand2.Count == 8 && hand3.Count == 8 && hand4.Count == 8 && !gameManager.AllDrawn) 
-            gameManager.AllDrawn = true;
+        if (p1available == 0 && p2available == 0 && p3available == 0 && p4available == 0 && !gameManager.AllReady) 
+            gameManager.AllReady = true;
         
 
     }
