@@ -27,7 +27,7 @@ public class PlayerScript : NetworkBehaviour
     private int strength = 0;
     private string highest;
     [SyncVar]
-    private int availablePoints = 8;
+    public int availablePoints = 8;
     private int maxPoints = 8;
     private bool readied = false;
     public int numSelected = 0;

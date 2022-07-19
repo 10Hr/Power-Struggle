@@ -18,10 +18,10 @@ public class PlayerManager : NetworkBehaviour {
     private GameObject player3;
     private GameObject player4;
 
-    private int p1available = 8;
-    private int p2available = 8;
-    private int p3available = 8;
-    private int p4available = 8;
+    public int p1available = 8;
+    public int p2available = 8;
+    public int p3available = 8;
+    public int p4available = 8;
 
     [SyncVar]
     public GameObject deck1;
@@ -41,7 +41,7 @@ public class PlayerManager : NetworkBehaviour {
     GameState gameManager;
     PassiveManager passiveManager;
 
-    bool p1ready, p2ready, p3ready, p4ready;
+    public bool p1ready, p2ready, p3ready, p4ready;
 
 
 
@@ -142,32 +142,26 @@ public class PlayerManager : NetworkBehaviour {
 
     public void readyUP() {
         string bntTag = UnityEngine.EventSystems.EventSystem.current.currentSelectedGameObject.tag;
-        Debug.Log("bntTag " + bntTag);
         if (bntTag == "Player1") {
             if (player1.GetComponent<PlayerScript>().ReadyUp()) {
-                p1ready = true;
-                iDidsomething("Player1 " + p1ready);
+                iDidsomething(bntTag);
                 //Debug.Log("Player 1 is ready!" + p1ready);
             }
         }
         else if (bntTag == "Player2") {
             Debug.Log("Player 2 button found");
             if (player2.GetComponent<PlayerScript>().ReadyUp()) {
-                p2ready = true;
-                iDidsomething("Player2 " + p2ready);
-                //Debug.Log("Player 2 is ready!" + p2ready);
+                iDidsomething(bntTag);
             }
         }
         else if (bntTag == "Player3") {
             if (player3.GetComponent<PlayerScript>().ReadyUp()) {
-                p3ready = true;
-                Debug.Log("Player 3 is ready!" + p3ready);
+                iDidsomething(bntTag);
                 }
         }
         else if (bntTag == "Player4") {
             if (player4.GetComponent<PlayerScript>().ReadyUp()) {
-                p4ready = true;
-                Debug.Log("Player 4 is ready!" + p4ready);
+                iDidsomething(bntTag);
             }
         }
 
@@ -179,8 +173,22 @@ public class PlayerManager : NetworkBehaviour {
 
     }
     [Command(requiresAuthority = false)]
-    void iDidsomething(string pp) {
-        Debug.Log("I did something " + pp);
+    void iDidsomething(string btnTag) {
+        switch (btnTag)
+        {
+            case "Player1":
+                p1ready = true;
+                break;
+            case "Player2":
+                p2ready = true;
+                break;
+            case "Player3":
+                p3ready = true;
+                break;
+            case "Player4":
+                p4ready = true;
+                break;
+        }
     }
 
    //[Command(requiresAuthority = false)]
