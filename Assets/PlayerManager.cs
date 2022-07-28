@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using System;
 using Mirror;
 
@@ -11,17 +12,11 @@ public class PlayerManager : NetworkBehaviour {
     NetworkIdentity player3ID;
     NetworkIdentity player4ID;
     List<NetworkIdentity> playerIDs;
-    //[SyncVar]
-    //List<GameObject> decks;
+
     public PlayerScript player1;
     public PlayerScript player2;
     public PlayerScript player3;
     public PlayerScript player4;
-
-    public int p1available = 8;
-    public int p2available = 8;
-    public int p3available = 8;
-    public int p4available = 8;
 
     [SyncVar]
     public GameObject deck1;
@@ -58,17 +53,11 @@ public class PlayerManager : NetworkBehaviour {
         deck3 = GameObject.Find("Deck3");
         deck4 = GameObject.Find("Deck4");
         passiveManager = GameObject.Find("PassiveManager").GetComponent<PassiveManager>();
-        //decks = new List<GameObject>();
     }
 
     // Update is called once per frame
     void Update() { 
         listObjects = FindObjectsOfType<NetworkIdentity>(); 
-
-        //I do not think this is needed
-        //REMOVE???
-        if (p1available == 0 && p2available == 0 && p3available == 0 && p4available == 0 && !gameManager.AllReady) 
-            gameManager.AllReady = true;
     }
 
     public int AddNet(NetworkIdentity playerID) {
@@ -80,7 +69,6 @@ public class PlayerManager : NetworkBehaviour {
         }
         else if (playerIDs[1] != null && playerIDs.Count == 2) {
             player2ID = playerIDs[1];
-            //            Debug.Log("Player 2 is " + player2ID);
             setPlayer(1);
         }
         else if (playerIDs[2] != null && playerIDs.Count == 3) {
@@ -91,8 +79,6 @@ public class PlayerManager : NetworkBehaviour {
             player4ID = playerIDs[3];
             setPlayer(3);
         }
-
-        //stats.beginFind(); //error causer
         return playerIDs.Count;
     }
 
@@ -159,25 +145,6 @@ public class PlayerManager : NetworkBehaviour {
             gameManager.AllReady = true;
         }
 
-    }
-
-   //[Command(requiresAuthority = false)]
-    public void returnAvailability(int playerNum, int aval) {
-        switch(playerNum) {
-            case 1:
-                p1available = aval;
-                break;
-            case 2:
-                p2available = aval;
-                break;
-            case 3:
-                p3available = aval;
-                break;
-            case 4:
-                p4available = aval;
-                break;
-        }
-    
     }
 
     //Find decks objects in scene
@@ -438,5 +405,88 @@ public class PlayerManager : NetworkBehaviour {
             if (hand4[i].GetComponent<CardScript>().hasAuthority)
                 hand4[i].GetComponent<CardScript>().Enlarge();
             
+    }
+
+    [Command(requiresAuthority = false)]
+    public void CmdIncrement(string butName, PlayerScript player, int playerNum)
+    {
+        if (player.Available > 0)
+        {
+            player.Available--;
+            switch (butName)
+            {
+                case "addCharisma":
+                    player.Charisma++;
+                    RpcTextEditor(player.connectionToClient, "Charisma ", player.Charisma, "CharismaCounter" + playerNum);
+                    break;
+
+                case "addCunning":
+                    player.Cunning++;
+                    RpcTextEditor(player.connectionToClient, "Cunning ", player.Cunning, "CunningCounter" + playerNum);
+                    break;
+
+                case "addStrength":
+                    player.Strength++;
+                    RpcTextEditor(player.connectionToClient, "Strength ", player.Strength, "StrengthCounter" + playerNum);
+                    break;
+
+                case "addIntelligence":
+                    player.Intelligence++;
+                    RpcTextEditor(player.connectionToClient, "Intelligence ", player.Intelligence, "IntelligenceCounter" + playerNum);
+                    break;
+            }
+        }
+    }
+
+    [Command(requiresAuthority = false)]
+    public void CmdDecrement(string butName, PlayerScript player, int playerNum)
+    {
+        if (player.Available != player.Max)
+        {
+            switch (butName)
+            {
+                case "subCharisma":
+                    if (player.Charisma > 0)
+                    {
+                        player.Charisma--;
+                        player.Available++;
+                        RpcTextEditor(player.connectionToClient, "Charisma ", player.Charisma, "CharismaCounter" + playerNum);
+                    }
+                    break;
+
+                case "subCunning":
+                    if (player.Cunning > 0)
+                    {
+                        player.Cunning--;
+                        player.Available++;
+                        RpcTextEditor(player.connectionToClient, "Cunning ", player.Cunning, "CunningCounter" + playerNum);
+                    }
+                    break;
+
+                case "subStrength":
+                    if (player.Strength > 0)
+                    {
+                        player.Strength--;
+                        player.Available++;
+                        RpcTextEditor(player.connectionToClient, "Strength ", player.Strength, "StrengthCounter" + playerNum);
+                    }
+                    break;
+
+                case "subIntelligence":
+                    if (player.Intelligence > 0)
+                    {
+                        player.Intelligence--;
+                        player.Available++;
+                        RpcTextEditor(player.connectionToClient, "Intelligence ", player.Intelligence, "IntelligenceCounter" + playerNum);
+                    }
+                    break;
+            }
+        }
+    }
+
+    [TargetRpc]
+    public void RpcTextEditor(NetworkConnection conn, string stat, int num, string txtName)
+    {
+        GameObject.Find(txtName).GetComponent<Text>().text = stat + num.ToString();
     }
 }

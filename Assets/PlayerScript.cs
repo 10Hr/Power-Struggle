@@ -360,16 +360,8 @@ public class PlayerScript : NetworkBehaviour
         playerManager.HandMaker(playerCount, connectionToClient);
     }
 
-    [Command]
-    void CmdreturnAvailable(int availablePoints) {
-        playerManager.returnAvailability(playerNum, availablePoints);
-    }
-
-
     //sets player up for passive phase
     public bool ReadyUp() {
-        //Debug.Log("I am READY!");
-        CmdreturnAvailable(availablePoints);
         if (availablePoints == 0)
         {
             readied = true;
