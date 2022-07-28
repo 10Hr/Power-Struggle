@@ -500,8 +500,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 866009260}
-        m_TargetAssemblyTypeName: PlayerManager, Assembly-CSharp
+      - m_Target: {fileID: 1882713756}
+        m_TargetAssemblyTypeName: StatManager, Assembly-CSharp
         m_MethodName: readyUP
         m_Mode: 1
         m_Arguments:
@@ -702,8 +702,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 866009260}
-        m_TargetAssemblyTypeName: PlayerManager, Assembly-CSharp
+      - m_Target: {fileID: 1882713756}
+        m_TargetAssemblyTypeName: StatManager, Assembly-CSharp
         m_MethodName: readyUP
         m_Mode: 1
         m_Arguments:
@@ -6506,6 +6506,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
+  p1available: 8
+  p2available: 8
+  p3available: 8
+  p4available: 8
   deck1: {fileID: 0}
   deck2: {fileID: 0}
   deck3: {fileID: 0}
@@ -6515,6 +6519,10 @@ MonoBehaviour:
   hand2: []
   hand3: []
   hand4: []
+  p1ready: 0
+  p2ready: 0
+  p3ready: 0
+  p4ready: 0
 --- !u!4 &866009261
 Transform:
   m_ObjectHideFlags: 0
@@ -9499,8 +9507,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 866009260}
-        m_TargetAssemblyTypeName: PlayerManager, Assembly-CSharp
+      - m_Target: {fileID: 1882713756}
+        m_TargetAssemblyTypeName: StatManager, Assembly-CSharp
         m_MethodName: readyUP
         m_Mode: 1
         m_Arguments:
@@ -9750,8 +9758,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 866009260}
-        m_TargetAssemblyTypeName: PlayerManager, Assembly-CSharp
+      - m_Target: {fileID: 1882713756}
+        m_TargetAssemblyTypeName: StatManager, Assembly-CSharp
         m_MethodName: readyUP
         m_Mode: 1
         m_Arguments:
@@ -16151,6 +16159,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
+  currentState: 0
 --- !u!114 &2118885773
 MonoBehaviour:
   m_ObjectHideFlags: 0

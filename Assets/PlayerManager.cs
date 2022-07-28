@@ -13,10 +13,10 @@ public class PlayerManager : NetworkBehaviour {
     List<NetworkIdentity> playerIDs;
     //[SyncVar]
     //List<GameObject> decks;
-    private PlayerScript player1;
-    private PlayerScript player2;
-    private PlayerScript player3;
-    private PlayerScript player4;
+    public PlayerScript player1;
+    public PlayerScript player2;
+    public PlayerScript player3;
+    public PlayerScript player4;
 
     public int p1available = 8;
     public int p2available = 8;
@@ -40,10 +40,6 @@ public class PlayerManager : NetworkBehaviour {
     NetworkIdentity[] listObjects;
     GameState gameManager;
     PassiveManager passiveManager;
-
-    public bool p1ready, p2ready, p3ready, p4ready;
-
-
 
     public void getCount() { playerCount++; } //player count
 
@@ -69,15 +65,14 @@ public class PlayerManager : NetworkBehaviour {
     void Update() { 
         listObjects = FindObjectsOfType<NetworkIdentity>(); 
 
+        //I do not think this is needed
+        //REMOVE???
         if (p1available == 0 && p2available == 0 && p3available == 0 && p4available == 0 && !gameManager.AllReady) 
             gameManager.AllReady = true;
-        
-
     }
 
     public int AddNet(NetworkIdentity playerID) {
         playerIDs.Add(playerID);
-
 
         if (playerIDs[0] != null && playerIDs.Count == 1) {
             player1ID = playerIDs[0];
@@ -99,7 +94,6 @@ public class PlayerManager : NetworkBehaviour {
 
         //stats.beginFind(); //error causer
         return playerIDs.Count;
-
     }
 
     public void setPlayer(int whichPlayer) {
@@ -140,54 +134,31 @@ public class PlayerManager : NetworkBehaviour {
             return null;
     }
 
-    public void readyUP() {
-        string bntTag = UnityEngine.EventSystems.EventSystem.current.currentSelectedGameObject.tag;
-        if (bntTag == "Player1") {
-            if (player1.GetComponent<PlayerScript>().ReadyUp()) {
-                iDidsomething(bntTag);
-            }
-        }
-        else if (bntTag == "Player2") {
-            Debug.Log("Player 2 button found");
-            if (player2.GetComponent<PlayerScript>().ReadyUp()) {
-                iDidsomething(bntTag);
-            }
-        }
-        else if (bntTag == "Player3") {
-            if (player3.GetComponent<PlayerScript>().ReadyUp()) {
-                iDidsomething(bntTag);
-                }
-        }
-        else if (bntTag == "Player4") {
-            if (player4.GetComponent<PlayerScript>().ReadyUp()) {
-                iDidsomething(bntTag);
-            }
+    [Command(requiresAuthority = false)]
+    public void CmdReadyPlayer(string btnTag) {
+        switch (btnTag)
+        {
+            case "Player1":
+                player1.readied = true;
+                break;
+            case "Player2":
+                player2.readied = true;
+                break;
+            case "Player3":
+                player3.readied = true;
+                break;
+            case "Player4":
+                player4.readied = true;
+                break;
         }
 
-        if (p1ready && p2ready && p3ready && p4ready) {
+        if (player1.readied && player2.readied && player3.readied && player4.readied)
+        {
             Debug.Log("All players are ready!");
             //start game
             gameManager.AllReady = true;
         }
 
-    }
-    [Command(requiresAuthority = false)]
-    void iDidsomething(string btnTag) {
-        switch (btnTag)
-        {
-            case "Player1":
-                p1ready = true;
-                break;
-            case "Player2":
-                p2ready = true;
-                break;
-            case "Player3":
-                p3ready = true;
-                break;
-            case "Player4":
-                p4ready = true;
-                break;
-        }
     }
 
    //[Command(requiresAuthority = false)]

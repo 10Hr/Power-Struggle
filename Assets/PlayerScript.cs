@@ -29,7 +29,7 @@ public class PlayerScript : NetworkBehaviour
     [SyncVar]
     public int availablePoints = 8;
     private int maxPoints = 8;
-    private bool readied = false;
+    public bool readied = false;
     public int numSelected = 0;
     [SyncVar]
     string myName;
