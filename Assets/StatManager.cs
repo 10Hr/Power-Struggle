@@ -5,10 +5,10 @@ using Mirror;
 using UnityEngine.UI;
 
 public class StatManager : NetworkBehaviour {
-    private GameObject player1;
-    private GameObject player2;
-    private GameObject player3;
-    private GameObject player4;
+    private PlayerScript player1;
+    private PlayerScript player2;
+    private PlayerScript player3;
+    private PlayerScript player4;
     PlayerManager playerManager;
     [SyncVar]
     private int count;

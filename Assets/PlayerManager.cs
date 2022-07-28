@@ -13,10 +13,10 @@ public class PlayerManager : NetworkBehaviour {
     List<NetworkIdentity> playerIDs;
     //[SyncVar]
     //List<GameObject> decks;
-    private GameObject player1;
-    private GameObject player2;
-    private GameObject player3;
-    private GameObject player4;
+    private PlayerScript player1;
+    private PlayerScript player2;
+    private PlayerScript player3;
+    private PlayerScript player4;
 
     public int p1available = 8;
     public int p2available = 8;
@@ -109,25 +109,25 @@ public class PlayerManager : NetworkBehaviour {
         foreach (NetworkIdentity obj in listObjects) {    // gets player object    
                                                           // Debug.Log("obj.GetComponent<NetworkIdentity>() " + obj.GetComponent<NetworkIdentity>() + " player1ID " + player1ID + " playercount " + playerCount + " whichPlayer " + whichPlayer);
             if (obj.GetComponent<NetworkIdentity>() == player1ID && playerCount == 1 && whichPlayer == 0) {
-                player1 = obj.gameObject;
+                player1 = obj.GetComponent<PlayerScript>();
                 Debug.Log("Player 1 is created!");
             }
             else if (obj.GetComponent<NetworkIdentity>() == player2ID && playerCount == 2 && whichPlayer == 1) {
-                player2 = obj.gameObject;
+                player2 = obj.GetComponent<PlayerScript>();
                 Debug.Log("Player 2 is created!");
             }
             else if (obj.GetComponent<NetworkIdentity>() == player3ID && playerCount == 3 && whichPlayer == 2) {
-                player3 = obj.gameObject;
+                player3 = obj.GetComponent<PlayerScript>();
                 Debug.Log("Player 3 is created!");
             }
             else if (obj.GetComponent<NetworkIdentity>() == player4ID && playerCount == 4 && whichPlayer == 3) {
-                player4 = obj.gameObject;
+                player4 = obj.GetComponent<PlayerScript>();
                 Debug.Log("Player 4 is created!");
             }
         }
     }
 
-    public GameObject getPlayer(int whichPlayer) {
+    public PlayerScript getPlayer(int whichPlayer) {
         if (whichPlayer == 0)
             return player1;
         else if (whichPlayer == 1)
@@ -145,7 +145,6 @@ public class PlayerManager : NetworkBehaviour {
         if (bntTag == "Player1") {
             if (player1.GetComponent<PlayerScript>().ReadyUp()) {
                 iDidsomething(bntTag);
-                //Debug.Log("Player 1 is ready!" + p1ready);
             }
         }
         else if (bntTag == "Player2") {
@@ -394,7 +393,7 @@ public class PlayerManager : NetworkBehaviour {
     //doesnt work on server to prevent the host having multiple copies
     //creates deck properties for clients
     [ClientRpc]
-    public void RPCGiveDeck(GameObject deck, GameObject player, string highest)
+    public void RPCGiveDeck(GameObject deck, PlayerScript player, string highest)
     {
         if (!isServer)
             deck.GetComponent<DeckScript>().CreateDeck(highest, this.GetComponent<InstantiatePrefab>().cardPrefab);
