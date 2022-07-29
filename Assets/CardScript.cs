@@ -82,7 +82,7 @@ public class CardScript : NetworkBehaviour
         hovered = false;
     }
 
-    [ClientRpc]
+    [Command(requiresAuthority = false)]
     public void OnMouseDown()
     {
         prevSelected = selected;

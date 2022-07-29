@@ -270,7 +270,7 @@ public class PlayerManager : NetworkBehaviour {
                     cardToSpawn.GetComponent<CardScript>().Title = hand1[hand1.Count - 1].GetComponent<CardScript>().Title;
                     cardToSpawn.GetComponent<CardScript>().Stat = hand1[hand1.Count - 1].GetComponent<CardScript>().Stat;
                     hand1[hand1.Count - 1] = cardToSpawn;
-                    player1.GetComponent<PlayerScript>().hand.Add(hand1[hand1.Count - 1]);
+                    player1.hand.Add(hand1[hand1.Count - 1]);
                     AdjustCards(hand1, pNum);
                     break;
                 case 2:
@@ -278,7 +278,7 @@ public class PlayerManager : NetworkBehaviour {
                     cardToSpawn.GetComponent<CardScript>().Title = hand2[hand2.Count - 1].GetComponent<CardScript>().Title;
                     cardToSpawn.GetComponent<CardScript>().Stat = hand2[hand2.Count - 1].GetComponent<CardScript>().Stat;
                     hand2[hand2.Count - 1] = cardToSpawn;
-                    player2.GetComponent<PlayerScript>().hand.Add(hand2[hand2.Count - 1]);
+                    player2.hand.Add(hand2[hand2.Count - 1]);
                     AdjustCards(hand2, pNum);
                     break;
                 case 3:
@@ -286,7 +286,7 @@ public class PlayerManager : NetworkBehaviour {
                     cardToSpawn.GetComponent<CardScript>().Title = hand3[hand3.Count - 1].GetComponent<CardScript>().Title;
                     cardToSpawn.GetComponent<CardScript>().Stat = hand3[hand3.Count - 1].GetComponent<CardScript>().Stat;
                     hand3[hand3.Count - 1] = cardToSpawn;
-                    player3.GetComponent<PlayerScript>().hand.Add(hand3[hand3.Count - 1]);
+                    player3.hand.Add(hand3[hand3.Count - 1]);
                     AdjustCards(hand3, pNum);
                     break;
                 case 4:
@@ -294,7 +294,7 @@ public class PlayerManager : NetworkBehaviour {
                     cardToSpawn.GetComponent<CardScript>().Title = hand4[hand4.Count - 1].GetComponent<CardScript>().Title;
                     cardToSpawn.GetComponent<CardScript>().Stat = hand4[hand4.Count - 1].GetComponent<CardScript>().Stat;
                     hand4[hand4.Count - 1] = cardToSpawn;
-                    player4.GetComponent<PlayerScript>().hand.Add(hand4[hand4.Count - 1]);
+                    player4.hand.Add(hand4[hand4.Count - 1]);
                     AdjustCards(hand4, pNum);
                     break;
             }
@@ -462,5 +462,32 @@ public class PlayerManager : NetworkBehaviour {
     public void RpcTextEditor(NetworkConnection conn, string stat, int num, string txtName)
     {
         GameObject.Find(txtName).GetComponent<Text>().text = stat + num.ToString();
+    }
+
+    [Command(requiresAuthority = false)]
+    public void CmdTrackSelected(PlayerScript player)
+    {
+        for (int i = 0; i < player.hand.Count; i++)
+        {
+            if (player.hand[i].GetComponent<CardScript>().selected && !player.hand[i].GetComponent<CardScript>().prevSelected)
+            {
+                player.numSelected++;
+                player.hand[i].GetComponent<CardScript>().prevSelected = true;
+            }
+            else if (!player.hand[i].GetComponent<CardScript>().selected && player.hand[i].GetComponent<CardScript>().prevSelected)
+            {
+                player.numSelected--;
+                player.hand[i].GetComponent<CardScript>().prevSelected = false;
+            }
+        }
+        if (player.numSelected == 3)
+        {
+            Debug.Log("You may lock in");
+            //show lockIn button
+        }
+        else
+        {
+            //hide lockIn button
+        }
     }
 }

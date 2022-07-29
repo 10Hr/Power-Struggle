@@ -299,26 +299,7 @@ public class PlayerScript : NetworkBehaviour
                 }
                 break;
             case GameStates.Turn:
-                for (int i = 0; i < hand.Count; i++)
-                {
-                    if (hand[i].GetComponent<CardScript>().selected)
-                    {
-                        numSelected++;
-                    }
-                    else if (!hand[i].GetComponent<CardScript>().selected && hand[i].GetComponent<CardScript>().prevSelected)
-                    {
-                        numSelected--;
-                    }
-                }
-                if (numSelected == 3)
-                {
-                    Debug.Log("You may lock in");
-                    //show lockIn button
-                }
-                else
-                {
-                    //hide lockIn button
-                }
+                playerManager.CmdTrackSelected(this);
                 break;
             default:
                 break;
