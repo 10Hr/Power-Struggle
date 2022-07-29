@@ -130,8 +130,17 @@ public class PlayerManager : NetworkBehaviour {
             Debug.Log("All players are ready!");
             //start game
             gameManager.AllReady = true;
+            gameManager.PassivesSelected = true;
+            RpcAllReady(gameManager);
         }
 
+    }
+    //probably something to do with this method
+    [ClientRpc]
+    public void RpcAllReady(GameState gameManager)
+    {
+        gameManager.AllReady = true;
+        gameManager.PassivesSelected = true;
     }
 
     //Find decks objects in scene
@@ -355,30 +364,57 @@ public class PlayerManager : NetworkBehaviour {
         
     }
 
-    public void Enlarge()
+    public void Enlarge(PlayerScript player, int playerNum)
     {
-        RPCEnlarge(hand1, hand2, hand3, hand4);
+        RpcEnlarge(player.connectionToClient, hand1, hand2, hand3, hand4, playerNum);
     }
     
-    [ClientRpc]
-    public void RPCEnlarge(List<GameObject> hand1, List<GameObject> hand2, List<GameObject> hand3, List<GameObject> hand4)
+    [TargetRpc]
+    public void RpcEnlarge(NetworkConnection conn, List<GameObject> hand1, List<GameObject> hand2, List<GameObject> hand3, List<GameObject> hand4, int playerNum)
     {
-        for (int i = 0; i < hand1.Count; i++)        
-            if (hand1[i].GetComponent<CardScript>().hasAuthority)           
-                hand1[i].GetComponent<CardScript>().Enlarge();
-             
-        for (int i = 0; i < hand2.Count; i++)        
-            if (hand2[i].GetComponent<CardScript>().hasAuthority)            
-                hand2[i].GetComponent<CardScript>().Enlarge();
+        //for (int i = 0; i < hand1.Count; i++)        
+        //    if (hand1[i].GetComponent<CardScript>().hasAuthority)           
+        //        hand1[i].GetComponent<CardScript>().Enlarge();
+
+        //for (int i = 0; i < hand2.Count; i++)        
+        //    if (hand2[i].GetComponent<CardScript>().hasAuthority)            
+        //        hand2[i].GetComponent<CardScript>().Enlarge();
+
+        //for (int i = 0; i < hand3.Count; i++)        
+        //    if (hand3[i].GetComponent<CardScript>().hasAuthority)
+        //        hand3[i].GetComponent<CardScript>().Enlarge();
+
+        //for (int i = 0; i < hand4.Count; i++)
+        //    if (hand4[i].GetComponent<CardScript>().hasAuthority)
+        //        hand4[i].GetComponent<CardScript>().Enlarge();
+
+        List<GameObject> thisHand;
+
+        switch(playerNum)
+        {
+            case 1:
+                thisHand = hand1;
+                break;
+            case 2:
+                thisHand = hand2;
+                break;
+            case 3:
+                thisHand = hand3;
+                break;
+            case 4:
+                thisHand = hand4;
+                break;
+            default:
+                thisHand = hand1;
+                break;
+        }
+
+        for (int i = 0; i < thisHand.Count; i++)
+        {
+            if (thisHand[i].GetComponent<CardScript>().hasAuthority)
+                thisHand[i].GetComponent<CardScript>().Enlarge();
+        }
         
-        for (int i = 0; i < hand3.Count; i++)        
-            if (hand3[i].GetComponent<CardScript>().hasAuthority)
-                hand3[i].GetComponent<CardScript>().Enlarge();
-              
-        for (int i = 0; i < hand4.Count; i++)
-            if (hand4[i].GetComponent<CardScript>().hasAuthority)
-                hand4[i].GetComponent<CardScript>().Enlarge();
-            
     }
 
     [Command(requiresAuthority = false)]
@@ -467,6 +503,7 @@ public class PlayerManager : NetworkBehaviour {
     [Command(requiresAuthority = false)]
     public void CmdTrackSelected(PlayerScript player)
     {
+        Debug.Log(player + "check 2");
         for (int i = 0; i < player.hand.Count; i++)
         {
             if (player.hand[i].GetComponent<CardScript>().selected && !player.hand[i].GetComponent<CardScript>().prevSelected)

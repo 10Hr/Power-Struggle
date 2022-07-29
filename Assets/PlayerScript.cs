@@ -250,29 +250,9 @@ public class PlayerScript : NetworkBehaviour
 
                     break;
                 }
-                if (hasDeck && handCount < 8)
-                {
-                    handCount++;
-                    //Debug.Log("I want to draw");
-                    CmdDraw(playerCount);
-                }
-                if (availablePoints == 0 && readied)
-                {
-                    foreach (GameObject b in buttons)
-                    {
-                        b.SetActive(false);
-                    }
-                }
-                else
-                {
-                    foreach (GameObject b in buttons)
-                    {
-                        b.SetActive(true);
-                    }
-                }
                 break;
             case GameStates.Passive:
-                if (!called) {
+                //if (!called) {
                     // uncomment to run passive code, might actually work better in readyup??
                     /* 
                             passiveManager = GameObject.Find("PassiveManager").GetComponent<PassiveManager>(); // if these two lones are put here then they will run as soon as player 1 is ready.
@@ -294,11 +274,33 @@ public class PlayerScript : NetworkBehaviour
                             }
 
                     */
-                    gameManager.PassivesSelected = true;
-                    called = true;
-                }
+                    //called = true;
+                //}
                 break;
             case GameStates.Turn:
+
+                if (hasDeck && handCount < 8)
+                {
+                    handCount++;
+                    //Debug.Log("I want to draw");
+                    CmdDraw(playerCount);
+                }
+                if (availablePoints == 0)
+                {
+                    foreach (GameObject b in buttons)
+                    {
+                        b.SetActive(false);
+                    }
+                }
+                else
+                {
+                    foreach (GameObject b in buttons)
+                    {
+                        b.SetActive(true);
+                    }
+                }
+
+                Debug.Log(this + "check 1");
                 playerManager.CmdTrackSelected(this);
                 break;
             default:
@@ -368,6 +370,6 @@ public class PlayerScript : NetworkBehaviour
     [Command]
     public void CmdEnlarge()
     {
-        playerManager.Enlarge();
+        playerManager.Enlarge(this, playerNum);
     }
 }
