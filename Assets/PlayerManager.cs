@@ -199,6 +199,7 @@ public class PlayerManager : NetworkBehaviour {
     //Creates players hands depending on which player is ready to draw
     //draws the cards after hand is created
     //draws cards 1 at a time (1 per call of this method)
+    [Command(requiresAuthority = false)]
     public void HandMaker(int pNum, NetworkConnectionToClient conn)  //Shorter name for PlayerNum
     {
         //Depending on Player

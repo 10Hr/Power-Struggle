@@ -261,7 +261,7 @@ public class PlayerScript : NetworkBehaviour
                 {
                     handCount++;
                     //Debug.Log("I want to draw");
-                    CmdDraw(playerCount);
+                    playerManager.HandMaker(playerCount, connectionToClient);
                 }
                 if (availablePoints == 0)
                 {
@@ -309,15 +309,6 @@ public class PlayerScript : NetworkBehaviour
         {
             return "intelligence";
         }
-    }
-
-    //Create players deck
-    //Create players hand
-    //spawn hand in game
-    [Command]
-    public void CmdDraw(int playerCount)
-    {
-        playerManager.HandMaker(playerCount, connectionToClient);
     }
 
     //sets player up for passive phase
