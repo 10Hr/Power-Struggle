@@ -185,22 +185,23 @@ public class PlayerManager : NetworkBehaviour {
     {
         GameObject thisDeck = deckList[pNum - 1];
         List<GameObject> thisHand = handList[pNum - 1];
+        PlayerScript thisPlayer = playerList[pNum - 1];
 
         thisHand.Add(deck1.GetComponent<DeckScript>().cards[0]);
         thisDeck.GetComponent<DeckScript>().cards.RemoveAt(0);
-        Draw(thisDeck, thisHand, pNum, conn);
+        Draw(thisDeck, thisHand, thisPlayer, pNum, conn);
     }
 
     //Gets the correct sprite/prefab for the card and instatiates and spawns it
     //adjusts the hand to represent the spawned cards
-    public void Draw(GameObject deck, List<GameObject> hand, int pNum, NetworkConnectionToClient conn)
+    public void Draw(GameObject thisDeck, List<GameObject> thisHand, PlayerScript thisPlayer, int pNum, NetworkConnectionToClient conn)
     {
         //As long as the deck has cards to draw
-        if (deck.GetComponent<DeckScript>().cards.Count >= 0) //Looking back on it, this should be in HandMaker... It shouldn't be causing the problem though.
+        if (thisDeck.GetComponent<DeckScript>().cards.Count >= 0) //Looking back on it, this should be in HandMaker... It shouldn't be causing the problem though.
         {
             //get correct prefab
             GameObject prefab;
-            switch (deck.GetComponent<DeckScript>().Type)
+            switch (thisDeck.GetComponent<DeckScript>().Type)
             {
                 case "charisma":
                     prefab = this.GetComponent<InstantiatePrefab>().chaPrefab;
@@ -223,42 +224,13 @@ public class PlayerManager : NetworkBehaviour {
             GameObject cardToSpawn = Instantiate(prefab);
             //cardToSpawn.AddComponent<CardScript>();
             NetworkServer.Spawn(cardToSpawn, conn);
-            //update hand
-            switch (pNum)
-            {
-                case 1:
-                    cardToSpawn.GetComponent<CardScript>().Effect = hand1[hand1.Count - 1].GetComponent<CardScript>().Effect;
-                    cardToSpawn.GetComponent<CardScript>().Title = hand1[hand1.Count - 1].GetComponent<CardScript>().Title;
-                    cardToSpawn.GetComponent<CardScript>().Stat = hand1[hand1.Count - 1].GetComponent<CardScript>().Stat;
-                    hand1[hand1.Count - 1] = cardToSpawn;
-                    player1.hand.Add(hand1[hand1.Count - 1]);
-                    AdjustCards(hand1, pNum);
-                    break;
-                case 2:
-                    cardToSpawn.GetComponent<CardScript>().Effect = hand2[hand2.Count - 1].GetComponent<CardScript>().Effect;
-                    cardToSpawn.GetComponent<CardScript>().Title = hand2[hand2.Count - 1].GetComponent<CardScript>().Title;
-                    cardToSpawn.GetComponent<CardScript>().Stat = hand2[hand2.Count - 1].GetComponent<CardScript>().Stat;
-                    hand2[hand2.Count - 1] = cardToSpawn;
-                    player2.hand.Add(hand2[hand2.Count - 1]);
-                    AdjustCards(hand2, pNum);
-                    break;
-                case 3:
-                    cardToSpawn.GetComponent<CardScript>().Effect = hand3[hand3.Count - 1].GetComponent<CardScript>().Effect;
-                    cardToSpawn.GetComponent<CardScript>().Title = hand3[hand3.Count - 1].GetComponent<CardScript>().Title;
-                    cardToSpawn.GetComponent<CardScript>().Stat = hand3[hand3.Count - 1].GetComponent<CardScript>().Stat;
-                    hand3[hand3.Count - 1] = cardToSpawn;
-                    player3.hand.Add(hand3[hand3.Count - 1]);
-                    AdjustCards(hand3, pNum);
-                    break;
-                case 4:
-                    cardToSpawn.GetComponent<CardScript>().Effect = hand4[hand4.Count - 1].GetComponent<CardScript>().Effect;
-                    cardToSpawn.GetComponent<CardScript>().Title = hand4[hand4.Count - 1].GetComponent<CardScript>().Title;
-                    cardToSpawn.GetComponent<CardScript>().Stat = hand4[hand4.Count - 1].GetComponent<CardScript>().Stat;
-                    hand4[hand4.Count - 1] = cardToSpawn;
-                    player4.hand.Add(hand4[hand4.Count - 1]);
-                    AdjustCards(hand4, pNum);
-                    break;
-            }
+
+            cardToSpawn.GetComponent<CardScript>().Effect = thisHand[thisHand.Count - 1].GetComponent<CardScript>().Effect;
+            cardToSpawn.GetComponent<CardScript>().Title = thisHand[thisHand.Count - 1].GetComponent<CardScript>().Title;
+            cardToSpawn.GetComponent<CardScript>().Stat = thisHand[thisHand.Count - 1].GetComponent<CardScript>().Stat;
+            thisHand[thisHand.Count - 1] = cardToSpawn;
+            thisPlayer.hand.Add(thisHand[thisHand.Count - 1]);
+            AdjustCards(thisHand, pNum);
         }
     }
 
