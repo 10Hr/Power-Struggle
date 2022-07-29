@@ -155,7 +155,7 @@ public class PlayerManager : NetworkBehaviour {
         deck3 = GameObject.Find("Deck3");
         deck4 = GameObject.Find("Deck4");
 
-        //IF SOMETHING GOES WRONG WITH CARD OBJECTS, TRY UNCOMMENTING FOR LOOPS
+        //IF SOMETHING GOES WRONG WITH CARD OBJECTS, TRY UNCOMMENTING FOR LOOPS AND RE ADD TO OTHER PLAYERS
         //depending on player
         switch (pNum)
         {
@@ -163,7 +163,7 @@ public class PlayerManager : NetworkBehaviour {
                 //create deck properties for server and clients
                 RPCGiveDeck(deck1, player1, highest);
                 deck1.GetComponent<DeckScript>().CreateDeck(highest, this.GetComponent<InstantiatePrefab>().cardPrefab);
-
+                //DO NOT REMOVE!!!!!!!!
                 //spawns all the cards in that deck
                 //for (int i = 0; i < deck1.GetComponent<DeckScript>().cards.Count; i++)
                     //NetworkServer.Spawn(deck1.GetComponent<DeckScript>().cards[i]);
@@ -172,22 +172,16 @@ public class PlayerManager : NetworkBehaviour {
             case 2:
                 RPCGiveDeck(deck2, player2, highest);
                 deck2.GetComponent<DeckScript>().CreateDeck(highest, this.GetComponent<InstantiatePrefab>().cardPrefab);
-                //for (int i = 0; i < deck2.GetComponent<DeckScript>().cards.Count; i++) 
-                    //NetworkServer.Spawn(deck2.GetComponent<DeckScript>().cards[i]);
                 break;
 
             case 3:
                 RPCGiveDeck(deck3, player3, highest);
                 deck3.GetComponent<DeckScript>().CreateDeck(highest, this.GetComponent<InstantiatePrefab>().cardPrefab);
-                //for (int i = 0; i < deck3.GetComponent<DeckScript>().cards.Count; i++)
-                    //NetworkServer.Spawn(deck3.GetComponent<DeckScript>().cards[i]);
                 break;
 
             case 4:
                 RPCGiveDeck(deck4, player4, highest);
                 deck4.GetComponent<DeckScript>().CreateDeck(highest, this.GetComponent<InstantiatePrefab>().cardPrefab);
-                //for (int i = 0; i < deck4.GetComponent<DeckScript>().cards.Count; i++)
-                    //NetworkServer.Spawn(deck4.GetComponent<DeckScript>().cards[i]);
                 break;
 
             default:
@@ -207,8 +201,6 @@ public class PlayerManager : NetworkBehaviour {
         {
             case 1:
                 //add the card to the hand
-                // NOTE: LISTS ITEMS SHIFT FOWARD IF ONE IS REMOVED
-                // SO IF cards[0] IS REMOVED cards[1] WILL TAKE ITS PLACE
                 hand1.Add(deck1.GetComponent<DeckScript>().cards[0]);
                 //remove the card from the deck
                 deck1.GetComponent<DeckScript>().cards.RemoveAt(0);
