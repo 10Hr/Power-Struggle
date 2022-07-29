@@ -146,7 +146,8 @@ public class PlayerManager : NetworkBehaviour {
     //Find decks objects in scene
     //Depending on player spawn that deck
     //create deck properties for both server and all clients
-    public void DeckMaker(string highest, int pNum)
+    [Command(requiresAuthority = false)]
+    public void CmdDeckMaker(string highest, int pNum)
     {
         //get deck objects
         deck1 = GameObject.Find("Deck1");
@@ -154,6 +155,7 @@ public class PlayerManager : NetworkBehaviour {
         deck3 = GameObject.Find("Deck3");
         deck4 = GameObject.Find("Deck4");
 
+        //IF SOMETHING GOES WRONG WITH CARD OBJECTS, TRY UNCOMMENTING FOR LOOPS
         //depending on player
         switch (pNum)
         {
@@ -163,29 +165,29 @@ public class PlayerManager : NetworkBehaviour {
                 deck1.GetComponent<DeckScript>().CreateDeck(highest, this.GetComponent<InstantiatePrefab>().cardPrefab);
 
                 //spawns all the cards in that deck
-                for (int i = 0; i < deck1.GetComponent<DeckScript>().cards.Count; i++)
-                    NetworkServer.Spawn(deck1.GetComponent<DeckScript>().cards[i]);
+                //for (int i = 0; i < deck1.GetComponent<DeckScript>().cards.Count; i++)
+                    //NetworkServer.Spawn(deck1.GetComponent<DeckScript>().cards[i]);
                 break;
 
             case 2:
                 RPCGiveDeck(deck2, player2, highest);
                 deck2.GetComponent<DeckScript>().CreateDeck(highest, this.GetComponent<InstantiatePrefab>().cardPrefab);
-                for (int i = 0; i < deck2.GetComponent<DeckScript>().cards.Count; i++) 
-                    NetworkServer.Spawn(deck2.GetComponent<DeckScript>().cards[i]);
+                //for (int i = 0; i < deck2.GetComponent<DeckScript>().cards.Count; i++) 
+                    //NetworkServer.Spawn(deck2.GetComponent<DeckScript>().cards[i]);
                 break;
 
             case 3:
                 RPCGiveDeck(deck3, player3, highest);
                 deck3.GetComponent<DeckScript>().CreateDeck(highest, this.GetComponent<InstantiatePrefab>().cardPrefab);
-                for (int i = 0; i < deck3.GetComponent<DeckScript>().cards.Count; i++)
-                    NetworkServer.Spawn(deck3.GetComponent<DeckScript>().cards[i]);
+                //for (int i = 0; i < deck3.GetComponent<DeckScript>().cards.Count; i++)
+                    //NetworkServer.Spawn(deck3.GetComponent<DeckScript>().cards[i]);
                 break;
 
             case 4:
                 RPCGiveDeck(deck4, player4, highest);
                 deck4.GetComponent<DeckScript>().CreateDeck(highest, this.GetComponent<InstantiatePrefab>().cardPrefab);
-                for (int i = 0; i < deck4.GetComponent<DeckScript>().cards.Count; i++)
-                    NetworkServer.Spawn(deck4.GetComponent<DeckScript>().cards[i]);
+                //for (int i = 0; i < deck4.GetComponent<DeckScript>().cards.Count; i++)
+                    //NetworkServer.Spawn(deck4.GetComponent<DeckScript>().cards[i]);
                 break;
 
             default:

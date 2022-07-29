@@ -245,7 +245,7 @@ public class PlayerScript : NetworkBehaviour
                 {
                     //Debug.Log("I want to get my deck");
                     highest = FindHighestStat();
-                    CmdSpawnDeck(highest, playerNum);
+                    SpawnDeck();
                     hasDeck = true;
 
                     break;
@@ -361,9 +361,9 @@ public class PlayerScript : NetworkBehaviour
     }
 
     //if weird error try playerCount
-    [Command]
-    public void CmdSpawnDeck(string highest, int playerNum) {
-        playerManager.DeckMaker(highest, playerNum);
+    
+    public void SpawnDeck() {
+        playerManager.CmdDeckMaker(highest, playerNum);
 
     }
 
