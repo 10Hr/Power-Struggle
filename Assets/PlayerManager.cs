@@ -32,6 +32,9 @@ public class PlayerManager : NetworkBehaviour {
     public List<GameObject> hand2 = new List<GameObject>();
     public List<GameObject> hand3 = new List<GameObject>();
     public List<GameObject> hand4 = new List<GameObject>();
+    public List<PlayerScript> playerList = new List<PlayerScript>();
+    public List<GameObject> deckList = new List<GameObject>();
+    public List<List<GameObject>> handList = new List<List<GameObject>>();
     NetworkIdentity[] listObjects;
     GameState gameManager;
     PassiveManager passiveManager;
@@ -90,18 +93,22 @@ public class PlayerManager : NetworkBehaviour {
                                                           // Debug.Log("obj.GetComponent<NetworkIdentity>() " + obj.GetComponent<NetworkIdentity>() + " player1ID " + player1ID + " playercount " + playerCount + " whichPlayer " + whichPlayer);
             if (obj.GetComponent<NetworkIdentity>() == player1ID && playerCount == 1 && whichPlayer == 0) {
                 player1 = obj.GetComponent<PlayerScript>();
+                playerList.Add(player1);
                 Debug.Log("Player 1 is created!");
             }
             else if (obj.GetComponent<NetworkIdentity>() == player2ID && playerCount == 2 && whichPlayer == 1) {
                 player2 = obj.GetComponent<PlayerScript>();
+                playerList.Add(player2);
                 Debug.Log("Player 2 is created!");
             }
             else if (obj.GetComponent<NetworkIdentity>() == player3ID && playerCount == 3 && whichPlayer == 2) {
                 player3 = obj.GetComponent<PlayerScript>();
+                playerList.Add(player3);
                 Debug.Log("Player 3 is created!");
             }
             else if (obj.GetComponent<NetworkIdentity>() == player4ID && playerCount == 4 && whichPlayer == 3) {
                 player4 = obj.GetComponent<PlayerScript>();
+                playerList.Add(player4);
                 Debug.Log("Player 4 is created!");
             }
         }
@@ -154,84 +161,34 @@ public class PlayerManager : NetworkBehaviour {
         deck2 = GameObject.Find("Deck2");
         deck3 = GameObject.Find("Deck3");
         deck4 = GameObject.Find("Deck4");
+        deckList.Add(deck1);
+        deckList.Add(deck2);
+        deckList.Add(deck3);
+        deckList.Add(deck4);
+        handList.Add(hand1);
+        handList.Add(hand2);
+        handList.Add(hand3);
+        handList.Add(hand4);
 
-        //IF SOMETHING GOES WRONG WITH CARD OBJECTS, TRY UNCOMMENTING FOR LOOPS AND RE ADD TO OTHER PLAYERS
-        //depending on player
-        switch (pNum)
-        {
-            case 1:
-                //create deck properties for server and clients
-                RPCGiveDeck(deck1, player1, highest);
-                deck1.GetComponent<DeckScript>().CreateDeck(highest, this.GetComponent<InstantiatePrefab>().cardPrefab);
-                //DO NOT REMOVE!!!!!!!!
-                //spawns all the cards in that deck
-                //for (int i = 0; i < deck1.GetComponent<DeckScript>().cards.Count; i++)
-                    //NetworkServer.Spawn(deck1.GetComponent<DeckScript>().cards[i]);
-                break;
+        PlayerScript thisPlayer = playerList[pNum - 1];
+        GameObject thisDeck = deckList[pNum - 1];
 
-            case 2:
-                RPCGiveDeck(deck2, player2, highest);
-                deck2.GetComponent<DeckScript>().CreateDeck(highest, this.GetComponent<InstantiatePrefab>().cardPrefab);
-                break;
-
-            case 3:
-                RPCGiveDeck(deck3, player3, highest);
-                deck3.GetComponent<DeckScript>().CreateDeck(highest, this.GetComponent<InstantiatePrefab>().cardPrefab);
-                break;
-
-            case 4:
-                RPCGiveDeck(deck4, player4, highest);
-                deck4.GetComponent<DeckScript>().CreateDeck(highest, this.GetComponent<InstantiatePrefab>().cardPrefab);
-                break;
-
-            default:
-                break;
-        }
+        RPCGiveDeck(thisDeck, thisPlayer, highest);
+        thisDeck.GetComponent<DeckScript>().CreateDeck(highest, this.GetComponent<InstantiatePrefab>().cardPrefab);
     }
 
-    
     //Creates players hands depending on which player is ready to draw
     //draws the cards after hand is created
     //draws cards 1 at a time (1 per call of this method)
     [Command(requiresAuthority = false)]
     public void HandMaker(int pNum, NetworkConnectionToClient conn)  //Shorter name for PlayerNum
     {
-        //Depending on Player
-        switch (pNum)
-        {
-            case 1:
-                //add the card to the hand
-                hand1.Add(deck1.GetComponent<DeckScript>().cards[0]);
-                //remove the card from the deck
-                deck1.GetComponent<DeckScript>().cards.RemoveAt(0);
-                //instaniate and spawn card
-                Draw(deck1, hand1, pNum, conn);
-                break;
+        GameObject thisDeck = deckList[pNum - 1];
+        List<GameObject> thisHand = handList[pNum - 1];
 
-            case 2:
-                hand2.Add(deck2.GetComponent<DeckScript>().cards[0]);
-                deck2.GetComponent<DeckScript>().cards.RemoveAt(0);
-                Draw(deck2, hand2, pNum, conn);
-                break;
-
-            case 3:
-                hand3.Add(deck3.GetComponent<DeckScript>().cards[0]);
-                deck3.GetComponent<DeckScript>().cards.RemoveAt(0);
-                Draw(deck3, hand3, pNum, conn);
-                break;
-
-            case 4:
-                hand4.Add(deck4.GetComponent<DeckScript>().cards[0]);
-                deck4.GetComponent<DeckScript>().cards.RemoveAt(0);
-                Draw(deck4, hand4, pNum, conn);
-                break;
-
-            default:
-                Debug.Log("Invalid player.");
-                break;
-        }
-
-
+        thisHand.Add(deck1.GetComponent<DeckScript>().cards[0]);
+        thisDeck.GetComponent<DeckScript>().cards.RemoveAt(0);
+        Draw(thisDeck, thisHand, pNum, conn);
     }
 
     //Gets the correct sprite/prefab for the card and instatiates and spawns it
