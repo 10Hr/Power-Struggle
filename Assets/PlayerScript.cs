@@ -37,8 +37,6 @@ public class PlayerScript : NetworkBehaviour
     //player belongings
     public bool hasDeck = false;
     public bool called = false;
-    //[SyncVar]
-    GameObject cardReplacement;
 
     //data structures
     public List<GameObject> buttons;
@@ -49,11 +47,9 @@ public class PlayerScript : NetworkBehaviour
     public GameObject[] player4GUI;
     public int handCount = 0;
     public List<GameObject> hand = new List<GameObject>();
-    //private List<GameObject> realHand = new List<GameObject>();
 
     //Other Objects
     PlayerManager playerManager;
-    StatManager stats;
     PassiveManager passiveManager;
     GameState gameManager;
     GameStates currentState;
