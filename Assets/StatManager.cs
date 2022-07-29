@@ -6,10 +6,6 @@ using UnityEngine.UI;
 
 public class StatManager : NetworkBehaviour
 {
-    private PlayerScript player1;
-    private PlayerScript player2;
-    private PlayerScript player3;
-    private PlayerScript player4;
     PlayerManager playerManager;
     [SyncVar]
     private int count;
@@ -19,16 +15,6 @@ public class StatManager : NetworkBehaviour
     void Awake()
     {
         playerManager = GameObject.Find("PlayerManager").GetComponent<PlayerManager>();
-        //GameObject.Find("Main Camera").SetActive(false);
-    }
-
-    private void Update()
-    {
-        //NEVER HAPPENS
-        if (player4 != null)
-        {
-            Debug.Log("ALL 4 ARE HERE");
-        }
     }
 
     public void Increment()
@@ -41,20 +27,16 @@ public class StatManager : NetworkBehaviour
         switch (buttontag)
         {
             case "Player1":
-                player1 = playerManager.getPlayer(0);
-                playerManager.CmdIncrement(thisButName, player1, 1);
+                playerManager.CmdIncrement(thisButName, playerManager.player1, 1);
                 break;
             case "Player2":
-                player2 = playerManager.getPlayer(1);
-                playerManager.CmdIncrement(thisButName, player2, 2);
+                playerManager.CmdIncrement(thisButName, playerManager.player2, 2);
                 break;
             case "Player3":
-                player3 = playerManager.getPlayer(2);
-                playerManager.CmdIncrement(thisButName, player3, 3);
+                playerManager.CmdIncrement(thisButName, playerManager.player3, 3);
                 break;
             case "Player4":
-                player4 = playerManager.getPlayer(3);
-                playerManager.CmdIncrement(thisButName, player4, 4);
+                playerManager.CmdIncrement(thisButName, playerManager.player4, 4);
                 break;
         }
     }
@@ -69,20 +51,16 @@ public class StatManager : NetworkBehaviour
         switch (buttontag)
         {
             case "Player1":
-                player1 = playerManager.getPlayer(0);
-                playerManager.CmdDecrement(thisButName, player1, 1);
+                playerManager.CmdDecrement(thisButName, playerManager.player1, 1);
                 break;
             case "Player2":
-                player2 = playerManager.getPlayer(1);
-                playerManager.CmdDecrement(thisButName, player2, 2);
+                playerManager.CmdDecrement(thisButName, playerManager.player2, 2);
                 break;
             case "Player3":
-                player3 = playerManager.getPlayer(2);
-                playerManager.CmdDecrement(thisButName, player3, 3);
+                playerManager.CmdDecrement(thisButName, playerManager.player3, 3);
                 break;
             case "Player4":
-                player4 = playerManager.getPlayer(3);
-                playerManager.CmdDecrement(thisButName, player4, 4);
+                playerManager.CmdDecrement(thisButName, playerManager.player4, 4);
                 break;
         }
     }
@@ -92,29 +70,28 @@ public class StatManager : NetworkBehaviour
         string bntTag = UnityEngine.EventSystems.EventSystem.current.currentSelectedGameObject.tag;
         if (bntTag == "Player1")
         {
-            if (player1.ReadyUp())
+            if (playerManager.player1.ReadyUp())
             {
                 playerManager.CmdReadyPlayer(bntTag);
             }
         }
         else if (bntTag == "Player2")
         {
-            if (player2.ReadyUp())
+            if (playerManager.player2.ReadyUp())
             {
-                Debug.Log("player 2 ready called");
                 playerManager.CmdReadyPlayer(bntTag);
             }
         }
         else if (bntTag == "Player3")
         {
-            if (player3.ReadyUp())
+            if (playerManager.player3.ReadyUp())
             {
                 playerManager.CmdReadyPlayer(bntTag);
             }
         }
         else if (bntTag == "Player4")
         {
-            if (player4.ReadyUp())
+            if (playerManager.player4.ReadyUp())
             {
                 playerManager.CmdReadyPlayer(bntTag);
             }

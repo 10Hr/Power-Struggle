@@ -107,19 +107,6 @@ public class PlayerManager : NetworkBehaviour {
         }
     }
 
-    public PlayerScript getPlayer(int whichPlayer) {
-        if (whichPlayer == 0)
-            return player1;
-        else if (whichPlayer == 1)
-            return player2;
-        else if (whichPlayer == 2)
-            return player3;
-        else if (whichPlayer == 3)
-            return player4;
-        else
-            return null;
-    }
-
     [Command(requiresAuthority = false)]
     public void CmdReadyPlayer(string btnTag) {
         switch (btnTag)
@@ -311,19 +298,6 @@ public class PlayerManager : NetworkBehaviour {
                     AdjustCards(hand4, pNum);
                     break;
             }
-
-
-            //TODO
-
-            //Debug.Log(hand[hand.Count - 1]);
-            /////////////////////////////////////CMDSpawnCard(deck, pNum);
-            //Debug.Log(hand[hand.Count - 1]);
-            //cardReplacement.AddComponent<CardScript>();
-            //cardReplacement.GetComponent<CardScript>().Effect = hand[hand.Count - 1].GetComponent<CardScript>().Effect;
-            //cardReplacement.GetComponent<CardScript>().Title = hand[hand.Count - 1].GetComponent<CardScript>().Title;
-            //cardReplacement.GetComponent<CardScript>().Stat = hand[hand.Count - 1].GetComponent<CardScript>().Stat;
-            //cardReplacement.transform.position = new Vector3(hand.Count * 2, 0, 0);
-            //Debug.Log("Adjusted position");
         }
     }
 
