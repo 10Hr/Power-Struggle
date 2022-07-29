@@ -81,6 +81,7 @@ public class CardScript : NetworkBehaviour
     public void OnMouseExit() {
         hovered = false;
     }
+
     [ClientRpc]
     public void OnMouseDown()
     {
