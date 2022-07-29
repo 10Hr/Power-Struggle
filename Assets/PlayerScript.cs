@@ -245,38 +245,16 @@ public class PlayerScript : NetworkBehaviour
                 {
                     //Debug.Log("I want to get my deck");
                     highest = FindHighestStat();
-                    SpawnDeck();
+                    playerManager.CmdDeckMaker(highest, playerNum);
                     hasDeck = true;
 
                     break;
                 }
                 break;
-            case GameStates.Passive:
-                //if (!called) {
-                    // uncomment to run passive code, might actually work better in readyup??
-                    /* 
-                            passiveManager = GameObject.Find("PassiveManager").GetComponent<PassiveManager>(); // if these two lones are put here then they will run as soon as player 1 is ready.
-                            passiveManager.selectPassive(FindHighestStat());
-                            if (playerNum == 2) {
-                                //  GameObject.Find("passiveChoice1").transform.Rotate(0, 0, 90);
-                                // GameObject.Find("passiveChoice2").transform.Rotate(0, 0, 90);
-                                    GameObject.Find("passiveChoicePivot").transform.Rotate(0, 0, 90);
-                            }
-                            if (playerNum == 3) {
-                                // GameObject.Find("passiveChoice1").transform.Rotate(0, 0, 90);
-                                // GameObject.Find("passiveChoice2").transform.Rotate(0, 0, 90);
-                                    GameObject.Find("passiveChoicePivot").transform.Rotate(0, 0, 180);
-                            }
-                            if (playerNum == 4) {
-                                //GameObject.Find("passiveChoice1").transform.Rotate(0, 0, 90);
-                                //  GameObject.Find("passiveChoice2").transform.Rotate(0, 0, 90);
-                                GameObject.Find("passiveChoicePivot").transform.Rotate(0, 0, 270);
-                            }
 
-                    */
-                    //called = true;
-                //}
+            case GameStates.Passive:
                 break;
+
             case GameStates.Turn:
 
                 if (hasDeck && handCount < 8)
@@ -299,16 +277,15 @@ public class PlayerScript : NetworkBehaviour
                         b.SetActive(true);
                     }
                 }
-
-                Debug.Log(this + "check 1");
                 playerManager.CmdTrackSelected(this);
                 break;
+
             default:
                 break;
         }
 
         if(handCount > 0)
-        CmdEnlarge();
+        playerManager.Enlarge(this, playerNum); //CmdEnlarge();
 
     }
 
@@ -358,18 +335,5 @@ public class PlayerScript : NetworkBehaviour
         }
         else
             return false;
-    }
-
-    //if weird error try playerCount
-    
-    public void SpawnDeck() {
-        playerManager.CmdDeckMaker(highest, playerNum);
-
-    }
-
-    [Command]
-    public void CmdEnlarge()
-    {
-        playerManager.Enlarge(this, playerNum);
     }
 }

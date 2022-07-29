@@ -356,16 +356,11 @@ public class PlayerManager : NetworkBehaviour {
                 hand[hand.Count - 1].GetComponent<CardScript>().sortingDefault = hand[hand.Count - 1].GetComponent<SpriteRenderer>().sortingOrder;
                 break;
         }
-
-        //if (hasAuthority)
-        //{
-       // Debug.Log(hand[hand.Count - 1].GetComponent<NetworkIdentity>().connectionToClient);
-        //Debug.Log(hand[hand.Count - 1].GetComponent<NetworkIdentity>().hasAuthority);
         hand[hand.Count - 1].GetComponent<CardScript>().Flip();
-        //}
         
     }
 
+    [Command(requiresAuthority = false)]
     public void Enlarge(PlayerScript player, int playerNum)
     {
         RpcEnlarge(player.connectionToClient, hand1, hand2, hand3, hand4, playerNum);
@@ -374,22 +369,6 @@ public class PlayerManager : NetworkBehaviour {
     [TargetRpc]
     public void RpcEnlarge(NetworkConnection conn, List<GameObject> hand1, List<GameObject> hand2, List<GameObject> hand3, List<GameObject> hand4, int playerNum)
     {
-        //for (int i = 0; i < hand1.Count; i++)        
-        //    if (hand1[i].GetComponent<CardScript>().hasAuthority)           
-        //        hand1[i].GetComponent<CardScript>().Enlarge();
-
-        //for (int i = 0; i < hand2.Count; i++)        
-        //    if (hand2[i].GetComponent<CardScript>().hasAuthority)            
-        //        hand2[i].GetComponent<CardScript>().Enlarge();
-
-        //for (int i = 0; i < hand3.Count; i++)        
-        //    if (hand3[i].GetComponent<CardScript>().hasAuthority)
-        //        hand3[i].GetComponent<CardScript>().Enlarge();
-
-        //for (int i = 0; i < hand4.Count; i++)
-        //    if (hand4[i].GetComponent<CardScript>().hasAuthority)
-        //        hand4[i].GetComponent<CardScript>().Enlarge();
-
         List<GameObject> thisHand;
 
         switch(playerNum)
@@ -505,7 +484,6 @@ public class PlayerManager : NetworkBehaviour {
     [Command(requiresAuthority = false)]
     public void CmdTrackSelected(PlayerScript player)
     {
-        Debug.Log(player + "check 2");
         for (int i = 0; i < player.hand.Count; i++)
         {
             if (player.hand[i].GetComponent<CardScript>().selected && !player.hand[i].GetComponent<CardScript>().prevSelected)
@@ -521,7 +499,6 @@ public class PlayerManager : NetworkBehaviour {
         }
         if (player.numSelected == 3)
         {
-            Debug.Log("You may lock in");
             //show lockIn button
         }
         else
