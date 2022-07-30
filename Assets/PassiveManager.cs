@@ -8,6 +8,9 @@ public class PassiveManager : NetworkBehaviour
 {
     private List<Passive> passives = new List<Passive>();
     private List<Passive> choices = new List<Passive>();
+
+
+    //private List<> effects = new List<>();
    // private GameObject passiveChoice1;
     //private GameObject passiveChoice2;
     private GameObject passiveChoice3;
@@ -52,12 +55,17 @@ public class PassiveManager : NetworkBehaviour
         choices.Add(passives[0]);
         choices.Add(passives[1]);
         choices.Add(passives[2]);
-
         foreach (Passive p in passives) 
             if (p.PassiveType == highest)
                 choices.Add(p);
 
-        
+        for (int i = 0; i < passives.Count; i++) {
+          // choices.Add(Random.Range(0, 6));
+        }
+
+        effect(choices[rnd].PassiveName);
+
+     
 
 
        // passiveChoice1.GetComponent<Text>().text = "Name: " + choices[0].PassiveName + "\n" + "Description: " + choices[0].PassiveDescription;
@@ -74,7 +82,24 @@ public class PassiveManager : NetworkBehaviour
 
     }
 
-    void effect() {
+    void effect(string eff) {
         //do stuff 
-        }
+
+      //  foreach(String p in effects)
+          //  eff
+      //  }
+
+    
+
+
+
+    }
+
+    private static void getPassiveEffect() {
+        //get passive effect
+        //add to player
+        //add to player manager
+
+
+    }
 }
