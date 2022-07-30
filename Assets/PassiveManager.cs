@@ -4,12 +4,12 @@ using UnityEngine;
 using Mirror;
 using System.IO;
 using UnityEngine.UI;
-public class PassiveManager<T> : NetworkBehaviour, Assets.IPassive<T>
+public class PassiveManager : NetworkBehaviour
 {
     private List<Passive> passives = new List<Passive>();
     private List<Passive> choices = new List<Passive>();
 
-    public List<T> passiveMethods = new List<T>();
+    //public List<T> passiveMethods = new List<T>();
 
     //private List<> effects = new List<>();
    // private GameObject passiveChoice1;

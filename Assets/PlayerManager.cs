@@ -37,7 +37,7 @@ public class PlayerManager : NetworkBehaviour {
     public List<List<GameObject>> handList = new List<List<GameObject>>();
     NetworkIdentity[] listObjects;
     GameState gameManager;
-    //PassiveManager passiveManager;
+    PassiveManager passiveManager;
 
     public void getCount() { playerCount++; } //player count
 
