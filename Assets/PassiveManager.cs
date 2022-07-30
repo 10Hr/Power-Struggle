@@ -47,10 +47,19 @@ public class PassiveManager : NetworkBehaviour
 
     public void selectPassive(string highest) {
         //Debug.Log(highest);
+
+        int rnd = Random.Range(0, 6);
+        choices.Add(passives[0]);
+        choices.Add(passives[1]);
+        choices.Add(passives[2]);
+
         foreach (Passive p in passives) 
             if (p.PassiveType == highest)
                 choices.Add(p);
-    
+
+        
+
+
        // passiveChoice1.GetComponent<Text>().text = "Name: " + choices[0].PassiveName + "\n" + "Description: " + choices[0].PassiveDescription;
         //passiveChoice2.GetComponent<Text>().text = "Name: " + choices[1].PassiveName + "\n" + "Description: " + choices[1].PassiveDescription;
         passiveChoice3.GetComponent<Text>().text = "Name: " + choices[0].PassiveName + "\n" + "Description: " + choices[0].PassiveDescription +
