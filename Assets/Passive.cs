@@ -7,8 +7,7 @@ public class Passive : NetworkBehaviour
     private string passiveType;
     private string passiveName;
     private string passiveDescription;
-
-    private Object passiveEffect;
+    private string passiveEffect;
 
     // properties
     public string PassiveType
@@ -27,7 +26,7 @@ public class Passive : NetworkBehaviour
         set { passiveDescription = value; }
     }
 
-    public Object PassiveEffect
+    public string PassiveEffect
     {
         get { return passiveEffect; }
         set { passiveEffect = value; }

@@ -4,11 +4,12 @@ using UnityEngine;
 using Mirror;
 using System.IO;
 using UnityEngine.UI;
-public class PassiveManager : NetworkBehaviour
+public class PassiveManager<T> : NetworkBehaviour, Assets.IPassive<T>
 {
     private List<Passive> passives = new List<Passive>();
     private List<Passive> choices = new List<Passive>();
 
+    public List<T> passiveMethods = new List<T>();
 
     //private List<> effects = new List<>();
    // private GameObject passiveChoice1;
@@ -82,24 +83,25 @@ public class PassiveManager : NetworkBehaviour
 
     }
 
-    void effect(string eff) {
+    void effect(string name) {
         //do stuff 
 
-      //  foreach(String p in effects)
-          //  eff
-      //  }
-
+    /*
+        take in string eff
+        for each p in choices[x].PassiveName
+            if eff == passiveEffect
+                do stuff
+        end for
+    */
     
 
 
 
     }
 
-    private static void getPassiveEffect() {
-        //get passive effect
-        //add to player
-        //add to player manager
-
+    void mitigateLosses() {
 
     }
+
+    void copyCat() {}
 }

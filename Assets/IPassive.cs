@@ -6,7 +6,11 @@ using System.Threading.Tasks;
 
 namespace Assets
 {
-    interface IPassive
-    {
+    interface IPassive<T> {
+
+
+        void mitigateLosses() {}
+        void copyCat() {}
+
     }
 }
