@@ -57,7 +57,8 @@ public class PlayerScript : NetworkBehaviour
     GameObject camera2;
     GameObject camera3;
     GameObject camera4;
-    GameObject canvas;
+    List<GameObject> cameraList = new List<GameObject>();
+    Canvas canvas;
 
 
     //Stat Properties
@@ -124,8 +125,12 @@ public class PlayerScript : NetworkBehaviour
         camera2 = GameObject.Find("playerCamera2");
         camera3 = GameObject.Find("playerCamera3");
         camera4 = GameObject.Find("playerCamera4");
+        cameraList.Add(camera1);
+        cameraList.Add(camera2);
+        cameraList.Add(camera3);
+        cameraList.Add(camera4);
 
-        canvas = GameObject.FindGameObjectWithTag("MainCanvas");
+        canvas = GameObject.FindGameObjectWithTag("MainCanvas").GetComponent<Canvas>();
 
         gameManager = GameObject.Find("FSM").GetComponent<GameState>();
         playerManager = GameObject.Find("PlayerManager").GetComponent<PlayerManager>();
@@ -140,19 +145,16 @@ public class PlayerScript : NetworkBehaviour
         if (isLocalPlayer)
         {
             //assign cameras
-            //GameObject.Find("Main Camera").SetActive(false);
-            camera1.SetActive(false);
-            camera2.SetActive(false);
-            camera3.SetActive(false);
-            camera4.SetActive(false);
+            foreach (GameObject g in cameraList)
+                g.SetActive(false);
+
+            cameraList[playerCount - 1].SetActive(true);
+            canvas.worldCamera = cameraList[playerCount - 1].GetComponent<Camera>();
+            //cameraList[playerCount - 1].GetComponent<Camera>().transform.Rotate(new Vector3(0, 0, 90 * playerCount - 1));
 
             switch (playerCount)
             {
                 case 1:
-                    //camera setup
-                    camera1.SetActive(true);
-                    canvas.GetComponent<Canvas>().worldCamera = camera1.GetComponent<Camera>();
-
                     //gui setup
                     foreach (GameObject g in player2GUI)
                         g.SetActive(false);
@@ -168,9 +170,6 @@ public class PlayerScript : NetworkBehaviour
 
                     break;
                 case 2:
-                    camera2.SetActive(true);
-                    canvas.GetComponent<Canvas>().worldCamera = camera2.GetComponent<Camera>();
-
                     foreach (GameObject g in player1GUI)
                         g.SetActive(false);
                     foreach (GameObject g in player3GUI)
@@ -183,9 +182,6 @@ public class PlayerScript : NetworkBehaviour
                         buttons.Add(c.transform.parent.gameObject);
                     break;
                 case 3:
-                    camera3.SetActive(true);
-                    canvas.GetComponent<Canvas>().worldCamera = camera3.GetComponent<Camera>();
-
                     foreach (GameObject g in player1GUI)
                         g.SetActive(false);
                     foreach (GameObject g in player2GUI)
@@ -198,9 +194,6 @@ public class PlayerScript : NetworkBehaviour
                         buttons.Add(c.transform.parent.gameObject);
                     break;
                 case 4:
-                    camera4.SetActive(true);
-                    canvas.GetComponent<Canvas>().worldCamera = camera4.GetComponent<Camera>();
-
                     foreach (GameObject g in player1GUI)
                         g.SetActive(false);
                     foreach (GameObject g in player2GUI)
