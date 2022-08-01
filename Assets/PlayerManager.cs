@@ -131,8 +131,8 @@ public class PlayerManager : NetworkBehaviour {
                 player4.readied = true;
                 break;
         }
-
-        if (player1.readied && player2.readied && player3.readied && player4.readied)
+        //&& player2.readied && player3.readied && player4.readied
+        if (player1.readied )
         {
             Debug.Log("All players are ready!");
             //start game
@@ -147,7 +147,7 @@ public class PlayerManager : NetworkBehaviour {
     public void RpcAllReady(GameState gameManager)
     {
         gameManager.AllReady = true;
-        gameManager.PassivesSelected = true;
+       // gameManager.PassivesSelected = false;
     }
 
     //Find decks objects in scene

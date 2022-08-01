@@ -1,13 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using Mirror;
 using System.IO;
 using UnityEngine.UI;
 public class PassiveManager : NetworkBehaviour
 {
-    private List<Passive> passives = new List<Passive>();
-    private List<Passive> choices = new List<Passive>();
+    public List<Passive> passives = new List<Passive>();
+    public List<Passive> choices = new List<Passive>(); // passives player can choose from after random selection
+    public List<Passive> possible = new List<Passive>(); // all passives to be chosen from; 
+    private delegate void GetEffects();
+    private List<GetEffects> effects = new List<GetEffects>();
+
+    string eName;
 
     //public List<T> passiveMethods = new List<T>();
 
@@ -17,7 +23,9 @@ public class PassiveManager : NetworkBehaviour
     private GameObject passiveChoice3;
 
 
-    void Awake() { getPassivesFromFile(); 
+    void Awake() { 
+
+    getPassivesFromFile();
     
     //passiveChoice1 = GameObject.Find("passiveChoice1");
     //passiveChoice2 = GameObject.Find("passiveChoice2");
@@ -42,7 +50,7 @@ public class PassiveManager : NetworkBehaviour
             passives[passives.Count - 1].PassiveType = data[0];
             passives[passives.Count - 1].PassiveName = data[1];
             passives[passives.Count - 1].PassiveDescription = data[2];
-
+            passives[passives.Count - 1].PassiveEffect = data[3];
             if (passives[passives.Count - 1].PassiveDescription.Contains(".")) 
                 passives[passives.Count - 1].PassiveDescription = passives[passives.Count - 1].PassiveDescription.Replace(".", ",");
         }
@@ -50,21 +58,18 @@ public class PassiveManager : NetworkBehaviour
     }
 
     public void selectPassive(string highest) {
-        //Debug.Log(highest);
 
-        int rnd = Random.Range(0, 6);
-        choices.Add(passives[0]);
-        choices.Add(passives[1]);
-        choices.Add(passives[2]);
+        possible.Add(passives[0]);
+        possible.Add(passives[1]);
+        possible.Add(passives[2]);
         foreach (Passive p in passives) 
             if (p.PassiveType == highest)
-                choices.Add(p);
-
-        for (int i = 0; i < passives.Count; i++) {
-          // choices.Add(Random.Range(0, 6));
+                possible.Add(p);
+        for (int i = 0; i < 3; i++) {
+            int rand = Random.Range(0, 6 - i);
+            choices.Add(possible[rand]);
+            possible.RemoveAt(rand);
         }
-
-        effect(choices[rnd].PassiveName);
 
      
 
@@ -78,30 +83,112 @@ public class PassiveManager : NetworkBehaviour
         //select passive
         //add to player
         //add to player manager
-
-
+        createEffectList();
+        pullEff();
+    }
+   void pullEff() { // waste of time
+        for (int i = 0; i < effects.Count; i++) 
+            for (int j = 0; j < 3; j++) 
+                if (choices[j].PassiveEffect == effects[i].Method.Name) 
+                    effects[i]();     
 
     }
 
-    void effect(string name) {
-        //do stuff 
-
-    /*
-        take in string eff
-        for each p in choices[x].PassiveName
-            if eff == passiveEffect
-                do stuff
-        end for
-    */
-    
 
 
 
+    void createEffectList()
+    {
+        // create a list of delegate objects as placeholders for the methods.
+        // note the methods must all be of type void with no parameters
+        // that is they must all have the same signature.
+        Debug.Log("creating effect list");
+                effects.Add(mitigateLosses); // how to add methods based on name of effect
+                effects.Add(copyCat);
+                effects.Add(veteran);
+
+                effects.Add(encore);
+                effects.Add(lastingEffects);
+                effects.Add(naturalAlly);
+
+                effects.Add(tactician);
+                effects.Add(precise);
+                effects.Add(seeDeck);
+
+                effects.Add(unrelenting);
+                effects.Add(displayOfSkill);
+                effects.Add(unstable);
+
+                effects.Add(shadyBusiness);
+                effects.Add(blackMarket);
+                effects.Add(wireTapping);
+
+     }
+
+
+     // effect methods
+
+     //-----------------------------------------default-----------------------------------------
+     void mitigateLosses() {
+         Debug.Log("mitigateLosses");
+     }
+     void copyCat() {
+         Debug.Log("CopyCat");
+     }
+     void veteran() {
+         Debug.Log("Veteran");
+     }
+
+
+     //-----------------------------------------charisma-----------------------------------------
+
+
+     void encore() {
+         Debug.Log("Encore");
+     }
+    void lastingEffects() {
+        Debug.Log("lastingEffects");
+    }
+    void naturalAlly() {
+        Debug.Log("naturalAlly");
     }
 
-    void mitigateLosses() {
+    //-----------------------------------------intelligence-----------------------------------------
 
+
+    void tactician() {
+        Debug.Log("tactician");
+    }
+    void precise() {
+        Debug.Log("precise");
+    }
+    void seeDeck() {
+        Debug.Log("seeDeck");
     }
 
-    void copyCat() {}
+    //-----------------------------------------strength-----------------------------------------
+
+
+    void unrelenting() {
+        Debug.Log("unrelenting");
+    }
+    void displayOfSkill() {
+        Debug.Log("displayOfSkill");
+    }
+    void unstable() {
+        Debug.Log("unstable");
+    }
+
+    //-----------------------------------------cunning-----------------------------------------
+
+
+    void shadyBusiness() {
+        Debug.Log("shadyBusiness");
+    }
+    void blackMarket() {
+        Debug.Log("blackMarket");
+    }
+    void wireTapping() {
+        Debug.Log("wireTapping");
+    }
 }
