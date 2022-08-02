@@ -123,6 +123,14 @@ public class PassiveManager : NetworkBehaviour
                 effects.Add(blackMarket);
                 effects.Add(wireTapping);
 
+    /* needs PassiveEffect to return a methodName
+            for (int i = 0; i < effects.Count; i++)
+            {
+                effects.Add(passives[i].PassiveEffect);
+            }
+
+
+        */
      }
 
 
