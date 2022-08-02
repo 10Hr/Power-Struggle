@@ -14,7 +14,7 @@ public class PlayerScript : NetworkBehaviour
     NetworkIdentity netID;
     [SyncVar]
     private int playerCount;
-    private int playerNum;
+    public int playerNum;
 
     //Player attributes
     [SyncVar]
@@ -59,6 +59,7 @@ public class PlayerScript : NetworkBehaviour
     GameObject camera4;
     List<GameObject> cameraList = new List<GameObject>();
     Canvas canvas;
+    GameObject objectPivot;
 
 
     //Stat Properties
@@ -131,6 +132,8 @@ public class PlayerScript : NetworkBehaviour
         cameraList.Add(camera4);
 
         canvas = GameObject.FindGameObjectWithTag("MainCanvas").GetComponent<Canvas>();
+        objectPivot = GameObject.Find("ObjectPivot");
+
 
         gameManager = GameObject.Find("FSM").GetComponent<GameState>();
         playerManager = GameObject.Find("PlayerManager").GetComponent<PlayerManager>();
@@ -150,6 +153,7 @@ public class PlayerScript : NetworkBehaviour
 
             cameraList[playerCount - 1].SetActive(true);
             canvas.worldCamera = cameraList[playerCount - 1].GetComponent<Camera>();
+            objectPivot.transform.Rotate(0, 0, -90 * (playerNum - 1));
             //cameraList[playerCount - 1].GetComponent<Camera>().transform.Rotate(new Vector3(0, 0, 90 * playerCount - 1));
 
             switch (playerCount)

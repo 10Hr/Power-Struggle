@@ -59,8 +59,8 @@ public class PlayerManager : NetworkBehaviour {
     }
 
     // Update is called once per frame
-    void Update() { 
-        listObjects = FindObjectsOfType<NetworkIdentity>(); 
+    void Update() {
+        listObjects = FindObjectsOfType<NetworkIdentity>();
     }
 
     public int AddNet(NetworkIdentity playerID) {
@@ -131,10 +131,12 @@ public class PlayerManager : NetworkBehaviour {
                 player4.readied = true;
                 break;
         }
-        //&& player2.readied && player3.readied && player4.readied
-        if (player1.readied )
+        // && player2.readied && player3.readied && player4.readied
+        if (player1.readied)
         {
+            //GameObject funnytest = new GameObject();
             Debug.Log("All players are ready!");
+            //RotateObjects(funnytest);
             //start game
             gameManager.AllReady = true;
             gameManager.PassivesSelected = true;
@@ -147,7 +149,7 @@ public class PlayerManager : NetworkBehaviour {
     public void RpcAllReady(GameState gameManager)
     {
         gameManager.AllReady = true;
-       // gameManager.PassivesSelected = false;
+        // gameManager.PassivesSelected = false;
     }
 
     //Find decks objects in scene
@@ -279,7 +281,7 @@ public class PlayerManager : NetworkBehaviour {
                 break;
         }
         hand[hand.Count - 1].GetComponent<CardScript>().Flip();
-        
+
     }
 
     [Command(requiresAuthority = false)]
@@ -287,13 +289,13 @@ public class PlayerManager : NetworkBehaviour {
     {
         RpcEnlarge(player.connectionToClient, hand1, hand2, hand3, hand4, playerNum);
     }
-    
+
     [TargetRpc]
     public void RpcEnlarge(NetworkConnection conn, List<GameObject> hand1, List<GameObject> hand2, List<GameObject> hand3, List<GameObject> hand4, int playerNum)
     {
         List<GameObject> thisHand;
 
-        switch(playerNum)
+        switch (playerNum)
         {
             case 1:
                 thisHand = hand1;
@@ -317,7 +319,7 @@ public class PlayerManager : NetworkBehaviour {
             if (thisHand[i].GetComponent<CardScript>().hasAuthority)
                 thisHand[i].GetComponent<CardScript>().Enlarge();
         }
-        
+
     }
 
     [Command(requiresAuthority = false)]
@@ -428,4 +430,21 @@ public class PlayerManager : NetworkBehaviour {
             //hide lockIn button
         }
     }
+
+    //foreach and conn
+    //[Command(requiresAuthority = false)]
+    //public void RotateObjects(GameObject objectPivot)
+    //{
+    //    foreach(PlayerScript p in playerList)
+    //    {
+    //        RpcRotateClient(p.connectionToClient, objectPivot, p.playerNum);
+    //    }
+    //}
+
+    //[TargetRpc]
+    //public void RpcRotateClient(NetworkConnection conn, GameObject objectPivot, int playerNum)
+    //{
+    //    objectPivot.transform.Rotate(0, 0, 90 * (playerNum - 1));
+    //}
+
 }
