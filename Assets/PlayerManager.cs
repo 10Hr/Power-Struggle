@@ -239,7 +239,7 @@ public class PlayerManager : NetworkBehaviour {
             thisPlayer.hand.Add(thisHand[thisHand.Count - 1]);
             AdjustCards(thisHand, pNum);
             //cardToSpawn.transform.SetParent(GameObject.Find("ObjectPivot").transform);
-            SetCardParent(cardToSpawn);
+            //SetCardParent(cardToSpawn);
         }
     }
 
@@ -248,7 +248,11 @@ public class PlayerManager : NetworkBehaviour {
     public void SetCardParent(GameObject cardToSpawn)
     {
         //Debug.Log(GameObject.Find("ObjectPivot").transform.rotation.z);
-        cardToSpawn.transform.SetParent(GameObject.Find("ObjectPivot").transform);
+        Vector3 ogPosition = cardToSpawn.transform.position;
+        Vector3 ogScale = cardToSpawn.transform.localScale;
+        cardToSpawn.transform.SetParent(GameObject.Find("ObjectPivot").transform, false);
+        cardToSpawn.transform.position = ogPosition;
+        cardToSpawn.transform.position = ogScale;
     }
 
     //Is Called on all clients and server
