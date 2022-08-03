@@ -240,7 +240,10 @@ public class PlayerScript : NetworkBehaviour
                     highest = FindHighestStat();
                     playerManager.CmdDeckMaker(highest, playerNum);
                     hasDeck = true;
-
+                    if (playerNum == 1)
+                    {
+                        playerManager.CmdReadyPlayer(null);
+                    }
                     break;
                 }
                 break;
@@ -254,7 +257,7 @@ public class PlayerScript : NetworkBehaviour
                 {
                     handCount++;
                     //Debug.Log("I want to draw");
-                    playerManager.HandMaker(playerCount, connectionToClient);
+                    playerManager.HandMaker(playerCount);
                 }
                 if (availablePoints == 0)
                 {

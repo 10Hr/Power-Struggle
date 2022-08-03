@@ -130,9 +130,11 @@ public class PlayerManager : NetworkBehaviour {
             case "Player4":
                 player4.readied = true;
                 break;
+            default:
+                break;
         }
         // 
-        if (player1.readied && player2.readied && player3.readied && player4.readied)
+        if (player1.readied && player2.readied && player3.readied && player4.readied && player1.hasDeck)
         {
             //GameObject funnytest = new GameObject();
             Debug.Log("All players are ready!");
@@ -175,6 +177,7 @@ public class PlayerManager : NetworkBehaviour {
         PlayerScript thisPlayer = playerList[pNum - 1];
         GameObject thisDeck = deckList[pNum - 1];
 
+        thisPlayer.hasDeck = true;
         RPCGiveDeck(thisDeck, thisPlayer, highest);
         thisDeck.GetComponent<DeckScript>().CreateDeck(highest, this.GetComponent<InstantiatePrefab>().cardPrefab);
     }
@@ -183,20 +186,21 @@ public class PlayerManager : NetworkBehaviour {
     //draws the cards after hand is created
     //draws cards 1 at a time (1 per call of this method)
     [Command(requiresAuthority = false)]
-    public void HandMaker(int pNum, NetworkConnectionToClient conn)  //Shorter name for PlayerNum
+    public void HandMaker(int pNum)  //Shorter name for PlayerNum
     {
         GameObject thisDeck = deckList[pNum - 1];
         List<GameObject> thisHand = handList[pNum - 1];
         PlayerScript thisPlayer = playerList[pNum - 1];
-
-        thisHand.Add(deck1.GetComponent<DeckScript>().cards[0]);
+        Debug.Log("pnum:" + pNum);
+        Debug.Log(thisHand);
+        thisHand.Add(thisDeck.GetComponent<DeckScript>().cards[0]);
         thisDeck.GetComponent<DeckScript>().cards.RemoveAt(0);
-        Draw(thisDeck, thisHand, thisPlayer, pNum, conn);
+        Draw(thisDeck, thisHand, thisPlayer, pNum, thisPlayer.connectionToClient);
     }
 
     //Gets the correct sprite/prefab for the card and instatiates and spawns it
     //adjusts the hand to represent the spawned cards
-    public void Draw(GameObject thisDeck, List<GameObject> thisHand, PlayerScript thisPlayer, int pNum, NetworkConnectionToClient conn)
+    public void Draw(GameObject thisDeck, List<GameObject> thisHand, PlayerScript thisPlayer, int pNum, NetworkConnection conn)
     {
         //As long as the deck has cards to draw
         if (thisDeck.GetComponent<DeckScript>().cards.Count >= 0) //Looking back on it, this should be in HandMaker... It shouldn't be causing the problem though.
@@ -226,7 +230,7 @@ public class PlayerManager : NetworkBehaviour {
             GameObject cardToSpawn = Instantiate(prefab);
             //cardToSpawn.AddComponent<CardScript>();
             NetworkServer.Spawn(cardToSpawn, conn);
-            SetCardParent(cardToSpawn);
+            //SetCardParent(cardToSpawn);
 
             cardToSpawn.GetComponent<CardScript>().Effect = thisHand[thisHand.Count - 1].GetComponent<CardScript>().Effect;
             cardToSpawn.GetComponent<CardScript>().Title = thisHand[thisHand.Count - 1].GetComponent<CardScript>().Title;
@@ -234,12 +238,16 @@ public class PlayerManager : NetworkBehaviour {
             thisHand[thisHand.Count - 1] = cardToSpawn;
             thisPlayer.hand.Add(thisHand[thisHand.Count - 1]);
             AdjustCards(thisHand, pNum);
+            //cardToSpawn.transform.SetParent(GameObject.Find("ObjectPivot").transform);
+            SetCardParent(cardToSpawn);
         }
     }
 
+    //most likely culprit is a math error here.
     [ClientRpc]
     public void SetCardParent(GameObject cardToSpawn)
     {
+        //Debug.Log(GameObject.Find("ObjectPivot").transform.rotation.z);
         cardToSpawn.transform.SetParent(GameObject.Find("ObjectPivot").transform);
     }
 
