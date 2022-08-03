@@ -248,11 +248,12 @@ public class PlayerManager : NetworkBehaviour {
     public void SetCardParent(GameObject cardToSpawn)
     {
         //Debug.Log(GameObject.Find("ObjectPivot").transform.rotation.z);
-        //Vector3 ogPosition = cardToSpawn.transform.position;
-        //Vector3 ogScale = cardToSpawn.transform.localScale;
-        cardToSpawn.transform.SetParent(GameObject.Find("ObjectPivot").transform);
-        //cardToSpawn.transform.position = ogPosition;
-        //cardToSpawn.transform.position = ogScale;
+        Vector3 ogPosition = cardToSpawn.transform.position;
+        Vector3 ogScale = cardToSpawn.transform.localScale;
+        cardToSpawn.transform.SetParent(GameObject.Find("ObjectPivot").transform, false);
+        //cardToSpawn.transform.rotation = GameObject.Find("ObjectPivot").transform.rotation; NO WORK
+        cardToSpawn.transform.position = ogPosition;
+        cardToSpawn.transform.localScale = ogScale;
     }
 
     //Is Called on all clients and server
