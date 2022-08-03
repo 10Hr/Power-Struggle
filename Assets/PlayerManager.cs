@@ -131,8 +131,8 @@ public class PlayerManager : NetworkBehaviour {
                 player4.readied = true;
                 break;
         }
-        // && player2.readied && player3.readied && player4.readied
-        if (player1.readied)
+        // 
+        if (player1.readied && player2.readied && player3.readied && player4.readied)
         {
             //GameObject funnytest = new GameObject();
             Debug.Log("All players are ready!");
@@ -149,7 +149,7 @@ public class PlayerManager : NetworkBehaviour {
     public void RpcAllReady(GameState gameManager)
     {
         gameManager.AllReady = true;
-        // gameManager.PassivesSelected = false;
+        gameManager.PassivesSelected = true;
     }
 
     //Find decks objects in scene
@@ -226,6 +226,7 @@ public class PlayerManager : NetworkBehaviour {
             GameObject cardToSpawn = Instantiate(prefab);
             //cardToSpawn.AddComponent<CardScript>();
             NetworkServer.Spawn(cardToSpawn, conn);
+            SetCardParent(cardToSpawn);
 
             cardToSpawn.GetComponent<CardScript>().Effect = thisHand[thisHand.Count - 1].GetComponent<CardScript>().Effect;
             cardToSpawn.GetComponent<CardScript>().Title = thisHand[thisHand.Count - 1].GetComponent<CardScript>().Title;
@@ -234,6 +235,12 @@ public class PlayerManager : NetworkBehaviour {
             thisPlayer.hand.Add(thisHand[thisHand.Count - 1]);
             AdjustCards(thisHand, pNum);
         }
+    }
+
+    [ClientRpc]
+    public void SetCardParent(GameObject cardToSpawn)
+    {
+        cardToSpawn.transform.SetParent(GameObject.Find("ObjectPivot").transform);
     }
 
     //Is Called on all clients and server
@@ -254,28 +261,28 @@ public class PlayerManager : NetworkBehaviour {
         {
             case 1:
                 hand[hand.Count - 1].transform.position = new Vector3((hand.Count * 1.25f) + 3.5f, -2, 0);
-                hand[hand.Count - 1].transform.localScale -= new Vector3(0.2f, 0.2f, 0);
+                //hand[hand.Count - 1].transform.localScale -= new Vector3(0.2f, 0.2f, 0);
                 hand[hand.Count - 1].GetComponent<SpriteRenderer>().sortingOrder = 8 - hand.Count;
                 hand[hand.Count - 1].GetComponent<CardScript>().sortingDefault = hand[hand.Count - 1].GetComponent<SpriteRenderer>().sortingOrder;
                 break;
             case 2:
                 hand[hand.Count - 1].transform.position = new Vector3(18, (hand.Count * 1.25f) + .25f, 0);
                 hand[hand.Count - 1].transform.Rotate(0, 0, 90);
-                hand[hand.Count - 1].transform.localScale -= new Vector3(0.2f, 0.2f, 0);
+                //hand[hand.Count - 1].transform.localScale -= new Vector3(0.2f, 0.2f, 0);
                 hand[hand.Count - 1].GetComponent<SpriteRenderer>().sortingOrder = 8 - hand.Count;
                 hand[hand.Count - 1].GetComponent<CardScript>().sortingDefault = hand[hand.Count - 1].GetComponent<SpriteRenderer>().sortingOrder;
                 break;
             case 3:
                 hand[hand.Count - 1].transform.position = new Vector3(16 - (hand.Count * 1.25f), 14, 0);
                 hand[hand.Count - 1].transform.Rotate(0, 0, 180);
-                hand[hand.Count - 1].transform.localScale -= new Vector3(0.2f, 0.2f, 0);
+                //hand[hand.Count - 1].transform.localScale -= new Vector3(0.2f, 0.2f, 0);
                 hand[hand.Count - 1].GetComponent<SpriteRenderer>().sortingOrder = 8 - hand.Count;
                 hand[hand.Count - 1].GetComponent<CardScript>().sortingDefault = hand[hand.Count - 1].GetComponent<SpriteRenderer>().sortingOrder;
                 break;
             case 4:
                 hand[hand.Count - 1].transform.position = new Vector3(1, 10 - (hand.Count * 1.25f), 0);
                 hand[hand.Count - 1].transform.Rotate(0, 0, 270);
-                hand[hand.Count - 1].transform.localScale -= new Vector3(0.2f, 0.2f, 0);
+                //hand[hand.Count - 1].transform.localScale -= new Vector3(0.2f, 0.2f, 0);
                 hand[hand.Count - 1].GetComponent<SpriteRenderer>().sortingOrder = 8 - hand.Count;
                 hand[hand.Count - 1].GetComponent<CardScript>().sortingDefault = hand[hand.Count - 1].GetComponent<SpriteRenderer>().sortingOrder;
                 break;
