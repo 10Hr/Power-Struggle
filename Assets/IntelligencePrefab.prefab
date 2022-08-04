@@ -156,6 +156,8 @@ MonoBehaviour:
   cardFront: {fileID: 21300000, guid: 41a962c94c99f2f49996322b6e912e95, type: 3}
   cardBack: {fileID: 21300000, guid: 1bb5db65ec801c5429cccc6595bdf943, type: 3}
   hovered: 0
+  selected: 0
+  prevSelected: 0
   sortingDefault: 0
 --- !u!61 &-5837020804591198012
 BoxCollider2D:
