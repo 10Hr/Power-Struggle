@@ -15,7 +15,7 @@ public class DeckScript : NetworkBehaviour
     private GameObject player4;
     private GameObject thisPlayer;
     private NetworkIdentity thisID;
-    PlayerManager playerManager;
+    public PlayerManager playerManager;
 
     public string Type
     {
@@ -25,7 +25,7 @@ public class DeckScript : NetworkBehaviour
 
     private void Awake()
     {
-        playerManager = GameObject.Find("PlayerManager").GetComponent<PlayerManager>();
+        //playerManager = GameObject.Find("PlayerManager").GetComponent<PlayerManager>();
 
         //type = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerScript>().Highest;
     }

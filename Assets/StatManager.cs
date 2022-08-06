@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class StatManager : NetworkBehaviour
 {
-    PlayerManager playerManager;
+    public PlayerManager playerManager;
     [SyncVar]
     private int count;
 
@@ -14,7 +14,7 @@ public class StatManager : NetworkBehaviour
 
     void Awake()
     {
-        playerManager = GameObject.Find("PlayerManager").GetComponent<PlayerManager>();
+        //playerManager = GameObject.Find("PlayerManager").GetComponent<PlayerManager>();
     }
 
     public void Increment()

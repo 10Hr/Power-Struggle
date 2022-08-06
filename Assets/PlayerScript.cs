@@ -60,6 +60,7 @@ public class PlayerScript : NetworkBehaviour
     List<GameObject> cameraList = new List<GameObject>();
     Canvas canvas;
     GameObject objectPivot;
+    GameObject cardPivot;
 
 
     //Stat Properties
@@ -133,6 +134,7 @@ public class PlayerScript : NetworkBehaviour
 
         canvas = GameObject.FindGameObjectWithTag("MainCanvas").GetComponent<Canvas>();
         objectPivot = GameObject.Find("ObjectPivot");
+        cardPivot = GameObject.Find("CardPivot");
 
 
         gameManager = GameObject.Find("FSM").GetComponent<GameState>();
@@ -154,6 +156,7 @@ public class PlayerScript : NetworkBehaviour
             cameraList[playerCount - 1].SetActive(true);
             canvas.worldCamera = cameraList[playerCount - 1].GetComponent<Camera>();
             objectPivot.transform.Rotate(0, 0, -90 * (playerNum - 1));
+            cardPivot.transform.Rotate(0, 0, -90 * (playerNum - 1));
             //cameraList[playerCount - 1].GetComponent<Camera>().transform.Rotate(new Vector3(0, 0, 90 * playerCount - 1));
 
             switch (playerCount)

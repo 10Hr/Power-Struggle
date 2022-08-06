@@ -20,7 +20,7 @@ public class PassiveManager : NetworkBehaviour
     //private List<> effects = new List<>();
    // private GameObject passiveChoice1;
     //private GameObject passiveChoice2;
-    private GameObject passiveChoice3;
+    public GameObject passiveChoice3;
 
 
     void Awake() { 
@@ -29,7 +29,7 @@ public class PassiveManager : NetworkBehaviour
     
     //passiveChoice1 = GameObject.Find("passiveChoice1");
     //passiveChoice2 = GameObject.Find("passiveChoice2");
-    passiveChoice3 = GameObject.Find("passiveChoice3");
+    //passiveChoice3 = GameObject.Find("passiveChoice3");
 
      }
 

@@ -36,8 +36,9 @@ public class PlayerManager : NetworkBehaviour {
     public List<GameObject> deckList = new List<GameObject>();
     public List<List<GameObject>> handList = new List<List<GameObject>>();
     NetworkIdentity[] listObjects;
-    GameState gameManager;
-    PassiveManager passiveManager;
+    public GameState gameManager;
+    public PassiveManager passiveManager;
+    public Transform cardPivot;
 
     public void getCount() { playerCount++; } //player count
 
@@ -50,12 +51,12 @@ public class PlayerManager : NetworkBehaviour {
     void Awake()
     {
         playerIDs = new List<NetworkIdentity>();
-        gameManager = GameObject.Find("FSM").GetComponent<GameState>();
-        deck1 = GameObject.Find("Deck1");
-        deck2 = GameObject.Find("Deck2");
-        deck3 = GameObject.Find("Deck3");
-        deck4 = GameObject.Find("Deck4");
-        passiveManager = GameObject.Find("PassiveManager").GetComponent<PassiveManager>();
+        //gameManager = GameObject.Find("FSM").GetComponent<GameState>();
+        //deck1 = GameObject.Find("Deck1");
+        //deck2 = GameObject.Find("Deck2");
+        //deck3 = GameObject.Find("Deck3");
+        //deck4 = GameObject.Find("Deck4");
+       //passiveManager = GameObject.Find("PassiveManager").GetComponent<PassiveManager>();
     }
 
     // Update is called once per frame
@@ -161,10 +162,10 @@ public class PlayerManager : NetworkBehaviour {
     public void CmdDeckMaker(string highest, int pNum)
     {
         //get deck objects
-        deck1 = GameObject.Find("Deck1");
-        deck2 = GameObject.Find("Deck2");
-        deck3 = GameObject.Find("Deck3");
-        deck4 = GameObject.Find("Deck4");
+        //deck1 = GameObject.Find("Deck1");
+        //deck2 = GameObject.Find("Deck2");
+        //deck3 = GameObject.Find("Deck3");
+        //deck4 = GameObject.Find("Deck4");
         deckList.Add(deck1);
         deckList.Add(deck2);
         deckList.Add(deck3);
@@ -237,23 +238,22 @@ public class PlayerManager : NetworkBehaviour {
             cardToSpawn.GetComponent<CardScript>().Stat = thisHand[thisHand.Count - 1].GetComponent<CardScript>().Stat;
             thisHand[thisHand.Count - 1] = cardToSpawn;
             thisPlayer.hand.Add(thisHand[thisHand.Count - 1]);
+            
             AdjustCards(thisHand, pNum);
-            //cardToSpawn.transform.SetParent(GameObject.Find("ObjectPivot").transform);
-            SetCardParent(cardToSpawn);
+
+            if (thisHand.Count == 8)
+                SetCardParent(thisHand);
         }
     }
 
-    //most likely culprit is a math error here.
+    //USUALLY, same card glitched for each client
     [ClientRpc]
-    public void SetCardParent(GameObject cardToSpawn)
+    public void SetCardParent(List<GameObject> thisHand)
     {
-        //Debug.Log(GameObject.Find("ObjectPivot").transform.rotation.z);
-        Vector3 ogPosition = cardToSpawn.transform.position;
-        Vector3 ogScale = cardToSpawn.transform.localScale;
-        cardToSpawn.transform.SetParent(GameObject.Find("ObjectPivot").transform, false);
-        //cardToSpawn.transform.rotation = GameObject.Find("ObjectPivot").transform.rotation; NO WORK
-        cardToSpawn.transform.position = ogPosition;
-        cardToSpawn.transform.localScale = ogScale;
+        foreach (GameObject g in thisHand)
+        {
+            g.transform.parent = cardPivot;
+        }
     }
 
     //Is Called on all clients and server
