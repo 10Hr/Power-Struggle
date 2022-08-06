@@ -18,6 +18,11 @@ public class PlayerManager : NetworkBehaviour {
     public PlayerScript player3;
     public PlayerScript player4;
 
+    Passive player1Passive;
+    Passive player2Passive;
+    Passive player3Passive;
+    Passive player4Passive;
+
     [SyncVar]
     public GameObject deck1;
     [SyncVar]
@@ -134,8 +139,8 @@ public class PlayerManager : NetworkBehaviour {
             default:
                 break;
         }
-        // 
-        if (player1.readied && player2.readied && player3.readied && player4.readied && player1.hasDeck)
+        // && player2.readied && player3.readied && player4.readied
+        if (player1.readied && player1.hasDeck)
         {
             //GameObject funnytest = new GameObject();
             Debug.Log("All players are ready!");
@@ -192,8 +197,8 @@ public class PlayerManager : NetworkBehaviour {
         GameObject thisDeck = deckList[pNum - 1];
         List<GameObject> thisHand = handList[pNum - 1];
         PlayerScript thisPlayer = playerList[pNum - 1];
-        Debug.Log("pnum:" + pNum);
-        Debug.Log(thisHand);
+       // Debug.Log("pnum:" + pNum);
+      //  Debug.Log(thisHand);
         thisHand.Add(thisDeck.GetComponent<DeckScript>().cards[0]);
         thisDeck.GetComponent<DeckScript>().cards.RemoveAt(0);
         Draw(thisDeck, thisHand, thisPlayer, pNum, thisPlayer.connectionToClient);

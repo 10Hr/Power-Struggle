@@ -7,6 +7,8 @@ using UnityEngine.UI;
 public class StatManager : NetworkBehaviour
 {
     public PlayerManager playerManager;
+    PassiveManager passiveManager;
+
     [SyncVar]
     private int count;
 
@@ -96,5 +98,23 @@ public class StatManager : NetworkBehaviour
                 playerManager.CmdReadyPlayer(bntTag);
             }
         }
+    }
+
+
+
+    public void selectPassive() {
+
+        // get
+        string btnName = UnityEngine.EventSystems.EventSystem.current.currentSelectedGameObject.name;
+        GameObject btn = UnityEngine.EventSystems.EventSystem.current.currentSelectedGameObject;
+
+        List<Passive> passives = passiveManager.getChoices();
+
+        for (int i = 0; i < passives.Count; i++)
+        {  
+         //   btn.GetComponent<Text>().text = p.PassiveName;
+        }
+
+
     }
 }

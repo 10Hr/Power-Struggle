@@ -21,11 +21,15 @@ public class PassiveManager : NetworkBehaviour
    // private GameObject passiveChoice1;
     //private GameObject passiveChoice2;
     public GameObject passiveChoice3;
+    public GameObject txtChoice1;
+    public GameObject txtChoice2;
+    public GameObject txtChoice3;
+
 
 
     void Awake() { 
 
-    getPassivesFromFile();
+        getPassivesFromFile();
     
     //passiveChoice1 = GameObject.Find("passiveChoice1");
     //passiveChoice2 = GameObject.Find("passiveChoice2");
@@ -80,11 +84,22 @@ public class PassiveManager : NetworkBehaviour
                                                    "\n\nName: " + choices[1].PassiveName + "\n" + "Description: " + choices[1].PassiveDescription +
                                                    "\n\nName: " + choices[2].PassiveName + "\n" + "Description: " + choices[2].PassiveDescription;
 
+        
+
         //select passive
         //add to player
         //add to player manager
         createEffectList();
+
         pullEff();
+        txtChoice1.GetComponent<Text>().text = choices[0].PassiveName; //problem chold
+        txtChoice2.GetComponent<Text>().text = choices[1].PassiveName;
+        txtChoice3.GetComponent<Text>().text = choices[2].PassiveName;
+
+
+
+
+
     }
    void pullEff() { // waste of time
         for (int i = 0; i < effects.Count; i++) 
@@ -92,6 +107,10 @@ public class PassiveManager : NetworkBehaviour
                 if (choices[j].PassiveEffect == effects[i].Method.Name) 
                     effects[i]();     
 
+    }
+
+    public List<Passive> getChoices() {
+        return choices;
     }
 
 

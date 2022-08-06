@@ -46,8 +46,10 @@ public class PlayerScript : NetworkBehaviour
     public GameObject[] player2GUI;
     public GameObject[] player3GUI;
     public GameObject[] player4GUI;
+
     public int handCount = 0;
     public List<GameObject> hand = new List<GameObject>();
+
 
     //Other Objects
     PlayerManager playerManager;
@@ -62,7 +64,7 @@ public class PlayerScript : NetworkBehaviour
     Canvas canvas;
     GameObject objectPivot;
     GameObject cardPivot;
-
+    Passive passive;
 
     //Stat Properties
     public int Charisma
@@ -140,6 +142,12 @@ public class PlayerScript : NetworkBehaviour
 
         gameManager = GameObject.Find("FSM").GetComponent<GameState>();
         playerManager = GameObject.Find("PlayerManager").GetComponent<PlayerManager>();
+
+      //  bntChoice1 = GameObject.Find("bntChoice1");
+     //   bntChoice2 = GameObject.Find("bntChoice2");
+      //  bntChoice3  = GameObject.Find("bntChoice3");
+       
+       
     }
 
     // Start is called before the first frame update
@@ -326,6 +334,9 @@ public class PlayerScript : NetworkBehaviour
             passiveManager = GameObject.Find("PassiveManager").GetComponent<PassiveManager>(); // if these two lones are put here then they will run as soon as player 1 is ready.
             passiveManager.selectPassive(FindHighestStat());
             GameObject.Find("passiveChoicePivot").transform.Rotate(0, 0, 90 * (playerNum - 1));
+            //bntChoice1.SetActive(true);
+            //bntChoice2.SetActive(true);
+            //bntChoice3.SetActive(true);
 
             return true;
         }
