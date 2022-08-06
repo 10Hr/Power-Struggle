@@ -30,6 +30,7 @@ public class PlayerScript : NetworkBehaviour
     public int availablePoints = 8;
     private int maxPoints = 8;
     public bool readied = false;
+    private bool roatated = false;
     public int numSelected = 0;
     [SyncVar]
     string myName;
@@ -262,9 +263,10 @@ public class PlayerScript : NetworkBehaviour
                     //Debug.Log("I want to draw");
                     playerManager.HandMaker(playerCount);
                 }
-                else
+                else if (roatated == false)
                 {
                     cardPivot.transform.Rotate(0, 0, -90 * (playerNum - 1));
+                    roatated = true;
                 }
                 if (availablePoints == 0)
                 {
