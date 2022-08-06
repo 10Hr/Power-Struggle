@@ -114,7 +114,18 @@ public class StatManager : NetworkBehaviour
         {  
          //   btn.GetComponent<Text>().text = p.PassiveName;
         }
+    }
 
-
+    public void lockIn()
+    {
+        string btnName = UnityEngine.EventSystems.EventSystem.current.currentSelectedGameObject.name;
+        
+        for (int i = 1; i < 5; i++)
+        {
+            if (btnName == "LockInButton" + i)
+            {
+                playerManager.CmdLockIn(i - 1);
+            }
+        }
     }
 }

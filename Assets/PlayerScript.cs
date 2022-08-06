@@ -49,6 +49,7 @@ public class PlayerScript : NetworkBehaviour
 
     public int handCount = 0;
     public List<GameObject> hand = new List<GameObject>();
+    public List<GameObject> selectedCards = new List<GameObject>();
 
 
     //Other Objects
@@ -64,7 +65,9 @@ public class PlayerScript : NetworkBehaviour
     Canvas canvas;
     GameObject objectPivot;
     GameObject cardPivot;
+    public GameObject lockInButton;
     Passive passive;
+    public bool lockedIn = false;
 
     //Stat Properties
     public int Charisma
@@ -138,6 +141,8 @@ public class PlayerScript : NetworkBehaviour
         canvas = GameObject.FindGameObjectWithTag("MainCanvas").GetComponent<Canvas>();
         objectPivot = GameObject.Find("ObjectPivot");
         cardPivot = GameObject.Find("CardPivot");
+
+        lockInButton = GameObject.Find("LockInButton" + playerCount);
 
 
         gameManager = GameObject.Find("FSM").GetComponent<GameState>();
@@ -225,6 +230,7 @@ public class PlayerScript : NetworkBehaviour
                 default:
                     break;
             }
+            lockInButton.SetActive(false);
         }
     }
 
@@ -273,8 +279,8 @@ public class PlayerScript : NetworkBehaviour
                 }
                 else if (roatated == false)
                 {
-            //        cardPivot.transform.Rotate(0, 0, -90 * (playerNum - 1));
-               //     roatated = true;
+                    cardPivot.transform.Rotate(0, 0, -90 * (playerNum - 1));
+                    roatated = true;
                 }
                 if (availablePoints == 0)
                 {
@@ -290,7 +296,8 @@ public class PlayerScript : NetworkBehaviour
                         b.SetActive(true);
                     }
                 }
-                playerManager.CmdTrackSelected(this);
+                if (!lockedIn)
+                    playerManager.CmdTrackSelected(this);
                 break;
 
             default:
@@ -334,8 +341,6 @@ public class PlayerScript : NetworkBehaviour
             passiveManager = GameObject.Find("PassiveManager").GetComponent<PassiveManager>(); // if these two lones are put here then they will run as soon as player 1 is ready.
             passiveManager.selectPassive(FindHighestStat());
             GameObject.Find("passiveChoicePivot").transform.Rotate(0, 0, 90 * (playerNum - 1));
-            cardPivot.transform.Rotate(0, 0, -90 * (playerNum - 1));
-            roatated = true;
             //bntChoice1.SetActive(true);
             //bntChoice2.SetActive(true);
             //bntChoice3.SetActive(true);

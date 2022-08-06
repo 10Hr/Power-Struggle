@@ -449,27 +449,38 @@ public class PlayerManager : NetworkBehaviour {
         if (player.numSelected == 3)
         {
             //show lockIn button
+            RpcShowLockIn(player.connectionToClient, player,  true);
         }
         else
         {
             //hide lockIn button
+            RpcShowLockIn(player.connectionToClient, player, false);
         }
     }
 
-    //foreach and conn
-    //[Command(requiresAuthority = false)]
-    //public void RotateObjects(GameObject objectPivot)
-    //{
-    //    foreach(PlayerScript p in playerList)
-    //    {
-    //        RpcRotateClient(p.connectionToClient, objectPivot, p.playerNum);
-    //    }
-    //}
+    [TargetRpc]
+    public void RpcShowLockIn(NetworkConnection conn, PlayerScript player, bool visible)
+    {
+        if(visible != player.lockInButton.activeSelf)
+            player.lockInButton.SetActive(visible);
+    }
 
-    //[TargetRpc]
-    //public void RpcRotateClient(NetworkConnection conn, GameObject objectPivot, int playerNum)
-    //{
-    //    objectPivot.transform.Rotate(0, 0, 90 * (playerNum - 1));
-    //}
-
+    [Command(requiresAuthority = false)]
+    public void CmdLockIn(int pNum)
+    {
+        PlayerScript thisPlayer = playerList[pNum];
+        thisPlayer.lockedIn = true;
+        for (int i = 0; i < thisPlayer.hand.Count; i++)
+        {
+            if (thisPlayer.hand[i].GetComponent<CardScript>().selected)
+            {
+                thisPlayer.selectedCards.Add(thisPlayer.hand[i]);
+                thisPlayer.hand[i].GetComponent<CardScript>().selected = false;
+                thisPlayer.hand[i].GetComponent<CardScript>().prevSelected = false;
+                RpcShowLockIn(thisPlayer.connectionToClient, thisPlayer, false);
+                thisPlayer.hand.RemoveAt(i);
+                i--;
+            }
+        }
+    }
 }
