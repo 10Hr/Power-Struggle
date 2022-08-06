@@ -273,8 +273,8 @@ public class PlayerScript : NetworkBehaviour
                 }
                 else if (roatated == false)
                 {
-                    cardPivot.transform.Rotate(0, 0, -90 * (playerNum - 1));
-                    roatated = true;
+            //        cardPivot.transform.Rotate(0, 0, -90 * (playerNum - 1));
+               //     roatated = true;
                 }
                 if (availablePoints == 0)
                 {
@@ -334,6 +334,8 @@ public class PlayerScript : NetworkBehaviour
             passiveManager = GameObject.Find("PassiveManager").GetComponent<PassiveManager>(); // if these two lones are put here then they will run as soon as player 1 is ready.
             passiveManager.selectPassive(FindHighestStat());
             GameObject.Find("passiveChoicePivot").transform.Rotate(0, 0, 90 * (playerNum - 1));
+            cardPivot.transform.Rotate(0, 0, -90 * (playerNum - 1));
+            roatated = true;
             //bntChoice1.SetActive(true);
             //bntChoice2.SetActive(true);
             //bntChoice3.SetActive(true);
