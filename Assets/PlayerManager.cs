@@ -246,7 +246,7 @@ public class PlayerManager : NetworkBehaviour {
             
             AdjustCards(thisHand, pNum);
 
-            if (thisHand.Count == 8)
+            if (thisHand.Count == 6)
                 SetCardParent(thisHand);
         }
     }

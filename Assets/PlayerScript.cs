@@ -271,7 +271,7 @@ public class PlayerScript : NetworkBehaviour
 
             case GameStates.Turn:
 
-                if (hasDeck && handCount < 8)
+                if (hasDeck && handCount < 6)
                 {
                     handCount++;
                     //Debug.Log("I want to draw");
