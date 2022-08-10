@@ -278,27 +278,27 @@ public class PlayerManager : NetworkBehaviour {
         switch (pNum)
         {
             case 1:
-                hand[hand.Count - 1].transform.position = new Vector3((hand.Count * 1.25f) + 3.5f, -2, 0);
+                hand[hand.Count - 1].transform.position = new Vector3((hand.Count * 1.25f) + 5f, -1, 0);
                 //hand[hand.Count - 1].transform.localScale -= new Vector3(0.2f, 0.2f, 0);
                 hand[hand.Count - 1].GetComponent<SpriteRenderer>().sortingOrder = 8 - hand.Count;
                 hand[hand.Count - 1].GetComponent<CardScript>().sortingDefault = hand[hand.Count - 1].GetComponent<SpriteRenderer>().sortingOrder;
                 break;
             case 2:
-                hand[hand.Count - 1].transform.position = new Vector3(18, (hand.Count * 1.25f) + .25f, 0);
+                hand[hand.Count - 1].transform.position = new Vector3(17, (hand.Count * 1.25f) + 1.5f, 0);
                 hand[hand.Count - 1].transform.Rotate(0, 0, 90);
                 //hand[hand.Count - 1].transform.localScale -= new Vector3(0.2f, 0.2f, 0);
                 hand[hand.Count - 1].GetComponent<SpriteRenderer>().sortingOrder = 8 - hand.Count;
                 hand[hand.Count - 1].GetComponent<CardScript>().sortingDefault = hand[hand.Count - 1].GetComponent<SpriteRenderer>().sortingOrder;
                 break;
             case 3:
-                hand[hand.Count - 1].transform.position = new Vector3(16 - (hand.Count * 1.25f), 14, 0);
+                hand[hand.Count - 1].transform.position = new Vector3(15 - (hand.Count * 1.25f), 14, 0);
                 hand[hand.Count - 1].transform.Rotate(0, 0, 180);
                 //hand[hand.Count - 1].transform.localScale -= new Vector3(0.2f, 0.2f, 0);
                 hand[hand.Count - 1].GetComponent<SpriteRenderer>().sortingOrder = 8 - hand.Count;
                 hand[hand.Count - 1].GetComponent<CardScript>().sortingDefault = hand[hand.Count - 1].GetComponent<SpriteRenderer>().sortingOrder;
                 break;
             case 4:
-                hand[hand.Count - 1].transform.position = new Vector3(1, 10 - (hand.Count * 1.25f), 0);
+                hand[hand.Count - 1].transform.position = new Vector3(1.75f, 11.5f - (hand.Count * 1.25f), 0);
                 hand[hand.Count - 1].transform.Rotate(0, 0, 270);
                 //hand[hand.Count - 1].transform.localScale -= new Vector3(0.2f, 0.2f, 0);
                 hand[hand.Count - 1].GetComponent<SpriteRenderer>().sortingOrder = 8 - hand.Count;
