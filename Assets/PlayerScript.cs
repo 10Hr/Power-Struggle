@@ -66,7 +66,7 @@ public class PlayerScript : NetworkBehaviour
     GameObject objectPivot;
     GameObject cardPivot;
     public GameObject lockInButton;
-    Passive passive;
+    public Passive passive;
     public bool lockedIn = false;
 
     //Stat Properties
@@ -107,6 +107,12 @@ public class PlayerScript : NetworkBehaviour
     {
         get { return maxPoints; }
         set { maxPoints = value; }
+    }
+
+    public Passive Passive
+    {
+        get { return passive; }
+        set { passive = value; }
     }
 
     public void getCount() { playerCount++; }
@@ -349,5 +355,14 @@ public class PlayerScript : NetworkBehaviour
         }
         else
             return false;
+    }
+
+    public void hidePassivebnt() {
+        GameObject.Find("bntChoice1").SetActive(false);
+        GameObject.Find("bntChoice2").SetActive(false);
+        GameObject.Find("bntChoice3").SetActive(false);
+        GameObject.Find("txtChoice1").SetActive(false);
+        GameObject.Find("txtChoice2").SetActive(false);
+        GameObject.Find("txtChoice3").SetActive(false);
     }
 }

@@ -18,10 +18,10 @@ public class PlayerManager : NetworkBehaviour {
     public PlayerScript player3;
     public PlayerScript player4;
 
-    Passive player1Passive;
-    Passive player2Passive;
-    Passive player3Passive;
-    Passive player4Passive;
+    public Passive player1Passive;
+    public Passive player2Passive;
+    public Passive player3Passive;
+    public Passive player4Passive;
 
     [SyncVar]
     public GameObject deck1;
@@ -483,4 +483,17 @@ public class PlayerManager : NetworkBehaviour {
             }
         }
     }
+
+    public void getPassive(Passive p, NetworkConnection conn) {
+        for (int i = 1; i <= playerCount; i++) {
+            if (playerList[i - 1].connectionToClient == conn) 
+                playerList[i - 1].Passive = p;
+                Debug.Log("Player " + i + " has selected " + p.PassiveName);
+                playerList[i - 1].hidePassivebnt();
+                break;
+            }
+
+
+        }
+        
 }

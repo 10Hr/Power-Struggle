@@ -111,9 +111,8 @@ public class PassiveManager : NetworkBehaviour
 
     }
 
-    //List<Passive>  return choices;
-    public void getChoices() {
-      //  Debug.Log("choices");
+    public List<Passive> getChoices() {
+      return choices;
     }
 
 
