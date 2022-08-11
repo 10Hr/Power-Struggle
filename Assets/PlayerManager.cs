@@ -139,8 +139,8 @@ public class PlayerManager : NetworkBehaviour {
             default:
                 break;
         }
-        // 
-        if (player1.readied && player1.hasDeck && player2.readied && player3.readied && player4.readied)
+        //  && player1.hasDeck && player2.readied && player3.readied && player4.readied
+        if (player1.readied)
         {
             //GameObject funnytest = new GameObject();
             Debug.Log("All players are ready!");

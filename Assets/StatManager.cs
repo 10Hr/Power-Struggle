@@ -8,9 +8,12 @@ public class StatManager : NetworkBehaviour
 {
     public PlayerManager playerManager;
     PassiveManager passiveManager;
+    List<Passive> passives;
 
     [SyncVar]
     private int count;
+
+    bool selected = false;
 
     public void getCount() { count++; }
 
@@ -106,13 +109,17 @@ public class StatManager : NetworkBehaviour
 
         // get
         string btnName = UnityEngine.EventSystems.EventSystem.current.currentSelectedGameObject.name;
-        GameObject btn = UnityEngine.EventSystems.EventSystem.current.currentSelectedGameObject;
+       // GameObject btn = UnityEngine.EventSystems.EventSystem.current.currentSelectedGameObject;
+        
+        //passives = passiveManager.getChoices();
+        passiveManager.getChoices();
 
-        List<Passive> passives = passiveManager.getChoices();
-
+        selected = !selected;
+        Debug.Log("selected: " + selected);
         for (int i = 0; i < passives.Count; i++)
         {  
          //   btn.GetComponent<Text>().text = p.PassiveName;
+         
         }
     }
 

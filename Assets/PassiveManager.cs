@@ -96,6 +96,8 @@ public class PassiveManager : NetworkBehaviour
         txtChoice2.GetComponent<Text>().text = choices[1].PassiveName;
         txtChoice3.GetComponent<Text>().text = choices[2].PassiveName;
 
+        
+
 
 
 
@@ -109,8 +111,9 @@ public class PassiveManager : NetworkBehaviour
 
     }
 
-    public List<Passive> getChoices() {
-        return choices;
+    //List<Passive>  return choices;
+    public void getChoices() {
+      //  Debug.Log("choices");
     }
 
 
