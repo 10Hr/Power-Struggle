@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class StatManager : NetworkBehaviour
 {
     public PlayerManager playerManager;
-    PassiveManager passiveManager;
+    public PassiveManager passiveManager;
     List<Passive> passives;
 
     [SyncVar]
