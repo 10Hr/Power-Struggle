@@ -482,6 +482,36 @@ public class PlayerManager : NetworkBehaviour {
                 i--;
             }
         }
+
+        foreach (PlayerScript p in playerList)
+        {
+            GameObject thisCard;
+            for (int i = 0; i < 3; i++)
+            {
+                thisCard = thisPlayer.selectedCards[i];
+                RpcLockCards(p.connectionToClient, thisCard, pNum + 1);
+            }
+        }
+    }
+
+    [TargetRpc]
+    public void RpcLockCards(NetworkConnection conn, GameObject thisCard, int pNum)
+    {
+        switch (pNum)
+        {
+            case 1:
+                thisCard.transform.position += new Vector3(0, 4, 0);
+                break;
+            case 2:
+                thisCard.transform.position += new Vector3(-4, 0, 0);
+                break;
+            case 3:
+                thisCard.transform.position += new Vector3(0, -4, 0);
+                break;
+            case 4:
+                thisCard.transform.position += new Vector3(4, 4, 0);
+                break;
+        }
     }
 
    [Command(requiresAuthority = false)]
@@ -491,13 +521,13 @@ public class PlayerManager : NetworkBehaviour {
         playerList[pNum - 1].Passive.PassiveName = passiveName;
         playerList[pNum - 1].Passive.PassiveDescription = passiveDescription;
         playerList[pNum - 1].Passive.PassiveEffect = passiveEffect;
-        RpcHidePassive(playerList, pNum);
+        RpcHidePassive(playerList[pNum - 1].connectionToClient, playerList[pNum - 1]);
     }
 
-    [ClientRpc]
-    public void RpcHidePassive(List<PlayerScript> pList, int pNum)
+    [TargetRpc]
+    public void RpcHidePassive(NetworkConnection conn, PlayerScript thisPlayer)
     {
-        playerList[pNum - 1].HidePassivebnt();
+        thisPlayer.HidePassivebnt();
     }
         
 }
