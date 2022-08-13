@@ -14,6 +14,7 @@ public class StatManager : NetworkBehaviour
     private int count;
     public void getCount() { count++; }
 
+
     //public void getPlayerNum() { playerNum = playerManager.playerNum; }
 
     void Awake()
@@ -102,18 +103,18 @@ public class StatManager : NetworkBehaviour
         }
     }
 
+    public void selectPassive() { // being called by button
 
+        string bntName = UnityEngine.EventSystems.EventSystem.current.currentSelectedGameObject.name; //problem child for player 2
+        string bntTag = UnityEngine.EventSystems.EventSystem.current.currentSelectedGameObject.tag;
 
-    public void selectPassive() {
-
-        // get
-        string btnName = UnityEngine.EventSystems.EventSystem.current.currentSelectedGameObject.name;
-       // GameObject btn = UnityEngine.EventSystems.EventSystem.current.currentSelectedGameObject;
         passives = passiveManager.getChoices();
-
         for (int i = 0; i < passives.Count; i++) 
-            if (btnName == "txtChoice" + (i + 1)) 
-               playerManager.getPassive(passives[i], this.connectionToClient);  
+            if (bntName == "txtChoice" + (i + 1)) 
+                for (int j = 1; j < 5; j++)
+                    if (bntTag == "Player" + j) 
+                        playerManager.getPassive(passives[i].PassiveType, passives[i].PassiveName, passives[i].PassiveDescription, passives[i].PassiveEffect, int.Parse(bntTag.Substring(6)));
+                //                         Debug.Log("Passive: " + passives[i].PassiveEffect + " tag = " + int.Parse(bntTag.Substring(6)));      
         
     }
 

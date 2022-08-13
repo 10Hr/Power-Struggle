@@ -56,6 +56,7 @@ public class PlayerScript : NetworkBehaviour
     PlayerManager playerManager;
     PassiveManager passiveManager;
     GameState gameManager;
+    StatManager statManager;
     GameStates currentState;
     GameObject camera1;
     GameObject camera2;
@@ -66,7 +67,13 @@ public class PlayerScript : NetworkBehaviour
     GameObject objectPivot;
     GameObject cardPivot;
     public GameObject lockInButton;
-    public Passive passive;
+    GameObject txtChoice1;
+    GameObject txtChoice2;
+    GameObject txtChoice3;
+    GameObject bntChoice1;
+    GameObject bntChoice2;
+    GameObject bntChoice3;
+    Passive passive = new Passive();
     public bool lockedIn = false;
 
     //Stat Properties
@@ -108,7 +115,7 @@ public class PlayerScript : NetworkBehaviour
         get { return maxPoints; }
         set { maxPoints = value; }
     }
-
+    //player passive 
     public Passive Passive
     {
         get { return passive; }
@@ -126,6 +133,7 @@ public class PlayerScript : NetworkBehaviour
         playerCount = GameObject.Find("PlayerManager").GetComponent<PlayerManager>().AddNet(netID);
         playerNum = playerCount;
 
+        
         myName = "player " + playerCount;
         this.name = myName;
 
@@ -134,6 +142,8 @@ public class PlayerScript : NetworkBehaviour
         player2GUI = GameObject.FindGameObjectsWithTag("Player2");
         player3GUI = GameObject.FindGameObjectsWithTag("Player3");
         player4GUI = GameObject.FindGameObjectsWithTag("Player4");
+        
+
 
         camera1 = GameObject.Find("playerCamera1");
         camera2 = GameObject.Find("playerCamera2");
@@ -238,6 +248,14 @@ public class PlayerScript : NetworkBehaviour
             }
             lockInButton.SetActive(false);
         }
+
+        txtChoice1 = GameObject.Find("txtChoice1");
+        txtChoice2 = GameObject.Find("txtChoice2");
+        txtChoice3 = GameObject.Find("txtChoice3");
+        bntChoice1 = GameObject.Find("bntChoice1");
+        bntChoice2 = GameObject.Find("bntChoice2");
+        bntChoice3 = GameObject.Find("bntChoice3");
+
     }
 
     // Update is called once per frame
@@ -345,7 +363,7 @@ public class PlayerScript : NetworkBehaviour
             // this code allows for testing of the passive phase without having to wait for the other players to ready up if put here
              
             passiveManager = GameObject.Find("PassiveManager").GetComponent<PassiveManager>(); // if these two lones are put here then they will run as soon as player 1 is ready.
-            passiveManager.selectPassive(FindHighestStat());
+            passiveManager.selectPassive(FindHighestStat(), playerNum, txtChoice1, txtChoice2, txtChoice3);
             GameObject.Find("passiveChoicePivot").transform.Rotate(0, 0, 90 * (playerNum - 1));
             //bntChoice1.SetActive(true);
             //bntChoice2.SetActive(true);
@@ -358,11 +376,11 @@ public class PlayerScript : NetworkBehaviour
     }
 
     public void hidePassivebnt() {
-        GameObject.Find("bntChoice1").SetActive(false);
-        GameObject.Find("bntChoice2").SetActive(false);
-        GameObject.Find("bntChoice3").SetActive(false);
-        GameObject.Find("txtChoice1").SetActive(false);
-        GameObject.Find("txtChoice2").SetActive(false);
-        GameObject.Find("txtChoice3").SetActive(false);
+        txtChoice1.SetActive(false);
+        txtChoice2.SetActive(false);
+        txtChoice3.SetActive(false);
+        bntChoice1.SetActive(false);
+        bntChoice2.SetActive(false);
+        bntChoice3.SetActive(false);
     }
 }

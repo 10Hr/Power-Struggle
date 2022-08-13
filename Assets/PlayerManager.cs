@@ -139,8 +139,8 @@ public class PlayerManager : NetworkBehaviour {
             default:
                 break;
         }
-        //  && player1.hasDeck && player2.readied && player3.readied && player4.readied
-        if (player1.readied)
+        //  && player3.readied && player4.readied && player1.hasDeck 
+        if (player1.readied && player2.readied)
         {
             //GameObject funnytest = new GameObject();
             Debug.Log("All players are ready!");
@@ -484,16 +484,14 @@ public class PlayerManager : NetworkBehaviour {
         }
     }
 
-    public void getPassive(Passive p, NetworkConnection conn) {
-        for (int i = 1; i <= playerCount; i++) {
-            if (playerList[i - 1].connectionToClient == conn) 
-                playerList[i - 1].Passive = p;
-                Debug.Log("Player " + i + " has selected " + p.PassiveName);
-                playerList[i - 1].hidePassivebnt();
-                break;
-            }
+   [Command(requiresAuthority = false)]
+    public void getPassive(string passiveType, string passiveName, string passiveDescription, string passiveEffect, int plNum) {
 
-
-        }
+        playerList[plNum - 1].Passive.PassiveType = passiveType;
+        playerList[plNum - 1].Passive.PassiveName = passiveName;
+        playerList[plNum - 1].Passive.PassiveDescription = passiveDescription;
+        playerList[plNum - 1].Passive.PassiveEffect = passiveEffect;
+        playerList[plNum - 1].hidePassivebnt();
+    }
         
 }

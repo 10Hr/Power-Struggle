@@ -50,7 +50,8 @@ public class PassiveManager : NetworkBehaviour
 
         while ((line = input.ReadLine()) != null) {
             string[] data = line.Split(',');
-            passives.Add(new Passive());
+            Passive p = new Passive();
+            passives.Add(p);
             passives[passives.Count - 1].PassiveType = data[0];
             passives[passives.Count - 1].PassiveName = data[1];
             passives[passives.Count - 1].PassiveDescription = data[2];
@@ -61,7 +62,7 @@ public class PassiveManager : NetworkBehaviour
         input.Close();
     }
 
-    public void selectPassive(string highest) {
+    public void selectPassive(string highest, int pNum, GameObject t1, GameObject t2, GameObject t3) {
 
         possible.Add(passives[0]);
         possible.Add(passives[1]);
@@ -75,16 +76,10 @@ public class PassiveManager : NetworkBehaviour
             possible.RemoveAt(rand);
         }
 
-     
-
-
-       // passiveChoice1.GetComponent<Text>().text = "Name: " + choices[0].PassiveName + "\n" + "Description: " + choices[0].PassiveDescription;
-        //passiveChoice2.GetComponent<Text>().text = "Name: " + choices[1].PassiveName + "\n" + "Description: " + choices[1].PassiveDescription;
         passiveChoice3.GetComponent<Text>().text = "Name: " + choices[0].PassiveName + "\n" + "Description: " + choices[0].PassiveDescription +
                                                    "\n\nName: " + choices[1].PassiveName + "\n" + "Description: " + choices[1].PassiveDescription +
                                                    "\n\nName: " + choices[2].PassiveName + "\n" + "Description: " + choices[2].PassiveDescription;
 
-        
 
         //select passive
         //add to player
@@ -92,15 +87,26 @@ public class PassiveManager : NetworkBehaviour
         createEffectList();
 
         pullEff();
+        /*
+ 
+        List<GameObject> txts = new List<GameObject>();
+        txts.Add(txtChoice1);
+        txts.Add(txtChoice2);
+        txts.Add(txtChoice3);
+
+        for (int i = 1; i < 5; i++) {
+            if (txts[i].tag == "Player" + i) {
+
+            }
+        }
         txtChoice1.GetComponent<Text>().text = choices[0].PassiveName; //problem chold
         txtChoice2.GetComponent<Text>().text = choices[1].PassiveName;
         txtChoice3.GetComponent<Text>().text = choices[2].PassiveName;
+        */ 
 
-        
-
-
-
-
+        t1.GetComponent<Text>().text = choices[0].PassiveName; //problem chold
+        t2.GetComponent<Text>().text = choices[1].PassiveName;
+        t3.GetComponent<Text>().text = choices[2].PassiveName;
 
     }
    void pullEff() { // waste of time
@@ -114,10 +120,6 @@ public class PassiveManager : NetworkBehaviour
     public List<Passive> getChoices() {
       return choices;
     }
-
-
-
-
     void createEffectList()
     {
         // create a list of delegate objects as placeholders for the methods.
