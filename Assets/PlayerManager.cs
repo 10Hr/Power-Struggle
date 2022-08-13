@@ -509,7 +509,7 @@ public class PlayerManager : NetworkBehaviour {
                 thisCard.transform.position += new Vector3(0, -4, 0);
                 break;
             case 4:
-                thisCard.transform.position += new Vector3(4, 4, 0);
+                thisCard.transform.position += new Vector3(4, 0, 0);
                 break;
         }
     }
