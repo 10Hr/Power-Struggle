@@ -113,7 +113,7 @@ public class StatManager : NetworkBehaviour
             if (bntName == "txtChoice" + (i + 1)) 
                 for (int j = 1; j < 5; j++)
                     if (bntTag == "Player" + j) 
-                        playerManager.getPassive(passives[i].PassiveType, passives[i].PassiveName, passives[i].PassiveDescription, passives[i].PassiveEffect, int.Parse(bntTag.Substring(6)));
+                        playerManager.CmdGetPassive(passives[i].PassiveType, passives[i].PassiveName, passives[i].PassiveDescription, passives[i].PassiveEffect, int.Parse(bntTag.Substring(6)));
                 //                         Debug.Log("Passive: " + passives[i].PassiveEffect + " tag = " + int.Parse(bntTag.Substring(6)));      
         
     }

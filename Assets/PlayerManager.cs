@@ -485,13 +485,19 @@ public class PlayerManager : NetworkBehaviour {
     }
 
    [Command(requiresAuthority = false)]
-    public void getPassive(string passiveType, string passiveName, string passiveDescription, string passiveEffect, int plNum) {
+    public void CmdGetPassive(string passiveType, string passiveName, string passiveDescription, string passiveEffect, int pNum) {
 
-        playerList[plNum - 1].Passive.PassiveType = passiveType;
-        playerList[plNum - 1].Passive.PassiveName = passiveName;
-        playerList[plNum - 1].Passive.PassiveDescription = passiveDescription;
-        playerList[plNum - 1].Passive.PassiveEffect = passiveEffect;
-        playerList[plNum - 1].hidePassivebnt();
+        playerList[pNum - 1].Passive.PassiveType = passiveType;
+        playerList[pNum - 1].Passive.PassiveName = passiveName;
+        playerList[pNum - 1].Passive.PassiveDescription = passiveDescription;
+        playerList[pNum - 1].Passive.PassiveEffect = passiveEffect;
+        RpcHidePassive(playerList, pNum);
+    }
+
+    [ClientRpc]
+    public void RpcHidePassive(List<PlayerScript> pList, int pNum)
+    {
+        playerList[pNum - 1].HidePassivebnt();
     }
         
 }

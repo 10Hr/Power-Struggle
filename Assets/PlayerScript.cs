@@ -375,7 +375,7 @@ public class PlayerScript : NetworkBehaviour
             return false;
     }
 
-    public void hidePassivebnt() {
+    public void HidePassivebnt() {
         txtChoice1.SetActive(false);
         txtChoice2.SetActive(false);
         txtChoice3.SetActive(false);
