@@ -51,6 +51,7 @@ public class PlayerManager : NetworkBehaviour {
         listObjects = FindObjectsOfType<NetworkIdentity>();
     }
 
+    //forktest
 
     // Start is called before the first frame update
     void Awake()
