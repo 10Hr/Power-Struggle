@@ -273,29 +273,32 @@ public class PlayerManager : NetworkBehaviour {
             GameObject cardToSpawn = Instantiate(prefab);
             //cardToSpawn.AddComponent<CardScript>();
             NetworkServer.Spawn(cardToSpawn, conn);
+
+            for (int i = 1; i < 5; i++)
+            {
+                RPCSetCardParent(playerList[i].connectionToClient, cardToSpawn, i);
+            }
+
             //SetCardParent(cardToSpawn);
 
-            cardToSpawn.GetComponent<CardScript>().Effect = thisHand[thisHand.Count - 1].GetComponent<CardScript>().Effect;
-            cardToSpawn.GetComponent<CardScript>().Title = thisHand[thisHand.Count - 1].GetComponent<CardScript>().Title;
-            cardToSpawn.GetComponent<CardScript>().Stat = thisHand[thisHand.Count - 1].GetComponent<CardScript>().Stat;
-            thisHand[thisHand.Count - 1] = cardToSpawn;
-            thisPlayer.hand.Add(thisHand[thisHand.Count - 1]);
+            //cardToSpawn.GetComponent<CardScript>().Effect = thisHand[thisHand.Count - 1].GetComponent<CardScript>().Effect;
+            //cardToSpawn.GetComponent<CardScript>().Title = thisHand[thisHand.Count - 1].GetComponent<CardScript>().Title;
+            //cardToSpawn.GetComponent<CardScript>().Stat = thisHand[thisHand.Count - 1].GetComponent<CardScript>().Stat;
+            //thisHand[thisHand.Count - 1] = cardToSpawn;
+            //thisPlayer.hand.Add(thisHand[thisHand.Count - 1]);
             
-            AdjustCards(thisHand, pNum);
+            //AdjustCards(thisHand, pNum);
 
-            if (thisHand.Count == 6)
-                SetCardParent(thisHand);
+            //if (thisHand.Count == 6)
+            //    SetCardParent(thisHand);
         }
-    }
+    }   
 
     //USUALLY, same card glitched for each client
-    [ClientRpc]
-    public void SetCardParent(List<GameObject> thisHand)
+    [TargetRpc]
+    public void RPCSetCardParent(NetworkConnection conn, GameObject cardToSpawn, int pNum)
     {
-        foreach (GameObject g in thisHand)
-        {
-            g.transform.parent = cardPivot;
-        }
+        //slotList[pNum *]
     }
 
     //Is Called on all clients and server
