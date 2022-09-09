@@ -283,10 +283,10 @@ public class PlayerManager : NetworkBehaviour {
                 {
                     i++;
                     if (i == 4)
-                        i = 0;
-                   
+                        i = 0;              
                 }
                 RPCSetCardParent(playerList[connNum].connectionToClient, cardToSpawn, i);
+                i = connNum;
             }
 
         }
@@ -354,7 +354,7 @@ public class PlayerManager : NetworkBehaviour {
 
         for (int i = 0; i < thisHand.Count; i++)
         {
-            if (thisHand[i].GetComponent<CardScript>().hasAuthority)
+            if (thisHand[i].GetComponent<CardScript>().hasAuthority) //?
                 thisHand[i].GetComponent<CardScript>().Enlarge();
         }
 
