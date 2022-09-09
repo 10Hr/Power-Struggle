@@ -44,6 +44,8 @@ public class PlayerManager : NetworkBehaviour {
     public GameState gameManager;
     public PassiveManager passiveManager;
     public Transform cardPivot;
+    public List<GameObject> slotList;
+    public List<GameObject> lockSlotList;
 
     public void getCount() { playerCount++; } //player count
 
@@ -188,6 +190,40 @@ public class PlayerManager : NetworkBehaviour {
         RPCGiveDeck(thisDeck, thisPlayer, highest);
         thisDeck.GetComponent<DeckScript>().CreateDeck(highest, this.GetComponent<InstantiatePrefab>().cardPrefab);
     }
+
+    //*****************************
+    public void CmdSlotMaker()
+    {
+        slotList = new List<GameObject>();
+        for (int i = 1; i < 5; i++)
+        {
+            for (int j = 0; j < 6; j++)
+            {
+                slotList.Add(new GameObject());
+                slotList[slotList.Count].AddComponent<SpriteRenderer>();
+                switch(i)
+                {
+                    case 1:
+                       slotList[slotList.Count - 1].transform.position = new Vector3((j * 1.25f) + 5f, -4.5f, 0);
+                        break;
+                    case 2:
+                        slotList[slotList.Count - 1].transform.position = new Vector3(20.5f, (j * 1.25f) + 1.5f, 0);
+                        slotList[slotList.Count - 1].transform.Rotate(0, 0, 90);
+                        break;
+                    case 3:
+                        slotList[slotList.Count - 1].transform.position = new Vector3(15 - (j * 1.25f), 17.5f, 0);
+                        slotList[slotList.Count - 1].transform.Rotate(0, 0, 180);
+                        break;
+                    case 4:
+                        slotList[slotList.Count - 1].transform.position = new Vector3(-1.75f, 11.5f - (j * 1.25f), 0);
+                        slotList[slotList.Count - 1].transform.Rotate(0, 0, 270);
+                        break;
+                }
+            }
+        }
+    }
+    //*****************************
+
 
     //Creates players hands depending on which player is ready to draw
     //draws the cards after hand is created
