@@ -273,11 +273,11 @@ public class PlayerManager : NetworkBehaviour {
             GameObject cardToSpawn = Instantiate(prefab);
             //cardToSpawn.AddComponent<CardScript>();
             NetworkServer.Spawn(cardToSpawn, conn);
-
             for (int i = 1; i < 5; i++)
             {
                 RPCSetCardParent(playerList[i].connectionToClient, cardToSpawn, i);
             }
+            Destroy(cardToSpawn);
 
             //SetCardParent(cardToSpawn);
 
@@ -298,7 +298,15 @@ public class PlayerManager : NetworkBehaviour {
     [TargetRpc]
     public void RPCSetCardParent(NetworkConnection conn, GameObject cardToSpawn, int pNum)
     {
-        //slotList[pNum *]
+        for (int i = (pNum - 1)* 6; i < i + 6; i++)
+        {
+            if (slotList[i] == null)
+            {
+                cardToSpawn.transform.position = slotList[i].transform.position;
+                cardToSpawn.transform.rotation = slotList[i].transform.rotation;
+                slotList[i] = cardToSpawn;
+            }
+        }
     }
 
     //Is Called on all clients and server
