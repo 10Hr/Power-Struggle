@@ -142,8 +142,8 @@ public class PlayerManager : NetworkBehaviour {
             default:
                 break;
         }
-        //  && player3.readied && player4.readied && player1.hasDeck 
-        if (player1.readied && player2.readied)
+ 
+        if (player1.readied && player2.readied && player3.readied && player4.readied && player1.hasDeck)
         {
             //GameObject funnytest = new GameObject();
             Debug.Log("All players are ready!");
@@ -192,7 +192,7 @@ public class PlayerManager : NetworkBehaviour {
     }
 
     //*****************************
-    public void CmdSlotMaker()
+    public void SlotMaker()
     {
         slotList = new List<GameObject>();
         for (int i = 1; i < 5; i++)
@@ -200,7 +200,8 @@ public class PlayerManager : NetworkBehaviour {
             for (int j = 0; j < 6; j++)
             {
                 slotList.Add(new GameObject());
-                slotList[slotList.Count].AddComponent<SpriteRenderer>();
+                slotList[slotList.Count - 1].AddComponent<SpriteRenderer>();
+                slotList[slotList.Count - 1].AddComponent<CardScript>();
                 switch(i)
                 {
                     case 1:
@@ -234,17 +235,12 @@ public class PlayerManager : NetworkBehaviour {
         GameObject thisDeck = deckList[pNum - 1];
         List<GameObject> thisHand = handList[pNum - 1];
         PlayerScript thisPlayer = playerList[pNum - 1];
-       // Debug.Log("pnum:" + pNum);
-      //  Debug.Log(thisHand);
         thisHand.Add(thisDeck.GetComponent<DeckScript>().cards[0]);
         thisDeck.GetComponent<DeckScript>().cards.RemoveAt(0);
-        Draw(thisDeck, thisHand, thisPlayer, pNum, thisPlayer.connectionToClient);
-    }
 
-    //Gets the correct sprite/prefab for the card and instatiates and spawns it
-    //adjusts the hand to represent the spawned cards
-    public void Draw(GameObject thisDeck, List<GameObject> thisHand, PlayerScript thisPlayer, int pNum, NetworkConnection conn)
-    {
+        if (slotList != null)
+            SlotMaker();
+
         //As long as the deck has cards to draw
         if (thisDeck.GetComponent<DeckScript>().cards.Count >= 0) //Looking back on it, this should be in HandMaker... It shouldn't be causing the problem though.
         {
@@ -272,38 +268,43 @@ public class PlayerManager : NetworkBehaviour {
             //Instantiate and spawn
             GameObject cardToSpawn = Instantiate(prefab);
             //cardToSpawn.AddComponent<CardScript>();
-            NetworkServer.Spawn(cardToSpawn, conn);
-            for (int i = 1; i < 5; i++)
-            {
-                RPCSetCardParent(playerList[i].connectionToClient, cardToSpawn, i);
-            }
-            Destroy(cardToSpawn);
-
-            //SetCardParent(cardToSpawn);
-
-            //cardToSpawn.GetComponent<CardScript>().Effect = thisHand[thisHand.Count - 1].GetComponent<CardScript>().Effect;
-            //cardToSpawn.GetComponent<CardScript>().Title = thisHand[thisHand.Count - 1].GetComponent<CardScript>().Title;
-            //cardToSpawn.GetComponent<CardScript>().Stat = thisHand[thisHand.Count - 1].GetComponent<CardScript>().Stat;
-            //thisHand[thisHand.Count - 1] = cardToSpawn;
-            //thisPlayer.hand.Add(thisHand[thisHand.Count - 1]);
+            NetworkServer.Spawn(cardToSpawn, thisPlayer.connectionToClient);
+            cardToSpawn.GetComponent<CardScript>().Effect = thisHand[thisHand.Count - 1].GetComponent<CardScript>().Effect;
+            cardToSpawn.GetComponent<CardScript>().Title = thisHand[thisHand.Count - 1].GetComponent<CardScript>().Title;
+            cardToSpawn.GetComponent<CardScript>().Stat = thisHand[thisHand.Count - 1].GetComponent<CardScript>().Stat;
             
-            //AdjustCards(thisHand, pNum);
+            //I am player 1
+            //going to player 2
+            for (int i = 0; i < 4; i++)
+            {
+                int connNum = i;
 
-            //if (thisHand.Count == 6)
-            //    SetCardParent(thisHand);
+                for (int j = 0; j < 4 - (pNum - 1 - connNum); j++)
+                {
+                    i++;
+                    if (i == 4)
+                        i = 0;
+                   
+                }
+                RPCSetCardParent(playerList[connNum].connectionToClient, cardToSpawn, i);
+            }
+
         }
-    }   
+    }
 
     //USUALLY, same card glitched for each client
     [TargetRpc]
-    public void RPCSetCardParent(NetworkConnection conn, GameObject cardToSpawn, int pNum)
+    public void RPCSetCardParent(NetworkConnection conn, GameObject cardToSpawn, int multiplier)
     {
-        for (int i = (pNum - 1)* 6; i < i + 6; i++)
+        for (int i = multiplier * 6; i < multiplier * 6 + 6; i++)
         {
             if (slotList[i] == null)
             {
-                cardToSpawn.transform.position = slotList[i].transform.position;
-                cardToSpawn.transform.rotation = slotList[i].transform.rotation;
+                slotList[i].GetComponent<CardScript>().cardFront = cardToSpawn.GetComponent<CardScript>().cardFront;
+                slotList[i].GetComponent<CardScript>().cardBack = cardToSpawn.GetComponent<CardScript>().cardBack;
+                slotList[i].GetComponent<CardScript>().Effect = cardToSpawn.GetComponent<CardScript>().Effect;
+                slotList[i].GetComponent<CardScript>().Title = cardToSpawn.GetComponent<CardScript>().Title;
+                slotList[i].GetComponent<CardScript>().Stat = cardToSpawn.GetComponent<CardScript>().Stat;
                 slotList[i] = cardToSpawn;
             }
         }
@@ -319,43 +320,7 @@ public class PlayerManager : NetworkBehaviour {
             deck.GetComponent<DeckScript>().CreateDeck(highest, this.GetComponent<InstantiatePrefab>().cardPrefab);
     }
 
-    //List<GameObject> hand, GameObject cardToSpawn
-    [ClientRpc]
-    public void AdjustCards(List<GameObject> hand, int pNum)
-    {
-        switch (pNum)
-        {
-            case 1:
-                hand[hand.Count - 1].transform.position = new Vector3((hand.Count * 1.25f) + 5f, -4.5f, 0);
-                //hand[hand.Count - 1].transform.localScale -= new Vector3(0.2f, 0.2f, 0);
-                hand[hand.Count - 1].GetComponent<SpriteRenderer>().sortingOrder = 8 - hand.Count;
-                hand[hand.Count - 1].GetComponent<CardScript>().sortingDefault = hand[hand.Count - 1].GetComponent<SpriteRenderer>().sortingOrder;
-                break;
-            case 2:
-                hand[hand.Count - 1].transform.position = new Vector3(20.5f, (hand.Count * 1.25f) + 1.5f, 0);
-                hand[hand.Count - 1].transform.Rotate(0, 0, 90);
-                //hand[hand.Count - 1].transform.localScale -= new Vector3(0.2f, 0.2f, 0);
-                hand[hand.Count - 1].GetComponent<SpriteRenderer>().sortingOrder = 8 - hand.Count;
-                hand[hand.Count - 1].GetComponent<CardScript>().sortingDefault = hand[hand.Count - 1].GetComponent<SpriteRenderer>().sortingOrder;
-                break;
-            case 3:
-                hand[hand.Count - 1].transform.position = new Vector3(15 - (hand.Count * 1.25f), 17.5f, 0);
-                hand[hand.Count - 1].transform.Rotate(0, 0, 180);
-                //hand[hand.Count - 1].transform.localScale -= new Vector3(0.2f, 0.2f, 0);
-                hand[hand.Count - 1].GetComponent<SpriteRenderer>().sortingOrder = 8 - hand.Count;
-                hand[hand.Count - 1].GetComponent<CardScript>().sortingDefault = hand[hand.Count - 1].GetComponent<SpriteRenderer>().sortingOrder;
-                break;
-            case 4:
-                hand[hand.Count - 1].transform.position = new Vector3(-1.75f, 11.5f - (hand.Count * 1.25f), 0);
-                hand[hand.Count - 1].transform.Rotate(0, 0, 270);
-                //hand[hand.Count - 1].transform.localScale -= new Vector3(0.2f, 0.2f, 0);
-                hand[hand.Count - 1].GetComponent<SpriteRenderer>().sortingOrder = 8 - hand.Count;
-                hand[hand.Count - 1].GetComponent<CardScript>().sortingDefault = hand[hand.Count - 1].GetComponent<SpriteRenderer>().sortingOrder;
-                break;
-        }
-        hand[hand.Count - 1].GetComponent<CardScript>().Flip();
 
-    }
 
     [Command(requiresAuthority = false)]
     public void Enlarge(PlayerScript player, int playerNum)

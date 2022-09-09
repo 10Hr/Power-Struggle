@@ -65,11 +65,11 @@ public class CardScript : NetworkBehaviour
     }
 
     public void Enlarge() {
-        if (hovered) {
+        if (hovered && cardBack != null) {
             this.transform.localScale = new Vector3(1.25f, 1.25f, 0);
             this.GetComponent<SpriteRenderer>().sortingOrder = 9;
         }
-        if (!hovered) {
+        if (!hovered && cardBack != null) {
             this.transform.localScale = new Vector3(1f, 1f, 0);
             this.GetComponent<SpriteRenderer>().sortingOrder = sortingDefault;
         }
@@ -85,8 +85,10 @@ public class CardScript : NetworkBehaviour
     [Command(requiresAuthority = false)]
     public void OnMouseDown()
     {
-        prevSelected = selected;
-        selected = !selected;
-        
+        if (cardBack != null)
+        {
+            prevSelected = selected;
+            selected = !selected;
+        }
     }
 }
