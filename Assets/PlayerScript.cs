@@ -328,8 +328,8 @@ public class PlayerScript : NetworkBehaviour
                 break;
         }
 
-        if(handCount > 0)
-        playerManager.Enlarge(this, playerNum); //CmdEnlarge();
+        //if(handCount > 0)
+        //playerManager.Enlarge(this, playerNum); //CmdEnlarge();
 
     }
 

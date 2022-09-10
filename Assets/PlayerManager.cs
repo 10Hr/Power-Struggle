@@ -46,6 +46,7 @@ public class PlayerManager : NetworkBehaviour {
     public Transform cardPivot;
     public List<GameObject> slotList;
     public List<GameObject> lockSlotList;
+    public bool made = false;
 
     public void getCount() { playerCount++; } //player count
 
@@ -199,7 +200,7 @@ public class PlayerManager : NetworkBehaviour {
         {
             for (int j = 0; j < 6; j++)
             {
-                slotList.Add(new GameObject());
+                slotList.Add(new GameObject("Slot Obj"));
                 slotList[slotList.Count - 1].AddComponent<SpriteRenderer>();
                 slotList[slotList.Count - 1].AddComponent<CardScript>();
                 switch(i)
@@ -238,8 +239,12 @@ public class PlayerManager : NetworkBehaviour {
         thisHand.Add(thisDeck.GetComponent<DeckScript>().cards[0]);
         thisDeck.GetComponent<DeckScript>().cards.RemoveAt(0);
 
-        if (slotList != null)
+        if (!made)
+        {
+            Debug.Log("made it");
+            made = true;
             SlotMaker();
+        }
 
         //As long as the deck has cards to draw
         if (thisDeck.GetComponent<DeckScript>().cards.Count >= 0) //Looking back on it, this should be in HandMaker... It shouldn't be causing the problem though.
@@ -288,6 +293,7 @@ public class PlayerManager : NetworkBehaviour {
                 RPCSetCardParent(playerList[connNum].connectionToClient, cardToSpawn, i);
                 i = connNum;
             }
+            Destroy(cardToSpawn);
 
         }
     }
@@ -305,6 +311,7 @@ public class PlayerManager : NetworkBehaviour {
                 slotList[i].GetComponent<CardScript>().Effect = cardToSpawn.GetComponent<CardScript>().Effect;
                 slotList[i].GetComponent<CardScript>().Title = cardToSpawn.GetComponent<CardScript>().Title;
                 slotList[i].GetComponent<CardScript>().Stat = cardToSpawn.GetComponent<CardScript>().Stat;
+                slotList[i].GetComponent<SpriteRenderer>().sprite = slotList[i].GetComponent<CardScript>().cardBack;
                 slotList[i] = cardToSpawn;
             }
         }
@@ -352,11 +359,11 @@ public class PlayerManager : NetworkBehaviour {
                 break;
         }
 
-        for (int i = 0; i < thisHand.Count; i++)
-        {
-            if (thisHand[i].GetComponent<CardScript>().hasAuthority) //?
-                thisHand[i].GetComponent<CardScript>().Enlarge();
-        }
+        //for (int i = 0; i < thisHand.Count; i++)
+        //{
+        //    if (thisHand[i].GetComponent<CardScript>().hasAuthority) //?
+        //        thisHand[i].GetComponent<CardScript>().Enlarge();
+        //}
 
     }
 
