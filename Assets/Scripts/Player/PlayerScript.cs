@@ -123,9 +123,9 @@ public class PlayerScript : NetworkBehaviour
     //}
 
     //Fields
-    public List<Card> playerHand;
+    public List<CardScript> playerHand;
 
-    public List<Card> playerDeck;
+    public List<CardScript> playerDeck;
 
     [SyncVar]
     public int playerNumber;
