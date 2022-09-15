@@ -43,7 +43,11 @@ public class PlayerScript : NetworkBehaviour
         //}
 
         CmdGetScripts();
-        Debug.Log(playerList);
+   
+    }
+
+    public void Start()
+    {
         CmdSetPlayer();
     }
 
@@ -64,7 +68,6 @@ public class PlayerScript : NetworkBehaviour
     public void CmdSetPlayer()
     {
         RpcSetPlayer();
-        Debug.Log(playerList);
         playerList.CmdAddPlayers(this);
     }
 
@@ -86,6 +89,5 @@ public class PlayerScript : NetworkBehaviour
     {
         FSM = GameObject.Find("FSM").GetComponent<GameState>();
         playerList = GameObject.Find("PlayerList").GetComponent<PlayerList>();
-        Debug.Log(playerList);
     }
 }
