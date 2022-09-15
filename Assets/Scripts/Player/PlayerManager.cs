@@ -51,6 +51,5 @@ public class PlayerManager : NetworkBehaviour {
 
     //public void getCount() { playerCount++; } //player count
 
-    
-        
+       
 }
