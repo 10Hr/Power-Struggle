@@ -143,13 +143,13 @@ public class NewNetworkManager : NetworkManager
     /// </summary>
     /// <param name="conn">Connection from client.</param>
     public override void OnServerConnect(NetworkConnectionToClient conn) { 
-        listObjects = FindObjectsOfType<NetworkIdentity>();
-        playerCount++;
-        playerManager = GameObject.Find("PlayerManager").GetComponent<PlayerManager>();  
-        statManager = GameObject.Find("StatManager").GetComponent<StatManager>();
-        statManager.getCount(); // sets count in statmanager
-        playerManager.getCount(); // sets count in playermanager
-        Debug.Log("Client " + conn + " connected!");
+      //  listObjects = FindObjectsOfType<NetworkIdentity>();
+      //  playerCount++;
+      //  playerManager = GameObject.Find("PlayerManager").GetComponent<PlayerManager>();  
+      //  statManager = GameObject.Find("StatManager").GetComponent<StatManager>();
+      //  statManager.getCount(); // sets count in statmanager
+       // playerManager.getCount(); // sets count in playermanager
+      //  Debug.Log("Client " + conn + " connected!");
     }
 
     /// <summary>
