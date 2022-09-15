@@ -121,4 +121,39 @@ public class PlayerScript : NetworkBehaviour
     //    get { return passive; }
     //    set { passive = value; }
     //}
+
+    //Fields
+    public List<Card> playerHand;
+
+    public List<Card> playerDeck;
+
+    [SyncVar]
+    public int playerNumber;
+
+    [SyncVar]
+    public bool deckGenerated;
+    //Properties
+    //Methods
+    public override void OnStartLocalPlayer()
+    {
+        base.OnStartLocalPlayer();
+
+        if (!isLocalPlayer)
+            return;
+
+        CmdSetPlayer();
+    }
+
+    [Command(requiresAuthority = false)]
+    public void CmdSetPlayer()
+    {
+        RpcSetPlayer();
+    }
+
+    [ClientRpc]
+    public void RpcSetPlayer()
+    {
+        playerNumber = (int)netIdentity.netId;
+        gameObject.name = $"{playerNumber}";
+    }
 }
