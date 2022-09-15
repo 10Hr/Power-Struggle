@@ -47,6 +47,7 @@ public class PlayerManager : NetworkBehaviour {
     public List<GameObject> slotList;
     public List<GameObject> lockSlotList;
     public bool made = false;
+    public GameObject cardToSpawn;
 
     public void getCount() { playerCount++; } //player count
 
@@ -271,9 +272,9 @@ public class PlayerManager : NetworkBehaviour {
                     break;
             }
             //Instantiate and spawn
-            GameObject cardToSpawn = Instantiate(prefab);
-            //cardToSpawn.AddComponent<CardScript>();
+            cardToSpawn = Instantiate(prefab);
             NetworkServer.Spawn(cardToSpawn, thisPlayer.connectionToClient);
+            Debug.Log(cardToSpawn);
             cardToSpawn.GetComponent<CardScript>().Effect = thisHand[thisHand.Count - 1].GetComponent<CardScript>().Effect;
             cardToSpawn.GetComponent<CardScript>().Title = thisHand[thisHand.Count - 1].GetComponent<CardScript>().Title;
             cardToSpawn.GetComponent<CardScript>().Stat = thisHand[thisHand.Count - 1].GetComponent<CardScript>().Stat;
@@ -293,26 +294,27 @@ public class PlayerManager : NetworkBehaviour {
                 RPCSetCardParent(playerList[connNum].connectionToClient, cardToSpawn, i);
                 i = connNum;
             }
-            Destroy(cardToSpawn);
-
         }
     }
 
+    //make variables for getCompnents
     //USUALLY, same card glitched for each client
     [TargetRpc]
     public void RPCSetCardParent(NetworkConnection conn, GameObject cardToSpawn, int multiplier)
     {
+        Debug.Log(cardToSpawn);
         for (int i = multiplier * 6; i < multiplier * 6 + 6; i++)
         {
-            if (slotList[i] == null)
+            if (slotList[i].GetComponent<CardScript>().cardFront == null)
             {
-                slotList[i].GetComponent<CardScript>().cardFront = cardToSpawn.GetComponent<CardScript>().cardFront;
+                slotList[i].GetComponent<CardScript>().cardFront = cardToSpawn.GetComponent<CardScript>().cardFront; //?
                 slotList[i].GetComponent<CardScript>().cardBack = cardToSpawn.GetComponent<CardScript>().cardBack;
                 slotList[i].GetComponent<CardScript>().Effect = cardToSpawn.GetComponent<CardScript>().Effect;
                 slotList[i].GetComponent<CardScript>().Title = cardToSpawn.GetComponent<CardScript>().Title;
                 slotList[i].GetComponent<CardScript>().Stat = cardToSpawn.GetComponent<CardScript>().Stat;
                 slotList[i].GetComponent<SpriteRenderer>().sprite = slotList[i].GetComponent<CardScript>().cardBack;
-                slotList[i] = cardToSpawn;
+                break;
+                //slotList[i] = cardToSpawn;
             }
         }
     }
