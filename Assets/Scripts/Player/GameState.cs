@@ -6,6 +6,7 @@ using Mirror;
 //List of game states
 public enum GameStates
 {
+    FillingLobby, //Waiting for 4 players to connect
     Setup, //players picking stats
     Passive, //players picking passive
     StartEvent, //starting event
@@ -15,11 +16,12 @@ public enum GameStates
 
 public class GameState : NetworkBehaviour
 {
-    public GameStates currentState;
+    private GameStates currentState;
     public PlayerList playerList;
     private bool allReady = false;
     private bool allDrawn = false;
     private bool passivesSelected = false;
+    private bool allConnected = false;
 
     public bool PassivesSelected
     {
@@ -37,7 +39,7 @@ public class GameState : NetworkBehaviour
 
     void Awake() {
         Debug.Log("Game Started!");
-        currentState = GameStates.Setup;
+        currentState = GameStates.FillingLobby;
     }
 
     public override void OnStartServer()
@@ -49,17 +51,26 @@ public class GameState : NetworkBehaviour
     // Update is called once per frame
     //Handles the Finite State Machine
     void Update()
-    {
-        if (!allReady && playerList.players[0].ready && playerList.players[1].ready 
-            && playerList.players[2].ready && playerList.players[3].ready)
-        {
-            allReady = true;
-        }
-        
+    {        
         switch (currentState)
         {
+            case GameStates.FillingLobby:
+                if(allConnected)
+                {
+                    currentState = GameStates.Setup;
+                }
+                else
+                {
+                    if (playerList.players.Count == 4)
+                        allConnected = true;
+                }
+                break;
             
             case GameStates.Setup:
+                if (!allReady && playerList.players[0].ready && playerList.players[1].ready
+                    && playerList.players[2].ready && playerList.players[3].ready)
+                      allReady = true;
+
                 if (allReady)
                 {
                     Debug.Log("Switching Game State");

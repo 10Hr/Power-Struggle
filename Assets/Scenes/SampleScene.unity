@@ -9118,32 +9118,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
-  player1: {fileID: 0}
-  player2: {fileID: 0}
-  player3: {fileID: 0}
-  player4: {fileID: 0}
-  player1Passive: {fileID: 0}
-  player2Passive: {fileID: 0}
-  player3Passive: {fileID: 0}
-  player4Passive: {fileID: 0}
-  deck1: {fileID: 215939936}
-  deck2: {fileID: 664984160}
-  deck3: {fileID: 1676786453}
-  deck4: {fileID: 497447393}
-  playerCount: 0
-  hand1: []
-  hand2: []
-  hand3: []
-  hand4: []
-  playerList: []
-  deckList: []
-  gameManager: {fileID: 2118885772}
-  passiveManager: {fileID: 388284281}
-  cardPivot: {fileID: 809899184}
-  slotList: []
-  lockSlotList: []
-  made: 0
-  cardToSpawn: {fileID: 0}
 --- !u!4 &866009261
 Transform:
   m_ObjectHideFlags: 0
@@ -18959,6 +18933,71 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1749221976}
   m_CullTransparentMesh: 1
+--- !u!1 &1752536910
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1752536913}
+  - component: {fileID: 1752536912}
+  - component: {fileID: 1752536911}
+  m_Layer: 0
+  m_Name: PlayerList
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1752536911
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1752536910}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08546c58400395141b6dc2043e849bfd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
+  players: []
+--- !u!114 &1752536912
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1752536910}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneId: 1163736835
+  serverOnly: 0
+  visible: 0
+  m_AssetId: 
+  hasSpawned: 0
+--- !u!4 &1752536913
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1752536910}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 18
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1760365080
 GameObject:
   m_ObjectHideFlags: 0
@@ -20392,8 +20431,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
-  playerManager: {fileID: 866009260}
-  passiveManager: {fileID: 388284281}
 --- !u!114 &1882713757
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -22063,6 +22100,7 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0.1
   currentState: 0
+  playerList: {fileID: 0}
 --- !u!114 &2118885773
 MonoBehaviour:
   m_ObjectHideFlags: 0
