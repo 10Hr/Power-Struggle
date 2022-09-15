@@ -1,18 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Mirror;
 
-public class PlayerList : MonoBehaviour
+public class PlayersList : NetworkBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public GameObject[] players;
+
+    public override void OnStartServer()
     {
-        
+        base.OnStartServer();
     }
 
-    // Update is called once per frame
-    void Update()
+    [ClientRpc]
+    public void FindPlayersByTag()
     {
-        
+        players = GameObject.FindGameObjectsWithTag("Player");
     }
 }
+

@@ -127,6 +127,8 @@ public class PlayerScript : NetworkBehaviour
 
     public List<CardScript> playerDeck;
 
+    public GameState FSM;
+
     [SyncVar]
     public int playerNumber;
 
@@ -142,6 +144,20 @@ public class PlayerScript : NetworkBehaviour
             return;
 
         CmdSetPlayer();
+        CmdGetGameState();
+    }
+
+    public void Update()
+    {
+        if (!isLocalPlayer)
+            return;
+
+        switch(FSM.currentState)
+        {
+            case GameStates.Setup:
+
+                break;
+        }
     }
 
     [Command(requiresAuthority = false)]
@@ -155,5 +171,17 @@ public class PlayerScript : NetworkBehaviour
     {
         playerNumber = (int)netIdentity.netId;
         gameObject.name = $"{playerNumber}";
+    }
+
+    [Command(requiresAuthority = false)]
+    public void CmdGetGameState()
+    {
+        RpcGetGameState();
+    }
+
+    [ClientRpc]
+    public void RpcGetGameState()
+    {
+        FSM = GameObject.Find("FSM").GetComponent<GameState>();
     }
 }
