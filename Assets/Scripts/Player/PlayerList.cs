@@ -3,19 +3,26 @@ using System.Collections.Generic;
 using UnityEngine;
 using Mirror;
 
-public class PlayersList : NetworkBehaviour
+public class PlayerList : NetworkBehaviour
 {
-    public GameObject[] players;
+    [SyncVar]
+    public List<PlayerScript> players;
 
     public override void OnStartServer()
     {
         base.OnStartServer();
     }
 
-    [ClientRpc]
-    public void FindPlayersByTag()
+    [Command(requiresAuthority = false)]
+    public void CmdAddPlayers(PlayerScript player)
     {
-        players = GameObject.FindGameObjectsWithTag("Player");
+        RpcAddPlayers(player);
+    }
+
+    [ClientRpc]
+    public void RpcAddPlayers(PlayerScript player)
+    {
+        players.Add(player);
     }
 }
 

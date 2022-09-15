@@ -129,11 +129,18 @@ public class PlayerScript : NetworkBehaviour
 
     public GameState FSM;
 
+    public GameObject[] GUI;
+
+    public PlayerList playerList;
+
     [SyncVar]
     public int playerNumber;
 
     [SyncVar]
     public bool deckGenerated;
+
+    [SyncVar]
+    public bool ready;
     //Properties
     //Methods
     public override void OnStartLocalPlayer()
@@ -143,8 +150,14 @@ public class PlayerScript : NetworkBehaviour
         if (!isLocalPlayer)
             return;
 
+        //GUI = GameObject.FindGameObjectsWithTag("Player1");
+        //foreach (GameObject g in GUI)
+        //{
+        //    g.SetActive(false);
+        //}
+
+        CmdGetScripts();
         CmdSetPlayer();
-        CmdGetGameState();
     }
 
     public void Update()
@@ -155,7 +168,7 @@ public class PlayerScript : NetworkBehaviour
         switch(FSM.currentState)
         {
             case GameStates.Setup:
-
+                
                 break;
         }
     }
@@ -164,6 +177,7 @@ public class PlayerScript : NetworkBehaviour
     public void CmdSetPlayer()
     {
         RpcSetPlayer();
+        playerList.CmdAddPlayers(this);
     }
 
     [ClientRpc]
@@ -174,14 +188,15 @@ public class PlayerScript : NetworkBehaviour
     }
 
     [Command(requiresAuthority = false)]
-    public void CmdGetGameState()
+    public void CmdGetScripts()
     {
-        RpcGetGameState();
+        RpcGetScripts();
     }
 
     [ClientRpc]
-    public void RpcGetGameState()
+    public void RpcGetScripts()
     {
         FSM = GameObject.Find("FSM").GetComponent<GameState>();
+        playerList = GameObject.Find("PlayerList").GetComponent<PlayerList>();
     }
 }

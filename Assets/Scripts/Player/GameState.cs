@@ -16,16 +16,11 @@ public enum GameStates
 public class GameState : NetworkBehaviour
 {
     public GameStates currentState;
+    public PlayerList playerList;
     private bool allReady = false;
     private bool allDrawn = false;
     private bool passivesSelected = false;
 
-    //properties
-    public bool AllReady
-    {
-        get { return allReady; }
-        set { allReady = value; }
-    }
     public bool PassivesSelected
     {
         set { passivesSelected = value; }
@@ -40,21 +35,27 @@ public class GameState : NetworkBehaviour
         get { return allDrawn; }
     }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
     void Awake() {
         Debug.Log("Game Started!");
         currentState = GameStates.Setup;
+    }
+
+    public override void OnStartServer()
+    {
+        base.OnStartServer();
+        playerList = GameObject.Find("PlayerList").GetComponent<PlayerList>();
     }
 
     // Update is called once per frame
     //Handles the Finite State Machine
     void Update()
     {
+        if (!allReady && playerList.players[0].ready && playerList.players[1].ready 
+            && playerList.players[2].ready && playerList.players[3].ready)
+        {
+            allReady = true;
+        }
+        
         switch (currentState)
         {
             
