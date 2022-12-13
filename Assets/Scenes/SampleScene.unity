@@ -976,7 +976,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1882713756}
         m_TargetAssemblyTypeName: StatManager, Assembly-CSharp
-        m_MethodName: readyUP
+        m_MethodName: OnPointerClick
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -18965,7 +18965,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
-  players: []
 --- !u!114 &1752536912
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20431,6 +20430,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
+  playerList: {fileID: 1752536911}
 --- !u!114 &1882713757
 MonoBehaviour:
   m_ObjectHideFlags: 0

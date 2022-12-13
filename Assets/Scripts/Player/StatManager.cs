@@ -3,9 +3,28 @@ using System.Collections.Generic;
 using UnityEngine;
 using Mirror;
 using UnityEngine.UI;
+using System.IO;
 
 public class StatManager : NetworkBehaviour
 {
+    [SerializeField]
+    PlayerList playerList;
+
+    public void OnPointerClick()
+    {
+        Debug.Log((int)playerList.players[0].netIdentity.netId);
+        //Debug.Log((int)NetworkServer.localConnection.identity.netId);
+        Debug.Log((int)connectionToClient.identity.netId);
+        foreach (PlayerScript p in playerList.players)
+        {
+            if (p.netId == NetworkServer.localConnection.connectionId)
+            {
+                Debug.Log("Player" + (int)p.netId + "clicked this button.");
+            }
+        }
+    }
+
+
     //public PlayerManager playerManager;
     //public PassiveManager passiveManager;
     //List<Passive> passives;
