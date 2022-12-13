@@ -19,6 +19,7 @@ public class StatManager : NetworkBehaviour
         {
             if (p.netId == NetworkServer.localConnection.connectionId)
             {
+                // test
                 Debug.Log("Player" + (int)p.netId + "clicked this button.");
             }
         }
