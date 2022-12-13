@@ -12,14 +12,13 @@ public class StatManager : NetworkBehaviour
 
     public void OnPointerClick()
     {
-        Debug.Log(playerList.players[0].netIdentity.netId);
-        //Debug.Log((int)NetworkServer.localConnection.identity.netId);
-        Debug.Log(NetworkClient.localPlayer.netId);
+        //Debug.Log(playerList.players[0].netIdentity.netId);
+        ////Debug.Log((int)NetworkServer.localConnection.identity.netId);
+        //Debug.Log(NetworkClient.localPlayer.netId);
         foreach (PlayerScript p in playerList.players)
         {
-            if (p.netId == NetworkServer.localConnection.connectionId)
+            if (p.netId == NetworkClient.localPlayer.netId)
             {
-                // test
                 Debug.Log("Player" + (int)p.netId + "clicked this button.");
             }
         }
