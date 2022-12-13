@@ -16,7 +16,9 @@ public enum GameStates
 
 public class GameState : NetworkBehaviour
 {
-    private GameStates currentState;
+    [SyncVar]
+    public GameStates currentState;
+
     public PlayerList playerList;
     private bool allReady = false;
     private bool allDrawn = false;
@@ -46,12 +48,16 @@ public class GameState : NetworkBehaviour
     {
         base.OnStartServer();
         playerList = GameObject.Find("PlayerList").GetComponent<PlayerList>();
+        Debug.Log(playerList);
     }
 
     // Update is called once per frame
     //Handles the Finite State Machine
     void Update()
-    {        
+    {
+        if (!isServer)
+            return;
+
         switch (currentState)
         {
             case GameStates.FillingLobby:

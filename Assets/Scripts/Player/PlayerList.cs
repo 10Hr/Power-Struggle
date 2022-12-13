@@ -5,8 +5,7 @@ using Mirror;
 
 public class PlayerList : NetworkBehaviour
 {
-    [SyncVar]
-    public List<PlayerScript> players;
+    public SyncList<PlayerScript> players = new SyncList<PlayerScript>();
 
     public override void OnStartServer()
     {
@@ -16,13 +15,20 @@ public class PlayerList : NetworkBehaviour
     [Command(requiresAuthority = false)]
     public void CmdAddPlayers(PlayerScript player)
     {
-        RpcAddPlayers(player);
+        players.Add(player);
+        //for (int i = 0; i < 4; i++)
+        //{
+        //    if (players[i] == null)
+        //    {
+        //        players[i] = player;
+        //    }
+        //}
     }
 
-    [ClientRpc]
-    public void RpcAddPlayers(PlayerScript player)
-    {
-        players.Add(player);
-    }
+    //[ClientRpc]
+    //public void RpcAddPlayers(PlayerScript player)
+    //{
+        
+    //}
 }
 

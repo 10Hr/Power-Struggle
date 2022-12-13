@@ -17,6 +17,9 @@ public class PlayerScript : NetworkBehaviour
 
     public GameObject[] GUI;
 
+    public bool added = false;
+
+    [SyncVar]
     public PlayerList playerList;
 
     [SyncVar]
@@ -32,43 +35,56 @@ public class PlayerScript : NetworkBehaviour
     public override void OnStartLocalPlayer()
     {
         base.OnStartLocalPlayer();
-
-        if (!isLocalPlayer)
-            return;
-
-        //GUI = GameObject.FindGameObjectsWithTag("Player1");
-        //foreach (GameObject g in GUI)
-        //{
-        //    g.SetActive(false);
-        //}
-
-        CmdGetScripts();
-   
     }
 
     public void Start()
     {
-        CmdSetPlayer();
+        //CmdGetScripts();
+        playerList = GameObject.Find("PlayerList").GetComponent<PlayerList>();
+        FSM = GameObject.Find("FSM").GetComponent<GameState>();
+        CmdSetPlayer(this);
     }
 
     public void Update()
     {
+
+        //if (isServer && playerList.players.Count == 4)
+        //{
+        //    CmdSendPlayers(playerList.players);
+        //    Debug.Log("It shoudl be working");
+        //}
+
+        if (GameObject.Find("13") != null && !added && isServer)
+        {
+            CmdSendPlayers(this);
+            added = true;
+        }
+
         if (!isLocalPlayer)
             return;
+        if (FSM == null)
+            return;
 
-        switch(FSM.CurrentState)
+        switch (FSM.CurrentState)
         {
             case GameStates.Setup:
-                
+
                 break;
         }
     }
 
     [Command(requiresAuthority = false)]
-    public void CmdSetPlayer()
+    public void CmdSendPlayers(PlayerScript player)
+    {
+        playerList.CmdAddPlayers(player);
+    }
+
+    [Command(requiresAuthority = false)]
+    public void CmdSetPlayer(PlayerScript player)
     {
         RpcSetPlayer();
-        playerList.CmdAddPlayers(this);
+        //if (!playerList.players.Contains(player))
+        //playerList.CmdAddPlayers(player);
     }
 
     [ClientRpc]
@@ -78,16 +94,51 @@ public class PlayerScript : NetworkBehaviour
         gameObject.name = $"{playerNumber}";
     }
 
-    [Command(requiresAuthority = false)]
-    public void CmdGetScripts()
-    {
-        RpcGetScripts();
-    }
+    //[Command(requiresAuthority = false)]
+    //public void CmdSendPlayers(List<PlayerScript> players)
+    //{
+    //    RpcRecievePlayers(players);
+    //}
 
-    [ClientRpc]
-    public void RpcGetScripts()
-    {
-        FSM = GameObject.Find("FSM").GetComponent<GameState>();
-        playerList = GameObject.Find("PlayerList").GetComponent<PlayerList>();
-    }
+    //[ClientRpc]
+    //public void RpcRecievePlayers(List<PlayerScript> players)
+    //{
+    //    this.playerList.players = players;
+    //}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    //[Command(requiresAuthority = false)]
+    //public void CmdGetScripts()
+    //{
+    //    Debug.Log("getting scripts");
+    //    if (!isServer)
+    //        RpcGetScripts();
+    //}
+
+    //[ClientRpc]
+    //public void RpcGetScripts()
+    //{
+    //    if
+    //    FSM = GameObject.Find("FSM").GetComponent<GameState>();
+    //    Debug.Log(FSM + " fsm");
+    //    playerList = GameObject.Find("PlayerList").GetComponent<PlayerList>();
+    //}
 }
