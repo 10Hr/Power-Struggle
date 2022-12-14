@@ -34,15 +34,19 @@ public class StatManager : NetworkBehaviour
                 {
                     case "Charisma":
                         p.Charisma = 1;
+                        p.AvailablePoints = -1;
                         break;
                     case "Strength":
                         p.Strength = 1;
+                        p.AvailablePoints = -1;
                         break;
                     case "Intelligence":
                         p.Intelligence = 1;
+                        p.AvailablePoints = -1;
                         break;
                     case "Cunning":
                         p.Cunning = 1;
+                        p.AvailablePoints = -1;
                         break;
                 }
                 break;
@@ -50,16 +54,32 @@ public class StatManager : NetworkBehaviour
                 switch (thisButName)
                 {
                     case "Charisma":
-                        p.Charisma = -1;
+                        if (p.Charisma > 0)
+                        {
+                            p.Charisma = -1;
+                            p.AvailablePoints = 1;
+                        }
                         break;
                     case "Strength":
-                        p.Strength = -1;
+                        if (p.Strength > 0)
+                        {
+                            p.Strength = -1;
+                            p.AvailablePoints = 1;
+                        }
                         break;
                     case "Intelligence":
-                        p.Intelligence = -1;
+                        if (p.Intelligence > 0)
+                        {
+                            p.Intelligence = -1;
+                            p.AvailablePoints = 1;
+                        }
                         break;
                     case "Cunning":
-                        p.Cunning = -1;
+                        if (p.Cunning > 0)
+                        {
+                            p.Cunning = -1;
+                            p.AvailablePoints = 1;
+                        }
                         break;
                 }
                 break;

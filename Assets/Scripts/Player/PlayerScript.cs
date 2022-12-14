@@ -52,6 +52,18 @@ public class PlayerScript : NetworkBehaviour
     public Text strengthText;
     public Text intelligenceText;
     public Text cunningText;
+
+    private GameObject[] addButtons;
+    private GameObject[] subButtons;
+
+    private int maxPoints = 8;
+    private int availablePoints = 8;
+
+    public int AvailablePoints
+    {
+        get { return availablePoints; }
+        set { availablePoints += value; }
+    }
     #endregion
 
     [SyncVar]
@@ -82,6 +94,8 @@ public class PlayerScript : NetworkBehaviour
         strengthText = GameObject.Find("StrengthCounter").GetComponent<Text>();
         intelligenceText = GameObject.Find("IntelligenceCounter").GetComponent<Text>();
         cunningText = GameObject.Find("CunningCounter").GetComponent<Text>();
+        addButtons = GameObject.FindGameObjectsWithTag("add");
+        subButtons = GameObject.FindGameObjectsWithTag("sub");
     }
 
     public void Update()
@@ -106,11 +120,58 @@ public class PlayerScript : NetworkBehaviour
                 break;
         }
 
+        #region statChanges
         //DETECT CHANGES IN STATS
         charismaText.text = "Charisma: " + charisma;
         strengthText.text = "Strength: " + strength;
         intelligenceText.text = "Intelligence: " + intelligence;
         cunningText.text = "Cunning: " + cunning;
+
+        if (availablePoints > 0 && availablePoints < maxPoints)
+        {
+            foreach (GameObject b in addButtons)
+            {
+                b.SetActive(true);
+            }
+            foreach (GameObject b in subButtons)
+            {
+                b.SetActive(true);
+            }
+        }
+        else if(availablePoints == maxPoints)
+        {
+            foreach (GameObject b in addButtons)
+            {
+                b.SetActive(true);
+            }
+            foreach (GameObject b in subButtons)
+            {
+                b.SetActive(false);
+            }
+        }
+        else if (availablePoints == 0)
+        {
+            foreach (GameObject b in subButtons)
+            {
+                b.SetActive(false);
+            }
+            foreach (GameObject b in addButtons)
+            {
+                b.SetActive(false);
+            }
+        }
+        else if (availablePoints < 0)
+        {
+            foreach (GameObject b in subButtons)
+            {
+                b.SetActive(true);
+            }
+            foreach (GameObject b in addButtons)
+            {
+                b.SetActive(false);
+            }
+        }
+        #endregion
     }
 
     [Command(requiresAuthority = false)]
