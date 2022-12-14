@@ -10,18 +10,23 @@ public class StatManager : NetworkBehaviour
     [SerializeField]
     PlayerList playerList;
 
-    public void OnPointerClick()
-    {
-        //Debug.Log(playerList.players[0].netIdentity.netId);
-        ////Debug.Log((int)NetworkServer.localConnection.identity.netId);
-        //Debug.Log(NetworkClient.localPlayer.netId);
+    public PlayerScript GetPlayer() {
+
         foreach (PlayerScript p in playerList.players)
-        {
-            if (p.netId == NetworkClient.localPlayer.netId)
-            {
+            if (p.netId == NetworkClient.localPlayer.netId) {
                 Debug.Log("Player" + (int)p.netId + "clicked this button.");
+                return p;
             }
-        }
+        return null; // we have a problem
+    }
+
+    public void addCount() {
+        PlayerScript p = GetPlayer();
+
+        
+                // increment count on client
+            
+
     }
 
 
