@@ -66,6 +66,8 @@ public class PlayerScript : NetworkBehaviour
     }
     #endregion
 
+    private GameObject readyButton;
+
     [SyncVar]
     public PlayerList playerList;
 
@@ -96,6 +98,8 @@ public class PlayerScript : NetworkBehaviour
         cunningText = GameObject.Find("CunningCounter").GetComponent<Text>();
         addButtons = GameObject.FindGameObjectsWithTag("add");
         subButtons = GameObject.FindGameObjectsWithTag("sub");
+
+        readyButton = GameObject.Find("Ready");
     }
 
     public void Update()
@@ -116,7 +120,8 @@ public class PlayerScript : NetworkBehaviour
         switch (FSM.CurrentState)
         {
             case GameStates.Setup:
-
+                break;
+            case GameStates.Passive:
                 break;
         }
 

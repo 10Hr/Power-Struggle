@@ -20,6 +20,12 @@ public class StatManager : NetworkBehaviour
         return null; // we have a problem
     }
 
+    public void ReadyUp()
+    {
+        PlayerScript p = GetPlayer();
+        p.ready = true;
+    }
+
     public void ChangeStats() {
         GameObject thisButton = UnityEngine.EventSystems.EventSystem.current.currentSelectedGameObject;
         string thisButName = thisButton.name;
