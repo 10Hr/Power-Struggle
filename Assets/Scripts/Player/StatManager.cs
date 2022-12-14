@@ -32,13 +32,9 @@ public class StatManager : NetworkBehaviour
         p.ready = true;
     }
 
-    public void ChangeStats() {
-        GameObject thisButton = UnityEngine.EventSystems.EventSystem.current.currentSelectedGameObject;
-        string thisButName = thisButton.name;
-        string buttontag = UnityEngine.EventSystems.EventSystem.current.currentSelectedGameObject.tag;
-
-        PlayerScript p = GetPlayer();
-
+    [Command(requiresAuthority = false)]
+    public void CmdChangeStats(PlayerScript p, string thisButName, string buttontag)
+    {
         switch (buttontag)
         {
             case "add":
@@ -96,5 +92,15 @@ public class StatManager : NetworkBehaviour
                 }
                 break;
         }
+    }
+
+    public void ChangeStats() {
+        GameObject thisButton = UnityEngine.EventSystems.EventSystem.current.currentSelectedGameObject;
+        string thisButName = thisButton.name;
+        string buttontag = UnityEngine.EventSystems.EventSystem.current.currentSelectedGameObject.tag;
+
+        PlayerScript p = GetPlayer();
+
+        CmdChangeStats(p, thisButName, buttontag);
     }
 }

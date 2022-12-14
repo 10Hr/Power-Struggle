@@ -22,9 +22,13 @@ public class PlayerScript : NetworkBehaviour
     public bool added = false;
 
     #region stats
+    [SyncVar]
     private int charisma;
+    [SyncVar]
     private int strength;
+    [SyncVar]
     private int intelligence;
+    [SyncVar]
     private int cunning;
 
     public int Charisma
@@ -57,6 +61,7 @@ public class PlayerScript : NetworkBehaviour
     private GameObject[] subButtons;
 
     private int maxPoints = 8;
+    [SyncVar]
     private int availablePoints = 8;
 
     public int AvailablePoints
