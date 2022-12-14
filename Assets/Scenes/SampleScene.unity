@@ -277,7 +277,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1882713756}
         m_TargetAssemblyTypeName: StatManager, Assembly-CSharp
-        m_MethodName: OnPointerClick
+        m_MethodName: ReadyUp
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -532,7 +532,6 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0.1
   cards: []
-  playerManager: {fileID: 866009260}
 --- !u!114 &215939938
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1045,7 +1044,6 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0.1
   cards: []
-  playerManager: {fileID: 866009260}
 --- !u!114 &497447395
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1910,7 +1908,6 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0.1
   cards: []
-  playerManager: {fileID: 866009260}
 --- !u!114 &664984162
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5569,7 +5566,6 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0.1
   cards: []
-  playerManager: {fileID: 866009260}
 --- !u!114 &1676786455
 MonoBehaviour:
   m_ObjectHideFlags: 0

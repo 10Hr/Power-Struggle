@@ -75,10 +75,17 @@ public class PlayerScript : NetworkBehaviour
     public int playerNumber;
 
     [SyncVar]
-    public bool deckGenerated;
+    public bool ready;
 
     [SyncVar]
-    public bool ready;
+    public string highest;
+
+    [SyncVar]
+    public bool hasDeck = false;
+
+    public DeckScript deck;
+    public SyncList<CardScript> cards = new SyncList<CardScript>();
+
     //Properties
     //Methods
     public override void OnStartLocalPlayer()
@@ -122,6 +129,15 @@ public class PlayerScript : NetworkBehaviour
             case GameStates.Setup:
                 break;
             case GameStates.Passive:
+                if (!hasDeck)
+                {
+                    CmdCalcHighest(this);
+                    deck = new DeckScript();
+                    deck.CreateDeck(highest);
+                    CmdFillDeck(deck.cards, this);
+                    Debug.Log(deck.cards[0].Title);
+                    Debug.Log(cards[0].Title);
+                }
                 break;
         }
 
@@ -177,6 +193,42 @@ public class PlayerScript : NetworkBehaviour
             }
         }
         #endregion
+    }
+
+    [Command (requiresAuthority = false)]
+    private void CmdCalcHighest(PlayerScript p)
+    {
+        int currentHigh = 0;
+        if (p.charisma >= currentHigh)
+        {
+            currentHigh = charisma;
+            p.highest = "charisma";
+        }
+        if (p.strength >= currentHigh)
+        {
+            currentHigh = strength;
+            p.highest = "strength";
+        }
+        if (p.intelligence >= currentHigh)
+        {
+            currentHigh = intelligence;
+            p.highest = "intelligence";
+        }
+        if (p.cunning >= currentHigh)
+        {
+            currentHigh = cunning;
+            p.highest = "cunning";
+        }
+    }
+
+    [Command(requiresAuthority = false)]
+    public void CmdFillDeck(List<CardScript> cards, PlayerScript p)
+    {
+        foreach (CardScript c in cards)
+        {
+            p.cards.Add(c);
+        }
+        p.hasDeck = true;
     }
 
     [Command(requiresAuthority = false)]

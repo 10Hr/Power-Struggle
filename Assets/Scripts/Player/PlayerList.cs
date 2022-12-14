@@ -16,19 +16,6 @@ public class PlayerList : NetworkBehaviour
     public void CmdAddPlayers(PlayerScript player)
     {
         players.Add(player);
-        //for (int i = 0; i < 4; i++)
-        //{
-        //    if (players[i] == null)
-        //    {
-        //        players[i] = player;
-        //    }
-        //}
     }
-
-    //[ClientRpc]
-    //public void RpcAddPlayers(PlayerScript player)
-    //{
-        
-    //}
 }
 

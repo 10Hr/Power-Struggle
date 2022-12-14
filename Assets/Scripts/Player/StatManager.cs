@@ -23,6 +23,12 @@ public class StatManager : NetworkBehaviour
     public void ReadyUp()
     {
         PlayerScript p = GetPlayer();
+        CmdReadyUp(p);
+    }
+
+    [Command(requiresAuthority = false)]
+    public void CmdReadyUp(PlayerScript p)
+    {
         p.ready = true;
     }
 
