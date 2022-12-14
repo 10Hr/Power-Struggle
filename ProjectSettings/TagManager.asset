@@ -18,6 +18,8 @@ TagManager:
   - Deck 2
   - Deck 3
   - Deck 4
+  - add
+  - sub
   layers:
   - Default
   - TransparentFX

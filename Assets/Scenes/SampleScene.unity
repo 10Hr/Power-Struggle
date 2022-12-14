@@ -5349,8 +5349,8 @@ GameObject:
   - component: {fileID: 554980133}
   - component: {fileID: 554980132}
   m_Layer: 5
-  m_Name: addCunning
-  m_TagString: Player1
+  m_Name: Cunning
+  m_TagString: add
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5423,7 +5423,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1882713756}
         m_TargetAssemblyTypeName: StatManager, Assembly-CSharp
-        m_MethodName: Increment
+        m_MethodName: ChangeStats
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -5484,8 +5484,8 @@ GameObject:
   - component: {fileID: 584652480}
   - component: {fileID: 584652479}
   m_Layer: 5
-  m_Name: addCharisma
-  m_TagString: Player1
+  m_Name: Charisma
+  m_TagString: add
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5558,7 +5558,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1882713756}
         m_TargetAssemblyTypeName: StatManager, Assembly-CSharp
-        m_MethodName: Increment
+        m_MethodName: ChangeStats
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -6081,8 +6081,8 @@ GameObject:
   - component: {fileID: 650506927}
   - component: {fileID: 650506926}
   m_Layer: 5
-  m_Name: addStrength
-  m_TagString: Player1
+  m_Name: Strength
+  m_TagString: add
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6155,7 +6155,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1882713756}
         m_TargetAssemblyTypeName: StatManager, Assembly-CSharp
-        m_MethodName: Increment
+        m_MethodName: ChangeStats
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -7962,8 +7962,8 @@ GameObject:
   - component: {fileID: 772431165}
   - component: {fileID: 772431164}
   m_Layer: 5
-  m_Name: subStrength
-  m_TagString: Player1
+  m_Name: Strength
+  m_TagString: sub
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -8036,7 +8036,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1882713756}
         m_TargetAssemblyTypeName: StatManager, Assembly-CSharp
-        m_MethodName: Decrement
+        m_MethodName: ChangeStats
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -9164,8 +9164,8 @@ GameObject:
   - component: {fileID: 879585971}
   - component: {fileID: 879585970}
   m_Layer: 5
-  m_Name: subCunning
-  m_TagString: Player1
+  m_Name: Cunning
+  m_TagString: sub
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -9238,7 +9238,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1882713756}
         m_TargetAssemblyTypeName: StatManager, Assembly-CSharp
-        m_MethodName: Decrement
+        m_MethodName: ChangeStats
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -11131,8 +11131,8 @@ GameObject:
   - component: {fileID: 995386864}
   - component: {fileID: 995386863}
   m_Layer: 5
-  m_Name: addIntelligence
-  m_TagString: Player1
+  m_Name: Intelligence
+  m_TagString: add
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -11205,7 +11205,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1882713756}
         m_TargetAssemblyTypeName: StatManager, Assembly-CSharp
-        m_MethodName: Increment
+        m_MethodName: ChangeStats
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -11759,8 +11759,8 @@ GameObject:
   - component: {fileID: 1085716426}
   - component: {fileID: 1085716425}
   m_Layer: 5
-  m_Name: subCharisma
-  m_TagString: Player1
+  m_Name: Charisma
+  m_TagString: sub
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -11833,7 +11833,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1882713756}
         m_TargetAssemblyTypeName: StatManager, Assembly-CSharp
-        m_MethodName: Decrement
+        m_MethodName: ChangeStats
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -14386,7 +14386,7 @@ GameObject:
   - component: {fileID: 1334454392}
   - component: {fileID: 1334454391}
   m_Layer: 5
-  m_Name: CunningCounter1
+  m_Name: CunningCounter
   m_TagString: Player1
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -15872,7 +15872,7 @@ GameObject:
   - component: {fileID: 1474910055}
   - component: {fileID: 1474910054}
   m_Layer: 5
-  m_Name: StrengthCounter1
+  m_Name: StrengthCounter
   m_TagString: Player1
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -16486,7 +16486,7 @@ GameObject:
   - component: {fileID: 1503668474}
   - component: {fileID: 1503668473}
   m_Layer: 5
-  m_Name: CharismaCounter1
+  m_Name: CharismaCounter
   m_TagString: Player1
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -19179,8 +19179,8 @@ GameObject:
   - component: {fileID: 1767001272}
   - component: {fileID: 1767001271}
   m_Layer: 5
-  m_Name: subIntelligence
-  m_TagString: Player1
+  m_Name: Intelligence
+  m_TagString: sub
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -19253,7 +19253,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1882713756}
         m_TargetAssemblyTypeName: StatManager, Assembly-CSharp
-        m_MethodName: Decrement
+        m_MethodName: ChangeStats
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -21707,7 +21707,7 @@ GameObject:
   - component: {fileID: 2060131110}
   - component: {fileID: 2060131109}
   m_Layer: 5
-  m_Name: IntelligenceCounter1
+  m_Name: IntelligenceCounter
   m_TagString: Player1
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
