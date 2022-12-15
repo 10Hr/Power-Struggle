@@ -92,6 +92,10 @@ public class PlayerScript : NetworkBehaviour
     public bool hasDeck = false;
 
     public DeckScript deck;
+
+    public PassiveManager passiveManager;
+
+    int g = 0;
     public SyncList<string[]> cards = new SyncList<string[]>();
 
     //Properties
@@ -115,6 +119,8 @@ public class PlayerScript : NetworkBehaviour
         subButtons = GameObject.FindGameObjectsWithTag("sub");
 
         readyButton = GameObject.Find("Ready");
+
+        passiveManager = GameObject.Find("PassiveManager").GetComponent<PassiveManager>();
     }
 
     public void Update()
@@ -147,6 +153,11 @@ public class PlayerScript : NetworkBehaviour
                     {
                         CmdFillDeck(deck.cardData, this);
                     }
+                }
+
+                if (g == 0) {
+                    passiveManager.selectPassive(highest);
+                    g = 1;
                 }
                 break;
         }

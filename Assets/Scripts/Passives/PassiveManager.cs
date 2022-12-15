@@ -28,8 +28,6 @@ public class PassiveManager : NetworkBehaviour
 
 
     void Awake() { 
-
-        getPassivesFromFile();
     
     //passiveChoice1 = GameObject.Find("passiveChoice1");
     //passiveChoice2 = GameObject.Find("passiveChoice2");
@@ -62,7 +60,13 @@ public class PassiveManager : NetworkBehaviour
         input.Close();
     }
 
-    public void selectPassive(string highest, int pNum, GameObject t1, GameObject t2, GameObject t3) {
+    public void selectPassive(string highest /*, int pNum, GameObject t1, GameObject t2, GameObject t3*/) {
+        Debug.Log(highest + " is the highest stat");
+
+        getPassivesFromFile();
+
+        Debug.Log("Passives loaded");
+
 
         possible.Add(passives[0]);
         possible.Add(passives[1]);
@@ -75,10 +79,7 @@ public class PassiveManager : NetworkBehaviour
             choices.Add(possible[rand]);
             possible.RemoveAt(rand);
         }
-
-        passiveChoice3.GetComponent<Text>().text = "Name: " + choices[0].PassiveName + "\n" + "Description: " + choices[0].PassiveDescription +
-                                                   "\n\nName: " + choices[1].PassiveName + "\n" + "Description: " + choices[1].PassiveDescription +
-                                                   "\n\nName: " + choices[2].PassiveName + "\n" + "Description: " + choices[2].PassiveDescription;
+        Debug.Log("Passives added");
 
 
         //select passive
@@ -104,9 +105,9 @@ public class PassiveManager : NetworkBehaviour
         txtChoice3.GetComponent<Text>().text = choices[2].PassiveName;
         */ 
 
-        t1.GetComponent<Text>().text = choices[0].PassiveName; //problem chold
-        t2.GetComponent<Text>().text = choices[1].PassiveName;
-        t3.GetComponent<Text>().text = choices[2].PassiveName;
+        txtChoice1.GetComponent<Text>().text = choices[0].PassiveName; //problem chold
+        txtChoice2.GetComponent<Text>().text = choices[1].PassiveName;
+        txtChoice3.GetComponent<Text>().text = choices[2].PassiveName;
 
     }
    void pullEff() { // waste of time
