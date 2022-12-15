@@ -9,6 +9,7 @@ public class DeckScript : NetworkBehaviour
 {
     private string type;
     public List<CardScript> cards = new List<CardScript>();
+    public List<string[]> cardData = new List<string[]>();
     //private GameObject player1;
     //private GameObject player2;
     //private GameObject player3;
@@ -50,6 +51,8 @@ public class DeckScript : NetworkBehaviour
                 {
                     string[] data = line.Split(',');
                     cards.Add(new CardScript());
+                    cardData.Add(data);
+                    Debug.Log(cardData[cardData.Count - 1][0]);
                     //cards.Add(Instantiate(prefab));
                     //cards[cards.Count - 1].name = data[0];
                     //cards[cards.Count - 1].AddComponent<SpriteRenderer>();
@@ -75,6 +78,7 @@ public class DeckScript : NetworkBehaviour
                 {
                     string[] data = line.Split(',');
                     cards.Add(new CardScript());
+                    cardData.Add(data);
                     //cards.Add(Instantiate(prefab));
                     //cards[cards.Count - 1].name = data[0];
                     //cards[cards.Count - 1].AddComponent<SpriteRenderer>();
@@ -100,6 +104,7 @@ public class DeckScript : NetworkBehaviour
                 {
                     string[] data = line.Split(',');
                     cards.Add(new CardScript());
+                    cardData.Add(data);
                     //cards.Add(Instantiate(prefab));
                     //cards[cards.Count - 1].name = data[0];
                     //cards[cards.Count - 1].AddComponent<SpriteRenderer>();
@@ -125,6 +130,7 @@ public class DeckScript : NetworkBehaviour
                 {
                     string[] data = line.Split(',');
                     cards.Add(new CardScript());
+                    cardData.Add(data);
                     //cards.Add(Instantiate(prefab));
                     //cards[cards.Count - 1].name = data[0];
                     //cards[cards.Count - 1].AddComponent<SpriteRenderer>();

@@ -89,7 +89,7 @@ public class PlayerScript : NetworkBehaviour
     public bool hasDeck = false;
 
     public DeckScript deck;
-    public SyncList<CardScript> cards = new SyncList<CardScript>();
+    public SyncList<string[]> cards = new SyncList<string[]>();
 
     //Properties
     //Methods
@@ -139,9 +139,9 @@ public class PlayerScript : NetworkBehaviour
                     CmdCalcHighest(this);
                     deck = new DeckScript();
                     deck.CreateDeck(highest);
-                    CmdFillDeck(deck.cards, this);
-                    Debug.Log(deck.cards[0].Title);
-                    Debug.Log(cards[0].Title);
+                    CmdFillDeck(deck.cardData, this);
+                    Debug.Log(deck.cardData[0][0]);
+                    Debug.Log(cards[0][0]);
                 }
                 break;
         }
@@ -227,11 +227,15 @@ public class PlayerScript : NetworkBehaviour
     }
 
     [Command(requiresAuthority = false)]
-    public void CmdFillDeck(List<CardScript> cards, PlayerScript p)
+    public void CmdFillDeck(List<string[]> cards, PlayerScript p)
     {
-        foreach (CardScript c in cards)
+        foreach (string[] s in cards)
         {
-            p.cards.Add(c);
+            //p.cards.Add(c);
+            //p.cards[p.cards.Count - 1].Title = c.Title;
+            //p.cards[p.cards.Count - 1].Effect = c.Effect;
+            //p.cards[p.cards.Count - 1].Stat = c.Stat;
+            p.cards.Add(s);
         }
         p.hasDeck = true;
     }
