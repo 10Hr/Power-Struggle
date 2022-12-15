@@ -7,7 +7,6 @@ using Mirror;
 
 public class DeckScript : NetworkBehaviour
 {
-    private string type;
     public List<CardScript> cards = new List<CardScript>();
     public List<string[]> cardData = new List<string[]>();
     //private GameObject player1;
@@ -18,14 +17,9 @@ public class DeckScript : NetworkBehaviour
     private NetworkIdentity thisID;
     //public PlayerManager playerManager;
 
-    public string Type
-    {
-        get { return type; }
-        set { type = value; }
-    }
-
     private void Awake()
     {
+        Debug.Log("Deck is awake");
         //playerManager = GameObject.Find("PlayerManager").GetComponent<PlayerManager>();
 
         //type = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerScript>().Highest;
@@ -34,21 +28,23 @@ public class DeckScript : NetworkBehaviour
     // Start is called before the first frame update
     public void CreateDeck(string highest/*, GameObject prefab*/) {
 
-        type = highest;
+        Debug.Log("creating deck");
+        Debug.Log(highest);
         string path = null;
         string line = null;
         StreamReader input = null;
 
-        switch (type)
+        switch (highest)
         {
             case "cunning":
-
+                Debug.Log("In cunning");
                 path = Application.dataPath + " /StreamingAssets/cardsCunning.txt";
                 input = new StreamReader(path);
                 line = null;
 
                 while ((line = input.ReadLine()) != null)
                 {
+                    Debug.Log("about to create a card");
                     string[] data = line.Split(',');
                     cards.Add(new CardScript());
                     cardData.Add(data);

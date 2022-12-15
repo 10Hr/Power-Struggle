@@ -86,6 +86,9 @@ public class PlayerScript : NetworkBehaviour
     public string highest;
 
     [SyncVar]
+    public bool hasHighest = false;
+
+    [SyncVar]
     public bool hasDeck = false;
 
     public DeckScript deck;
@@ -134,14 +137,12 @@ public class PlayerScript : NetworkBehaviour
             case GameStates.Setup:
                 break;
             case GameStates.Passive:
-                if (!hasDeck)
+                CmdCalcHighest(this);
+                if (!hasDeck && hasHighest)
                 {
-                    CmdCalcHighest(this);
                     deck = new DeckScript();
                     deck.CreateDeck(highest);
                     CmdFillDeck(deck.cardData, this);
-                    Debug.Log(deck.cardData[0][0]);
-                    Debug.Log(cards[0][0]);
                 }
                 break;
         }
@@ -224,6 +225,7 @@ public class PlayerScript : NetworkBehaviour
             currentHigh = cunning;
             p.highest = "cunning";
         }
+        p.hasHighest = true;
     }
 
     [Command(requiresAuthority = false)]
