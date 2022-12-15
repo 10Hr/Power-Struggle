@@ -95,6 +95,8 @@ public class PlayerScript : NetworkBehaviour
 
     public PassiveManager passiveManager;
 
+    public PlayerScript[] playerCheck;
+
     int g = 0;
     public SyncList<string[]> cards = new SyncList<string[]>();
 
@@ -125,8 +127,12 @@ public class PlayerScript : NetworkBehaviour
 
     public void Update()
     {
+        if (isServer)
+        {
+            playerCheck = GameObject.FindObjectsOfType<PlayerScript>();
+        }
         //START ONCE ALL PLAYERS JOIN
-        if (GameObject.Find("13") != null && !added && isServer)
+        if (playerCheck.Length == 4 && !added && isServer)
         {
             CmdSendPlayers(this);
             added = true;
