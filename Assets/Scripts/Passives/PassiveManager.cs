@@ -29,6 +29,8 @@ public class PassiveManager : NetworkBehaviour
 
     void Awake() { 
     
+
+    getPassivesFromFile();
     //passiveChoice1 = GameObject.Find("passiveChoice1");
     //passiveChoice2 = GameObject.Find("passiveChoice2");
     //passiveChoice3 = GameObject.Find("passiveChoice3");
@@ -63,7 +65,7 @@ public class PassiveManager : NetworkBehaviour
     public void selectPassive(string highest /*, int pNum, GameObject t1, GameObject t2, GameObject t3*/) {
         Debug.Log(highest + " is the highest stat");
 
-        getPassivesFromFile();
+
 
         Debug.Log("Passives loaded");
 
@@ -74,6 +76,8 @@ public class PassiveManager : NetworkBehaviour
         foreach (Passive p in passives) 
             if (p.PassiveType == highest)
                 possible.Add(p);
+        for (int i = 0; i < passives.Count; i++)
+            Debug.Log(possible[i].PassiveName);
         for (int i = 0; i < 3; i++) {
             int rand = Random.Range(0, 6 - i);
             choices.Add(possible[rand]);
