@@ -12,30 +12,16 @@ public class PassiveManager : NetworkBehaviour
     public List<Passive> possible = new List<Passive>(); // all passives to be chosen from; 
     private delegate void GetEffects();
     private List<GetEffects> effects = new List<GetEffects>();
-
-    string eName;
-
-    //public List<T> passiveMethods = new List<T>();
-
-    //private List<> effects = new List<>();
-   // private GameObject passiveChoice1;
-    //private GameObject passiveChoice2;
-    public GameObject passiveChoice3;
     public GameObject txtChoice1;
     public GameObject txtChoice2;
     public GameObject txtChoice3;
 
-
-
     void Awake() { 
     
+        getPassivesFromFile();
+        createEffectList();
 
-    getPassivesFromFile();
-    //passiveChoice1 = GameObject.Find("passiveChoice1");
-    //passiveChoice2 = GameObject.Find("passiveChoice2");
-    //passiveChoice3 = GameObject.Find("passiveChoice3");
-
-     }
+    }
 
     //Type, Name, Desc
     // add thing to turn periods to commas in description
@@ -62,25 +48,18 @@ public class PassiveManager : NetworkBehaviour
         input.Close();
     }
 
-    public void selectPassive(string highest /*, int pNum, GameObject t1, GameObject t2, GameObject t3*/) {
-        Debug.Log(highest + " is the highest stat");
-
-
-
-        Debug.Log("Passives loaded");
-
+    public void selectPassive(string highest) {
 
         possible.Add(passives[0]);
         possible.Add(passives[1]);
         possible.Add(passives[2]);
         foreach (Passive p in passives) 
-            if (p.PassiveType == highest)
+            if (p.PassiveType == highest) 
                 possible.Add(p);
-        for (int i = 0; i < passives.Count; i++)
-            Debug.Log(possible[i].PassiveName);
+
         for (int i = 0; i < 3; i++) {
             int rand = Random.Range(0, 6 - i);
-            choices.Add(possible[rand]);
+            choices.Add(possible[rand]); // bad
             possible.RemoveAt(rand);
         }
         Debug.Log("Passives added");
@@ -89,25 +68,9 @@ public class PassiveManager : NetworkBehaviour
         //select passive
         //add to player
         //add to player manager
-        createEffectList();
 
-        pullEff();
-        /*
- 
-        List<GameObject> txts = new List<GameObject>();
-        txts.Add(txtChoice1);
-        txts.Add(txtChoice2);
-        txts.Add(txtChoice3);
 
-        for (int i = 1; i < 5; i++) {
-            if (txts[i].tag == "Player" + i) {
-
-            }
-        }
-        txtChoice1.GetComponent<Text>().text = choices[0].PassiveName; //problem chold
-        txtChoice2.GetComponent<Text>().text = choices[1].PassiveName;
-        txtChoice3.GetComponent<Text>().text = choices[2].PassiveName;
-        */ 
+       // pullEff();
 
         txtChoice1.GetComponent<Text>().text = choices[0].PassiveName; //problem chold
         txtChoice2.GetComponent<Text>().text = choices[1].PassiveName;
@@ -121,10 +84,7 @@ public class PassiveManager : NetworkBehaviour
                     effects[i]();     
 
     }
-
-    public List<Passive> getChoices() {
-      return choices;
-    }
+    
     void createEffectList()
     {
         // create a list of delegate objects as placeholders for the methods.
@@ -165,6 +125,8 @@ public class PassiveManager : NetworkBehaviour
      // effect methods
 
      //-----------------------------------------default-----------------------------------------
+
+
      void mitigateLosses() {
          Debug.Log("mitigateLosses");
      }

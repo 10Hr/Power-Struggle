@@ -161,7 +161,8 @@ public class PlayerScript : NetworkBehaviour
                     }
                 }
 
-                if (g == 0) {
+                if (g == 0 && hasHighest) {
+                    //highest is blank?
                     passiveManager.selectPassive(highest);
                     g = 1;
                 }
