@@ -26,7 +26,7 @@ public class DeckScript : NetworkBehaviour
     }
 
     // Start is called before the first frame update
-    public void CreateDeck(string highest/*, GameObject prefab*/) {
+    public void CreateDeck(string highest) {
 
         Debug.Log("creating deck");
         Debug.Log(highest);

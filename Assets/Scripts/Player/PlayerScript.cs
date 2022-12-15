@@ -140,9 +140,13 @@ public class PlayerScript : NetworkBehaviour
                 CmdCalcHighest(this);
                 if (!hasDeck && hasHighest)
                 {
+                    hasDeck = true;
                     deck = new DeckScript();
                     deck.CreateDeck(highest);
-                    CmdFillDeck(deck.cardData, this);
+                    if (deck.cardData.Count > 7)
+                    {
+                        CmdFillDeck(deck.cardData, this);
+                    }
                 }
                 break;
         }
@@ -239,7 +243,6 @@ public class PlayerScript : NetworkBehaviour
             //p.cards[p.cards.Count - 1].Stat = c.Stat;
             p.cards.Add(s);
         }
-        p.hasDeck = true;
     }
 
     [Command(requiresAuthority = false)]
