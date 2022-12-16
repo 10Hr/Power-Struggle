@@ -192,7 +192,7 @@ public class PlayerScript : NetworkBehaviour
             case GameStates.Turn:
                 if (hand.Count < 6)
                 {
-                    CmdDrawCard(this);
+                    CmdDrawCard(this, cardSlots);
                 }
                 break;
         }
