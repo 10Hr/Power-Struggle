@@ -91,14 +91,20 @@ public class PlayerScript : NetworkBehaviour
     [SyncVar]
     public bool hasDeck = false;
 
+    [SyncVar]
+    public bool cardSlotsSpawned = false;
+
     public DeckScript deck;
 
     public PassiveManager passiveManager;
 
     public PlayerScript[] playerCheck;
 
+    public GameObject[] cardSlots;
+
     int g = 0;
     public SyncList<string[]> cards = new SyncList<string[]>();
+    public SyncList<string[]> hand = new SyncList<string[]>();
 
     //Properties
     //Methods
@@ -119,6 +125,8 @@ public class PlayerScript : NetworkBehaviour
         cunningText = GameObject.Find("CunningCounter").GetComponent<Text>();
         addButtons = GameObject.FindGameObjectsWithTag("add");
         subButtons = GameObject.FindGameObjectsWithTag("sub");
+
+        cardSlots = GameObject.FindGameObjectsWithTag("CardSlot");
 
         readyButton = GameObject.Find("Ready");
 
@@ -149,7 +157,10 @@ public class PlayerScript : NetworkBehaviour
             case GameStates.Setup:
                 break;
             case GameStates.Passive:
+                //calculate players highest stat
                 CmdCalcHighest(this);
+
+                //create deck and get cards data
                 if (!hasDeck && hasHighest)
                 {
                     hasDeck = true;
@@ -161,9 +172,27 @@ public class PlayerScript : NetworkBehaviour
                     }
                 }
 
+                //spawn passive choices
                 if (g == 0 && hasHighest) {
                     passiveManager.selectPassive(highest);
                     g = 1;
+                }
+
+                ////spawn card slots to plug in card data to
+                //if (!cardSlotsSpawned && hasDeck && hasHighest)
+                //{
+                //    foreach (string[] s in cards)
+                //    {
+                        
+                //    }
+                //}
+
+                break;
+
+            case GameStates.Turn:
+                if (hand.Count < 6)
+                {
+                    CmdDrawCard(this);
                 }
                 break;
         }
@@ -220,6 +249,23 @@ public class PlayerScript : NetworkBehaviour
             }
         }
         #endregion
+    }
+
+    [Command(requiresAuthority = false)]
+    public void CmdDrawCard(PlayerScript p, GameObject[] slots)
+    {
+        p.hand.Add(p.cards[0]);
+        p.cards.Remove(p.cards[0]);
+
+        foreach (GameObject g in slots)
+        {
+            if (g.GetComponent<CardScript>().Title == "")
+            {
+                g.GetComponent<CardScript>().Title = p.hand[p.hand.Count - 1][0];
+                g.GetComponent<CardScript>().Stat = p.hand[p.hand.Count - 1][2];
+                break;
+            }
+        }
     }
 
     [Command (requiresAuthority = false)]

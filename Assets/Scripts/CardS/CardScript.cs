@@ -10,6 +10,11 @@ public class CardScript : NetworkBehaviour
     public Sprite cardFront;
     public Sprite cardBack;
 
+    public Sprite sprCharisma;
+    public Sprite sprCunning;
+    public Sprite sprIntelligence;
+    public Sprite sprStrength;
+
     private string title;
     private string effect;
     private string stat;
@@ -33,21 +38,39 @@ public class CardScript : NetworkBehaviour
     public string Stat
     {
         get { return stat; }
-        set { stat = value; }
+        set 
+        { 
+            stat = value;
+            switch (stat)
+            {
+                case "charisma":
+                    cardBack = sprCharisma;
+                    break;
+                case "cunning":
+                    cardBack = sprCunning;
+                    break;
+                case "intelligence":
+                    cardBack = sprIntelligence;
+                    break;
+                case "strength":
+                    cardBack = sprStrength;
+                    break;
+            }
+        }
     }
 
     // Start is called before the first frame update
     void Start()
     {
-
+        gameObject.GetComponent<SpriteRenderer>().sprite = cardBack;
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        gameObject.GetComponent<SpriteRenderer>().sprite = cardBack;
     }
-    //THIS IS CALLED FROM A CLIENT RPC IN PLAYERMANAGER
+
     public void Flip()
     {
         Sprite currentSprite = gameObject.GetComponent<SpriteRenderer>().sprite;

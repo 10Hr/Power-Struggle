@@ -20,6 +20,7 @@ TagManager:
   - Deck 4
   - add
   - sub
+  - CardSlot
   layers:
   - Default
   - TransparentFX
