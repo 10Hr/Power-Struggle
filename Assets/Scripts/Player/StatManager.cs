@@ -113,6 +113,7 @@ public class StatManager : NetworkBehaviour
         PlayerScript p = GetPlayer();
 
         CmdSelectPassive(p, buttontag);
+        CmdSetPassiveName(p, p.Passive.PassiveName);
     }
 
     [Command(requiresAuthority = false)]
@@ -132,5 +133,11 @@ public class StatManager : NetworkBehaviour
                 Debug.Log(passiveManager.getChoiceList(2).PassiveName + " selected!");
                 break;
         }
+    }
+
+    [Command (requiresAuthority = false)]
+    public void CmdSetPassiveName(PlayerScript p, string passiveName)
+    {
+        p.passiveName = passiveName;
     }
 }

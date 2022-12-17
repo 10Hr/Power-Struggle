@@ -97,7 +97,12 @@ public class PlayerScript : NetworkBehaviour
     public DeckScript deck;
 
     public PassiveManager passiveManager;
+
+    [SyncVar]
     public Passive passive;
+
+    [SyncVar]
+    public string passiveName;
 
     public PlayerScript[] playerCheck;
 
