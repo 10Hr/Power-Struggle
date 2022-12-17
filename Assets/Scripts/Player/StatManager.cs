@@ -112,27 +112,30 @@ public class StatManager : NetworkBehaviour
 
         PlayerScript p = GetPlayer();
 
-        CmdSelectPassive(p, buttontag);
-        CmdSetPassiveName(p, p.Passive.PassiveName);
-    }
-
-    [Command(requiresAuthority = false)]
-    public void CmdSelectPassive(PlayerScript p, string buttontag) {
-        
         switch (buttontag) {
             case "passiveChoice1":
-                p.Passive = passiveManager.getChoiceList(0);
+                CmdSelectPassive(p, passiveManager.getChoiceList(0));
                 Debug.Log(passiveManager.getChoiceList(0).PassiveName + " selected!");
                 break;
             case "passiveChoice2":
-                p.Passive = passiveManager.getChoiceList(1);
+                CmdSelectPassive(p, passiveManager.getChoiceList(1));
                 Debug.Log(passiveManager.getChoiceList(1).PassiveName + " selected!");
                 break;
             case "passiveChoice3":
-                p.Passive = passiveManager.getChoiceList(2);
+                CmdSelectPassive(p, passiveManager.getChoiceList(2));
                 Debug.Log(passiveManager.getChoiceList(2).PassiveName + " selected!");
                 break;
         }
+
+   
+      //  CmdSetPassiveName(p, p.Passive.PassiveName);
+    }
+
+    [Command(requiresAuthority = false)]
+    public void CmdSelectPassive(PlayerScript p, Passive ps) {
+        p.Passive = ps;
+        p.PassiveName = ps.PassiveName;
+
     }
 
     [Command (requiresAuthority = false)]

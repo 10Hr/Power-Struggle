@@ -116,6 +116,10 @@ public class PlayerScript : NetworkBehaviour
         get { return passive; }
         set { passive = value; }
     }
+    public string PassiveName {
+        get { return passiveName; }
+        set { passiveName = value; }
+    }
 
     //Properties
     //Methods
