@@ -94,11 +94,17 @@ public class PlayerScript : NetworkBehaviour
     public DeckScript deck;
 
     public PassiveManager passiveManager;
+    public Passive passive;
 
     public PlayerScript[] playerCheck;
 
     int g = 0;
     public SyncList<string[]> cards = new SyncList<string[]>();
+
+    public Passive Passive {
+        get { return passive; }
+        set { passive = value; }
+    }
 
     //Properties
     //Methods
@@ -112,7 +118,7 @@ public class PlayerScript : NetworkBehaviour
         playerList = GameObject.Find("PlayerList").GetComponent<PlayerList>();
         FSM = GameObject.Find("FSM").GetComponent<GameState>();
         CmdSetPlayer(this);
-
+        
         charismaText = GameObject.Find("CharismaCounter").GetComponent<Text>();
         strengthText = GameObject.Find("StrengthCounter").GetComponent<Text>();
         intelligenceText = GameObject.Find("IntelligenceCounter").GetComponent<Text>();

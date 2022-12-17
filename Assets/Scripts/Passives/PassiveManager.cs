@@ -77,6 +77,11 @@ public class PassiveManager : NetworkBehaviour
         txtChoice3.GetComponent<Text>().text = choices[2].PassiveName;
 
     }
+
+    public Passive getChoiceList(int l) {
+        return choices[l];
+    }
+
    void pullEff() { // waste of time
         for (int i = 0; i < effects.Count; i++) 
             for (int j = 0; j < 3; j++) 

@@ -20,6 +20,9 @@ TagManager:
   - Deck 4
   - add
   - sub
+  - passiveChoice1
+  - passiveChoice2
+  - passiveChoice3
   layers:
   - Default
   - TransparentFX
