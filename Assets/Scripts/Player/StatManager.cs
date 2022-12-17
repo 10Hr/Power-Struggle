@@ -114,28 +114,22 @@ public class StatManager : NetworkBehaviour
 
         switch (buttontag) {
             case "passiveChoice1":
-                CmdSelectPassive(p, passiveManager.getChoiceList(0));
-                Debug.Log(passiveManager.getChoiceList(0).PassiveName + " selected!");
+                passiveManager.getChoiceList(0, p);
                 break;
             case "passiveChoice2":
-                CmdSelectPassive(p, passiveManager.getChoiceList(1));
-                Debug.Log(passiveManager.getChoiceList(1).PassiveName + " selected!");
+                passiveManager.getChoiceList(0, p);
                 break;
             case "passiveChoice3":
-                CmdSelectPassive(p, passiveManager.getChoiceList(2));
-                Debug.Log(passiveManager.getChoiceList(2).PassiveName + " selected!");
+                passiveManager.getChoiceList(0, p);
                 break;
         }
 
-   
-      //  CmdSetPassiveName(p, p.Passive.PassiveName);
+        CmdSelectPassive(p);
     }
 
     [Command(requiresAuthority = false)]
-    public void CmdSelectPassive(PlayerScript p, Passive ps) {
-        p.Passive = ps;
-        p.PassiveName = ps.PassiveName;
-
+    public void CmdSelectPassive(PlayerScript p) {
+        p.PassiveName = p.Passive.PassiveName;
     }
 
     [Command (requiresAuthority = false)]

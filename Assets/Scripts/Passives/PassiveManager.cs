@@ -78,8 +78,15 @@ public class PassiveManager : NetworkBehaviour
 
     }
 
-    public Passive getChoiceList(int i) {
-        return choices[i];
+    public void getChoiceList(int i, PlayerScript p) {
+        CmdGetChoiseList(p, choices[i]);
+    }
+
+    [Command (requiresAuthority = false)]
+    public void CmdGetChoiseList(PlayerScript p, Passive pass)
+    {
+        Debug.Log(pass.PassiveName);
+        p.Passive = pass;
     }
 
    void pullEff() { // waste of time
