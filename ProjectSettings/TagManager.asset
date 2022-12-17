@@ -20,9 +20,13 @@ TagManager:
   - Deck 4
   - add
   - sub
+<<<<<<< HEAD
   - passiveChoice1
   - passiveChoice2
   - passiveChoice3
+=======
+  - CardSlot
+>>>>>>> aa5ae48097156a791b4655382dc7f86854b91537
   layers:
   - Default
   - TransparentFX
