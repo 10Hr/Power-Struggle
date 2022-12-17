@@ -78,8 +78,8 @@ public class PassiveManager : NetworkBehaviour
 
     }
 
-    public Passive getChoiceList(int l) {
-        return choices[l];
+    public Passive getChoiceList(int i) {
+        return choices[i];
     }
 
    void pullEff() { // waste of time

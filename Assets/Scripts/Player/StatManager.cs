@@ -10,7 +10,7 @@ public class StatManager : NetworkBehaviour
     [SerializeField]
     PlayerList playerList;
 
-    PassiveManager passiveManager;
+    public PassiveManager passiveManager;
 
     public PlayerScript GetPlayer() {
 
@@ -108,7 +108,6 @@ public class StatManager : NetworkBehaviour
 
     public void selectPassive() {
         GameObject thisButton = UnityEngine.EventSystems.EventSystem.current.currentSelectedGameObject;
-        string thisButName = thisButton.name;
         string buttontag = UnityEngine.EventSystems.EventSystem.current.currentSelectedGameObject.tag;
 
         PlayerScript p = GetPlayer();
@@ -121,16 +120,16 @@ public class StatManager : NetworkBehaviour
         
         switch (buttontag) {
             case "passiveChoice1":
+                p.Passive = passiveManager.getChoiceList(0);
+                Debug.Log(passiveManager.getChoiceList(0).PassiveName + " selected!");
+                break;
+            case "passiveChoice2":
                 p.Passive = passiveManager.getChoiceList(1);
                 Debug.Log(passiveManager.getChoiceList(1).PassiveName + " selected!");
                 break;
-            case "passiveChoice2":
+            case "passiveChoice3":
                 p.Passive = passiveManager.getChoiceList(2);
                 Debug.Log(passiveManager.getChoiceList(2).PassiveName + " selected!");
-                break;
-            case "passiveChoice3":
-                p.Passive = passiveManager.getChoiceList(3);
-                Debug.Log(passiveManager.getChoiceList(3).PassiveName + " selected!");
                 break;
         }
     }

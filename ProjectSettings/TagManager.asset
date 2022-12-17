@@ -3,30 +3,7 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags:
-  - Change
-  - Player1
-  - Player2
-  - Player3
-  - Player4
-  - Change2
-  - Change3
-  - Change4
-  - Change1
-  - MainCanvas
-  - Deck 1
-  - Deck 2
-  - Deck 3
-  - Deck 4
-  - add
-  - sub
-<<<<<<< HEAD
-  - passiveChoice1
-  - passiveChoice2
-  - passiveChoice3
-=======
-  - CardSlot
->>>>>>> aa5ae48097156a791b4655382dc7f86854b91537
+  tags: []
   layers:
   - Default
   - TransparentFX
@@ -63,7 +40,4 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
-    locked: 0
-  - name: 1
-    uniqueID: 3239312533
     locked: 0
