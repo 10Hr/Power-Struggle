@@ -48,13 +48,28 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
-  buttons: []
-  childButtons: []
-  player1GUI: []
-  player2GUI: []
-  player3GUI: []
-  player4GUI: []
-  hand: []
+  playerHand: []
+  playerDeck: []
+  FSM: {fileID: 0}
+  GUI: []
+  added: 0
+  charismaText: {fileID: 0}
+  strengthText: {fileID: 0}
+  intelligenceText: {fileID: 0}
+  cunningText: {fileID: 0}
+  playerList: {fileID: 0}
+  playerNumber: 0
+  ready: 0
+  highest: 
+  hasHighest: 0
+  hasDeck: 0
+  cardSlotsSpawned: 0
+  deck: {fileID: 0}
+  passiveManager: {fileID: 0}
+  passive: {fileID: 0}
+  passiveName: 
+  playerCheck: []
+  cardSlots: []
 --- !u!114 &-3502643074226097910
 MonoBehaviour:
   m_ObjectHideFlags: 0

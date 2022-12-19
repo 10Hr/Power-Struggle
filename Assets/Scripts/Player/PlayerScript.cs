@@ -111,6 +111,7 @@ public class PlayerScript : NetworkBehaviour
     int g = 0;
     public SyncList<string[]> cards = new SyncList<string[]>();
     public SyncList<string[]> hand = new SyncList<string[]>();
+    public SyncList<Passive> choicesList = new SyncList<Passive>();
 
     public Passive Passive {
         get { return passive; }
@@ -189,7 +190,7 @@ public class PlayerScript : NetworkBehaviour
 
                 //spawn passive choices
                 if (g == 0 && hasHighest) {
-                    passiveManager.selectPassive(highest);
+                    passiveManager.CmdSelectPassive(highest, this);
                     g = 1;
                 }
 

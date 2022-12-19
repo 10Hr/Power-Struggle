@@ -48,7 +48,8 @@ public class PassiveManager : NetworkBehaviour
         input.Close();
     }
 
-    public void selectPassive(string highest) {
+    [Command (requiresAuthority = false)]
+    public void CmdSelectPassive(string highest, PlayerScript player) {
 
         possible.Add(passives[0]);
         possible.Add(passives[1]);
@@ -72,21 +73,26 @@ public class PassiveManager : NetworkBehaviour
 
        // pullEff();
 
-        txtChoice1.GetComponent<Text>().text = choices[0].PassiveName; //problem chold
-        txtChoice2.GetComponent<Text>().text = choices[1].PassiveName;
-        txtChoice3.GetComponent<Text>().text = choices[2].PassiveName;
-
+        setChoices(player, choices);
+        RpcSetLabels(player.connectionToClient, choices);
     }
 
-    public void getChoiceList(int i, PlayerScript p) {
-        CmdGetChoiseList(p, choices[i]);
-    }
-
-    [Command (requiresAuthority = false)]
-    public void CmdGetChoiseList(PlayerScript p, Passive pass)
+    [TargetRpc]
+    public void RpcSetLabels(NetworkConnection conn, List<Passive> pl)
     {
-        Debug.Log(pass.PassiveName);
-        p.Passive = pass;
+        txtChoice1.GetComponent<Text>().text = pl[0].PassiveName; //problem chold
+        txtChoice2.GetComponent<Text>().text = pl[1].PassiveName;
+        txtChoice3.GetComponent<Text>().text = pl[2].PassiveName;
+    }
+
+    //[Command (requiresAuthority = false)]
+    public void setChoices(PlayerScript player, List<Passive> pl)
+    {
+        foreach (Passive p in pl)
+        {
+            player.choicesList.Add(p);
+            Debug.Log(p.PassiveName);
+        }
     }
 
    void pullEff() { // waste of time
