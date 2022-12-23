@@ -74,15 +74,16 @@ public class PassiveManager : NetworkBehaviour
        // pullEff();
 
         setChoices(player, choices);
-        RpcSetLabels(player.connectionToClient, choices);
+        RpcSetLabels(player.connectionToClient, choices[0], choices[1], choices[2]);
     }
 
+    //try with seperate passives isntead of list
     [TargetRpc]
-    public void RpcSetLabels(NetworkConnection conn, List<Passive> pl)
+    public void RpcSetLabels(NetworkConnection conn, Passive p1, Passive p2, Passive p3)
     {
-        txtChoice1.GetComponent<Text>().text = pl[0].PassiveName; //problem chold
-        txtChoice2.GetComponent<Text>().text = pl[1].PassiveName;
-        txtChoice3.GetComponent<Text>().text = pl[2].PassiveName;
+        txtChoice1.GetComponent<Text>().text = p1.PassiveName; //problem child
+        txtChoice2.GetComponent<Text>().text = p2.PassiveName;
+        txtChoice3.GetComponent<Text>().text = p3.PassiveName;
     }
 
     //[Command (requiresAuthority = false)]
