@@ -79,16 +79,14 @@ public class GameState : NetworkBehaviour
 
                 if (allReady)
                 {
-                    Debug.Log("Switching Game State");
                     currentState = GameStates.Passive;
                 }
                 break;
 
             case GameStates.Passive:
-                if (passivesSelected)
+                if (playerList.players[0].hasPassive && playerList.players[1].hasPassive 
+                    && playerList.players[2].hasPassive && playerList.players[3].hasPassive)
                 {
-                    Debug.Log("Switching Game State");
-                    //make start event later
                     currentState = GameStates.Turn;
                 }
                 break;

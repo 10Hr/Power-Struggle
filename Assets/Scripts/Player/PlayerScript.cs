@@ -92,6 +92,9 @@ public class PlayerScript : NetworkBehaviour
     public bool hasDeck = false;
 
     [SyncVar]
+    public bool hasPassive = false;
+
+    [SyncVar]
     public bool cardSlotsSpawned = false;
 
     public DeckScript deck;
@@ -185,7 +188,7 @@ public class PlayerScript : NetworkBehaviour
                 //spawn passive choices
                 if (g == 0 && hasHighest) {
                     passiveManager.CmdSelectPassive(highest, this);
-                    Debug.Log(passive.PassiveName);  // returns null on client
+                    CmdSelectedPassive(this);
                     g = 1;
                 }
 
@@ -203,7 +206,7 @@ public class PlayerScript : NetworkBehaviour
             case GameStates.Turn:
                 if (hand.Count < 6)
                 {
-                    CmdDrawCard(this, cardSlots);
+                    //CmdDrawCard(this, cardSlots);
                 }
                 break;
         }
@@ -260,6 +263,12 @@ public class PlayerScript : NetworkBehaviour
             }
         }
         #endregion
+    }
+
+    [Command(requiresAuthority = false)]
+    public void CmdSelectedPassive(PlayerScript p)
+    {
+        p.hasPassive = true;
     }
 
     [Command(requiresAuthority = false)]
