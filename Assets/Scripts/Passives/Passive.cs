@@ -4,9 +4,13 @@ using UnityEngine;
 using Mirror;
 public class Passive : NetworkBehaviour
 {
+    [SyncVar]
     private string passiveType;
+    [SyncVar]
     private string passiveName;
+    [SyncVar]
     private string passiveDescription;
+    [SyncVar]
     private string passiveEffect;
     
     // properties

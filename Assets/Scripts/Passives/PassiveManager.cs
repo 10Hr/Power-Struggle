@@ -66,6 +66,10 @@ public class PassiveManager : NetworkBehaviour
         Debug.Log("Passives added");
 
         player.passive.PassiveName = choices[0].PassiveName;
+        player.passiveName = choices[0].PassiveName;
+
+        possible.Clear();
+        choices.Clear();
 
 
         //select passive
