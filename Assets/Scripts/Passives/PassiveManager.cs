@@ -65,6 +65,8 @@ public class PassiveManager : NetworkBehaviour
         }
         Debug.Log("Passives added");
 
+        player.passive.PassiveName = choices[0].PassiveName;
+
 
         //select passive
         //add to player
@@ -73,8 +75,8 @@ public class PassiveManager : NetworkBehaviour
 
        // pullEff();
 
-        setChoices(player, choices);
-        RpcSetLabels(player.connectionToClient, choices[0], choices[1], choices[2]);
+     //   setChoices(player, choices);
+     //  RpcSetLabels(player.connectionToClient, choices[0], choices[1], choices[2]);
     }
 
     //try with seperate passives isntead of list

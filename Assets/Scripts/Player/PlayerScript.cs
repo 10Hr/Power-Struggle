@@ -113,14 +113,6 @@ public class PlayerScript : NetworkBehaviour
     public SyncList<string[]> hand = new SyncList<string[]>();
     public SyncList<Passive> choicesList = new SyncList<Passive>();
 
-    public Passive Passive {
-        get { return passive; }
-        set { passive = value; }
-    }
-    public string PassiveName {
-        get { return passiveName; }
-        set { passiveName = value; }
-    }
 
     //Properties
     //Methods
@@ -134,7 +126,9 @@ public class PlayerScript : NetworkBehaviour
         playerList = GameObject.Find("PlayerList").GetComponent<PlayerList>();
         FSM = GameObject.Find("FSM").GetComponent<GameState>();
         CmdSetPlayer(this);
-        
+
+        passive = gameObject.GetComponent<Passive>();
+
         charismaText = GameObject.Find("CharismaCounter").GetComponent<Text>();
         strengthText = GameObject.Find("StrengthCounter").GetComponent<Text>();
         intelligenceText = GameObject.Find("IntelligenceCounter").GetComponent<Text>();
@@ -191,6 +185,7 @@ public class PlayerScript : NetworkBehaviour
                 //spawn passive choices
                 if (g == 0 && hasHighest) {
                     passiveManager.CmdSelectPassive(highest, this);
+                    Debug.Log(passive.PassiveName);  // returns null on client
                     g = 1;
                 }
 

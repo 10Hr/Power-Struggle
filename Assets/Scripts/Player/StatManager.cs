@@ -105,6 +105,8 @@ public class StatManager : NetworkBehaviour
 
         CmdChangeStats(p, thisButName, buttontag);
     }
+/* fix later
+
 
     public void selectPassive() {
         GameObject thisButton = UnityEngine.EventSystems.EventSystem.current.currentSelectedGameObject;
@@ -139,4 +141,5 @@ public class StatManager : NetworkBehaviour
     {
         p.passiveName = passiveName;
     }
+    */
 }
