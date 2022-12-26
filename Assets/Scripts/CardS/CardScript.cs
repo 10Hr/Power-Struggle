@@ -108,12 +108,12 @@ public class CardScript : NetworkBehaviour
 
     public void Enlarge() {
         if (hovered && cardBack != null) {
-            this.transform.localScale = new Vector3(1.25f, 1.25f, 0);
-            this.GetComponent<SpriteRenderer>().sortingOrder = 9;
+            gameObject.transform.localScale = new Vector3(1.25f, 1.25f, 0);
+            gameObject.GetComponent<SpriteRenderer>().sortingOrder = 9;
         }
         if (!hovered && cardBack != null) {
-            this.transform.localScale = new Vector3(1f, 1f, 0);
-            this.GetComponent<SpriteRenderer>().sortingOrder = sortingDefault;
+            transform.localScale = new Vector3(1f, 1f, 0);
+            gameObject.GetComponent<SpriteRenderer>().sortingOrder = sortingDefault;
         }
     }
     
