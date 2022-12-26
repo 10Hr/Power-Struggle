@@ -204,10 +204,7 @@ public class PlayerScript : NetworkBehaviour
                 break;
 
             case GameStates.Turn:
-                if (hand.Count < 6)
-                {
-                    //CmdDrawCard(this, cardSlots);
-                }
+                CmdDrawCard(this, cardSlots);
                 break;
         }
 
@@ -274,16 +271,21 @@ public class PlayerScript : NetworkBehaviour
     [Command(requiresAuthority = false)]
     public void CmdDrawCard(PlayerScript p, GameObject[] slots)
     {
-        p.hand.Add(p.cards[0]);
-        p.cards.Remove(p.cards[0]);
-
-        foreach (GameObject g in slots)
+        if (p.hand.Count < 6)
         {
-            if (g.GetComponent<CardScript>().Title == "")
+            Debug.Log("Hand: " + p.gameObject.name + " " + p.hand.Count);
+            Debug.Log("Deck: " + p.gameObject.name + " " + p.cards.Count);
+            p.hand.Add(p.cards[0]);
+            p.cards.Remove(p.cards[0]);
+
+            foreach (GameObject g in slots)
             {
-                g.GetComponent<CardScript>().Title = p.hand[p.hand.Count - 1][0];
-                g.GetComponent<CardScript>().Stat = p.hand[p.hand.Count - 1][2];
-                break;
+                if (g.GetComponent<CardScript>().Title == "")
+                {
+                    g.GetComponent<CardScript>().Title = p.hand[p.hand.Count - 1][0];
+                    g.GetComponent<CardScript>().Stat = p.hand[p.hand.Count - 1][2];
+                    break;
+                }
             }
         }
     }
