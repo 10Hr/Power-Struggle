@@ -15,13 +15,20 @@ public class CardScript : NetworkBehaviour
     public Sprite sprIntelligence;
     public Sprite sprStrength;
 
+    private string type;
     private string title;
-    private string effect;
-    private string stat;
+    private string cost;
+    private string description;
     public bool hovered;
     public bool selected = false;
     public bool prevSelected = false;
     public int sortingDefault;
+
+    public string Cost
+    {
+        get { return cost; }
+        set { cost = value; }
+    }
 
     public string Title
     {
@@ -29,19 +36,19 @@ public class CardScript : NetworkBehaviour
         set { title = value; }
     }
 
-    public string Effect
+        public string Description
     {
-        get { return effect; }
-        set { effect = value; }
+        get { return description; }
+        set { description = value; }
     }
 
-    public string Stat
+    public string Type
     {
-        get { return stat; }
+        get { return type; }
         set 
         { 
-            stat = value;
-            switch (stat)
+            type = value;
+            switch (type)
             {
                 case "charisma":
                     cardBack = sprCharisma;

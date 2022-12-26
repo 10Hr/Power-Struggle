@@ -282,8 +282,8 @@ public class PlayerScript : NetworkBehaviour
             {
                 if (g.GetComponent<CardScript>().Title == "")
                 {
-                    g.GetComponent<CardScript>().Title = p.hand[p.hand.Count - 1][0];
-                    g.GetComponent<CardScript>().Stat = p.hand[p.hand.Count - 1][2];
+                    g.GetComponent<CardScript>().Title = p.hand[p.hand.Count - 1][1];
+                    g.GetComponent<CardScript>().Type = p.hand[p.hand.Count - 1][0];
                     break;
                 }
             }

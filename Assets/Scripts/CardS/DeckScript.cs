@@ -37,111 +37,41 @@ public class DeckScript : NetworkBehaviour
         switch (highest)
         {
             case "cunning":
-                Debug.Log("In cunning");
                 path = Application.dataPath + " /StreamingAssets/cardsCunning.txt";
-                input = new StreamReader(path);
-                line = null;
-
-                while ((line = input.ReadLine()) != null)
-                {
-                    Debug.Log("about to create a card");
-                    string[] data = line.Split(',');
-                    cards.Add(new CardScript());
-                    cardData.Add(data);
-                    Debug.Log(cardData[cardData.Count - 1][0]);
-                    //cards.Add(Instantiate(prefab));
-                    //cards[cards.Count - 1].name = data[0];
-                    //cards[cards.Count - 1].AddComponent<SpriteRenderer>();
-                    //cards[cards.Count - 1].AddComponent<CardScript>();
-                    //cards[cards.Count - 1].AddComponent<NetworkIdentity>();
-                    //cards[cards.Count - 1].GetComponent<CardScript>().Title = data[0];
-                    //cards[cards.Count - 1].GetComponent<CardScript>().Effect = data[1];
-                    //cards[cards.Count - 1].GetComponent<CardScript>().Stat = data[2];
-                    cards[cards.Count - 1].Title = data[0];
-                    cards[cards.Count - 1].Effect = data[1];
-                    cards[cards.Count - 1].Stat = data[2];
-                }
-                input.Close();
-                    break;
+                break;
 
             case "charisma":
-
                 path = Application.dataPath + " /StreamingAssets/cardsCharisma.txt";
-                input = new StreamReader(path);
-                line = null;
-
-                while ((line = input.ReadLine()) != null)
-                {
-                    string[] data = line.Split(',');
-                    cards.Add(new CardScript());
-                    cardData.Add(data);
-                    //cards.Add(Instantiate(prefab));
-                    //cards[cards.Count - 1].name = data[0];
-                    //cards[cards.Count - 1].AddComponent<SpriteRenderer>();
-                    //cards[cards.Count - 1].AddComponent<CardScript>();
-                    //cards[cards.Count - 1].AddComponent<NetworkIdentity>();
-                    //cards[cards.Count - 1].GetComponent<CardScript>().Title = data[0];
-                    //cards[cards.Count - 1].GetComponent<CardScript>().Effect = data[1];
-                    //cards[cards.Count - 1].GetComponent<CardScript>().Stat = data[2];
-                    cards[cards.Count - 1].Title = data[0];
-                    cards[cards.Count - 1].Effect = data[1];
-                    cards[cards.Count - 1].Stat = data[2];
-                }
-                input.Close();
                 break;
 
             case "intelligence":
-
                 path = Application.dataPath + " /StreamingAssets/cardsIntelligence.txt";
-                input = new StreamReader(path);
-                line = null;
-
-                while ((line = input.ReadLine()) != null)
-                {
-                    string[] data = line.Split(',');
-                    cards.Add(new CardScript());
-                    cardData.Add(data);
-                    //cards.Add(Instantiate(prefab));
-                    //cards[cards.Count - 1].name = data[0];
-                    //cards[cards.Count - 1].AddComponent<SpriteRenderer>();
-                    //cards[cards.Count - 1].AddComponent<CardScript>();
-                    //cards[cards.Count - 1].AddComponent<NetworkIdentity>();
-                    //cards[cards.Count - 1].GetComponent<CardScript>().Title = data[0];
-                    //cards[cards.Count - 1].GetComponent<CardScript>().Effect = data[1];
-                    //cards[cards.Count - 1].GetComponent<CardScript>().Stat = data[2];
-                    cards[cards.Count - 1].Title = data[0];
-                    cards[cards.Count - 1].Effect = data[1];
-                    cards[cards.Count - 1].Stat = data[2];
-                }
-                input.Close();
                 break;
 
             case "strength":
-
                 path = Application.dataPath + " /StreamingAssets/cardsStrength.txt";
-                input = new StreamReader(path);
-                line = null;
-
-                while ((line = input.ReadLine()) != null)
-                {
-                    string[] data = line.Split(',');
-                    cards.Add(new CardScript());
-                    cardData.Add(data);
-                    //cards.Add(Instantiate(prefab));
-                    //cards[cards.Count - 1].name = data[0];
-                    //cards[cards.Count - 1].AddComponent<SpriteRenderer>();
-                    //cards[cards.Count - 1].AddComponent<CardScript>();
-                    //cards[cards.Count - 1].AddComponent<NetworkIdentity>();
-                    //cards[cards.Count - 1].GetComponent<CardScript>().Title = data[0];
-                    //cards[cards.Count - 1].GetComponent<CardScript>().Effect = data[1];
-                    //cards[cards.Count - 1].GetComponent<CardScript>().Stat = data[2];
-                    cards[cards.Count - 1].Title = data[0];
-                    cards[cards.Count - 1].Effect = data[1];
-                    cards[cards.Count - 1].Stat = data[2];
-                }
-                input.Close();
                 break;
         }
+
+            input = new StreamReader(path);
+            line = null;
+
+            while ((line = input.ReadLine()) != null)
+            {
+                string[] data = line.Split(',');
+                cards.Add(new CardScript());
+                cardData.Add(data);
+                Debug.Log(cardData[cardData.Count - 1][0]);
+                cards[cards.Count - 1].Type = data[0];
+                cards[cards.Count - 1].Title = data[1];
+                cards[cards.Count - 1].Cost = data[2];
+                cards[cards.Count - 1].Description = data[3];
+
+            }
+            input.Close();
+
+            // when writing a new card
+            // type,title,cost,Description
     }
 
     // Update is called once per frame

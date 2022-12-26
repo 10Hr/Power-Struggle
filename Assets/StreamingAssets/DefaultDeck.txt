@@ -1,23 +1,23 @@
-default,0,Gain 1 point in Strength
-default,0,Gain 1 point in Charisma
-default,0,Gain 1 point in Intelligence
-default,0,Gain 1 point in Cunning
-default,0,2x performace points this turn
-default,1 strength,Target an opponent - they lose power equal to 10 x Strength
-default,1 strength,Target an opponent - they lose power equal to 10 x Strength
-default,1 intelligence,Look at cards in an opponents hand up to how many intelligence points you have (max 6).
-default,1 intelligence,Look at cards in an opponents hand up to how many intelligence points you have (max 6).
-default,1 charisma,Gain power equal to 10 x Charisma
-default,1 charisma,Gain power equal to 10 x Charisma
-default,1 cunning,lose a point in cunning - gain 75 power
-default,1 cunning,lose a point in cunning - gain 75 power
-default,0,prevent any stat point loss this turn
-default,0,opponent loses stat point of their choice
-default,0,opponent loses stat point of their choice
-default,0,opponent loses stat point of their choice
-default,0,opponent loses 50 points
-default,0,opponent loses 50 points
-default,0,opponent loses 50 points
-default,0,gain 50 points
-default,0,gain 50 points
-default,0,gain 50 points
+default,exTitle,0,Gain 1 point in Strength
+default,exTitle,0,Gain 1 point in Charisma
+default,exTitle,0,Gain 1 point in Intelligence
+default,exTitle,0,Gain 1 point in Cunning
+default,exTitle,0,2x performace points this turn
+default,exTitle,1 strength,Target an opponent - they lose power equal to 10 x Strength
+default,exTitle,1 strength,Target an opponent - they lose power equal to 10 x Strength
+default,exTitle,1 intelligence,Look at cards in an opponents hand up to how many intelligence points you have (max 6).
+default,exTitle,1 intelligence,Look at cards in an opponents hand up to how many intelligence points you have (max 6).
+default,exTitle,1 charisma,Gain power equal to 10 x Charisma
+default,exTitle,1 charisma,Gain power equal to 10 x Charisma
+default,exTitle,1 cunning,lose a point in cunning - gain 75 power
+default,exTitle,1 cunning,lose a point in cunning - gain 75 power
+default,exTitle,0,prevent any stat point loss this turn
+default,exTitle,0,opponent loses stat point of their choice
+default,exTitle,0,opponent loses stat point of their choice
+default,exTitle,0,opponent loses stat point of their choice
+default,exTitle,0,opponent loses 50 points
+default,exTitle,0,opponent loses 50 points
+default,exTitle,0,opponent loses 50 points
+default,exTitle,0,gain 50 points
+default,exTitle,0,gain 50 points
+default,exTitle,0,gain 50 points
