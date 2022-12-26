@@ -1,0 +1,17 @@
+intelligence,0,Gain 1 point in intelligence
+intelligence,1,Look at cards in an opponents hand up to how many intelligence points you have (max 6).
+intelligence,1,Look at cards in an opponents hand up to how many intelligence points you have (max 6).
+intelligence,4,If you lost power so far this turn, gain it back - return half of the loses to the players who targetted you. if you haven't - lose 100 power.
+intelligence,4,If a target you made lose power - negates it - or counters - gain half the power they would have lost.
+intelligence,4,If a target you made lose power - negates it - or counters - gain half the power they would have lost.
+intelligence,2,Target a player - learn their second highest stat value - and gain a point in that stat and choose if they gain one too.
+intelligence,2,Target a player - learn their second highest stat value - and gain a point in that stat and choose if they gain one too.
+intelligence,7,Target any number of players - reveal your hand to those players - gain 50 power per player shown.
+intelligence,3,Target a player, they lose power equal to 20 x the amount of cards in their hand that are revealed.
+intelligence,3,Target a player, they lose power equal to 20 x the amount of cards in their hand that are revealed.
+intelligence,3,Target a player, they lose stat points of your choice for every 3 revealed cards in their hand
+intelligence,3,Target a player, they lose stat points of your choice for every 3 revealed cards in their hand
+intelligence,3,Gain power equal to 10 x the amount of revealed cards in all your opponents hands.
+intelligence,3,Gain power equal to 10 x the amount of revealed cards in all your opponents hands.
+intelligence,6,Spend an amount of power equal to any multiple of 25 - reveal that many cards from all players hands
+intelligence,2,Gain 1 performance point for each card in players hands that is revealed
