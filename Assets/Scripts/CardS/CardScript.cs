@@ -102,14 +102,14 @@ public class CardScript : NetworkBehaviour
 
     public void Enlarge() {
         if (hovered && cardBack != null) {
-            gameObject.transform.localScale = new Vector3(1.25f, 1.25f, 0);
-            gameObject.transform.localPosition = new Vector3(gameObject.transform.localPosition.x, defaultY + 20, 0);
-            //gameObject.GetComponent<SpriteRenderer>().sortingOrder = 7;
+            gameObject.transform.localScale = new Vector3(75f, 75f, 0);
+            gameObject.transform.localPosition = new Vector3(gameObject.transform.localPosition.x, defaultY + 100, 0);
+            gameObject.GetComponent<SpriteRenderer>().sortingOrder = 7;
         }
         if (!hovered && cardBack != null) {
-            transform.localScale = new Vector3(1f, 1f, 0);
+            transform.localScale = new Vector3(45f, 45f, 0);
             gameObject.transform.localPosition = new Vector3(gameObject.transform.localPosition.x, defaultY, 0);
-            //gameObject.GetComponent<SpriteRenderer>().sortingOrder = sortingDefault;
+            gameObject.GetComponent<SpriteRenderer>().sortingOrder = sortingDefault;
         }
     }
     

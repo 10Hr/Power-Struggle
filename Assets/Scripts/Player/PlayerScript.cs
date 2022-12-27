@@ -281,16 +281,6 @@ public class PlayerScript : NetworkBehaviour
             Debug.Log("Deck: " + p.gameObject.name + " " + p.cards.Count);
             p.hand.Add(p.cards[0]);
             p.cards.Remove(p.cards[0]);
-
-            //foreach (GameObject g in slots)
-            //{
-            //    if (g.GetComponent<CardScript>().Title == "")
-            //    {
-            //        g.GetComponent<CardScript>().Title = p.hand[p.hand.Count - 1][1];
-            //        g.GetComponent<CardScript>().Type = p.hand[p.hand.Count - 1][0];
-            //        break;
-            //    }
-            //}
         }
     }
 
