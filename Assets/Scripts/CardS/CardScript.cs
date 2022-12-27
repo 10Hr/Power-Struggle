@@ -23,6 +23,7 @@ public class CardScript : NetworkBehaviour
     public bool selected = false;
     public bool prevSelected = false;
     public int sortingDefault;
+    public float defaultY;
 
     public string Cost
     {
@@ -69,25 +70,18 @@ public class CardScript : NetworkBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        defaultY = gameObject.transform.localPosition.y;
         gameObject.GetComponent<SpriteRenderer>().sprite = cardBack;
+        sortingDefault = gameObject.GetComponent<SpriteRenderer>().sortingOrder;
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        //switch (type)
-        //{
-        //    case "charisma":
-        //        cardBack =
-        //        break;
-        //    case "cunning":
-        //        break;
-        //    case "strength":
-        //        break;
-        //    case "intelligence":
-        //        break;
-        //}
         gameObject.GetComponent<SpriteRenderer>().sprite = cardBack;
+
+        Enlarge();
     }
 
     public void Flip()
@@ -109,11 +103,13 @@ public class CardScript : NetworkBehaviour
     public void Enlarge() {
         if (hovered && cardBack != null) {
             gameObject.transform.localScale = new Vector3(1.25f, 1.25f, 0);
-            gameObject.GetComponent<SpriteRenderer>().sortingOrder = 9;
+            gameObject.transform.localPosition = new Vector3(gameObject.transform.localPosition.x, defaultY + 20, 0);
+            //gameObject.GetComponent<SpriteRenderer>().sortingOrder = 7;
         }
         if (!hovered && cardBack != null) {
             transform.localScale = new Vector3(1f, 1f, 0);
-            gameObject.GetComponent<SpriteRenderer>().sortingOrder = sortingDefault;
+            gameObject.transform.localPosition = new Vector3(gameObject.transform.localPosition.x, defaultY, 0);
+            //gameObject.GetComponent<SpriteRenderer>().sortingOrder = sortingDefault;
         }
     }
     
