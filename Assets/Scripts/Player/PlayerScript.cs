@@ -110,12 +110,14 @@ public class PlayerScript : NetworkBehaviour
     public PlayerScript[] playerCheck;
 
     public GameObject[] cardSlots;
+    public GameObject[] enemySlots1;
+    public GameObject[] enemySlots2;
+    public GameObject[] enemySlots3;
 
     int g = 0;
     public SyncList<string[]> cards = new SyncList<string[]>();
     public SyncList<string[]> hand = new SyncList<string[]>();
     public SyncList<Passive> choicesList = new SyncList<Passive>();
-
 
     //Properties
     //Methods
@@ -140,6 +142,9 @@ public class PlayerScript : NetworkBehaviour
         subButtons = GameObject.FindGameObjectsWithTag("sub");
 
         cardSlots = GameObject.FindGameObjectsWithTag("CardSlot");
+        enemySlots1 = GameObject.FindGameObjectsWithTag("1");
+        enemySlots2 = GameObject.FindGameObjectsWithTag("2");
+        enemySlots3 = GameObject.FindGameObjectsWithTag("3");
 
         readyButton = GameObject.Find("Ready");
 
