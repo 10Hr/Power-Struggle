@@ -97,6 +97,9 @@ public class PlayerScript : NetworkBehaviour
     [SyncVar]
     public bool cardSlotsSpawned = false;
 
+    [SyncVar]
+    public bool cardsSpawned = false;
+
     public DeckScript deck;
 
     public PassiveManager passiveManager;
@@ -196,23 +199,24 @@ public class PlayerScript : NetworkBehaviour
                     CmdSelectedPassive(this);
                     g = 1;
                 }
-
-                ////spawn card slots to plug in card data to
-                //if (!cardSlotsSpawned && hasDeck && hasHighest)
-                //{
-                //    foreach (string[] s in cards)
-                //    {
-                        
-                //    }
-                //}
-
                 break;
 
-            case GameStates.Turn:
+            case GameStates.DrawCards:
                 CmdDrawCard(this);
                 if (hand.Count == 6)
                 {
                     TransferData();
+                    CmdSpawnedCards(this);
+                }
+                break;
+
+            case GameStates.Turn:
+                foreach (PlayerScript p in playerList.players)
+                {
+                    if (p.netId != this.netId)
+                    {
+                        //fill enemy card slots
+                    }
                 }
                 break;
         }
@@ -269,6 +273,12 @@ public class PlayerScript : NetworkBehaviour
             }
         }
         #endregion
+    }
+
+    [Command(requiresAuthority = false)]
+    public void CmdSpawnedCards(PlayerScript p)
+    {
+        p.cardsSpawned = true;
     }
 
     [Command(requiresAuthority = false)]
@@ -336,10 +346,6 @@ public class PlayerScript : NetworkBehaviour
     {
         foreach (string[] s in cards)
         {
-            //p.cards.Add(c);
-            //p.cards[p.cards.Count - 1].Title = c.Title;
-            //p.cards[p.cards.Count - 1].Effect = c.Effect;
-            //p.cards[p.cards.Count - 1].Stat = c.Stat;
             p.cards.Add(s);
         }
     }

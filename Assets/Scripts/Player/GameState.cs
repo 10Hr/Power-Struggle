@@ -10,6 +10,7 @@ public enum GameStates
     Setup, //players picking stats
     Passive, //players picking passive
     StartEvent, //starting event
+    DrawCards, //Draw self cards
     Turn, //turn
     Event //event
 }
@@ -87,11 +88,19 @@ public class GameState : NetworkBehaviour
                 if (playerList.players[0].hasPassive && playerList.players[1].hasPassive 
                     && playerList.players[2].hasPassive && playerList.players[3].hasPassive)
                 {
-                    currentState = GameStates.Turn;
+                    currentState = GameStates.DrawCards;
                 }
                 break;
 
             case GameStates.StartEvent:
+                break;
+
+            case GameStates.DrawCards:
+                if (playerList.players[0].cardsSpawned && playerList.players[1].cardsSpawned
+                    && playerList.players[2].cardsSpawned && playerList.players[3].cardsSpawned)
+                {
+                    currentState = GameStates.Turn;
+                }
                 break;
 
             case GameStates.Turn:
