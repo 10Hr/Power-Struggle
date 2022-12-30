@@ -3,7 +3,20 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Player1
+  - MainCanvas
+  - Change
+  - CardSlot
+  - passiveChoice2
+  - add
+  - passiveChoice3
+  - Change1
+  - sub
+  - passiveChoice1
+  - 1
+  - 2
+  - 3
   layers:
   - Default
   - TransparentFX
