@@ -205,7 +205,7 @@ public class PlayerScript : NetworkBehaviour
                 CmdDrawCard(this);
                 if (hand.Count == 6)
                 {
-                    TransferData();
+                    TransferData(cardSlots, this);
                     CmdSpawnedCards(this);
                 }
                 break;
@@ -215,7 +215,18 @@ public class PlayerScript : NetworkBehaviour
                 {
                     if (p.netId != this.netId)
                     {
-                        //fill enemy card slots
+                        if (enemySlots1[0].GetComponent<CardScript>().Title == "")
+                        {
+                            TransferData(enemySlots1, p);
+                        }
+                        else if (enemySlots2[0].GetComponent<CardScript>().Title == "")
+                        {
+                            TransferData(enemySlots2, p);
+                        }
+                        else if (enemySlots3[0].GetComponent<CardScript>().Title == "")
+                        {
+                            TransferData(enemySlots3, p);
+                        }
                     }
                 }
                 break;
@@ -299,15 +310,15 @@ public class PlayerScript : NetworkBehaviour
         }
     }
 
-    public void TransferData()
+    public void TransferData(GameObject[] slots, PlayerScript p)
     {
         int index = 0;
-        foreach (GameObject g in cardSlots)
+        foreach (GameObject g in slots)
         {
             if (g.GetComponent<CardScript>().Title == "")
             {
-                g.GetComponent<CardScript>().Title = hand[index][1];
-                g.GetComponent<CardScript>().Type = hand[index][0];
+                g.GetComponent<CardScript>().Title = p.hand[index][1];
+                g.GetComponent<CardScript>().Type = p.hand[index][0];
                 break;
             }
             index++;
