@@ -119,6 +119,7 @@ public class PlayerScript : NetworkBehaviour
     public GameObject[] enemySlots1;
     public GameObject[] enemySlots2;
     public GameObject[] enemySlots3;
+    public List<GameObject[]> allEnemySlots;
 
     int g = 0;
     public SyncList<string[]> cards = new SyncList<string[]>();
@@ -151,6 +152,9 @@ public class PlayerScript : NetworkBehaviour
         enemySlots1 = GameObject.FindGameObjectsWithTag("1");
         enemySlots2 = GameObject.FindGameObjectsWithTag("2");
         enemySlots3 = GameObject.FindGameObjectsWithTag("3");
+        allEnemySlots.Add(enemySlots1);
+        allEnemySlots.Add(enemySlots2);
+        allEnemySlots.Add(enemySlots3);
 
         readyButton = GameObject.Find("Ready");
 
@@ -276,25 +280,36 @@ public class PlayerScript : NetworkBehaviour
 
     public void TransferEnemyData()
     {
-        CmdEnemyTransfered(this);
-        foreach (PlayerScript p in playerList.players)
+        //CmdEnemyTransfered(this);
+        //foreach (PlayerScript p in playerList.players)
+        //{
+        //    if (p.netId != this.netId)
+        //    {
+        //        if (enemySlots1[5].GetComponent<CardScript>().Title == "")
+        //        {
+        //            TransferData(enemySlots1, p);
+        //        }
+        //        else if (enemySlots2[5].GetComponent<CardScript>().Title == "")
+        //        {
+        //            TransferData(enemySlots2, p);
+        //        }
+        //        else if (enemySlots3[5].GetComponent<CardScript>().Title == "")
+        //        {
+        //            TransferData(enemySlots3, p);
+        //        }
+        //    }
+        //}
+
+        foreach (GameObject[] ga in allEnemySlots)
         {
-            if (p.netId != this.netId)
+            for (int i = 0; i < 4; i++)
             {
-                if (enemySlots1[5].GetComponent<CardScript>().Title == "")
-                {
-                    TransferData(enemySlots1, p);
-                }
-                else if (enemySlots2[0].GetComponent<CardScript>().Title == "")
-                {
-                    TransferData(enemySlots2, p);
-                }
-                else if (enemySlots3[0].GetComponent<CardScript>().Title == "")
-                {
-                    TransferData(enemySlots3, p);
+                if (playerList.players[i].netId != this.netId)
+                { 
                 }
             }
         }
+
     }
 
     [Command (requiresAuthority = false)]
