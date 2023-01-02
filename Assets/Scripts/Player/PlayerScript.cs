@@ -100,6 +100,9 @@ public class PlayerScript : NetworkBehaviour
     [SyncVar]
     public bool cardsSpawned = false;
 
+    [SyncVar]
+    public bool dataTransfered = false;
+
     public DeckScript deck;
 
     public PassiveManager passiveManager;
@@ -203,32 +206,17 @@ public class PlayerScript : NetworkBehaviour
 
             case GameStates.DrawCards:
                 CmdDrawCard(this);
-                if (hand.Count == 6)
+                if (hand.Count == 6 && !cardsSpawned)
                 {
                     TransferData(cardSlots, this);
-                    CmdSpawnedCards(this);
+                    if (cardSlots[5].GetComponent<CardScript>().Title != "")
+                        CmdSpawnedCards(this);
                 }
                 break;
 
             case GameStates.Turn:
-                foreach (PlayerScript p in playerList.players)
-                {
-                    if (p.netId != this.netId)
-                    {
-                        if (enemySlots1[0].GetComponent<CardScript>().Title == "")
-                        {
-                            TransferData(enemySlots1, p);
-                        }
-                        else if (enemySlots2[0].GetComponent<CardScript>().Title == "")
-                        {
-                            TransferData(enemySlots2, p);
-                        }
-                        else if (enemySlots3[0].GetComponent<CardScript>().Title == "")
-                        {
-                            TransferData(enemySlots3, p);
-                        }
-                    }
-                }
+                //if (!dataTransfered)
+                    TransferEnemyData();
                 break;
         }
 
@@ -286,6 +274,35 @@ public class PlayerScript : NetworkBehaviour
         #endregion
     }
 
+    public void TransferEnemyData()
+    {
+        CmdEnemyTransfered(this);
+        foreach (PlayerScript p in playerList.players)
+        {
+            if (p.netId != this.netId)
+            {
+                if (enemySlots1[5].GetComponent<CardScript>().Title == "")
+                {
+                    TransferData(enemySlots1, p);
+                }
+                else if (enemySlots2[0].GetComponent<CardScript>().Title == "")
+                {
+                    TransferData(enemySlots2, p);
+                }
+                else if (enemySlots3[0].GetComponent<CardScript>().Title == "")
+                {
+                    TransferData(enemySlots3, p);
+                }
+            }
+        }
+    }
+
+    [Command (requiresAuthority = false)]
+    public void CmdEnemyTransfered(PlayerScript p)
+    {
+        p.dataTransfered = true;
+    }
+
     [Command(requiresAuthority = false)]
     public void CmdSpawnedCards(PlayerScript p)
     {
@@ -303,8 +320,6 @@ public class PlayerScript : NetworkBehaviour
     {
         if (p.hand.Count < 6)
         {
-            Debug.Log("Hand: " + p.gameObject.name + " " + p.hand.Count);
-            Debug.Log("Deck: " + p.gameObject.name + " " + p.cards.Count);
             p.hand.Add(p.cards[0]);
             p.cards.Remove(p.cards[0]);
         }
@@ -315,6 +330,7 @@ public class PlayerScript : NetworkBehaviour
         int index = 0;
         foreach (GameObject g in slots)
         {
+            //Debug.Log(p.netIdentity.netId + " " + g.GetComponent<CardScript>().Title + " " + slots.Length);
             if (g.GetComponent<CardScript>().Title == "")
             {
                 g.GetComponent<CardScript>().Title = p.hand[index][1];
