@@ -100,9 +100,6 @@ public class PlayerScript : NetworkBehaviour
     [SyncVar]
     public bool cardsSpawned = false;
 
-    [SyncVar]
-    public bool dataTransfered = false;
-
     public DeckScript deck;
 
     public PassiveManager passiveManager;
@@ -119,7 +116,9 @@ public class PlayerScript : NetworkBehaviour
     public GameObject[] enemySlots1;
     public GameObject[] enemySlots2;
     public GameObject[] enemySlots3;
-    public List<GameObject[]> allEnemySlots;
+    public PlayerScript enemy1;
+    public PlayerScript enemy2;
+    public PlayerScript enemy3;
 
     int g = 0;
     public SyncList<string[]> cards = new SyncList<string[]>();
@@ -152,9 +151,6 @@ public class PlayerScript : NetworkBehaviour
         enemySlots1 = GameObject.FindGameObjectsWithTag("1");
         enemySlots2 = GameObject.FindGameObjectsWithTag("2");
         enemySlots3 = GameObject.FindGameObjectsWithTag("3");
-        allEnemySlots.Add(enemySlots1);
-        allEnemySlots.Add(enemySlots2);
-        allEnemySlots.Add(enemySlots3);
 
         readyButton = GameObject.Find("Ready");
 
@@ -280,42 +276,34 @@ public class PlayerScript : NetworkBehaviour
 
     public void TransferEnemyData()
     {
-        //CmdEnemyTransfered(this);
-        //foreach (PlayerScript p in playerList.players)
-        //{
-        //    if (p.netId != this.netId)
-        //    {
-        //        if (enemySlots1[5].GetComponent<CardScript>().Title == "")
-        //        {
-        //            TransferData(enemySlots1, p);
-        //        }
-        //        else if (enemySlots2[5].GetComponent<CardScript>().Title == "")
-        //        {
-        //            TransferData(enemySlots2, p);
-        //        }
-        //        else if (enemySlots3[5].GetComponent<CardScript>().Title == "")
-        //        {
-        //            TransferData(enemySlots3, p);
-        //        }
-        //    }
-        //}
-
-        foreach (GameObject[] ga in allEnemySlots)
+        if (enemy1 == null || enemy2 == null || enemy3 == null)
         {
-            for (int i = 0; i < 4; i++)
+            foreach (PlayerScript p in playerList.players)
             {
-                if (playerList.players[i].netId != this.netId)
-                { 
+                if (p.netId != this.netId)
+                {
+                    if (enemy1 == null)
+                        enemy1 = p;
+                    else if (enemy2 == null)
+                        enemy2 = p;
+                    else if (enemy3 == null)
+                        enemy3 = p;
                 }
             }
         }
 
-    }
-
-    [Command (requiresAuthority = false)]
-    public void CmdEnemyTransfered(PlayerScript p)
-    {
-        p.dataTransfered = true;
+        if (enemySlots1[5].GetComponent<CardScript>().Title == "")
+        {
+            TransferData(enemySlots1, enemy1);
+        }
+        else if (enemySlots2[5].GetComponent<CardScript>().Title == "")
+        {
+            TransferData(enemySlots2, enemy2);
+        }
+        else if (enemySlots3[5].GetComponent<CardScript>().Title == "")
+        {
+            TransferData(enemySlots3, enemy3);
+        }
     }
 
     [Command(requiresAuthority = false)]
