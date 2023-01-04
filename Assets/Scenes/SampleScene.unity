@@ -7189,7 +7189,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1882713756}
         m_TargetAssemblyTypeName: StatManager, Assembly-CSharp
-        m_MethodName: lockIn
+        m_MethodName: LockIn
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

@@ -21,6 +21,8 @@ public class PlayerScript : NetworkBehaviour
 
     public bool added = false;
 
+    public int numSelected;
+
     #region stats
     [SyncVar]
     private int charisma;
@@ -109,6 +111,12 @@ public class PlayerScript : NetworkBehaviour
 
     [SyncVar]
     public string passiveName;
+
+    [SyncVar]
+    public bool LockedIn = false;
+
+    [SyncVar]
+    public bool threeSelected;
 
     public PlayerScript[] playerCheck;
 
@@ -215,8 +223,19 @@ public class PlayerScript : NetworkBehaviour
                 break;
 
             case GameStates.Turn:
-                //if (!dataTransfered)
-                    TransferEnemyData();
+                TransferEnemyData();
+                numSelected = 0;
+                foreach (GameObject g in cardSlots)
+                {
+                    if (g.GetComponent<CardScript>().selected && !g.GetComponent<CardScript>().prevSelected)
+                    {
+                        numSelected++;
+                    }
+                }
+                if (numSelected == 3)
+                    CmdThreeSelected(this, true);
+                else
+                    CmdThreeSelected(this, false);
                 break;
         }
 
@@ -272,6 +291,12 @@ public class PlayerScript : NetworkBehaviour
             }
         }
         #endregion
+    }
+
+    [Command (requiresAuthority = false)]
+    public void CmdThreeSelected(PlayerScript p, bool b)
+    {
+        p.threeSelected = b;
     }
 
     public void TransferEnemyData()

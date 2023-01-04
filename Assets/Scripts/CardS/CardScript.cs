@@ -87,21 +87,15 @@ public class CardScript : NetworkBehaviour
     public void Flip()
     {
         Sprite currentSprite = gameObject.GetComponent<SpriteRenderer>().sprite;
-        if (!hasAuthority)
-        {
-            //Debug.Log("No Authority");
-        }
-        else
+        if (this.gameObject.tag == "CardSlot")
         {
             if (currentSprite = cardBack)
-               gameObject.GetComponent<SpriteRenderer>().sprite = cardFront;
-            
-            //Debug.Log("I have Authority");
+                gameObject.GetComponent<SpriteRenderer>().sprite = cardFront;
         }
     }
 
     public void Enlarge() {
-        if (hovered && cardBack != null) {
+        if (hovered && cardBack != null && this.gameObject.tag == "CardSlot") {
             gameObject.transform.localScale = new Vector3(75f, 75f, 0);
             gameObject.transform.localPosition = new Vector3(gameObject.transform.localPosition.x, defaultY + 100, 0);
             gameObject.GetComponent<SpriteRenderer>().sortingOrder = 7;
@@ -120,10 +114,9 @@ public class CardScript : NetworkBehaviour
         hovered = false;
     }
 
-    [Command(requiresAuthority = false)]
     public void OnMouseDown()
     {
-        if (cardBack != null)
+        if (cardBack != null && this.gameObject.tag == "CardSlot")
         {
             prevSelected = selected;
             selected = !selected;

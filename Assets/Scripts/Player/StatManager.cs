@@ -105,6 +105,23 @@ public class StatManager : NetworkBehaviour
 
         CmdChangeStats(p, thisButName, buttontag);
     }
+
+    public void LockIn()
+    {
+        PlayerScript p = GetPlayer();
+        CmdLockIn(p);
+    }
+
+    [Command (requiresAuthority = false)]
+    public void CmdLockIn(PlayerScript p)
+    {
+        if (p.threeSelected)
+        {
+            p.LockedIn = true;
+        }
+    }
+
+
 /* fix later
 
 
