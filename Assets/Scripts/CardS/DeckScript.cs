@@ -80,6 +80,13 @@ public class DeckScript : NetworkBehaviour
             // type,title,cost,Description
             createEffectList();
     }
+       void pullEff() { // waste of time
+        for (int i = 0; i < effects.Count; i++) 
+            for (int j = 0; j < 3; j++) 
+                if (cards[j].Title == effects[i].Method.Name) 
+                    effects[i]();     
+
+    }
 
     void createEffectList()
     {
@@ -95,7 +102,7 @@ public class DeckScript : NetworkBehaviour
         effects.Add(trglose1);
         effects.Add(trglose1);
         effects.Add(gainstr6);
-        effects.Add(losePG1s);
+        effects.Add(losePG1str);
        
 }
 
@@ -126,7 +133,7 @@ public class DeckScript : NetworkBehaviour
     public void gainstr6() {
         Debug.Log("gain 6 strength points");
     }
-    public void losePG1s() {
+    public void losePG1str() {
         Debug.Log("lose 1 point from each player");
     }
 

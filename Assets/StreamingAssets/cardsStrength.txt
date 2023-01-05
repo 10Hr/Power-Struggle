@@ -4,7 +4,6 @@ strength,trglose1,1,Target 1 player make them lose 1 point of your choice
 strength,trglose1,1,Target 1 player make them lose 1 point of your choice
 strength,gainstr6,6,gain 4 strength points
 strength,losePG1str,1,lose power and gain 1 strength point per 30 power lost
-
 strength,exTitle,1,lose power and gain 1 strength point per 30 power lost
 strength,exTitle,4,Target 1 player make them lose (GAINER) power, gain gain power = .5 of what player lost
 strength,exTitle,4,Target 1 player make them lose (GAINER) power, gain gain power = .5 of what player lost

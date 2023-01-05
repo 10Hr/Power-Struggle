@@ -222,20 +222,25 @@ public class PlayerScript : NetworkBehaviour
                 }
                 break;
 
-            case GameStates.Turn:
+            case GameStates.LoadEnemyCards:
                 TransferEnemyData();
                 numSelected = 0;
                 foreach (GameObject g in cardSlots)
                 {
                     if (g.GetComponent<CardScript>().selected && !g.GetComponent<CardScript>().prevSelected)
                     {
+                        g.GetComponent<SpriteRenderer>().color = Color.green;
                         numSelected++;
-                    }
+                    } else
+                        g.GetComponent<SpriteRenderer>().color = Color.white;
                 }
                 if (numSelected == 3)
                     CmdThreeSelected(this, true);
                 else
                     CmdThreeSelected(this, false);
+                break;
+
+            case GameStates.Turn:
                 break;
         }
 
@@ -422,5 +427,10 @@ public class PlayerScript : NetworkBehaviour
     {
         playerNumber = (int)netIdentity.netId;
         gameObject.name = $"{playerNumber}";
+    } 
+
+    public void Turn() {
+        Debug.Log("My Turn " + playerNumber);
+
     }
 }

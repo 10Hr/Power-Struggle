@@ -25,6 +25,8 @@ public class CardScript : NetworkBehaviour
     public int sortingDefault;
     public float defaultY;
 
+    public GameState gameState;
+
     public string Cost
     {
         get { return cost; }
@@ -73,7 +75,7 @@ public class CardScript : NetworkBehaviour
         defaultY = gameObject.transform.localPosition.y;
         gameObject.GetComponent<SpriteRenderer>().sprite = cardBack;
         sortingDefault = gameObject.GetComponent<SpriteRenderer>().sortingOrder;
-
+        gameState = GameObject.Find("FSM").GetComponent<GameState>();
     }
 
     // Update is called once per frame
@@ -116,10 +118,14 @@ public class CardScript : NetworkBehaviour
 
     public void OnMouseDown()
     {
-        if (cardBack != null && this.gameObject.tag == "CardSlot")
+        if (cardBack != null && this.gameObject.tag == "CardSlot" && gameState.currentState == GameStates.LoadEnemyCards)
         {
             prevSelected = selected;
             selected = !selected;
+        }
+        else if (cardBack != null && this.gameObject.tag == "CardSlot" && gameState.currentState == GameStates.Turn)
+        {
+          
         }
     }
 }

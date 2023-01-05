@@ -11,6 +11,7 @@ public enum GameStates
     Passive, //players picking passive
     StartEvent, //starting event
     DrawCards, //Draw self cards
+    LoadEnemyCards, //Load enemy cards
     Turn, //turn
     Event //event
 }
@@ -25,7 +26,7 @@ public class GameState : NetworkBehaviour
     private bool allDrawn = false;
     private bool passivesSelected = false;
     private bool allConnected = false;
-
+    int turn = 1;
     public bool PassivesSelected
     {
         set { passivesSelected = value; }
@@ -99,11 +100,25 @@ public class GameState : NetworkBehaviour
                 if (playerList.players[0].cardsSpawned && playerList.players[1].cardsSpawned
                     && playerList.players[2].cardsSpawned && playerList.players[3].cardsSpawned)
                 {
+                    currentState = GameStates.LoadEnemyCards;
+                }
+                break;
+            case GameStates.LoadEnemyCards:
+                if (playerList.players[0].LockedIn && playerList.players[1].LockedIn
+                    && playerList.players[2].LockedIn && playerList.players[3].LockedIn)
+                {
                     currentState = GameStates.Turn;
                 }
                 break;
-
             case GameStates.Turn:
+                if (turn == 12) {
+                    turn = 1;
+                    currentState = GameStates.Event;
+                } else {
+                    playerList.players[turn % 4].Turn();
+                    turn++;
+                }
+
                 break;
 
             case GameStates.Event:
