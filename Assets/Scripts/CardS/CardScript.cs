@@ -123,9 +123,10 @@ public class CardScript : NetworkBehaviour
             prevSelected = selected;
             selected = !selected;
         }
-        else if ((cardBack != null && this.gameObject.tag == "CardSlot" && gameState.currentState == GameStates.Turn) && gameState.currentPlayer.netId == NetworkClient.localPlayer.netId)
+        else if ((cardBack != null && this.gameObject.tag == "CardSlot" && gameState.currentState == GameStates.Turn) && gameState.currentPlayer.netId == NetworkClient.localPlayer.netId && selected)
         {
-          
+          gameState.currentPlayer.deck.pullEff(title);
+          gameState.turn++;
         }
     }
 }

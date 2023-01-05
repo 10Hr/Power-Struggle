@@ -80,10 +80,9 @@ public class DeckScript : NetworkBehaviour
             // type,title,cost,Description
             createEffectList();
     }
-       void pullEff() { // waste of time
+       public void pullEff(string title) { // waste of time
         for (int i = 0; i < effects.Count; i++) 
-            for (int j = 0; j < 3; j++) 
-                if (cards[j].Title == effects[i].Method.Name) 
+                if (title == effects[i].Method.Name) 
                     effects[i]();     
 
     }

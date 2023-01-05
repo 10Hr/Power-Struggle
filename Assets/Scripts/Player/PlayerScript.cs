@@ -430,7 +430,7 @@ public class PlayerScript : NetworkBehaviour
     } 
 
     public void Turn() {
-        Debug.Log("My Turn " + playerNumber);
+        //Debug.Log("My Turn " + playerNumber);
 
     }
 }

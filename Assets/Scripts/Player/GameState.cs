@@ -29,7 +29,9 @@ public class GameState : NetworkBehaviour
     private bool allDrawn = false;
     private bool passivesSelected = false;
     private bool allConnected = false;
-    int turn = 1;
+
+    [SyncVar]
+    public int turn = 0;
     public bool PassivesSelected
     {
         set { passivesSelected = value; }
@@ -115,12 +117,11 @@ public class GameState : NetworkBehaviour
                 break;
             case GameStates.Turn:
                 if (turn == 12) {
-                    turn = 1;
+                    turn = 0;
                     currentState = GameStates.Event;
                 } else {
                     currentPlayer = playerList.players[turn % 4];
-                    currentPlayer.Turn();
-                    turn++;
+                    //currentPlayer.Turn();
                 }
 
                 break;
