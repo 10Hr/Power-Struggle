@@ -14,6 +14,7 @@ public class DeckScript : NetworkBehaviour
     private List<GetEffects> effects = new List<GetEffects>();
 
 
+
     //private GameObject player1;
     //private GameObject player2;
     //private GameObject player3;
@@ -71,7 +72,6 @@ public class DeckScript : NetworkBehaviour
                 cards[cards.Count - 1].Title = data[1];
                 cards[cards.Count - 1].Cost = data[2];
                 cards[cards.Count - 1].Description = data[3];
-                cards[cards.Count - 1].CardEffect = data[4];
 
             }
             input.Close();
@@ -87,29 +87,53 @@ public class DeckScript : NetworkBehaviour
         // note the methods must all be of type void with no parameters
         // that is they must all have the same signature.
         Debug.Log("creating card effect list");
-        effects.Add(gain1str);
-        effects.Add(gain1chr);
-        effects.Add(gain1int);
-        effects.Add(gain1cun);
-
-
-
+        effects.Add(gainstr1);
+        effects.Add(gainchr1);
+        effects.Add(gainint1);
+        effects.Add(gaincun1);
+        effects.Add(gainstr2);
+        effects.Add(trglose1);
+        effects.Add(trglose1);
+        effects.Add(gainstr6);
+        effects.Add(losePG1s);
+       
 }
-    public void gain1str() {
+
+    //-----------------------------------------default-----------------------------------------
+    public void gainstr1() {
         Debug.Log("gain 1 strength point");
     }
-    public void gain1str(string goober) {
-        Debug.Log("gain 1 strength point");
-    }
-    public void gain1chr() {
+    public void gainchr1() {
         Debug.Log("gain 1 charisma point");
     }
-    public void gain1int() {
+    public void gainint1() {
         Debug.Log("gain 1 intelligence point");
     }
-    public void gain1cun() {
+    public void gaincun1() {
         Debug.Log("gain 1 cunning point");
     }
+    //-----------------------------------------intelligence-----------------------------------------
+
+    //-----------------------------------------charisma-----------------------------------------
+
+    //-----------------------------------------strength-----------------------------------------
+    public void gainstr2() {
+        Debug.Log("gain 2 strength points");
+    }
+    public void trglose1() {
+        Debug.Log("target player loses 1 point");
+    }
+    public void gainstr6() {
+        Debug.Log("gain 6 strength points");
+    }
+    public void losePG1s() {
+        Debug.Log("lose 1 point from each player");
+    }
+
+     //-----------------------------------------cunning-----------------------------------------
+
+
+
 
 
 }

@@ -1,7 +1,7 @@
-default,exTitle,0,Gain 1 point in Strength,gain1str
-default,exTitle,0,Gain 1 point in Charisma,gain1chr
-default,exTitle,0,Gain 1 point in Intelligence,gain1int
-default,exTitle,0,Gain 1 point in Cunning,gain1cun
+default,gainstr1,0,Gain 1 point in Strength
+default,gainchr1,0,Gain 1 point in Charisma
+default,gainint1,0,Gain 1 point in Intelligence
+default,gaincun1,0,Gain 1 point in Cunning
 default,exTitle,0,2x performace points this turn
 default,exTitle,1 strength,Target an opponent - they lose power equal to 10 x Strength
 default,exTitle,1 strength,Target an opponent - they lose power equal to 10 x Strength

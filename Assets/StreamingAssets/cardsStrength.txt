@@ -1,17 +1,18 @@
-strength,exTitle,0,Gain 1 point in intelligence
-strength,exTitle,1,Look at cards in an opponents hand up to how many intelligence points you have (max 6).
-strength,exTitle,1,Look at cards in an opponents hand up to how many intelligence points you have (max 6).
-strength,exTitle,4,If you lost power so far this turn, gain it back - return half of the loses to the players who targetted you. if you haven't - lose 100 power.
-strength,exTitle,4,If a target you made lose power - negates it - or counters - gain half the power they would have lost.
-strength,exTitle,4,If a target you made lose power - negates it - or counters - gain half the power they would have lost.
-strength,exTitle,2,Target a player - learn their second highest stat value - and gain a point in that stat and choose if they gain one too.
-strength,exTitle,2,Target a player - learn their second highest stat value - and gain a point in that stat and choose if they gain one too.
-strength,exTitle,7,Target any number of players - reveal your hand to those players - gain 50 power per player shown.
-strength,exTitle,3,Target a player, they lose power equal to 20 x the amount of cards in their hand that are revealed.
-strength,exTitle,3,Target a player, they lose power equal to 20 x the amount of cards in their hand that are revealed.
-strength,exTitle,3,Target a player, they lose stat points of your choice for every 3 revealed cards in their hand
-strength,exTitle,3,Target a player, they lose stat points of your choice for every 3 revealed cards in their hand
-strength,exTitle,3,Gain power equal to 10 x the amount of revealed cards in all your opponents hands.
-strength,exTitle,3,Gain power equal to 10 x the amount of revealed cards in all your opponents hands.
-strength,exTitle,6,Spend an amount of power equal to any multiple of 25 - reveal that many cards from all players hands
-strength,exTitle,2,Gain 1 performance point for each card in players hands that is revealed
+strength,gainstr1,0,Gain 1 point in strength
+strength,gainstr2,1,gain 2 strength points
+strength,trglose1,1,Target 1 player make them lose 1 point of your choice
+strength,trglose1,1,Target 1 player make them lose 1 point of your choice
+strength,gainstr6,6,gain 4 strength points
+strength,losePG1str,1,lose power and gain 1 strength point per 30 power lost
+
+strength,exTitle,1,lose power and gain 1 strength point per 30 power lost
+strength,exTitle,4,Target 1 player make them lose (GAINER) power, gain gain power = .5 of what player lost
+strength,exTitle,4,Target 1 player make them lose (GAINER) power, gain gain power = .5 of what player lost
+strength,exTitle,6,Target 1 player make them lose (GAINER) power, gain 1 strength point
+strength,exTitle,6,Target 1 player make them lose (GAINER) power, gain 1 strength point
+strength,exTitle,8,lose a quarter your strength points and gain power = 12 * lost points
+strength,exTitle,8,lose a quarter your strength points and gain power = 12 * lost points
+strength,exTitle,12,lose half your strength points and gain power = 20 * lost points
+strength,exTitle,12,lose half your strength points and gain power = 20 * lost points
+strength,exTitle,20,Target all players make them lose power = 2*(GAINER) the amount of strength points you have
+strength,exTitle,2,Gain performance points = strength points
