@@ -9,6 +9,11 @@ public class DeckScript : NetworkBehaviour
 {
     public List<CardScript> cards = new List<CardScript>();
     public List<string[]> cardData = new List<string[]>();
+
+    private delegate void GetEffects();
+    private List<GetEffects> effects = new List<GetEffects>();
+
+
     //private GameObject player1;
     //private GameObject player2;
     //private GameObject player3;
@@ -66,17 +71,42 @@ public class DeckScript : NetworkBehaviour
                 cards[cards.Count - 1].Title = data[1];
                 cards[cards.Count - 1].Cost = data[2];
                 cards[cards.Count - 1].Description = data[3];
+                cards[cards.Count - 1].CardEffect = data[4];
 
             }
             input.Close();
 
             // when writing a new card
             // type,title,cost,Description
+            createEffectList();
     }
 
-    // Update is called once per frame
-    void Update()
+    void createEffectList()
     {
-        
+        // create a list of delegate objects as placeholders for the methods.
+        // note the methods must all be of type void with no parameters
+        // that is they must all have the same signature.
+        Debug.Log("creating card effect list");
+        effects.Add(gain1str);
+        effects.Add(gain1chr);
+        effects.Add(gain1int);
+        effects.Add(gain1cun);
+
+
+
+}
+    public void gain1str() {
+        Debug.Log("gain 1 strength point");
     }
+    public void gain1chr() {
+        Debug.Log("gain 1 charisma point");
+    }
+    public void gain1int() {
+        Debug.Log("gain 1 intelligence point");
+    }
+    public void gain1cun() {
+        Debug.Log("gain 1 cunning point");
+    }
+
+
 }

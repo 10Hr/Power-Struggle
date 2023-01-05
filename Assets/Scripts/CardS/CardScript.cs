@@ -19,6 +19,7 @@ public class CardScript : NetworkBehaviour
     private string title = "";
     private string cost = "";
     private string description = "";
+    private string cardEffect;
     public bool hovered;
     public bool selected = false;
     public bool prevSelected = false;
@@ -41,6 +42,11 @@ public class CardScript : NetworkBehaviour
     {
         get { return description; }
         set { description = value; }
+    }
+    public string CardEffect
+    {
+        get { return cardEffect; }
+        set { cardEffect = value; }
     }
 
     public string Type
