@@ -17,6 +17,9 @@ TagManager:
   - 1
   - 2
   - 3
+  - top
+  - left
+  - right
   layers:
   - Default
   - TransparentFX

@@ -62,6 +62,7 @@ public class PlayerScript : NetworkBehaviour
     private GameObject[] addButtons;
     private GameObject[] subButtons;
 
+    [SyncVar]
     private int maxPoints = 8;
     [SyncVar]
     private int availablePoints = 8;
@@ -71,6 +72,12 @@ public class PlayerScript : NetworkBehaviour
         get { return availablePoints; }
         set { availablePoints += value; }
     }
+        public int MaxPoints
+    {
+        get { return maxPoints; }
+        set { maxPoints += value; }
+    }
+
     #endregion
 
     private GameObject readyButton;
@@ -133,6 +140,10 @@ public class PlayerScript : NetworkBehaviour
     public SyncList<string[]> hand = new SyncList<string[]>();
     public SyncList<Passive> choicesList = new SyncList<Passive>();
 
+    GameObject bntTop;
+    GameObject bntLeft;
+    GameObject bntRight;
+
     //Properties
     //Methods
     public override void OnStartLocalPlayer()
@@ -163,6 +174,18 @@ public class PlayerScript : NetworkBehaviour
         readyButton = GameObject.Find("Ready");
 
         passiveManager = GameObject.Find("PassiveManager").GetComponent<PassiveManager>();
+
+        bntTop = GameObject.Find("PlayerTop");
+        bntLeft = GameObject.Find("PlayerLeft");
+        bntRight = GameObject.Find("PlayerRight");
+
+        if (isLocalPlayer)
+        {
+            bntTop.SetActive(false);
+            bntLeft.SetActive(false);
+            bntRight.SetActive(false);
+        }
+
     }
 
     public void Update()
@@ -176,6 +199,7 @@ public class PlayerScript : NetworkBehaviour
         {
             CmdSendPlayers(this);
             added = true;
+
         }
 
         if (!isLocalPlayer)
@@ -334,6 +358,7 @@ public class PlayerScript : NetworkBehaviour
         {
             TransferData(enemySlots3, enemy3);
         }
+        sendPlayerData();
     }
 
     [Command(requiresAuthority = false)]
@@ -364,7 +389,7 @@ public class PlayerScript : NetworkBehaviour
         foreach (GameObject g in slots)
         {
             //Debug.Log(p.netIdentity.netId + " " + g.GetComponent<CardScript>().Title + " " + slots.Length);
-            if (g.GetComponent<CardScript>().Title == "")
+            if (g.GetComponent<CardScript>().Title == "") // problem child??
             {
                 g.GetComponent<CardScript>().Title = p.hand[index][1];
                 g.GetComponent<CardScript>().Type = p.hand[index][0];
@@ -429,6 +454,21 @@ public class PlayerScript : NetworkBehaviour
         gameObject.name = $"{playerNumber}";
     } 
 
+    public List<PlayerScript> sendPlayerData() {
+        List<PlayerScript> playerslots = new List<PlayerScript>();
+        playerslots.Add(enemy1);
+        playerslots.Add(enemy2);
+        playerslots.Add(enemy3);
+
+        return playerslots;
+    }
+
+    public void UnhideButtons() {
+        bntTop.SetActive(true);
+        bntLeft.SetActive(true);
+        bntRight.SetActive(true);
+    }
+    
     public void Turn() {
         //Debug.Log("My Turn " + playerNumber);
 

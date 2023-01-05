@@ -11,7 +11,12 @@ public class StatManager : NetworkBehaviour
     PlayerList playerList;
 
     public PassiveManager passiveManager;
+    public GameState gameState;
 
+
+    void Start() {
+        gameState = GameObject.Find("FSM").GetComponent<GameState>();
+    }
     public PlayerScript GetPlayer() {
 
         foreach (PlayerScript p in playerList.players)
@@ -120,7 +125,24 @@ public class StatManager : NetworkBehaviour
             p.LockedIn = true;
         }
     }
+    public void GetPlayerData() {
+        GameObject thisButton = UnityEngine.EventSystems.EventSystem.current.currentSelectedGameObject;
+        string buttontag = UnityEngine.EventSystems.EventSystem.current.currentSelectedGameObject.tag;
 
+        List<PlayerScript> playerslots = NetworkClient.localPlayer.GetComponent<PlayerScript>().sendPlayerData();
+        switch(buttontag) {
+            case "right":
+                NetworkClient.localPlayer.GetComponent<DeckScript>().getTarget(playerslots[0]);
+                break;
+            case "left":
+                NetworkClient.localPlayer.GetComponent<DeckScript>().getTarget(playerslots[1]);
+                break;
+            case "top":
+                NetworkClient.localPlayer.GetComponent<DeckScript>().getTarget(playerslots[2]);
+                break;
+
+        }
+    }
 
 /* fix later
 

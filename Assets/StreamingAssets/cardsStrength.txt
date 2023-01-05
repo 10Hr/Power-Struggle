@@ -4,14 +4,14 @@ strength,trglose1,1,Target 1 player make them lose 1 point of your choice
 strength,trglose1,1,Target 1 player make them lose 1 point of your choice
 strength,gainstr6,6,gain 4 strength points
 strength,losePG1str,1,lose power and gain 1 strength point per 30 power lost
-strength,exTitle,1,lose power and gain 1 strength point per 30 power lost
-strength,exTitle,4,Target 1 player make them lose (GAINER) power, gain gain power = .5 of what player lost
-strength,exTitle,4,Target 1 player make them lose (GAINER) power, gain gain power = .5 of what player lost
-strength,exTitle,6,Target 1 player make them lose (GAINER) power, gain 1 strength point
-strength,exTitle,6,Target 1 player make them lose (GAINER) power, gain 1 strength point
-strength,exTitle,8,lose a quarter your strength points and gain power = 12 * lost points
-strength,exTitle,8,lose a quarter your strength points and gain power = 12 * lost points
-strength,exTitle,12,lose half your strength points and gain power = 20 * lost points
-strength,exTitle,12,lose half your strength points and gain power = 20 * lost points
-strength,exTitle,20,Target all players make them lose power = 2*(GAINER) the amount of strength points you have
-strength,exTitle,2,Gain performance points = strength points
+strength,losePG1str,1,lose power and gain 1 strength point per 30 power lost
+strength,trglosePGP,4,Target 1 player make them lose (GAINER) power, gain gain power = .5 of what player lost
+strength,trglosePGP,4,Target 1 player make them lose (GAINER) power, gain gain power = .5 of what player lost
+strength,trglosePG1str,6,Target 1 player make them lose (GAINER) power, gain 1 strength point
+strength,trglosePG1str,6,Target 1 player make them lose (GAINER) power, gain 1 strength point
+strength,loseqstrGP,8,lose a quarter your strength points and gain power = 12 * lost points
+strength,loseqstrGP,8,lose a quarter your strength points and gain power = 12 * lost points
+strength,loseHGP,12,lose half your strength points and gain power = 20 * lost points
+strength,loseHGP,12,lose half your strength points and gain power = 20 * lost points
+strength,trgAloseP,20,Target all players make them lose power = 2*(GAINER) the amount of strength points you have
+strength,GPpeqstr,2,Gain performance points = strength points
