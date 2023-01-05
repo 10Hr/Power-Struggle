@@ -125,8 +125,13 @@ public class CardScript : NetworkBehaviour
         }
         else if ((cardBack != null && this.gameObject.tag == "CardSlot" && gameState.currentState == GameStates.Turn) && gameState.currentPlayer.netId == NetworkClient.localPlayer.netId && selected)
         {
-          gameState.currentPlayer.deck.pullEff(title);
-          gameState.turn++;
+            gameState.currentPlayer.deck.pullEff(title);
+            CmdturnIncrease();
         }
+    }
+
+    [Command(requiresAuthority = false)]
+    public void CmdturnIncrease() {
+        gameState.turn++;
     }
 }
