@@ -162,9 +162,7 @@ public class DeckScript : NetworkBehaviour
                 trgbntActive("trglose1");
             break;
         }
-        
-        
-    }
+    } 
     public void gainstr6() { //Gain 6 point in strength
         Debug.Log("gain 6 strength points");
         ModifyStats("strength", 6, NetworkClient.localPlayer.GetComponent<PlayerScript>());
@@ -203,7 +201,7 @@ public class DeckScript : NetworkBehaviour
 
     //---------------------------------General Methods-------------------------------------------
 
-    [Command(requiresAuthority = false)]
+    //[Command(requiresAuthority = false)]
     public void ModifyStats(string type, int amount, PlayerScript p) {
 
         switch (type) {
