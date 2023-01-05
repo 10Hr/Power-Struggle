@@ -98,6 +98,9 @@ public class DeckScript : NetworkBehaviour
     public void gain1str() {
         Debug.Log("gain 1 strength point");
     }
+    public void gain1str(string goober) {
+        Debug.Log("gain 1 strength point");
+    }
     public void gain1chr() {
         Debug.Log("gain 1 charisma point");
     }
