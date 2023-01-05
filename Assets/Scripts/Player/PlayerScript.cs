@@ -473,4 +473,23 @@ public class PlayerScript : NetworkBehaviour
         //Debug.Log("My Turn " + playerNumber);
 
     }
+
+        [Command(requiresAuthority = false)]
+        public void ModifyStats(string type, int amount, PlayerScript p) {
+            switch (type) {
+                case "strength":
+                   p.Strength = amount;
+                    break;
+                case "charisma":
+                    p.Charisma = amount;
+                    break;
+                case "intelligence":
+                    p.Intelligence = amount;
+                    break;
+                case "cunning":
+                    p.Cunning = amount;
+                    break;
+            }
+            p.MaxPoints = amount;
+    }
 }
