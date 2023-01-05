@@ -21,6 +21,9 @@ public class GameState : NetworkBehaviour
     [SyncVar]
     public GameStates currentState;
 
+    [SyncVar]
+    public PlayerScript currentPlayer;
+
     public PlayerList playerList;
     private bool allReady = false;
     private bool allDrawn = false;
@@ -115,7 +118,8 @@ public class GameState : NetworkBehaviour
                     turn = 1;
                     currentState = GameStates.Event;
                 } else {
-                    playerList.players[turn % 4].Turn();
+                    currentPlayer = playerList.players[turn % 4];
+                    currentPlayer.Turn();
                     turn++;
                 }
 
