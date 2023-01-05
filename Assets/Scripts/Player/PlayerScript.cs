@@ -468,6 +468,12 @@ public class PlayerScript : NetworkBehaviour
         bntLeft.SetActive(true);
         bntRight.SetActive(true);
     }
+
+    public void hideButtons() {
+        bntTop.SetActive(false);
+        bntLeft.SetActive(false);
+        bntRight.SetActive(false);
+    }
     
     public void Turn() {
         //Debug.Log("My Turn " + playerNumber);

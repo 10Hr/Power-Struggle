@@ -159,6 +159,7 @@ public class DeckScript : NetworkBehaviour
                 readytrg = false;
                 // effect happens here
                 Debug.Log("targeting player" + targetPlayer);
+                NetworkClient.localPlayer.GetComponent<PlayerScript>().hideButtons();
                 break;
             case false:
                 trgbntActive("trglose1");
