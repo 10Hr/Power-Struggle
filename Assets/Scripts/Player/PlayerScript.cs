@@ -109,6 +109,15 @@ public class PlayerScript : NetworkBehaviour
     [SyncVar]
     public bool cardsSpawned = false;
 
+    [SyncVar]
+    private int power = 500;
+
+    public int Power
+    {
+        get { return power; }
+        set { power += value; }
+    }
+
     public DeckScript deck;
 
     public PassiveManager passiveManager;
