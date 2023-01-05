@@ -152,7 +152,7 @@ public class DeckScript : NetworkBehaviour
         NetworkClient.localPlayer.GetComponent<PlayerScript>().ModifyStats("strength", 2, NetworkClient.localPlayer.GetComponent<PlayerScript>());
     }
     public void trglose1() { // Target 1 player make them lose 1 point of your choice
-        Debug.Log("Target 1 player make them lose 1 point of your choice");
+        Debug.Log("Target 1 player make them lose 1 point of their highest stat");
 
         switch(readytrg) {
             case true:
