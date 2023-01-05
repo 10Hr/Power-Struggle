@@ -110,7 +110,6 @@ public class DeckScript : NetworkBehaviour
     //-----------------------------------------strength-----------------------------------------
         effects.Add(gainstr2);
         effects.Add(trglose1);
-        effects.Add(trglose1);
         effects.Add(gainstr6);
         effects.Add(losePG1str);
         effects.Add(trglosePGP);
