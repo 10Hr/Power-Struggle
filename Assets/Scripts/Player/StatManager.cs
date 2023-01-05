@@ -132,13 +132,13 @@ public class StatManager : NetworkBehaviour
         List<PlayerScript> playerslots = NetworkClient.localPlayer.GetComponent<PlayerScript>().sendPlayerData();
         switch(buttontag) {
             case "right":
-                NetworkClient.localPlayer.GetComponent<DeckScript>().getTarget(playerslots[0]);
+                NetworkClient.localPlayer.GetComponent<PlayerScript>().deck.getTarget(playerslots[0]);
                 break;
             case "left":
-                NetworkClient.localPlayer.GetComponent<DeckScript>().getTarget(playerslots[1]);
+                NetworkClient.localPlayer.GetComponent<PlayerScript>().deck.getTarget(playerslots[1]);
                 break;
             case "top":
-                NetworkClient.localPlayer.GetComponent<DeckScript>().getTarget(playerslots[2]);
+                NetworkClient.localPlayer.GetComponent<PlayerScript>().deck.getTarget(playerslots[2]);
                 break;
 
         }
