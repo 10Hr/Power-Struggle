@@ -388,10 +388,11 @@ public class PlayerScript : NetworkBehaviour
     [Command(requiresAuthority = false)]
     public void CmdDrawCard(PlayerScript p)
     {
+        int rand = UnityEngine.Random.Range(0, 11);
         if (p.hand.Count < 6)
         {
-            p.hand.Add(p.cards[0]);
-            p.cards.Remove(p.cards[0]);
+            p.hand.Add(p.cards[rand]);
+            p.cards.Remove(p.cards[rand]);
         }
     }
 
@@ -519,12 +520,20 @@ public class PlayerScript : NetworkBehaviour
     }
 
     [Command(requiresAuthority = false)]
+    public void AddPoints(int amount, PlayerScript p)
+    {
+        p.maxPoints = amount;
+        p.availablePoints = amount;
+    }
+
+    [Command(requiresAuthority = false)]
     public void DiscardCard(PlayerScript p, int index, GameObject[] slots)
     {
+        int rand = UnityEngine.Random.Range(0, 11);
         //Debug.Log(p.playerNumber);
         p.cards.Add(p.hand[index]);
-        p.hand[index] = p.cards[0];
-        p.cards.Remove(p.cards[0]);
+        p.hand[index] = p.cards[rand];
+        p.cards.Remove(p.cards[rand]);
         RpcFillSlot(p.connectionToClient, slots, p.hand[index][1], p.hand[index][0], p.hand[index][4]);
 
     }

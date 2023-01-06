@@ -167,40 +167,70 @@ public class DeckScript : NetworkBehaviour
         }
         
     } 
-    public void gainstr6() { //Gain 6 point in strength
-        Debug.Log("gain 6 strength points");
-        NetworkClient.localPlayer.GetComponent<PlayerScript>().ModifyStats("strength", 6, NetworkClient.localPlayer.GetComponent<PlayerScript>());
+    public void gainstr6() { //Gain 4 point in strength
+        Debug.Log("gain 4 strength points");
+        NetworkClient.localPlayer.GetComponent<PlayerScript>().ModifyStats("strength", 4, NetworkClient.localPlayer.GetComponent<PlayerScript>());
         NetworkClient.localPlayer.GetComponent<PlayerScript>().DiscardCard(NetworkClient.localPlayer.GetComponent<PlayerScript>(), index, NetworkClient.localPlayer.GetComponent<PlayerScript>().cardSlots);
     }
     public void losePG1str() { // lose power and gain 1 strength point per X power lost
         Debug.Log("lose power and gain 1 strength point per 30 power lost");
-                int X = -30; // power lost per strength gained
-                int am = 0; // amount of strength points player wants to gain
+        int X = -30; // power lost per strength gained
+        int am = 0; // amount of strength points player wants to gain
 
-                // need to make input for am
+        am += NetworkClient.localPlayer.GetComponent<PlayerScript>().Charisma;
+        am += NetworkClient.localPlayer.GetComponent<PlayerScript>().Intelligence;
+        am += NetworkClient.localPlayer.GetComponent<PlayerScript>().Cunning;
 
+        // need to make input for am
+        if (NetworkClient.localPlayer.GetComponent<PlayerScript>().Power > am * -X)
+        {
             NetworkClient.localPlayer.GetComponent<PlayerScript>().ModifyStats("strength", am, NetworkClient.localPlayer.GetComponent<PlayerScript>());
             NetworkClient.localPlayer.GetComponent<PlayerScript>().ModifyPower(X * am, NetworkClient.localPlayer.GetComponent<PlayerScript>());
-            NetworkClient.localPlayer.GetComponent<PlayerScript>().ModifyPower(X * am, NetworkClient.localPlayer.GetComponent<PlayerScript>());
-
-            Debug.Log("targeting player" + targetPlayer);
-            NetworkClient.localPlayer.GetComponent<PlayerScript>().hideButtons();
+        }
     }
     public void trglosePGP() { //Target 1 player make them lose (GAINER) power, gain gain power = .5 of what player lost
         Debug.Log("Target 1 player make them lose (GAINER) power, gain gain power = .5 of what player lost");
-        
+        switch (readytrg)
+        {
+            case true:
+                readytrg = false;
+                targetPlayer.ModifyPower(-3 * NetworkClient.localPlayer.GetComponent<PlayerScript>().Strength, targetPlayer);
+                NetworkClient.localPlayer.GetComponent<PlayerScript>().ModifyPower(Mathf.RoundToInt(3 * NetworkClient.localPlayer.GetComponent<PlayerScript>().Strength / 2), NetworkClient.localPlayer.GetComponent<PlayerScript>());
+                Debug.Log("targeting player" + targetPlayer);
+                NetworkClient.localPlayer.GetComponent<PlayerScript>().hideButtons();
+                NetworkClient.localPlayer.GetComponent<PlayerScript>().DiscardCard(NetworkClient.localPlayer.GetComponent<PlayerScript>(), index, NetworkClient.localPlayer.GetComponent<PlayerScript>().cardSlots);
+                break;
+            case false:
+                trgbntActive("trglose1");
+                break;
+        }
     }
     public void trglosePG1str() { //Target 1 player make them lose (GAINER) power, gain 1 strength point
         Debug.Log("Target 1 player make them lose (GAINER) power, gain 1 strength point");
-       
+        switch (readytrg)
+        {
+            case true:
+                readytrg = false;
+                targetPlayer.ModifyPower(-5 * NetworkClient.localPlayer.GetComponent<PlayerScript>().Strength, targetPlayer);
+                NetworkClient.localPlayer.GetComponent<PlayerScript>().ModifyStats("strength", 1, NetworkClient.localPlayer.GetComponent<PlayerScript>());
+                Debug.Log("targeting player" + targetPlayer);
+                NetworkClient.localPlayer.GetComponent<PlayerScript>().hideButtons();
+                NetworkClient.localPlayer.GetComponent<PlayerScript>().DiscardCard(NetworkClient.localPlayer.GetComponent<PlayerScript>(), index, NetworkClient.localPlayer.GetComponent<PlayerScript>().cardSlots);
+                break;
+            case false:
+                trgbntActive("trglose1");
+                break;
+        }
     }
     public void loseqstrGP() { // lose a quarter your strength points and gain power = 12 * lost points
         Debug.Log("lose a quarter your strength points and gain power = X * lost points");
-      //  ModifyStats("strength", 1, NetworkClient.localPlayer.GetComponent<PlayerScript>());
+        NetworkClient.localPlayer.GetComponent<PlayerScript>().ModifyPower(10 * Mathf.RoundToInt(NetworkClient.localPlayer.GetComponent<PlayerScript>().Strength / 2), NetworkClient.localPlayer.GetComponent<PlayerScript>());
+        NetworkClient.localPlayer.GetComponent<PlayerScript>().ModifyStats("strength", -1 * Mathf.RoundToInt(NetworkClient.localPlayer.GetComponent<PlayerScript>().Strength / 2), NetworkClient.localPlayer.GetComponent<PlayerScript>());
     }
     public void loseHGP() { // lose half your strength points and gain power = 20 * lost points
         Debug.Log("lose half your strength points and gain power = X * lost points");
-      //  ModifyStats("strength", 1, NetworkClient.localPlayer.GetComponent<PlayerScript>());
+        NetworkClient.localPlayer.GetComponent<PlayerScript>().AddPoints(Mathf.RoundToInt(NetworkClient.localPlayer.GetComponent<PlayerScript>().Strength / 2), NetworkClient.localPlayer.GetComponent<PlayerScript>());
+        NetworkClient.localPlayer.GetComponent<PlayerScript>().ModifyStats("strength", NetworkClient.localPlayer.GetComponent<PlayerScript>().Strength, NetworkClient.localPlayer.GetComponent<PlayerScript>());
     }
     public void trgAloseP() { // Target all players make them lose power = 2*(GAINER) the amount of strength points you have
         Debug.Log("Target all players make them lose power = 2*(GAINER) the amount of strength points you have");
