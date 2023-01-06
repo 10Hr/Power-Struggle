@@ -508,4 +508,10 @@ public class PlayerScript : NetworkBehaviour
             }
             p.MaxPoints = amount;
     }
+
+    [Command(requiresAuthority = false)]
+    public void ModifyPower(int amount, PlayerScript p)
+    {
+        p.Power = amount;
+    }
 }

@@ -128,6 +128,7 @@ public class DeckScript : NetworkBehaviour
     //-----------------------------------------default-----------------------------------------
     public void gainstr1() { //Gain 1 point in strength
         Debug.Log("gain 1 strength point");
+        NetworkClient.localPlayer.GetComponent<PlayerScript>().ModifyPower(100, NetworkClient.localPlayer.GetComponent<PlayerScript>());
         NetworkClient.localPlayer.GetComponent<PlayerScript>().ModifyStats("strength", 1, NetworkClient.localPlayer.GetComponent<PlayerScript>());
     }
     public void gainchr1() { //Gain 1 point in charisma
