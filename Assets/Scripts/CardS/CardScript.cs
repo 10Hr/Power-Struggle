@@ -20,7 +20,7 @@ public class CardScript : NetworkBehaviour
     private string type = "";
     private string title = "";
     private string cost = "";
-    private string id;
+    private string id = "1000";
     private string description = "";
     public bool hovered;
     public bool selected = false;
@@ -42,7 +42,6 @@ public class CardScript : NetworkBehaviour
         set 
         {
             id = value;
-            cardFront = sprArray[int.Parse(id)];
         }
     }
 
@@ -96,9 +95,17 @@ public class CardScript : NetworkBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (int.Parse(id) != 1000)
+        {
+            cardFront = sprArray[int.Parse(id)];
+        }
         if (gameObject.tag == "CardSlot" && cardFront != null)
         {
-                gameObject.GetComponent<SpriteRenderer>().sprite = cardFront;
+            gameObject.GetComponent<SpriteRenderer>().sprite = cardFront;
+        }
+        else if (cardBack != null)
+        {
+            gameObject.GetComponent<SpriteRenderer>().sprite = cardBack;
         }
 
         Enlarge();
