@@ -95,7 +95,7 @@ public class CardScript : NetworkBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (int.Parse(id) != 1000)
+        if (int.Parse(id) != 1000 && cardFront != sprArray[int.Parse(id)])
         {
             cardFront = sprArray[int.Parse(id)];
         }
@@ -140,7 +140,14 @@ public class CardScript : NetworkBehaviour
         }
         else if ((cardBack != null && gameObject.tag == "CardSlot" && gameState.currentState == GameStates.Turn) && gameState.currentPlayer.netId == NetworkClient.localPlayer.netId && selected)
         {
-            gameState.currentPlayer.deck.pullEff(title);
+            gameState.currentPlayer.deck.pullEff(title, this.id);
+            this.title = "";
+            this.description = "";
+            this.cost = "";
+            this.id = "1000";
+            this.type = "";
+            this.selected = false;
+            this.prevSelected = false;
             CmdturnIncrease();
         }
     }

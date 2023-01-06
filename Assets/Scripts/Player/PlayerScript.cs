@@ -514,4 +514,29 @@ public class PlayerScript : NetworkBehaviour
     {
         p.Power = amount;
     }
+
+    [Command(requiresAuthority = false)]
+    public void DiscardCard(PlayerScript p, int index, GameObject[] slots)
+    {
+        //Debug.Log(p.playerNumber);
+        p.cards.Add(p.hand[index]);
+        p.hand[index] = p.cards[0];
+        p.cards.Remove(p.cards[0]);
+        RpcFillSlot(p.connectionToClient, slots, p.hand[index][1], p.hand[index][0], p.hand[index][4]);
+
+    }
+
+    [TargetRpc]
+    public void RpcFillSlot(NetworkConnection conn, GameObject[] slots, string title, string type, string id)
+    {
+        foreach (GameObject g in slots)
+        {
+            if (g.GetComponent<CardScript>().Title == "")
+            {
+                g.GetComponent<CardScript>().Title = title;
+                g.GetComponent<CardScript>().Type = type;
+                g.GetComponent<CardScript>().ID = id;
+            }
+        }
+    }
 }

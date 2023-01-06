@@ -17,32 +17,16 @@ public class DeckScript : NetworkBehaviour
     public PlayerScript currentPlayer;
 
     public string currentMethod;
+    public string currentID;
+    public int index = 0;
 
     bool readytrg = false;
 
-    //private GameObject player1;
-    //private GameObject player2;
-    //private GameObject player3;
-    //private GameObject player4;
-    //private GameObject thisPlayer;
     private NetworkIdentity thisID;
-    //public PlayerManager playerManager;
-
-    private void Awake()
-    {
-
-
-
-
-        //playerManager = GameObject.Find("PlayerManager").GetComponent<PlayerManager>();
-
-        //type = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerScript>().Highest;
-    }
 
     // Start is called before the first frame update
     public void CreateDeck(string highest) {
 
-        Debug.Log("creating deck");
         Debug.Log(highest);
         string path = null;
         string line = null;
@@ -75,7 +59,6 @@ public class DeckScript : NetworkBehaviour
                 string[] data = line.Split(',');
                 cards.Add(new CardScript());
                 cardData.Add(data);
-                Debug.Log(cardData[cardData.Count - 1][0]);
                 cards[cards.Count - 1].Type = data[0];
                 cards[cards.Count - 1].Title = data[1];
                 cards[cards.Count - 1].Cost = data[2];
@@ -89,7 +72,17 @@ public class DeckScript : NetworkBehaviour
             createEffectList();
     }
    
-       public void pullEff(string title) { // waste of time
+       public void pullEff(string title, string id) { // waste of time
+        currentID = id;
+        index = 0;
+        foreach (GameObject g in NetworkClient.localPlayer.GetComponent<PlayerScript>().cardSlots)
+        {
+            if (g.GetComponent<CardScript>().ID == currentID)
+            {
+                break;
+            }
+            index++;
+        }
         for (int i = 0; i < effects.Count; i++) 
                 if (title == effects[i].Method.Name)
                     effects[i]();     
@@ -130,6 +123,7 @@ public class DeckScript : NetworkBehaviour
         Debug.Log("gain 1 strength point");
         NetworkClient.localPlayer.GetComponent<PlayerScript>().ModifyPower(100, NetworkClient.localPlayer.GetComponent<PlayerScript>());
         NetworkClient.localPlayer.GetComponent<PlayerScript>().ModifyStats("strength", 1, NetworkClient.localPlayer.GetComponent<PlayerScript>());
+        NetworkClient.localPlayer.GetComponent<PlayerScript>().DiscardCard(NetworkClient.localPlayer.GetComponent<PlayerScript>(), index, NetworkClient.localPlayer.GetComponent<PlayerScript>().cardSlots);
     }
     public void gainchr1() { //Gain 1 point in charisma
         Debug.Log("gain 1 charisma point");
@@ -151,6 +145,7 @@ public class DeckScript : NetworkBehaviour
     public void gainstr2() { //Gain 2 point in strength
         Debug.Log("gain 2 strength points");
         NetworkClient.localPlayer.GetComponent<PlayerScript>().ModifyStats("strength", 2, NetworkClient.localPlayer.GetComponent<PlayerScript>());
+        NetworkClient.localPlayer.GetComponent<PlayerScript>().DiscardCard(NetworkClient.localPlayer.GetComponent<PlayerScript>(), index, NetworkClient.localPlayer.GetComponent<PlayerScript>().cardSlots);
     }
     public void trglose1() { // Target 1 player make them lose 1 point of your choice
         Debug.Log("Target 1 player make them lose 1 point of their highest stat");
@@ -170,6 +165,7 @@ public class DeckScript : NetworkBehaviour
     public void gainstr6() { //Gain 6 point in strength
         Debug.Log("gain 6 strength points");
         NetworkClient.localPlayer.GetComponent<PlayerScript>().ModifyStats("strength", 6, NetworkClient.localPlayer.GetComponent<PlayerScript>());
+        NetworkClient.localPlayer.GetComponent<PlayerScript>().DiscardCard(NetworkClient.localPlayer.GetComponent<PlayerScript>(), index, NetworkClient.localPlayer.GetComponent<PlayerScript>().cardSlots);
     }
     public void losePG1str() { // lose power and gain 1 strength point per X power lost
         Debug.Log("lose power and gain 1 strength point per X power lost");
@@ -215,7 +211,7 @@ public class DeckScript : NetworkBehaviour
     public void getTarget(PlayerScript tP) {
         targetPlayer = tP;
         readytrg = true;
-        pullEff(currentMethod);
+        pullEff(currentMethod, currentID);
 
     }
 
