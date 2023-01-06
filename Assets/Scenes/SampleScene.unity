@@ -755,6 +755,7 @@ MonoBehaviour:
   sprCunning: {fileID: 21300000, guid: 09a1cff1f921b834b93f2c83a755a162, type: 3}
   sprIntelligence: {fileID: 21300000, guid: 1bb5db65ec801c5429cccc6595bdf943, type: 3}
   sprStrength: {fileID: 21300000, guid: 994a4639e01500641be8ebfc7dc543a8, type: 3}
+  sprArray: []
   hovered: 0
   selected: 0
   prevSelected: 0
@@ -1170,6 +1171,7 @@ MonoBehaviour:
   sprCunning: {fileID: 21300000, guid: 09a1cff1f921b834b93f2c83a755a162, type: 3}
   sprIntelligence: {fileID: 21300000, guid: 1bb5db65ec801c5429cccc6595bdf943, type: 3}
   sprStrength: {fileID: 21300000, guid: 994a4639e01500641be8ebfc7dc543a8, type: 3}
+  sprArray: []
   hovered: 0
   selected: 0
   prevSelected: 0
@@ -1337,8 +1339,8 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 2.5, y: 3.5}
-    newSize: {x: 1, y: 1}
+    oldSize: {x: 2.48062, y: 3.5358992}
+    newSize: {x: 5.333333, y: 8.002297}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
@@ -1360,12 +1362,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
-  cardFront: {fileID: 21300000, guid: 41a962c94c99f2f49996322b6e912e95, type: 3}
+  cardFront: {fileID: 0}
   cardBack: {fileID: 0}
   sprCharisma: {fileID: 21300000, guid: f171745d4aaa84b458825a73488ebc22, type: 3}
   sprCunning: {fileID: 21300000, guid: 09a1cff1f921b834b93f2c83a755a162, type: 3}
   sprIntelligence: {fileID: 21300000, guid: 1bb5db65ec801c5429cccc6595bdf943, type: 3}
   sprStrength: {fileID: 21300000, guid: 994a4639e01500641be8ebfc7dc543a8, type: 3}
+  sprArray: []
   hovered: 0
   selected: 0
   prevSelected: 0
@@ -1435,7 +1438,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 5.333333, y: 8.002297}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 0
@@ -1632,6 +1635,7 @@ MonoBehaviour:
   sprCunning: {fileID: 21300000, guid: 09a1cff1f921b834b93f2c83a755a162, type: 3}
   sprIntelligence: {fileID: 21300000, guid: 1bb5db65ec801c5429cccc6595bdf943, type: 3}
   sprStrength: {fileID: 21300000, guid: 994a4639e01500641be8ebfc7dc543a8, type: 3}
+  sprArray: []
   hovered: 0
   selected: 0
   prevSelected: 0
@@ -1935,12 +1939,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
-  cardFront: {fileID: 21300000, guid: 41a962c94c99f2f49996322b6e912e95, type: 3}
+  cardFront: {fileID: 0}
   cardBack: {fileID: 0}
   sprCharisma: {fileID: 21300000, guid: f171745d4aaa84b458825a73488ebc22, type: 3}
   sprCunning: {fileID: 21300000, guid: 09a1cff1f921b834b93f2c83a755a162, type: 3}
   sprIntelligence: {fileID: 21300000, guid: 1bb5db65ec801c5429cccc6595bdf943, type: 3}
   sprStrength: {fileID: 21300000, guid: 994a4639e01500641be8ebfc7dc543a8, type: 3}
+  sprArray: []
   hovered: 0
   selected: 0
   prevSelected: 0
@@ -2674,6 +2679,7 @@ MonoBehaviour:
   sprCunning: {fileID: 21300000, guid: 09a1cff1f921b834b93f2c83a755a162, type: 3}
   sprIntelligence: {fileID: 21300000, guid: 1bb5db65ec801c5429cccc6595bdf943, type: 3}
   sprStrength: {fileID: 21300000, guid: 994a4639e01500641be8ebfc7dc543a8, type: 3}
+  sprArray: []
   hovered: 0
   selected: 0
   prevSelected: 0
@@ -3005,6 +3011,7 @@ MonoBehaviour:
   sprCunning: {fileID: 21300000, guid: 09a1cff1f921b834b93f2c83a755a162, type: 3}
   sprIntelligence: {fileID: 21300000, guid: 1bb5db65ec801c5429cccc6595bdf943, type: 3}
   sprStrength: {fileID: 21300000, guid: 994a4639e01500641be8ebfc7dc543a8, type: 3}
+  sprArray: []
   hovered: 0
   selected: 0
   prevSelected: 0
@@ -4259,6 +4266,7 @@ MonoBehaviour:
   sprCunning: {fileID: 21300000, guid: 09a1cff1f921b834b93f2c83a755a162, type: 3}
   sprIntelligence: {fileID: 21300000, guid: 1bb5db65ec801c5429cccc6595bdf943, type: 3}
   sprStrength: {fileID: 21300000, guid: 994a4639e01500641be8ebfc7dc543a8, type: 3}
+  sprArray: []
   hovered: 0
   selected: 0
   prevSelected: 0
@@ -4947,6 +4955,7 @@ MonoBehaviour:
   sprCunning: {fileID: 21300000, guid: 09a1cff1f921b834b93f2c83a755a162, type: 3}
   sprIntelligence: {fileID: 21300000, guid: 1bb5db65ec801c5429cccc6595bdf943, type: 3}
   sprStrength: {fileID: 21300000, guid: 994a4639e01500641be8ebfc7dc543a8, type: 3}
+  sprArray: []
   hovered: 0
   selected: 0
   prevSelected: 0
@@ -5278,6 +5287,7 @@ MonoBehaviour:
   sprCunning: {fileID: 21300000, guid: 09a1cff1f921b834b93f2c83a755a162, type: 3}
   sprIntelligence: {fileID: 21300000, guid: 1bb5db65ec801c5429cccc6595bdf943, type: 3}
   sprStrength: {fileID: 21300000, guid: 994a4639e01500641be8ebfc7dc543a8, type: 3}
+  sprArray: []
   hovered: 0
   selected: 0
   prevSelected: 0
@@ -5580,12 +5590,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
-  cardFront: {fileID: 21300000, guid: 41a962c94c99f2f49996322b6e912e95, type: 3}
+  cardFront: {fileID: 0}
   cardBack: {fileID: 0}
   sprCharisma: {fileID: 21300000, guid: f171745d4aaa84b458825a73488ebc22, type: 3}
   sprCunning: {fileID: 21300000, guid: 09a1cff1f921b834b93f2c83a755a162, type: 3}
   sprIntelligence: {fileID: 21300000, guid: 1bb5db65ec801c5429cccc6595bdf943, type: 3}
   sprStrength: {fileID: 21300000, guid: 994a4639e01500641be8ebfc7dc543a8, type: 3}
+  sprArray: []
   hovered: 0
   selected: 0
   prevSelected: 0
@@ -6060,6 +6071,7 @@ MonoBehaviour:
   sprCunning: {fileID: 21300000, guid: 09a1cff1f921b834b93f2c83a755a162, type: 3}
   sprIntelligence: {fileID: 21300000, guid: 1bb5db65ec801c5429cccc6595bdf943, type: 3}
   sprStrength: {fileID: 21300000, guid: 994a4639e01500641be8ebfc7dc543a8, type: 3}
+  sprArray: []
   hovered: 0
   selected: 0
   prevSelected: 0
@@ -6391,6 +6403,7 @@ MonoBehaviour:
   sprCunning: {fileID: 21300000, guid: 09a1cff1f921b834b93f2c83a755a162, type: 3}
   sprIntelligence: {fileID: 21300000, guid: 1bb5db65ec801c5429cccc6595bdf943, type: 3}
   sprStrength: {fileID: 21300000, guid: 994a4639e01500641be8ebfc7dc543a8, type: 3}
+  sprArray: []
   hovered: 0
   selected: 0
   prevSelected: 0
@@ -6843,12 +6856,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
-  cardFront: {fileID: 21300000, guid: 41a962c94c99f2f49996322b6e912e95, type: 3}
+  cardFront: {fileID: 0}
   cardBack: {fileID: 0}
   sprCharisma: {fileID: 21300000, guid: f171745d4aaa84b458825a73488ebc22, type: 3}
   sprCunning: {fileID: 21300000, guid: 09a1cff1f921b834b93f2c83a755a162, type: 3}
   sprIntelligence: {fileID: 21300000, guid: 1bb5db65ec801c5429cccc6595bdf943, type: 3}
   sprStrength: {fileID: 21300000, guid: 994a4639e01500641be8ebfc7dc543a8, type: 3}
+  sprArray: []
   hovered: 0
   selected: 0
   prevSelected: 0
@@ -7137,6 +7151,7 @@ MonoBehaviour:
   sprCunning: {fileID: 21300000, guid: 09a1cff1f921b834b93f2c83a755a162, type: 3}
   sprIntelligence: {fileID: 21300000, guid: 1bb5db65ec801c5429cccc6595bdf943, type: 3}
   sprStrength: {fileID: 21300000, guid: 994a4639e01500641be8ebfc7dc543a8, type: 3}
+  sprArray: []
   hovered: 0
   selected: 0
   prevSelected: 0
@@ -7333,6 +7348,7 @@ MonoBehaviour:
   sprCunning: {fileID: 21300000, guid: 09a1cff1f921b834b93f2c83a755a162, type: 3}
   sprIntelligence: {fileID: 21300000, guid: 1bb5db65ec801c5429cccc6595bdf943, type: 3}
   sprStrength: {fileID: 21300000, guid: 994a4639e01500641be8ebfc7dc543a8, type: 3}
+  sprArray: []
   hovered: 0
   selected: 0
   prevSelected: 0
@@ -7765,12 +7781,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
-  cardFront: {fileID: 21300000, guid: 41a962c94c99f2f49996322b6e912e95, type: 3}
+  cardFront: {fileID: 0}
   cardBack: {fileID: 0}
   sprCharisma: {fileID: 21300000, guid: f171745d4aaa84b458825a73488ebc22, type: 3}
   sprCunning: {fileID: 21300000, guid: 09a1cff1f921b834b93f2c83a755a162, type: 3}
   sprIntelligence: {fileID: 21300000, guid: 1bb5db65ec801c5429cccc6595bdf943, type: 3}
   sprStrength: {fileID: 21300000, guid: 994a4639e01500641be8ebfc7dc543a8, type: 3}
+  sprArray: []
   hovered: 0
   selected: 0
   prevSelected: 0
@@ -8110,6 +8127,7 @@ MonoBehaviour:
   sprCunning: {fileID: 21300000, guid: 09a1cff1f921b834b93f2c83a755a162, type: 3}
   sprIntelligence: {fileID: 21300000, guid: 1bb5db65ec801c5429cccc6595bdf943, type: 3}
   sprStrength: {fileID: 21300000, guid: 994a4639e01500641be8ebfc7dc543a8, type: 3}
+  sprArray: []
   hovered: 0
   selected: 0
   prevSelected: 0
@@ -8386,6 +8404,7 @@ MonoBehaviour:
   sprCunning: {fileID: 21300000, guid: 09a1cff1f921b834b93f2c83a755a162, type: 3}
   sprIntelligence: {fileID: 21300000, guid: 1bb5db65ec801c5429cccc6595bdf943, type: 3}
   sprStrength: {fileID: 21300000, guid: 994a4639e01500641be8ebfc7dc543a8, type: 3}
+  sprArray: []
   hovered: 0
   selected: 0
   prevSelected: 0
@@ -9694,6 +9713,7 @@ MonoBehaviour:
   sprCunning: {fileID: 21300000, guid: 09a1cff1f921b834b93f2c83a755a162, type: 3}
   sprIntelligence: {fileID: 21300000, guid: 1bb5db65ec801c5429cccc6595bdf943, type: 3}
   sprStrength: {fileID: 21300000, guid: 994a4639e01500641be8ebfc7dc543a8, type: 3}
+  sprArray: []
   hovered: 0
   selected: 0
   prevSelected: 0
@@ -9876,12 +9896,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
-  cardFront: {fileID: 21300000, guid: 41a962c94c99f2f49996322b6e912e95, type: 3}
+  cardFront: {fileID: 0}
   cardBack: {fileID: 0}
   sprCharisma: {fileID: 21300000, guid: f171745d4aaa84b458825a73488ebc22, type: 3}
   sprCunning: {fileID: 21300000, guid: 09a1cff1f921b834b93f2c83a755a162, type: 3}
   sprIntelligence: {fileID: 21300000, guid: 1bb5db65ec801c5429cccc6595bdf943, type: 3}
   sprStrength: {fileID: 21300000, guid: 994a4639e01500641be8ebfc7dc543a8, type: 3}
+  sprArray: []
   hovered: 0
   selected: 0
   prevSelected: 0
@@ -10321,6 +10342,7 @@ MonoBehaviour:
   sprCunning: {fileID: 21300000, guid: 09a1cff1f921b834b93f2c83a755a162, type: 3}
   sprIntelligence: {fileID: 21300000, guid: 1bb5db65ec801c5429cccc6595bdf943, type: 3}
   sprStrength: {fileID: 21300000, guid: 994a4639e01500641be8ebfc7dc543a8, type: 3}
+  sprArray: []
   hovered: 0
   selected: 0
   prevSelected: 0
@@ -10690,6 +10712,7 @@ MonoBehaviour:
   sprCunning: {fileID: 21300000, guid: 09a1cff1f921b834b93f2c83a755a162, type: 3}
   sprIntelligence: {fileID: 21300000, guid: 1bb5db65ec801c5429cccc6595bdf943, type: 3}
   sprStrength: {fileID: 21300000, guid: 994a4639e01500641be8ebfc7dc543a8, type: 3}
+  sprArray: []
   hovered: 0
   selected: 0
   prevSelected: 0
@@ -12033,6 +12056,7 @@ MonoBehaviour:
   sprCunning: {fileID: 21300000, guid: 09a1cff1f921b834b93f2c83a755a162, type: 3}
   sprIntelligence: {fileID: 21300000, guid: 1bb5db65ec801c5429cccc6595bdf943, type: 3}
   sprStrength: {fileID: 21300000, guid: 994a4639e01500641be8ebfc7dc543a8, type: 3}
+  sprArray: []
   hovered: 0
   selected: 0
   prevSelected: 0

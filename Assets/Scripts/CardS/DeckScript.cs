@@ -80,7 +80,7 @@ public class DeckScript : NetworkBehaviour
                 cards[cards.Count - 1].Title = data[1];
                 cards[cards.Count - 1].Cost = data[2];
                 cards[cards.Count - 1].Description = data[3];
-
+                cards[cards.Count - 1].ID = data[4];
             }
             input.Close();
 

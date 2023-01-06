@@ -402,6 +402,7 @@ public class PlayerScript : NetworkBehaviour
             {
                 g.GetComponent<CardScript>().Title = p.hand[index][1];
                 g.GetComponent<CardScript>().Type = p.hand[index][0];
+                g.GetComponent<CardScript>().ID = p.hand[index][4];
                 break;
             }
             index++;

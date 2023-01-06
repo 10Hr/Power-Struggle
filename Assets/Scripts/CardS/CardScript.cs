@@ -15,9 +15,12 @@ public class CardScript : NetworkBehaviour
     public Sprite sprIntelligence;
     public Sprite sprStrength;
 
+    public Sprite[] sprArray;
+
     private string type = "";
     private string title = "";
     private string cost = "";
+    private string id;
     private string description = "";
     public bool hovered;
     public bool selected = false;
@@ -31,6 +34,16 @@ public class CardScript : NetworkBehaviour
     {
         get { return cost; }
         set { cost = value; }
+    }
+
+    public string ID
+    {
+        get { return id; }
+        set 
+        {
+            id = value;
+            cardFront = sprArray[int.Parse(id)];
+        }
     }
 
     public string Title
@@ -76,28 +89,23 @@ public class CardScript : NetworkBehaviour
         gameObject.GetComponent<SpriteRenderer>().sprite = cardBack;
         sortingDefault = gameObject.GetComponent<SpriteRenderer>().sortingOrder;
         gameState = GameObject.Find("FSM").GetComponent<GameState>();
+
+        sprArray = Resources.LoadAll<Sprite>("CardSprites");
     }
 
     // Update is called once per frame
     void Update()
     {
-        gameObject.GetComponent<SpriteRenderer>().sprite = cardBack;
+        if (gameObject.tag == "CardSlot" && cardFront != null)
+        {
+                gameObject.GetComponent<SpriteRenderer>().sprite = cardFront;
+        }
 
         Enlarge();
     }
 
-    public void Flip()
-    {
-        Sprite currentSprite = gameObject.GetComponent<SpriteRenderer>().sprite;
-        if (this.gameObject.tag == "CardSlot")
-        {
-            if (currentSprite = cardBack)
-                gameObject.GetComponent<SpriteRenderer>().sprite = cardFront;
-        }
-    }
-
     public void Enlarge() {
-        if (hovered && cardBack != null && this.gameObject.tag == "CardSlot") {
+        if (hovered && cardBack != null && gameObject.tag == "CardSlot") {
             gameObject.transform.localScale = new Vector3(75f, 75f, 0);
             gameObject.transform.localPosition = new Vector3(gameObject.transform.localPosition.x, defaultY + 100, 0);
             gameObject.GetComponent<SpriteRenderer>().sortingOrder = 7;
@@ -118,12 +126,12 @@ public class CardScript : NetworkBehaviour
 
     public void OnMouseDown()
     {
-        if (cardBack != null && this.gameObject.tag == "CardSlot" && gameState.currentState == GameStates.LoadEnemyCards)
+        if (cardBack != null && gameObject.tag == "CardSlot" && gameState.currentState == GameStates.LoadEnemyCards)
         {
             prevSelected = selected;
             selected = !selected;
         }
-        else if ((cardBack != null && this.gameObject.tag == "CardSlot" && gameState.currentState == GameStates.Turn) && gameState.currentPlayer.netId == NetworkClient.localPlayer.netId && selected)
+        else if ((cardBack != null && gameObject.tag == "CardSlot" && gameState.currentState == GameStates.Turn) && gameState.currentPlayer.netId == NetworkClient.localPlayer.netId && selected)
         {
             gameState.currentPlayer.deck.pullEff(title);
             CmdturnIncrease();
