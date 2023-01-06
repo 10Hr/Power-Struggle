@@ -128,14 +128,17 @@ public class DeckScript : NetworkBehaviour
     public void gainchr1() { //Gain 1 point in charisma
         Debug.Log("gain 1 charisma point");
         NetworkClient.localPlayer.GetComponent<PlayerScript>().ModifyStats("charisma", 1, NetworkClient.localPlayer.GetComponent<PlayerScript>());
+        NetworkClient.localPlayer.GetComponent<PlayerScript>().DiscardCard(NetworkClient.localPlayer.GetComponent<PlayerScript>(), index, NetworkClient.localPlayer.GetComponent<PlayerScript>().cardSlots);
     }
     public void gainint1() { //Gain 1 point in intelligence
         Debug.Log("gain 1 intelligence point");
         NetworkClient.localPlayer.GetComponent<PlayerScript>().ModifyStats("intelligence", 1, NetworkClient.localPlayer.GetComponent<PlayerScript>());
+        NetworkClient.localPlayer.GetComponent<PlayerScript>().DiscardCard(NetworkClient.localPlayer.GetComponent<PlayerScript>(), index, NetworkClient.localPlayer.GetComponent<PlayerScript>().cardSlots);
     }
     public void gaincun1() { //Gain 1 point in cunning
         Debug.Log("gain 1 cunning point");
         NetworkClient.localPlayer.GetComponent<PlayerScript>().ModifyStats("cunning", 1, NetworkClient.localPlayer.GetComponent<PlayerScript>());
+        NetworkClient.localPlayer.GetComponent<PlayerScript>().DiscardCard(NetworkClient.localPlayer.GetComponent<PlayerScript>(), index, NetworkClient.localPlayer.GetComponent<PlayerScript>().cardSlots);
     }
     //-----------------------------------------intelligence-----------------------------------------
 
@@ -153,14 +156,16 @@ public class DeckScript : NetworkBehaviour
         switch(readytrg) {
             case true:
                 readytrg = false;
-                // effect happens here
+                targetPlayer.ModifyStats(targetPlayer.highest, -1, targetPlayer);
                 Debug.Log("targeting player" + targetPlayer);
-                NetworkClient.localPlayer.GetComponent<PlayerScript>().hideButtons();
+                NetworkClient.localPlayer.GetComponent<PlayerScript>().hideButtons();      
+                NetworkClient.localPlayer.GetComponent<PlayerScript>().DiscardCard(NetworkClient.localPlayer.GetComponent<PlayerScript>(), index, NetworkClient.localPlayer.GetComponent<PlayerScript>().cardSlots);    
                 break;
             case false:
                 trgbntActive("trglose1");
             break;
         }
+        
     } 
     public void gainstr6() { //Gain 6 point in strength
         Debug.Log("gain 6 strength points");
@@ -168,16 +173,26 @@ public class DeckScript : NetworkBehaviour
         NetworkClient.localPlayer.GetComponent<PlayerScript>().DiscardCard(NetworkClient.localPlayer.GetComponent<PlayerScript>(), index, NetworkClient.localPlayer.GetComponent<PlayerScript>().cardSlots);
     }
     public void losePG1str() { // lose power and gain 1 strength point per X power lost
-        Debug.Log("lose power and gain 1 strength point per X power lost");
-       // ModifyStats("strength", 1, NetworkClient.localPlayer.GetComponent<PlayerScript>());
+        Debug.Log("lose power and gain 1 strength point per 30 power lost");
+                int X = -30; // power lost per strength gained
+                int am = 0; // amount of strength points player wants to gain
+
+                // need to make input for am
+
+            NetworkClient.localPlayer.GetComponent<PlayerScript>().ModifyStats("strength", am, NetworkClient.localPlayer.GetComponent<PlayerScript>());
+            NetworkClient.localPlayer.GetComponent<PlayerScript>().ModifyPower(X * am, NetworkClient.localPlayer.GetComponent<PlayerScript>());
+            NetworkClient.localPlayer.GetComponent<PlayerScript>().ModifyPower(X * am, NetworkClient.localPlayer.GetComponent<PlayerScript>());
+
+            Debug.Log("targeting player" + targetPlayer);
+            NetworkClient.localPlayer.GetComponent<PlayerScript>().hideButtons();
     }
     public void trglosePGP() { //Target 1 player make them lose (GAINER) power, gain gain power = .5 of what player lost
         Debug.Log("Target 1 player make them lose (GAINER) power, gain gain power = .5 of what player lost");
-      //  ModifyStats("strength", 1, NetworkClient.localPlayer.GetComponent<PlayerScript>());
+        
     }
     public void trglosePG1str() { //Target 1 player make them lose (GAINER) power, gain 1 strength point
         Debug.Log("Target 1 player make them lose (GAINER) power, gain 1 strength point");
-       // ModifyStats("strength", 1, NetworkClient.localPlayer.GetComponent<PlayerScript>());
+       
     }
     public void loseqstrGP() { // lose a quarter your strength points and gain power = 12 * lost points
         Debug.Log("lose a quarter your strength points and gain power = X * lost points");
@@ -200,8 +215,6 @@ public class DeckScript : NetworkBehaviour
 
 
     //---------------------------------General Methods-------------------------------------------
-
-
 
     public void trgbntActive(string meth) {
         NetworkClient.localPlayer.GetComponent<PlayerScript>().UnhideButtons();

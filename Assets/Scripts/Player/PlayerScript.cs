@@ -274,6 +274,9 @@ public class PlayerScript : NetworkBehaviour
                 break;
 
             case GameStates.Turn:
+                TransferData(enemySlots1, enemy1);
+                TransferData(enemySlots2, enemy2);
+                TransferData(enemySlots3, enemy3);
                 break;
         }
 
