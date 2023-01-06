@@ -148,6 +148,7 @@ public class CardScript : NetworkBehaviour
             this.type = "";
             this.selected = false;
             this.prevSelected = false;
+            gameObject.GetComponent<SpriteRenderer>().color = Color.white;
             CmdturnIncrease();
         }
     }
