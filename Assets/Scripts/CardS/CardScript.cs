@@ -61,7 +61,8 @@ public class CardScript : NetworkBehaviour
     {
         get { return type; }
         set 
-        { 
+        {
+            Debug.Log(value);
             type = value;
             switch (type)
             {

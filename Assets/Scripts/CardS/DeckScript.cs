@@ -27,7 +27,10 @@ public class DeckScript : NetworkBehaviour
     // Start is called before the first frame update
     public void CreateDeck(string highest) {
 
-        Debug.Log(highest);
+        //reset deck in case of switching
+        cards.Clear();
+        cardData.Clear();
+
         string path = null;
         string line = null;
         StreamReader input = null;
@@ -65,7 +68,26 @@ public class DeckScript : NetworkBehaviour
                 cards[cards.Count - 1].Description = data[3];
                 cards[cards.Count - 1].ID = data[4];
             }
-            input.Close();
+
+        path = null;
+        line = null;
+        input = null;
+
+        path = Application.dataPath + " /StreamingAssets/DefaultDeck.txt";
+        input = new StreamReader(path);
+        while ((line = input.ReadLine()) != null)
+        {
+            string[] data = line.Split(',');
+            cards.Add(new CardScript());
+            cardData.Add(data);
+            cards[cards.Count - 1].Type = data[0];
+            cards[cards.Count - 1].Title = data[1];
+            cards[cards.Count - 1].Cost = data[2];
+            cards[cards.Count - 1].Description = data[3];
+            cards[cards.Count - 1].ID = data[4];
+        }
+
+        input.Close();
 
             // when writing a new card
             // type,title,cost,Description
@@ -101,8 +123,17 @@ public class DeckScript : NetworkBehaviour
         effects.Add(gainchr1);
         effects.Add(gainint1);
         effects.Add(gaincun1);
+        effects.Add(trgLPSX10);
+        effects.Add(trgRevI);
+        effects.Add(gainPCHX10);
+        effects.Add(loseCUGP);
+        effects.Add(prevSLoss);
+        effects.Add(prevPLoss);
+        effects.Add(trgLoseHighest);
+        effects.Add(trgLoseP50);
+        effects.Add(gainPower50);
 
-    //-----------------------------------------strength-----------------------------------------
+        //-----------------------------------------strength-----------------------------------------
         effects.Add(gainstr2);
         effects.Add(trglose1);
         effects.Add(gainstr6);
@@ -113,7 +144,9 @@ public class DeckScript : NetworkBehaviour
         effects.Add(loseHGP);
         effects.Add(trgAloseP);
         effects.Add(GPpeqstr);
-       
+
+        //-----------------------------------------Intelligence-----------------------------------------
+        effects.Add(exTitle);
     }
 
     // CARD EFFECTS ARE CALLED IN CARDSCRIPT
@@ -121,7 +154,6 @@ public class DeckScript : NetworkBehaviour
     //-----------------------------------------default-----------------------------------------
     public void gainstr1() { //Gain 1 point in strength
         Debug.Log("gain 1 strength point");
-        NetworkClient.localPlayer.GetComponent<PlayerScript>().ModifyPower(100, NetworkClient.localPlayer.GetComponent<PlayerScript>());
         NetworkClient.localPlayer.GetComponent<PlayerScript>().ModifyStats("strength", 1, NetworkClient.localPlayer.GetComponent<PlayerScript>());
         NetworkClient.localPlayer.GetComponent<PlayerScript>().DiscardCard(NetworkClient.localPlayer.GetComponent<PlayerScript>(), index, NetworkClient.localPlayer.GetComponent<PlayerScript>().cardSlots);
     }
@@ -140,8 +172,60 @@ public class DeckScript : NetworkBehaviour
         NetworkClient.localPlayer.GetComponent<PlayerScript>().ModifyStats("cunning", 1, NetworkClient.localPlayer.GetComponent<PlayerScript>());
         NetworkClient.localPlayer.GetComponent<PlayerScript>().DiscardCard(NetworkClient.localPlayer.GetComponent<PlayerScript>(), index, NetworkClient.localPlayer.GetComponent<PlayerScript>().cardSlots);
     }
-    //-----------------------------------------intelligence-----------------------------------------
+    public void trgLPSX10()
+    {
+        Debug.Log("Target loses power = to 10x strength");
 
+        switch (readytrg)
+        {
+            case true:
+                readytrg = false;
+                targetPlayer.ModifyPower(-10 * NetworkClient.localPlayer.GetComponent<PlayerScript>().Strength, targetPlayer);
+                NetworkClient.localPlayer.GetComponent<PlayerScript>().hideButtons();
+                NetworkClient.localPlayer.GetComponent<PlayerScript>().DiscardCard(NetworkClient.localPlayer.GetComponent<PlayerScript>(), index, NetworkClient.localPlayer.GetComponent<PlayerScript>().cardSlots);
+                break;
+            case false:
+                trgbntActive("trglose1");
+                break;
+        }
+    }
+    public void trgRevI()
+    {
+        Debug.Log("Target player, reveal cards in their hand up to your intelligence");
+    }
+    public void gainPCHX10()
+    {
+        Debug.Log("charisma,Gain power equal to 10 x Charisma");
+    }
+    public void loseCUGP()
+    {
+        Debug.Log("lose a point in cunning - gain 75 power");
+    }
+    public void prevSLoss()
+    {
+        Debug.Log("prevent any stat point loss after this card is played");
+    }
+    public void prevPLoss()
+    {
+        Debug.Log("prevent any power loss after this card is played");
+    }
+    public void trgLoseHighest()
+    {
+        Debug.Log("opponent loses stat point of their highest");
+    }
+    public void trgLoseP50()
+    {
+        Debug.Log("opponent loses 50 power");
+    }
+    public void gainPower50()
+    {
+        Debug.Log("gain 50 power");
+    }
+    //-----------------------------------------intelligence-----------------------------------------
+    public void exTitle()
+    {
+        Debug.Log("Not implemented yet");
+    }
     //-----------------------------------------charisma-----------------------------------------
 
     //-----------------------------------------strength-----------------------------------------
@@ -156,7 +240,7 @@ public class DeckScript : NetworkBehaviour
         switch(readytrg) {
             case true:
                 readytrg = false;
-                targetPlayer.ModifyStats(targetPlayer.highest, -1, targetPlayer);
+                targetPlayer.ModifyStats(targetPlayer.Highest, -1, targetPlayer);
                 NetworkClient.localPlayer.GetComponent<PlayerScript>().hideButtons();      
                 NetworkClient.localPlayer.GetComponent<PlayerScript>().DiscardCard(NetworkClient.localPlayer.GetComponent<PlayerScript>(), index, NetworkClient.localPlayer.GetComponent<PlayerScript>().cardSlots);    
                 break;

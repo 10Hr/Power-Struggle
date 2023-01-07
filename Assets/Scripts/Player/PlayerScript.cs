@@ -21,6 +21,8 @@ public class PlayerScript : NetworkBehaviour
 
     public bool added = false;
 
+    bool ran = false;
+
     public int numSelected;
 
     #region stats
@@ -92,7 +94,38 @@ public class PlayerScript : NetworkBehaviour
     public bool ready;
 
     [SyncVar]
-    public string highest;
+    private string highest;
+
+    public string Highest
+    {
+        get { return highest; }
+        set
+        {
+            highest = value;
+            if (FSM.CurrentState == GameStates.Turn || FSM.CurrentState == GameStates.Event)
+            {
+                deck.CreateDeck(highest);
+                cards.Clear();
+                hand.Clear();
+
+                while (deck.cardData.Count < 40) { }
+
+                CmdFillDeck(deck.cardData, this);
+
+                while (cards.Count < 40) { }
+
+                for (int i = 0; i < 6; i++)
+                {
+                    CmdDrawCard(this);
+                }
+                foreach (GameObject g in cardSlots)
+                {
+                    g.GetComponent<CardScript>().Title = "";
+                }    
+                TransferData(cardSlots, this);
+            }
+        }
+    }
 
     [SyncVar]
     public bool hasHighest = false;
@@ -249,10 +282,12 @@ public class PlayerScript : NetworkBehaviour
                 CmdDrawCard(this);
                 if (hand.Count == 6 && !cardsSpawned)
                 {
+                    //ran = true;
                     TransferData(cardSlots, this);
                     if (cardSlots[5].GetComponent<CardScript>().Title != "")
                         CmdSpawnedCards(this);
                 }
+
                 break;
 
             case GameStates.LoadEnemyCards:
@@ -388,7 +423,7 @@ public class PlayerScript : NetworkBehaviour
     [Command(requiresAuthority = false)]
     public void CmdDrawCard(PlayerScript p)
     {
-        int rand = UnityEngine.Random.Range(0, 11);
+        int rand = UnityEngine.Random.Range(0, 33);
         if (p.hand.Count < 6)
         {
             p.hand.Add(p.cards[rand]);
@@ -405,6 +440,7 @@ public class PlayerScript : NetworkBehaviour
             if (g.GetComponent<CardScript>().Title == "") // problem child??
             {
                 g.GetComponent<CardScript>().Title = p.hand[index][1];
+                Debug.Log(p.hand[index][0]);
                 g.GetComponent<CardScript>().Type = p.hand[index][0];
                 g.GetComponent<CardScript>().ID = p.hand[index][4];
                 break;
@@ -529,7 +565,7 @@ public class PlayerScript : NetworkBehaviour
     [Command(requiresAuthority = false)]
     public void DiscardCard(PlayerScript p, int index, GameObject[] slots)
     {
-        int rand = UnityEngine.Random.Range(0, 11);
+        int rand = UnityEngine.Random.Range(0, 33);
         //Debug.Log(p.playerNumber);
         p.cards.Add(p.hand[index]);
         p.hand[index] = p.cards[rand];
