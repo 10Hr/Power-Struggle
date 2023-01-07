@@ -157,7 +157,6 @@ public class DeckScript : NetworkBehaviour
             case true:
                 readytrg = false;
                 targetPlayer.ModifyStats(targetPlayer.highest, -1, targetPlayer);
-                Debug.Log("targeting player" + targetPlayer);
                 NetworkClient.localPlayer.GetComponent<PlayerScript>().hideButtons();      
                 NetworkClient.localPlayer.GetComponent<PlayerScript>().DiscardCard(NetworkClient.localPlayer.GetComponent<PlayerScript>(), index, NetworkClient.localPlayer.GetComponent<PlayerScript>().cardSlots);    
                 break;
@@ -196,7 +195,6 @@ public class DeckScript : NetworkBehaviour
                 readytrg = false;
                 targetPlayer.ModifyPower(-3 * NetworkClient.localPlayer.GetComponent<PlayerScript>().Strength, targetPlayer);
                 NetworkClient.localPlayer.GetComponent<PlayerScript>().ModifyPower(Mathf.RoundToInt(3 * NetworkClient.localPlayer.GetComponent<PlayerScript>().Strength / 2), NetworkClient.localPlayer.GetComponent<PlayerScript>());
-                Debug.Log("targeting player" + targetPlayer);
                 NetworkClient.localPlayer.GetComponent<PlayerScript>().hideButtons();
                 NetworkClient.localPlayer.GetComponent<PlayerScript>().DiscardCard(NetworkClient.localPlayer.GetComponent<PlayerScript>(), index, NetworkClient.localPlayer.GetComponent<PlayerScript>().cardSlots);
                 break;
@@ -213,7 +211,6 @@ public class DeckScript : NetworkBehaviour
                 readytrg = false;
                 targetPlayer.ModifyPower(-5 * NetworkClient.localPlayer.GetComponent<PlayerScript>().Strength, targetPlayer);
                 NetworkClient.localPlayer.GetComponent<PlayerScript>().ModifyStats("strength", 1, NetworkClient.localPlayer.GetComponent<PlayerScript>());
-                Debug.Log("targeting player" + targetPlayer);
                 NetworkClient.localPlayer.GetComponent<PlayerScript>().hideButtons();
                 NetworkClient.localPlayer.GetComponent<PlayerScript>().DiscardCard(NetworkClient.localPlayer.GetComponent<PlayerScript>(), index, NetworkClient.localPlayer.GetComponent<PlayerScript>().cardSlots);
                 break;
