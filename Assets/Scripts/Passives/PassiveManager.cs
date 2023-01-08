@@ -23,7 +23,6 @@ public class PassiveManager : NetworkBehaviour
         createEffectList();
 
     }
-    //test
     //Type, Name, Desc
     // add thing to turn periods to commas in description
     public void getPassivesFromFile() {
