@@ -9,9 +9,9 @@ cunning,exTitle,0,Target an opponent - they gain 4 charisma
 cunning,exTitle,0,Target an opponent - they gain 4 charisma
 cunning,exTitle,0,Target an opponent - they gain 4 intelligence
 cunning,exTitle,0,Target an opponent - they gain 4 intelligence
-cunning,exTitle,0,Gain 1 strength
-cunning,exTitle,0,Gain 1 intelligence
-cunning,exTitle,0,Gain 1 charisma
+cunning,exTitle,0,Become untargetable for the rest of this turn
+cunning,exTitle,0,Become untargetable for the rest of this turn
+cunning,exTitle,0,Select a passive from your lowest stat
 cunning,exTitle,0,Gain power equal to 5x all your stat points
 cunning,exTitle,0,Gain power equal to 5x all your stat points
 cunning,exTitle,0,Relocate all your stat points
