@@ -255,6 +255,9 @@ public class PlayerScript : NetworkBehaviour
             case GameStates.Setup:
                 break;
             case GameStates.Passive:
+                if (isLocalPlayer)
+                    readyButton.SetActive(false);
+
                 //calculate players highest stat
                 CmdCalcHighest(this);
 
