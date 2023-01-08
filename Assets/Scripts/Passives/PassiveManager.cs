@@ -51,18 +51,12 @@ public class PassiveManager : NetworkBehaviour
 
     [Command (requiresAuthority = false)]
     public void CmdSelectPassive(string highest, PlayerScript player) {
-
-        possible.Add(passives[0]);
-        possible.Add(passives[1]);
-        possible.Add(passives[2]);
         foreach (Passive p in passives) 
             if (p.passiveType == highest) 
                 possible.Add(p);
 
         for (int i = 0; i < 3; i++) {
-            int rand = Random.Range(0, 6 - i);
-            choices.Add(possible[rand]); // bad
-            possible.RemoveAt(rand);
+            choices.Add(possible[i]);
         }
         Debug.Log("Passives added");
 
@@ -116,10 +110,6 @@ public class PassiveManager : NetworkBehaviour
         // note the methods must all be of type void with no parameters
         // that is they must all have the same signature.
         Debug.Log("creating effect list");
-                effects.Add(mitigateLosses); // how to add methods based on name of effect
-                effects.Add(copyCat);
-                effects.Add(veteran);
-
                 effects.Add(encore);
                 effects.Add(lastingEffects);
                 effects.Add(naturalAlly);
@@ -148,21 +138,6 @@ public class PassiveManager : NetworkBehaviour
 
 
      // effect methods
-
-     //-----------------------------------------default-----------------------------------------
-
-
-     void mitigateLosses() {
-         Debug.Log("mitigateLosses");
-     }
-     void copyCat() {
-         Debug.Log("CopyCat");
-     }
-     void veteran() {
-         Debug.Log("Veteran");
-     }
-
-
      //-----------------------------------------charisma-----------------------------------------
 
 

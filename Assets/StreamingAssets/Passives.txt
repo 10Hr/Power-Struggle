@@ -1,6 +1,3 @@
-default,Mitigate Losses,Ignore penalties from getting 4th in an event but half rewards from getting 1st,mitigateLosses
-default,Copycat,Draw 1 out of your 3 cards from another players deck,copyCat
-default,Veteran,At the beginning of every trimester. gain 1 point in all stats,veteran
 charisma,Encore,Play 4 cards per turn and draw 4 after *,encore
 charisma,Lasting effects,The last card you played also has the effect of the first,lastingEffects
 charisma,Natural Ally,Once per turn target one person that. person can not target you this turn,naturalAlly
