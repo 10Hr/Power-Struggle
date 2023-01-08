@@ -162,7 +162,7 @@ public class DeckScript : NetworkBehaviour
         effects.Add(trggain4str);
         effects.Add(trggain4chr);
         effects.Add(trggain4int);
-        effects.Add(bcuntrg);
+//        effects.Add(bcuntrg);
 
     }
 
