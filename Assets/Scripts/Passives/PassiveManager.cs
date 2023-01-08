@@ -160,12 +160,15 @@ public class PassiveManager : NetworkBehaviour
 
     void Scrapper() {
         Debug.Log("unrelenting");
+        //more if statements
     }
     void Taunt() {
         Debug.Log("displayOfSkill");
+        //if statement in ModifyPower
     }
     void Unstable() {
         Debug.Log("unstable");
+        //add reward multiplier syncarvar int
     }
 
     //-----------------------------------------cunning-----------------------------------------
@@ -173,11 +176,14 @@ public class PassiveManager : NetworkBehaviour
 
     void ShadyBusiness() {
         Debug.Log("shadyBusiness");
+        //more ifs for leaderboard
     }
     void BlackMarket() {
         Debug.Log("blackMarket");
+        //complicated... do last...
     }
     void WireTapping() {
         Debug.Log("wireTapping");
+        // complicated... do when events added. DISABLED FOR ALPHA
     }
 }
