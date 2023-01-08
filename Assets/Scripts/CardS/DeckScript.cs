@@ -147,6 +147,23 @@ public class DeckScript : NetworkBehaviour
 
         //-----------------------------------------Intelligence-----------------------------------------
         effects.Add(exTitle);
+
+
+        //-----------------------------------------Charisma-----------------------------------------
+
+
+
+        //-----------------------------------------Cunning-----------------------------------------
+
+        effects.Add(gainstreqcun);
+        effects.Add(gaininteqcun);
+        effects.Add(gainchreqcun);
+        effects.Add(trggain4cun);
+        effects.Add(trggain4str);
+        effects.Add(trggain4chr);
+        effects.Add(trggain4int);
+        effects.Add(bcuntrg);
+
     }
 
     // CARD EFFECTS ARE CALLED IN CARDSCRIPT
@@ -325,6 +342,27 @@ public class DeckScript : NetworkBehaviour
      //-----------------------------------------cunning-----------------------------------------
 
 
+        public void gainstreqcu() {
+        
+        }
+        public void gaininteqcu() {
+        
+        }
+        public void gainchreqcu() {
+        
+        }
+        public void trggain4cun() {
+        
+        }
+        public void trggain4str() {
+        
+        }
+        public void trggain4chr() {
+        
+        }
+        public void trggain4int() {
+        
+        }
     //---------------------------------General Methods-------------------------------------------
 
     public void trgbntActive(string meth) {

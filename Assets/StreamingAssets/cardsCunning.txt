@@ -1,17 +1,17 @@
-cunning,exTitle,0,Gain strength equal to cunning
-cunning,exTitle,0,Gain intelligence equal to cunning
-cunning,exTitle,0,Gain charisma equal to cunning
-cunning,exTitle,0,Target an opponent - they gain 4 cunning
-cunning,exTitle,0,Target an opponent - they gain 4 cunning
-cunning,exTitle,0,Target an opponent - they gain 4 strength
-cunning,exTitle,0,Target an opponent - they gain 4 strength
-cunning,exTitle,0,Target an opponent - they gain 4 charisma
-cunning,exTitle,0,Target an opponent - they gain 4 charisma
-cunning,exTitle,0,Target an opponent - they gain 4 intelligence
-cunning,exTitle,0,Target an opponent - they gain 4 intelligence
-cunning,exTitle,0,Become untargetable for the rest of this turn
-cunning,exTitle,0,Become untargetable for the rest of this turn
-cunning,exTitle,0,Select a passive from your lowest stat
-cunning,exTitle,0,Gain power equal to 5x all your stat points
-cunning,exTitle,0,Gain power equal to 5x all your stat points
-cunning,exTitle,0,Relocate all your stat points
+cunning,gainstreqcun,0,Gain strength equal to cunning,74
+cunning,gaininteqcun,0,Gain intelligence equal to cunning,75
+cunning,gainchreqcun,0,Gain charisma equal to cunning,76
+cunning,trggain4cun,0,Target an opponent - they gain 4 cunning,77
+cunning,trggain4cun,0,Target an opponent - they gain 4 cunning,78
+cunning,trggain4str,0,Target an opponent - they gain 4 strength,79
+cunning,trggain4str,0,Target an opponent - they gain 4 strength,80
+cunning,trggain4chr,0,Target an opponent - they gain 4 charisma,81
+cunning,trggain4chr,0,Target an opponent - they gain 4 charisma,82
+cunning,trggain4int,0,Target an opponent - they gain 4 intelligence,83
+cunning,trggain4int,0,Target an opponent - they gain 4 intelligence,84
+cunning,bcuntrg,0,Become untargetable for the rest of this turn,85
+cunning,bcuntrg,0,Become untargetable for the rest of this turn,86
+cunning,selpaslowstat,0,Select a passive from your lowest stat,87
+cunning,gainPeq5xallstat,0,Gain power equal to 5x all your stat points,88
+cunning,gainPeq5xallstat,0,Gain power equal to 5x all your stat points,89
+cunning,relocateAllStats,0,Relocate all your stat points,90
