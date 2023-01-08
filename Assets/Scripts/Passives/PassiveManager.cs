@@ -40,10 +40,6 @@ public class PassiveManager : NetworkBehaviour
             passives.Add(p);
             passives[passives.Count - 1].passiveType = data[0];
             passives[passives.Count - 1].passiveName = data[1];
-            //passives[passives.Count - 1].passiveDescription = data[2];
-            //passives[passives.Count - 1].passiveEffect = data[3];
-            //if (passives[passives.Count - 1].passiveDescription.Contains(".")) 
-            //    passives[passives.Count - 1].passiveDescription = passives[passives.Count - 1].passiveDescription.Replace(".", ",");
         }
         input.Close();
     }
@@ -59,15 +55,8 @@ public class PassiveManager : NetworkBehaviour
         }
         Debug.Log("Passives added");
 
-        //player.passive.passiveName = choices[0].passiveName;
-        //player.passiveName = choices[0].passiveName;
 
-        //select passive
-        //add to player
-        //add to player manager
-
-
-        // pullEff();
+        //pullEff();
 
         //setChoices(player, choices);
         RpcSetLabels(player.connectionToClient, choices[0].passiveName, choices[1].passiveName, choices[2].passiveName);
@@ -158,9 +147,12 @@ public class PassiveManager : NetworkBehaviour
     }
     void Precise() {
         Debug.Log("precise");
+        //just add checks in deckscript target methods
     }
     void SeeDeck() {
         Debug.Log("seeDeck");
+        //add disabled bool to card script
+        //add disable check when selecting card
     }
 
     //-----------------------------------------strength-----------------------------------------

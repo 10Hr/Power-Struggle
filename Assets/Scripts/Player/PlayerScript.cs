@@ -21,6 +21,9 @@ public class PlayerScript : NetworkBehaviour
 
     public bool added = false;
 
+    [SyncVar]
+    public bool untargetable = false;
+
     public int numSelected;
 
     #region stats
