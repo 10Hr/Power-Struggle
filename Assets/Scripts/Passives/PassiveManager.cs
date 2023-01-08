@@ -110,21 +110,21 @@ public class PassiveManager : NetworkBehaviour
         // note the methods must all be of type void with no parameters
         // that is they must all have the same signature.
         Debug.Log("creating effect list");
-                effects.Add(encore);
-                effects.Add(lastingEffects);
-                effects.Add(naturalAlly);
+                effects.Add(StrongAllies);
+                effects.Add(SmartAllies);
+                effects.Add(ShadyAllies);
 
-                effects.Add(tactician);
-                effects.Add(precise);
-                effects.Add(seeDeck);
+                effects.Add(Tactician);
+                effects.Add(Precise);
+                effects.Add(SeeDeck);
 
-                effects.Add(unrelenting);
-                effects.Add(displayOfSkill);
-                effects.Add(unstable);
+                effects.Add(Scrapper);
+                effects.Add(Taunt);
+                effects.Add(Unstable);
 
-                effects.Add(shadyBusiness);
-                effects.Add(blackMarket);
-                effects.Add(wireTapping);
+                effects.Add(ShadyBusiness);
+                effects.Add(BlackMarket);
+                effects.Add(WireTapping);
 
     /* needs PassiveEffect to return a methodName
             for (int i = 0; i < effects.Count; i++)
@@ -141,52 +141,52 @@ public class PassiveManager : NetworkBehaviour
      //-----------------------------------------charisma-----------------------------------------
 
 
-     void encore() {
+     void StrongAllies() {
          Debug.Log("Encore");
      }
-    void lastingEffects() {
+    void SmartAllies() {
         Debug.Log("lastingEffects");
     }
-    void naturalAlly() {
+    void ShadyAllies() {
         Debug.Log("naturalAlly");
     }
 
     //-----------------------------------------intelligence-----------------------------------------
 
 
-    void tactician() {
+    void Tactician() {
         Debug.Log("tactician");
     }
-    void precise() {
+    void Precise() {
         Debug.Log("precise");
     }
-    void seeDeck() {
+    void SeeDeck() {
         Debug.Log("seeDeck");
     }
 
     //-----------------------------------------strength-----------------------------------------
 
 
-    void unrelenting() {
+    void Scrapper() {
         Debug.Log("unrelenting");
     }
-    void displayOfSkill() {
+    void Taunt() {
         Debug.Log("displayOfSkill");
     }
-    void unstable() {
+    void Unstable() {
         Debug.Log("unstable");
     }
 
     //-----------------------------------------cunning-----------------------------------------
 
 
-    void shadyBusiness() {
+    void ShadyBusiness() {
         Debug.Log("shadyBusiness");
     }
-    void blackMarket() {
+    void BlackMarket() {
         Debug.Log("blackMarket");
     }
-    void wireTapping() {
+    void WireTapping() {
         Debug.Log("wireTapping");
     }
 }

@@ -1,12 +1,12 @@
-charisma,Encore,Play 4 cards per turn and draw 4 after *,encore
-charisma,Lasting effects,The last card you played also has the effect of the first,lastingEffects
-charisma,Natural Ally,Once per turn target one person that. person can not target you this turn,naturalAlly
-intelligence,Tactician,Once per playing round. change out one of your face down cards with one in your hand,tactician
-intelligence,Precise,Your attacks never miss their target,precise
-intelligence,See Deck,See another person's hand once per turn and disable 1 card *,seeDeck
-strength,Unrelenting,Save Yourself from elimination (one time use),unrelenting
-strength,Display of Skill,When targeted by another players card. you can roll a dice. if it lands on 5 or 6. it has no affect *,displayOfSkill
-strength,Unstable,Double all point income and double all point losses,unstable
-cunning,Shady business,Redirect an enemy card that targets another player to a player of your choosing **,shadyBusiness
-cunning,Blackmarket,You can put a card from your hand back in the deck and draw a new one. The first time is free. but every time after that costs 50pp,blackMarket
-cunning,Wire Tapping,At the start of a trimester. choose 1 event from a random 5 that will be in the treimester,wireTapping
+charisma,StrongAllies,All players with strength as their highest stat become your ally - you cannot harm allies
+charisma,SmartAllies,All players with intelligence as their highest stat become your ally - you cannot harm allies
+charisma,ShadyAllies,All players with cunning as their highest stat become your ally - you cannot harm allies
+intelligence,Tactician,Once per playing round. change out one of your face down cards with one in your hand
+intelligence,Precise,Your attacks never miss their target
+intelligence,SeeDeck,See another person's hand once per turn and disable 1 card
+strength,Scrapper,Players higher than you on the leaderboard can not target you
+strength,Taunt,Every time a player makes you lose power - gain 1 strength
+strength,Unstable,Double all point income and double all point losses
+cunning,ShadyBusiness,On the leaderboard you will always appear in last place with your points being unknown
+cunning,Blackmarket,You can put a card from your hand back in the deck and draw a new one. The first time is free. but every time after that costs 50pp
+cunning,WireTapping,At the start of a trimester. Choose 1 event from a random 5 that will be in the trimester
