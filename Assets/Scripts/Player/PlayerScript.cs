@@ -21,8 +21,6 @@ public class PlayerScript : NetworkBehaviour
 
     public bool added = false;
 
-    bool ran = false;
-
     public int numSelected;
 
     #region stats
@@ -64,7 +62,11 @@ public class PlayerScript : NetworkBehaviour
     private GameObject[] addButtons;
     private GameObject[] subButtons;
 
-    [SyncVar]
+    private GameObject passiveOption1;
+    private GameObject passiveOption2;
+    private GameObject passiveOption3;
+
+    [SyncVar]          
     private int maxPoints = 8;
     [SyncVar]
     private int availablePoints = 8;
@@ -201,6 +203,10 @@ public class PlayerScript : NetworkBehaviour
 
         passive = gameObject.GetComponent<Passive>();
 
+        passiveOption1 = GameObject.Find("bntChoice1");
+        passiveOption2 = GameObject.Find("bntChoice2");
+        passiveOption3 = GameObject.Find("bntChoice3");
+
         charismaText = GameObject.Find("CharismaCounter").GetComponent<Text>();
         strengthText = GameObject.Find("StrengthCounter").GetComponent<Text>();
         intelligenceText = GameObject.Find("IntelligenceCounter").GetComponent<Text>();
@@ -276,8 +282,14 @@ public class PlayerScript : NetworkBehaviour
                 //spawn passive choices
                 if (g == 0 && hasHighest) {
                     passiveManager.CmdSelectPassive(highest, this);
-                    CmdSelectedPassive(this);
                     g = 1;
+                }
+                if (passive.passiveName != "" && isLocalPlayer)
+                {
+                    passiveOption1.SetActive(false);
+                    passiveOption2.SetActive(false);
+                    passiveOption3.SetActive(false);
+                    CmdSelectedPassive(this);
                 }
                 break;
 

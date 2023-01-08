@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Mirror;
 using UnityEngine.UI;
+using TMPro;
 using System.IO;
 
 public class StatManager : NetworkBehaviour
@@ -144,35 +145,31 @@ public class StatManager : NetworkBehaviour
         }
     }
 
-/* fix later
-
-
     public void selectPassive() {
         GameObject thisButton = UnityEngine.EventSystems.EventSystem.current.currentSelectedGameObject;
         string buttontag = UnityEngine.EventSystems.EventSystem.current.currentSelectedGameObject.tag;
+
+        Debug.Log(thisButton.GetComponentInChildren<TextMeshProUGUI>().text);
 
         PlayerScript p = GetPlayer();
 
         switch (buttontag) {
             case "passiveChoice1":
-                Debug.Log(p.choicesList[0].PassiveName);
-                CmdSelectPassive(p);
+                CmdSelectPassive(p, thisButton.GetComponentInChildren<TextMeshProUGUI>().text);
                 break;
             case "passiveChoice2":
-                CmdSelectPassive(p);
+                CmdSelectPassive(p, thisButton.GetComponentInChildren<TextMeshProUGUI>().text);
                 break;
             case "passiveChoice3":
-                CmdSelectPassive(p);
+                CmdSelectPassive(p, thisButton.GetComponentInChildren<TextMeshProUGUI>().text);
                 break;
         }
 
     }
 
     [Command(requiresAuthority = false)]
-    public void CmdSelectPassive(PlayerScript p) {
-        Debug.Log(p.choicesList[0].PassiveName);
-        //p.Passive = passive;
-        //p.PassiveName = passive.PassiveName;
+    public void CmdSelectPassive(PlayerScript p, string name) {
+        p.passive.passiveName = name;
     }
 
     [Command (requiresAuthority = false)]
@@ -180,5 +177,4 @@ public class StatManager : NetworkBehaviour
     {
         p.passiveName = passiveName;
     }
-    */
 }

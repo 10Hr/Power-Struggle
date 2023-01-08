@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using Mirror;
 using System.IO;
+using TMPro;
 using UnityEngine.UI;
 public class PassiveManager : NetworkBehaviour
 {
@@ -12,9 +13,9 @@ public class PassiveManager : NetworkBehaviour
     public List<Passive> possible = new List<Passive>(); // all passives to be chosen from; 
     private delegate void GetEffects();
     private List<GetEffects> effects = new List<GetEffects>();
-    public GameObject txtChoice1;
-    public GameObject txtChoice2;
-    public GameObject txtChoice3;
+    public GameObject bntChoice1;
+    public GameObject bntChoice2;
+    public GameObject bntChoice3;
 
     void Awake() { 
     
@@ -38,12 +39,12 @@ public class PassiveManager : NetworkBehaviour
             string[] data = line.Split(',');
             Passive p = new Passive();
             passives.Add(p);
-            passives[passives.Count - 1].PassiveType = data[0];
-            passives[passives.Count - 1].PassiveName = data[1];
-            passives[passives.Count - 1].PassiveDescription = data[2];
-            passives[passives.Count - 1].PassiveEffect = data[3];
-            if (passives[passives.Count - 1].PassiveDescription.Contains(".")) 
-                passives[passives.Count - 1].PassiveDescription = passives[passives.Count - 1].PassiveDescription.Replace(".", ",");
+            passives[passives.Count - 1].passiveType = data[0];
+            passives[passives.Count - 1].passiveName = data[1];
+            //passives[passives.Count - 1].passiveDescription = data[2];
+            //passives[passives.Count - 1].passiveEffect = data[3];
+            //if (passives[passives.Count - 1].passiveDescription.Contains(".")) 
+            //    passives[passives.Count - 1].passiveDescription = passives[passives.Count - 1].passiveDescription.Replace(".", ",");
         }
         input.Close();
     }
@@ -55,7 +56,7 @@ public class PassiveManager : NetworkBehaviour
         possible.Add(passives[1]);
         possible.Add(passives[2]);
         foreach (Passive p in passives) 
-            if (p.PassiveType == highest) 
+            if (p.passiveType == highest) 
                 possible.Add(p);
 
         for (int i = 0; i < 3; i++) {
@@ -65,31 +66,30 @@ public class PassiveManager : NetworkBehaviour
         }
         Debug.Log("Passives added");
 
-        player.passive.PassiveName = choices[0].PassiveName;
-        player.passiveName = choices[0].PassiveName;
-
-        possible.Clear();
-        choices.Clear();
-
+        //player.passive.passiveName = choices[0].passiveName;
+        //player.passiveName = choices[0].passiveName;
 
         //select passive
         //add to player
         //add to player manager
 
 
-       // pullEff();
+        // pullEff();
 
-     //   setChoices(player, choices);
-     //  RpcSetLabels(player.connectionToClient, choices[0], choices[1], choices[2]);
+        //setChoices(player, choices);
+        RpcSetLabels(player.connectionToClient, choices[0].passiveName, choices[1].passiveName, choices[2].passiveName);
+
+        possible.Clear();
+        choices.Clear();
     }
 
     //try with seperate passives isntead of list
     [TargetRpc]
-    public void RpcSetLabels(NetworkConnection conn, Passive p1, Passive p2, Passive p3)
+    public void RpcSetLabels(NetworkConnection conn, string p1, string p2, string p3)
     {
-        txtChoice1.GetComponent<Text>().text = p1.PassiveName; //problem child
-        txtChoice2.GetComponent<Text>().text = p2.PassiveName;
-        txtChoice3.GetComponent<Text>().text = p3.PassiveName;
+        bntChoice1.GetComponent<TextMeshProUGUI>().text = p1;
+        bntChoice2.GetComponent<TextMeshProUGUI>().text = p2;
+        bntChoice3.GetComponent<TextMeshProUGUI>().text = p3;
     }
 
     //[Command (requiresAuthority = false)]
@@ -98,14 +98,14 @@ public class PassiveManager : NetworkBehaviour
         foreach (Passive p in pl)
         {
             player.choicesList.Add(p);
-            Debug.Log(p.PassiveName);
+            Debug.Log(p.passiveName);
         }
     }
 
    void pullEff() { // waste of time
         for (int i = 0; i < effects.Count; i++) 
             for (int j = 0; j < 3; j++) 
-                if (choices[j].PassiveEffect == effects[i].Method.Name) 
+                if (choices[j].passiveName == effects[i].Method.Name) 
                     effects[i]();     
 
     }
