@@ -1,17 +1,17 @@
-charisma,exTitle,0,Gain 1 point in intelligence
-charisma,exTitle,1,Look at cards in an opponents hand up to how many intelligence points you have (max 6).
-charisma,exTitle,1,Look at cards in an opponents hand up to how many intelligence points you have (max 6).
-charisma,exTitle,4,If you lost power so far this turn, gain it back - return half of the loses to the players who targetted you. if you haven't - lose 100 power.
-charisma,exTitle,4,If a target you made lose power - negates it - or counters - gain half the power they would have lost.
-charisma,exTitle,4,If a target you made lose power - negates it - or counters - gain half the power they would have lost.
-charisma,exTitle,2,Target a player - learn their second highest stat value - and gain a point in that stat and choose if they gain one too.
-charisma,exTitle,2,Target a player - learn their second highest stat value - and gain a point in that stat and choose if they gain one too.
-charisma,exTitle,7,Target any number of players - reveal your hand to those players - gain 50 power per player shown.
-charisma,exTitle,3,Target a player, they lose power equal to 20 x the amount of cards in their hand that are revealed.
-charisma,exTitle,3,Target a player, they lose power equal to 20 x the amount of cards in their hand that are revealed.
-charisma,exTitle,3,Target a player, they lose stat points of your choice for every 3 revealed cards in their hand
-charisma,exTitle,3,Target a player, they lose stat points of your choice for every 3 revealed cards in their hand
-charisma,exTitle,3,Gain power equal to 10 x the amount of revealed cards in all your opponents hands.
-charisma,exTitle,3,Gain power equal to 10 x the amount of revealed cards in all your opponents hands.
-charisma,exTitle,6,Spend an amount of power equal to any multiple of 25 - reveal that many cards from all players hands
-charisma,exTitle,2,Gain 1 performance point for each card in players hands that is revealed
+charisma,exTitle,0,Change your ally to all strength players
+charisma,exTitle,0,Change your ally to all intelligence players
+charisma,exTitle,0,Change your ally to all cunning players
+charisma,exTitle,0,You gain 10 x charisma power and your allies gain half of that
+charisma,exTitle,0,You gain 10 x charisma power and your allies gain half of that
+charisma,exTitle,0,You and your allies gain half the power you lost before playing this card
+charisma,exTitle,0,You and your allies gain half the power you lost before playing this card
+charisma,exTitle,0,All players that aren't your ally lose 50 power and gain 3 stat points of your current ally stat
+charisma,exTitle,0,All players that aren't your ally lose 50 power and gain 3 stat points of your current ally stat
+charisma,exTitle,0,All players that aren't your ally lose 50 power and gain 3 stat points of your current ally stat
+charisma,exTitle,0,All players that aren't your ally lose 50 power and gain 3 stat points of your current ally stat
+charisma,exTitle,0,Players who aren't your ally can not target you for the rest of this turn
+charisma,exTitle,0,Players who aren't your ally can not target you for the rest of this turn
+charisma,exTitle,0,Target an ally they gain 25 power and lose 3 points of their highest stat
+charisma,exTitle,0,Target an ally they gain 25 power and lose 3 points of their highest stat
+charisma,exTitle,0,Target an ally they gain 25 power, and lose 3 points of their highest stat
+charisma,exTitle,0, All players gain 3 stats points of your current ally stat
