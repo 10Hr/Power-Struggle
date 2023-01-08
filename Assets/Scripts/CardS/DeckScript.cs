@@ -342,13 +342,13 @@ public class DeckScript : NetworkBehaviour
      //-----------------------------------------cunning-----------------------------------------
 
 
-        public void gainstreqcu() {
+        public void gainstreqcun() {
         
         }
-        public void gaininteqcu() {
+        public void gaininteqcun() {
         
         }
-        public void gainchreqcu() {
+        public void gainchreqcun() {
         
         }
         public void trggain4cun() {
