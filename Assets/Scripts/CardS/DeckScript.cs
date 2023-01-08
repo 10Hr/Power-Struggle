@@ -162,7 +162,11 @@ public class DeckScript : NetworkBehaviour
         effects.Add(trggain4str);
         effects.Add(trggain4chr);
         effects.Add(trggain4int);
-//        effects.Add(bcuntrg);
+        effects.Add(bcuntrg);
+        effects.Add(selpaslowstat);
+        effects.Add(gainPeq5xallstat);
+        effects.Add(relocateAllStats);
+
 
     }
 
@@ -202,21 +206,33 @@ public class DeckScript : NetworkBehaviour
                 NetworkClient.localPlayer.GetComponent<PlayerScript>().DiscardCard(NetworkClient.localPlayer.GetComponent<PlayerScript>(), index, NetworkClient.localPlayer.GetComponent<PlayerScript>().cardSlots);
                 break;
             case false:
-                trgbntActive("trglose1");
+                trgbntActive("trgLPSX10");
                 break;
         }
     }
-    public void trgRevI()
-    {
+    public void trgRevI() { //Target player, reveal cards in their hand up to your intelligence
         Debug.Log("Target player, reveal cards in their hand up to your intelligence");
+        switch(readytrg) {
+            case true:
+                readytrg = false;
+                //reveal cards in their hand up to your intelligence
+
+                NetworkClient.localPlayer.GetComponent<PlayerScript>().hideButtons();      
+                NetworkClient.localPlayer.GetComponent<PlayerScript>().DiscardCard(NetworkClient.localPlayer.GetComponent<PlayerScript>(), index, NetworkClient.localPlayer.GetComponent<PlayerScript>().cardSlots);    
+                break;
+            case false:
+                trgbntActive("trgRevI");
+            break;
+        }
     }
-    public void gainPCHX10()
-    {
+    public void gainPCHX10() {//Gain power equal to 10 x Charisma
         Debug.Log("charisma,Gain power equal to 10 x Charisma");
+        NetworkClient.localPlayer.GetComponent<PlayerScript>().ModifyPower(10 * NetworkClient.localPlayer.GetComponent<PlayerScript>().Charisma, NetworkClient.localPlayer.GetComponent<PlayerScript>());
     }
-    public void loseCUGP()
-    {
+    public void loseCUGP() { // Lose a point in cunning, gain 75 power
         Debug.Log("lose a point in cunning - gain 75 power");
+        NetworkClient.localPlayer.GetComponent<PlayerScript>().ModifyStats("cunning", -1, NetworkClient.localPlayer.GetComponent<PlayerScript>());
+        NetworkClient.localPlayer.GetComponent<PlayerScript>().ModifyPower(75, NetworkClient.localPlayer.GetComponent<PlayerScript>());
     }
     public void prevSLoss()
     {
@@ -237,6 +253,7 @@ public class DeckScript : NetworkBehaviour
     public void gainPower50()
     {
         Debug.Log("gain 50 power");
+        NetworkClient.localPlayer.GetComponent<PlayerScript>().ModifyPower(50, NetworkClient.localPlayer.GetComponent<PlayerScript>());
     }
     //-----------------------------------------intelligence-----------------------------------------
     public void exTitle()
@@ -300,7 +317,7 @@ public class DeckScript : NetworkBehaviour
                 NetworkClient.localPlayer.GetComponent<PlayerScript>().DiscardCard(NetworkClient.localPlayer.GetComponent<PlayerScript>(), index, NetworkClient.localPlayer.GetComponent<PlayerScript>().cardSlots);
                 break;
             case false:
-                trgbntActive("trglose1");
+                trgbntActive("trglosePGP");
                 break;
         }
     }
@@ -316,7 +333,7 @@ public class DeckScript : NetworkBehaviour
                 NetworkClient.localPlayer.GetComponent<PlayerScript>().DiscardCard(NetworkClient.localPlayer.GetComponent<PlayerScript>(), index, NetworkClient.localPlayer.GetComponent<PlayerScript>().cardSlots);
                 break;
             case false:
-                trgbntActive("trglose1");
+                trgbntActive("trglosePG1str");
                 break;
         }
     }
@@ -342,27 +359,121 @@ public class DeckScript : NetworkBehaviour
      //-----------------------------------------cunning-----------------------------------------
 
 
-        public void gainstreqcun() {
+        public void gainstreqcun() { //Gain strength equal to cunning
+            Debug.Log("Gain strength equal to cunning");
+            NetworkClient.localPlayer.GetComponent<PlayerScript>().ModifyStats("strength", NetworkClient.localPlayer.GetComponent<PlayerScript>().Cunning, NetworkClient.localPlayer.GetComponent<PlayerScript>());
+            NetworkClient.localPlayer.GetComponent<PlayerScript>().DiscardCard(NetworkClient.localPlayer.GetComponent<PlayerScript>(), index, NetworkClient.localPlayer.GetComponent<PlayerScript>().cardSlots);        
+        }
+        public void gaininteqcun() { //Gain intelligence equal to cunning
+            Debug.Log("Gain strength equal to cunning");
+            NetworkClient.localPlayer.GetComponent<PlayerScript>().ModifyStats("intelligence", NetworkClient.localPlayer.GetComponent<PlayerScript>().Cunning, NetworkClient.localPlayer.GetComponent<PlayerScript>());
+            NetworkClient.localPlayer.GetComponent<PlayerScript>().DiscardCard(NetworkClient.localPlayer.GetComponent<PlayerScript>(), index, NetworkClient.localPlayer.GetComponent<PlayerScript>().cardSlots);       
+        }
+        public void gainchreqcun() { //Gain charisma equal to cunning
+            Debug.Log("Gain strength equal to cunning");
+            NetworkClient.localPlayer.GetComponent<PlayerScript>().ModifyStats("charisma", NetworkClient.localPlayer.GetComponent<PlayerScript>().Cunning, NetworkClient.localPlayer.GetComponent<PlayerScript>());
+            NetworkClient.localPlayer.GetComponent<PlayerScript>().DiscardCard(NetworkClient.localPlayer.GetComponent<PlayerScript>(), index, NetworkClient.localPlayer.GetComponent<PlayerScript>().cardSlots);          
+        }
+        public void trggain4cun() { // Target an opponent - they gain 4 cunning
+            Debug.Log("Target an opponent - they gain 4 cunning");
+            switch (readytrg)
+            {
+                case true:
+                    readytrg = false;
+                    targetPlayer.ModifyStats("cunning", 4, targetPlayer);
+                    NetworkClient.localPlayer.GetComponent<PlayerScript>().hideButtons();
+                    NetworkClient.localPlayer.GetComponent<PlayerScript>().DiscardCard(NetworkClient.localPlayer.GetComponent<PlayerScript>(), index, NetworkClient.localPlayer.GetComponent<PlayerScript>().cardSlots);
+                    break;
+                case false:
+                    trgbntActive("trggain4cun");
+                    break;
+            }
         
         }
-        public void gaininteqcun() {
-        
+        public void trggain4str() { //Target an opponent - they gain 4 strength
+            Debug.Log("Target an opponent - they gain 4 strength");
+            switch (readytrg) {
+                case true:
+                    readytrg = false;
+                    targetPlayer.ModifyStats("strength", 4, targetPlayer);
+                    NetworkClient.localPlayer.GetComponent<PlayerScript>().hideButtons();
+                    NetworkClient.localPlayer.GetComponent<PlayerScript>().DiscardCard(NetworkClient.localPlayer.GetComponent<PlayerScript>(), index, NetworkClient.localPlayer.GetComponent<PlayerScript>().cardSlots);
+                    break;
+                case false:
+                    trgbntActive("trggain4str");
+                    break;
+            }
         }
-        public void gainchreqcun() {
-        
+        public void trggain4chr() { //Target an opponent - they gain 4 charisma
+            Debug.Log("Target an opponent - they gain 4 charisma");
+            switch (readytrg) {
+                case true:
+                    readytrg = false;
+                    targetPlayer.ModifyStats("charisma", 4, targetPlayer);
+                    NetworkClient.localPlayer.GetComponent<PlayerScript>().hideButtons();
+                    NetworkClient.localPlayer.GetComponent<PlayerScript>().DiscardCard(NetworkClient.localPlayer.GetComponent<PlayerScript>(), index, NetworkClient.localPlayer.GetComponent<PlayerScript>().cardSlots);
+                    break;
+                case false:
+                    trgbntActive("trggain4str");
+                    break;
+            }
         }
-        public void trggain4cun() {
-        
+        public void trggain4int() { //Target an opponent - they gain 4 intelligence
+            Debug.Log("Target an opponent - they gain 4 intelligence");
+            switch (readytrg) {
+                case true:
+                    readytrg = false;
+                    targetPlayer.ModifyStats("intelligence", 4, targetPlayer);
+                    NetworkClient.localPlayer.GetComponent<PlayerScript>().hideButtons();
+                    NetworkClient.localPlayer.GetComponent<PlayerScript>().DiscardCard(NetworkClient.localPlayer.GetComponent<PlayerScript>(), index, NetworkClient.localPlayer.GetComponent<PlayerScript>().cardSlots);
+                    break;
+                case false:
+                    trgbntActive("trggain4str");
+                    break;
+            }
         }
-        public void trggain4str() {
-        
+        public void bcuntrg() { // Become untargetable for the rest of this turn
+            Debug.Log("Become untargetable for the rest of this turn");
+            setUntargetable(NetworkClient.localPlayer.GetComponent<PlayerScript>());
+            NetworkClient.localPlayer.GetComponent<PlayerScript>().DiscardCard(NetworkClient.localPlayer.GetComponent<PlayerScript>(), index, NetworkClient.localPlayer.GetComponent<PlayerScript>().cardSlots);
+            // need to handle untargetable when turn ends when turn ends
         }
-        public void trggain4chr() {
-        
+        public void selpaslowstat() { //Select a passive from your lowest stat
+            Debug.Log("Select a passive from your lowest stat");
+
+
+
+            //need to implement passive selection
+
+
+
+
+            NetworkClient.localPlayer.GetComponent<PlayerScript>().DiscardCard(NetworkClient.localPlayer.GetComponent<PlayerScript>(), index, NetworkClient.localPlayer.GetComponent<PlayerScript>().cardSlots);
         }
-        public void trggain4int() {
-        
+        public void gainPeq5xallstat() { //Gain power equal to 5x all your stat points
+            Debug.Log("Gain power equal to 5x all your stat points");
+            NetworkClient.localPlayer.GetComponent<PlayerScript>().ModifyPower((NetworkClient.localPlayer.GetComponent<PlayerScript>().Strength + 
+                                                                                         NetworkClient.localPlayer.GetComponent<PlayerScript>().Cunning + 
+                                                                                         NetworkClient.localPlayer.GetComponent<PlayerScript>().Charisma + 
+                                                                                         NetworkClient.localPlayer.GetComponent<PlayerScript>().Intelligence) * 5, 
+                                                                                         NetworkClient.localPlayer.GetComponent<PlayerScript>());                                                                
+            NetworkClient.localPlayer.GetComponent<PlayerScript>().DiscardCard(NetworkClient.localPlayer.GetComponent<PlayerScript>(), index, NetworkClient.localPlayer.GetComponent<PlayerScript>().cardSlots);
         }
+        public void relocateAllStats() { //Relocate all your stat points
+            Debug.Log("Relocate all your stat points");
+
+
+
+
+            //need to implement stat relocation
+
+
+
+
+            NetworkClient.localPlayer.GetComponent<PlayerScript>().DiscardCard(NetworkClient.localPlayer.GetComponent<PlayerScript>(), index, NetworkClient.localPlayer.GetComponent<PlayerScript>().cardSlots);
+
+        }
+
     //---------------------------------General Methods-------------------------------------------
 
     public void trgbntActive(string meth) {
@@ -377,5 +488,9 @@ public class DeckScript : NetworkBehaviour
 
     }
 
+    [Command(requiresAuthority = false)]
+    public void setUntargetable(PlayerScript p) {
+        p.untargetable = true;
+    }
 
 }

@@ -524,23 +524,29 @@ public class PlayerScript : NetworkBehaviour
 
     public List<PlayerScript> sendPlayerData() {
         List<PlayerScript> playerslots = new List<PlayerScript>();
-        playerslots.Add(enemy1);
-        playerslots.Add(enemy2);
-        playerslots.Add(enemy3);
+        playerslots.Add(enemy1); //bntright
+        playerslots.Add(enemy2); //bntleft
+        playerslots.Add(enemy3); //bnttop
 
         return playerslots;
     }
 
     public void UnhideButtons() {
-        bntTop.SetActive(true);
-        bntLeft.SetActive(true);
-        bntRight.SetActive(true);
+        if (sendPlayerData()[0].untargetable == false)  //enemy1
+            bntRight.SetActive(true);
+        else if (sendPlayerData()[1].untargetable == false)  //enemy2
+            bntLeft.SetActive(true);
+        else if (sendPlayerData()[2].untargetable == false)  //enemy3
+            bntTop.SetActive(true);
     }
 
     public void hideButtons() {
-        bntTop.SetActive(false);
-        bntLeft.SetActive(false);
-        bntRight.SetActive(false);
+        if (bntRight.activeInHierarchy == true)  //enemy1
+            bntRight.SetActive(false);
+        else if (bntRight.activeInHierarchy == true)  //enemy2
+            bntLeft.SetActive(false);
+        else if (bntRight.activeInHierarchy == true)  //enemy3
+            bntTop.SetActive(false);
     }
     
     public void Turn() {
@@ -605,4 +611,5 @@ public class PlayerScript : NetworkBehaviour
             }
         }
     }
+
 }
