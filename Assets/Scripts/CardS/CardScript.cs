@@ -39,7 +39,7 @@ public class CardScript : NetworkBehaviour
     public string ID
     {
         get { return id; }
-        set 
+        set
         {
             id = value;
         }
@@ -51,7 +51,7 @@ public class CardScript : NetworkBehaviour
         set { title = value; }
     }
 
-        public string Description
+    public string Description
     {
         get { return description; }
         set { description = value; }
@@ -60,7 +60,7 @@ public class CardScript : NetworkBehaviour
     public string Type
     {
         get { return type; }
-        set 
+        set
         {
             Debug.Log(value);
             type = value;
@@ -124,7 +124,7 @@ public class CardScript : NetworkBehaviour
             gameObject.GetComponent<SpriteRenderer>().sortingOrder = sortingDefault;
         }
     }
-    
+
     public void OnMouseEnter() {
         hovered = true;
     }
@@ -141,6 +141,7 @@ public class CardScript : NetworkBehaviour
         }
         else if ((cardBack != null && gameObject.tag == "CardSlot" && gameState.currentState == GameStates.Turn) && gameState.currentPlayer.netId == NetworkClient.localPlayer.netId && selected)
         {
+            CmdDisplayCard(int.Parse(this.id));
             gameState.currentPlayer.deck.pullEff(title, this.id);
             this.title = "";
             this.description = "";
@@ -157,5 +158,19 @@ public class CardScript : NetworkBehaviour
     [Command(requiresAuthority = false)]
     public void CmdturnIncrease() {
         gameState.turn++;
+    }
+
+    [Command(requiresAuthority = false)]
+    public void CmdDisplayCard(int id)
+    {
+        RpcDisplayCard(id);
+    }
+
+    [ClientRpc]
+    public void RpcDisplayCard(int id)
+    {
+        CardScript display = GameObject.Find("LastPlayed").GetComponent<CardScript>();
+        //display.cardBack = card.cardFront;
+        display.cardBack = sprArray[id];
     }
 }
