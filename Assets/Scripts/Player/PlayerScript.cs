@@ -553,19 +553,25 @@ public class PlayerScript : NetworkBehaviour
     public void UnhideButtons() {
         if (sendPlayerData()[0].untargetable == false)  //enemy1
             bntRight.SetActive(true);
-        else if (sendPlayerData()[1].untargetable == false)  //enemy2
+        if (sendPlayerData()[1].untargetable == false)  //enemy2
             bntLeft.SetActive(true);
-        else if (sendPlayerData()[2].untargetable == false)  //enemy3
+        if (sendPlayerData()[2].untargetable == false)  //enemy3
             bntTop.SetActive(true);
+        //bntTop.SetActive(true);
+        //bntLeft.SetActive(true);
+        //bntRight.SetActive(true);
     }
 
     public void hideButtons() {
         if (bntRight.activeInHierarchy == true)  //enemy1
             bntRight.SetActive(false);
-        else if (bntRight.activeInHierarchy == true)  //enemy2
+        if (bntLeft.activeInHierarchy == true)  //enemy2
             bntLeft.SetActive(false);
-        else if (bntRight.activeInHierarchy == true)  //enemy3
+        if (bntTop.activeInHierarchy == true)  //enemy3
             bntTop.SetActive(false);
+        //bntTop.SetActive(false);
+        //bntLeft.SetActive(false);
+        //bntRight.SetActive(false);
     }
     
     public void Turn() {
@@ -593,7 +599,7 @@ public class PlayerScript : NetworkBehaviour
     }
 
     [Command(requiresAuthority = false)]
-    public void ResetStats(PlayerScript p, int max)
+    public void ResetStats(PlayerScript p)
     {
         p.AvailablePoints = p.Charisma + p.Strength + p.Cunning + p.Intelligence;
         p.Strength = 0;
@@ -619,7 +625,7 @@ public class PlayerScript : NetworkBehaviour
     public void DiscardCard(PlayerScript p, int index, GameObject[] slots)
     {
         int rand = UnityEngine.Random.Range(0, 33);
-        //Debug.Log(p.playerNumber);
+        Debug.Log(index);
         p.cards.Add(p.hand[index]);
         p.hand[index] = p.cards[rand];
         p.cards.Remove(p.cards[rand]);
@@ -639,6 +645,12 @@ public class PlayerScript : NetworkBehaviour
                 g.GetComponent<CardScript>().ID = id;
             }
         }
+    }
+
+    [Command(requiresAuthority = false)]
+    public void setUntargetable(PlayerScript p)
+    {
+        p.untargetable = true;
     }
 
 }
