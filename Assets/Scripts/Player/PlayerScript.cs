@@ -26,6 +26,8 @@ public class PlayerScript : NetworkBehaviour
 
     public int numSelected;
 
+    public int numToReveal = 0;
+
     #region stats
     [SyncVar]
     private int charisma;
@@ -663,4 +665,9 @@ public class PlayerScript : NetworkBehaviour
         p.untargetable = true;
     }
 
+    [Command(requiresAuthority = false)]
+    public void CmdturnIncrease()
+    {
+        FSM.turn++;
+    }
 }

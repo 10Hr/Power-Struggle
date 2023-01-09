@@ -25,7 +25,7 @@ public class CardScript : NetworkBehaviour
     public bool hovered;
     public bool selected = false;
     public bool prevSelected = false;
-    public bool disabled = false;
+    public bool revealable = false;
     public bool revealed = false;
     public int sortingDefault;
     public float defaultY;
@@ -153,14 +153,16 @@ public class CardScript : NetworkBehaviour
             this.selected = false;
             this.prevSelected = false;
             gameObject.GetComponent<SpriteRenderer>().color = Color.white;
-            CmdturnIncrease();
+        }
+        if (cardBack != null && revealable == true)
+        {
+            revealed = true;
+            revealable = false;
+            NetworkClient.localPlayer.GetComponent<PlayerScript>().numToReveal--;
         }
     }
 
-    [Command(requiresAuthority = false)]
-    public void CmdturnIncrease() {
-        gameState.turn++;
-    }
+
 
     [Command(requiresAuthority = false)]
     public void CmdDisplayCard(int id)

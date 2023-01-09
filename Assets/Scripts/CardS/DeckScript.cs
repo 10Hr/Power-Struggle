@@ -195,21 +195,25 @@ public class DeckScript : NetworkBehaviour
         Debug.Log("gain 1 strength point");
         NetworkClient.localPlayer.GetComponent<PlayerScript>().ModifyStats("strength", 1, NetworkClient.localPlayer.GetComponent<PlayerScript>());
         NetworkClient.localPlayer.GetComponent<PlayerScript>().DiscardCard(NetworkClient.localPlayer.GetComponent<PlayerScript>(), index, NetworkClient.localPlayer.GetComponent<PlayerScript>().cardSlots);
+        NetworkClient.localPlayer.GetComponent<PlayerScript>().CmdturnIncrease();
     }
     public void gainchr1() { //Gain 1 point in charisma
         Debug.Log("gain 1 charisma point");
         NetworkClient.localPlayer.GetComponent<PlayerScript>().ModifyStats("charisma", 1, NetworkClient.localPlayer.GetComponent<PlayerScript>());
         NetworkClient.localPlayer.GetComponent<PlayerScript>().DiscardCard(NetworkClient.localPlayer.GetComponent<PlayerScript>(), index, NetworkClient.localPlayer.GetComponent<PlayerScript>().cardSlots);
+        NetworkClient.localPlayer.GetComponent<PlayerScript>().CmdturnIncrease();
     }
     public void gainint1() { //Gain 1 point in intelligence
         Debug.Log("gain 1 intelligence point");
         NetworkClient.localPlayer.GetComponent<PlayerScript>().ModifyStats("intelligence", 1, NetworkClient.localPlayer.GetComponent<PlayerScript>());
         NetworkClient.localPlayer.GetComponent<PlayerScript>().DiscardCard(NetworkClient.localPlayer.GetComponent<PlayerScript>(), index, NetworkClient.localPlayer.GetComponent<PlayerScript>().cardSlots);
+        NetworkClient.localPlayer.GetComponent<PlayerScript>().CmdturnIncrease();
     }
     public void gaincun1() { //Gain 1 point in cunning
         Debug.Log("gain 1 cunning point");
         NetworkClient.localPlayer.GetComponent<PlayerScript>().ModifyStats("cunning", 1, NetworkClient.localPlayer.GetComponent<PlayerScript>());
         NetworkClient.localPlayer.GetComponent<PlayerScript>().DiscardCard(NetworkClient.localPlayer.GetComponent<PlayerScript>(), index, NetworkClient.localPlayer.GetComponent<PlayerScript>().cardSlots);
+        NetworkClient.localPlayer.GetComponent<PlayerScript>().CmdturnIncrease();
     }
     public void trgLPSX10()
     {
@@ -222,6 +226,7 @@ public class DeckScript : NetworkBehaviour
                 targetPlayer.ModifyPower(-10 * NetworkClient.localPlayer.GetComponent<PlayerScript>().Strength, targetPlayer);
                 NetworkClient.localPlayer.GetComponent<PlayerScript>().hideButtons();
                 NetworkClient.localPlayer.GetComponent<PlayerScript>().DiscardCard(NetworkClient.localPlayer.GetComponent<PlayerScript>(), index, NetworkClient.localPlayer.GetComponent<PlayerScript>().cardSlots);
+                NetworkClient.localPlayer.GetComponent<PlayerScript>().CmdturnIncrease();
                 break;
             case false:
                 trgbntActive("trgLPSX10");
@@ -234,9 +239,10 @@ public class DeckScript : NetworkBehaviour
             case true:
                 readytrg = false;
                 //reveal cards in their hand up to your intelligence
-
+                RevealCards(targetPlayer, NetworkClient.localPlayer.GetComponent<PlayerScript>().Intelligence);
                 NetworkClient.localPlayer.GetComponent<PlayerScript>().hideButtons();      
-                NetworkClient.localPlayer.GetComponent<PlayerScript>().DiscardCard(NetworkClient.localPlayer.GetComponent<PlayerScript>(), index, NetworkClient.localPlayer.GetComponent<PlayerScript>().cardSlots);    
+                NetworkClient.localPlayer.GetComponent<PlayerScript>().DiscardCard(NetworkClient.localPlayer.GetComponent<PlayerScript>(), index, NetworkClient.localPlayer.GetComponent<PlayerScript>().cardSlots);
+                NetworkClient.localPlayer.GetComponent<PlayerScript>().CmdturnIncrease();
                 break;
             case false:
                 trgbntActive("trgRevI");
@@ -246,40 +252,49 @@ public class DeckScript : NetworkBehaviour
     public void gainPCHX10() {//Gain power equal to 10 x Charisma
         Debug.Log("charisma,Gain power equal to 10 x Charisma");
         NetworkClient.localPlayer.GetComponent<PlayerScript>().ModifyPower(10 * NetworkClient.localPlayer.GetComponent<PlayerScript>().Charisma, NetworkClient.localPlayer.GetComponent<PlayerScript>());
+        NetworkClient.localPlayer.GetComponent<PlayerScript>().DiscardCard(NetworkClient.localPlayer.GetComponent<PlayerScript>(), index, NetworkClient.localPlayer.GetComponent<PlayerScript>().cardSlots);
+        NetworkClient.localPlayer.GetComponent<PlayerScript>().CmdturnIncrease();
     }
     public void loseCUGP() { // Lose a point in cunning, gain 75 power
         Debug.Log("lose a point in cunning - gain 75 power");
         NetworkClient.localPlayer.GetComponent<PlayerScript>().ModifyStats("cunning", -1, NetworkClient.localPlayer.GetComponent<PlayerScript>());
         NetworkClient.localPlayer.GetComponent<PlayerScript>().ModifyPower(75, NetworkClient.localPlayer.GetComponent<PlayerScript>());
+        NetworkClient.localPlayer.GetComponent<PlayerScript>().DiscardCard(NetworkClient.localPlayer.GetComponent<PlayerScript>(), index, NetworkClient.localPlayer.GetComponent<PlayerScript>().cardSlots);
+        NetworkClient.localPlayer.GetComponent<PlayerScript>().CmdturnIncrease();
     }
     public void prevSLoss()
     {
         Debug.Log("prevent any stat point loss after this card is played");
         NetworkClient.localPlayer.GetComponent<PlayerScript>().DiscardCard(NetworkClient.localPlayer.GetComponent<PlayerScript>(), index, NetworkClient.localPlayer.GetComponent<PlayerScript>().cardSlots);
+        NetworkClient.localPlayer.GetComponent<PlayerScript>().CmdturnIncrease();
 
     }
     public void prevPLoss()
     {
         Debug.Log("prevent any power loss after this card is played");
         NetworkClient.localPlayer.GetComponent<PlayerScript>().DiscardCard(NetworkClient.localPlayer.GetComponent<PlayerScript>(), index, NetworkClient.localPlayer.GetComponent<PlayerScript>().cardSlots);
+        NetworkClient.localPlayer.GetComponent<PlayerScript>().CmdturnIncrease();
 
     }
     public void trgLoseHighest()
     {
         Debug.Log("opponent loses stat point of their highest");
         NetworkClient.localPlayer.GetComponent<PlayerScript>().DiscardCard(NetworkClient.localPlayer.GetComponent<PlayerScript>(), index, NetworkClient.localPlayer.GetComponent<PlayerScript>().cardSlots);
+        NetworkClient.localPlayer.GetComponent<PlayerScript>().CmdturnIncrease();
 
     }
     public void trgLoseP50()
     {
         Debug.Log("opponent loses 50 power");
         NetworkClient.localPlayer.GetComponent<PlayerScript>().DiscardCard(NetworkClient.localPlayer.GetComponent<PlayerScript>(), index, NetworkClient.localPlayer.GetComponent<PlayerScript>().cardSlots);
-
+        NetworkClient.localPlayer.GetComponent<PlayerScript>().CmdturnIncrease();
     }
     public void gainPower50()
     {
         Debug.Log("gain 50 power");
         NetworkClient.localPlayer.GetComponent<PlayerScript>().ModifyPower(50, NetworkClient.localPlayer.GetComponent<PlayerScript>());
+        NetworkClient.localPlayer.GetComponent<PlayerScript>().DiscardCard(NetworkClient.localPlayer.GetComponent<PlayerScript>(), index, NetworkClient.localPlayer.GetComponent<PlayerScript>().cardSlots);
+        NetworkClient.localPlayer.GetComponent<PlayerScript>().CmdturnIncrease();
     }
     #endregion
     //-----------------------------------------intelligence-----------------------------------------
@@ -288,13 +303,13 @@ public class DeckScript : NetworkBehaviour
     {
         Debug.Log("Not implemented yet");
         NetworkClient.localPlayer.GetComponent<PlayerScript>().DiscardCard(NetworkClient.localPlayer.GetComponent<PlayerScript>(), index, NetworkClient.localPlayer.GetComponent<PlayerScript>().cardSlots);
-
+        NetworkClient.localPlayer.GetComponent<PlayerScript>().CmdturnIncrease();
     }
     public void iflostPgainPrethalfelselose100()
     {
         Debug.Log("Not implemented yet");
         NetworkClient.localPlayer.GetComponent<PlayerScript>().DiscardCard(NetworkClient.localPlayer.GetComponent<PlayerScript>(), index, NetworkClient.localPlayer.GetComponent<PlayerScript>().cardSlots);
-
+        NetworkClient.localPlayer.GetComponent<PlayerScript>().CmdturnIncrease();
     }
     public void trggainhalfP()
     {
@@ -306,6 +321,7 @@ public class DeckScript : NetworkBehaviour
                 targetPlayer.ModifyStats(targetPlayer.Highest, -1, targetPlayer);
                 NetworkClient.localPlayer.GetComponent<PlayerScript>().hideButtons();
                 NetworkClient.localPlayer.GetComponent<PlayerScript>().DiscardCard(NetworkClient.localPlayer.GetComponent<PlayerScript>(), index, NetworkClient.localPlayer.GetComponent<PlayerScript>().cardSlots);
+                NetworkClient.localPlayer.GetComponent<PlayerScript>().CmdturnIncrease();
                 break;
             case false:
                 trgbntActive("trglose1");
@@ -323,6 +339,7 @@ public class DeckScript : NetworkBehaviour
                 targetPlayer.ModifyStats(targetPlayer.Highest, -1, targetPlayer);
                 NetworkClient.localPlayer.GetComponent<PlayerScript>().hideButtons();
                 NetworkClient.localPlayer.GetComponent<PlayerScript>().DiscardCard(NetworkClient.localPlayer.GetComponent<PlayerScript>(), index, NetworkClient.localPlayer.GetComponent<PlayerScript>().cardSlots);
+                NetworkClient.localPlayer.GetComponent<PlayerScript>().CmdturnIncrease();
                 break;
             case false:
                 trgbntActive("trglose1");
@@ -340,6 +357,7 @@ public class DeckScript : NetworkBehaviour
                 targetPlayer.ModifyStats(targetPlayer.Highest, -1, targetPlayer);
                 NetworkClient.localPlayer.GetComponent<PlayerScript>().hideButtons();
                 NetworkClient.localPlayer.GetComponent<PlayerScript>().DiscardCard(NetworkClient.localPlayer.GetComponent<PlayerScript>(), index, NetworkClient.localPlayer.GetComponent<PlayerScript>().cardSlots);
+                NetworkClient.localPlayer.GetComponent<PlayerScript>().CmdturnIncrease();
                 break;
             case false:
                 trgbntActive("trglose1");
@@ -357,6 +375,7 @@ public class DeckScript : NetworkBehaviour
                 targetPlayer.ModifyStats(targetPlayer.Highest, -1, targetPlayer);
                 NetworkClient.localPlayer.GetComponent<PlayerScript>().hideButtons();
                 NetworkClient.localPlayer.GetComponent<PlayerScript>().DiscardCard(NetworkClient.localPlayer.GetComponent<PlayerScript>(), index, NetworkClient.localPlayer.GetComponent<PlayerScript>().cardSlots);
+                NetworkClient.localPlayer.GetComponent<PlayerScript>().CmdturnIncrease();
                 break;
             case false:
                 trgbntActive("trglose1");
@@ -374,6 +393,7 @@ public class DeckScript : NetworkBehaviour
                 targetPlayer.ModifyStats(targetPlayer.Highest, -1, targetPlayer);
                 NetworkClient.localPlayer.GetComponent<PlayerScript>().hideButtons();
                 NetworkClient.localPlayer.GetComponent<PlayerScript>().DiscardCard(NetworkClient.localPlayer.GetComponent<PlayerScript>(), index, NetworkClient.localPlayer.GetComponent<PlayerScript>().cardSlots);
+                NetworkClient.localPlayer.GetComponent<PlayerScript>().CmdturnIncrease();
                 break;
             case false:
                 trgbntActive("trglose1");
@@ -385,50 +405,62 @@ public class DeckScript : NetworkBehaviour
     {
         Debug.Log("Not implemented yet");
         NetworkClient.localPlayer.GetComponent<PlayerScript>().DiscardCard(NetworkClient.localPlayer.GetComponent<PlayerScript>(), index, NetworkClient.localPlayer.GetComponent<PlayerScript>().cardSlots);
+        NetworkClient.localPlayer.GetComponent<PlayerScript>().CmdturnIncrease();
 
     }
     public void losePMult25RAllE()
     {
         Debug.Log("Not implemented yet");
         NetworkClient.localPlayer.GetComponent<PlayerScript>().DiscardCard(NetworkClient.localPlayer.GetComponent<PlayerScript>(), index, NetworkClient.localPlayer.GetComponent<PlayerScript>().cardSlots);
+        NetworkClient.localPlayer.GetComponent<PlayerScript>().CmdturnIncrease();
 
     }
     public void selectNP()
     {
         Debug.Log("Not implemented yet");
         NetworkClient.localPlayer.GetComponent<PlayerScript>().DiscardCard(NetworkClient.localPlayer.GetComponent<PlayerScript>(), index, NetworkClient.localPlayer.GetComponent<PlayerScript>().cardSlots);
+        NetworkClient.localPlayer.GetComponent<PlayerScript>().CmdturnIncrease();
 
     }
     #endregion
     //-----------------------------------------charisma-----------------------------------------
     #region charismacards
     public void chgalystr() { //Change your ally to all strength players
-
-        }
+        NetworkClient.localPlayer.GetComponent<PlayerScript>().DiscardCard(NetworkClient.localPlayer.GetComponent<PlayerScript>(), index, NetworkClient.localPlayer.GetComponent<PlayerScript>().cardSlots);
+        NetworkClient.localPlayer.GetComponent<PlayerScript>().CmdturnIncrease();
+    }
         public void chgalyint() { //Change your ally to all intelligence players
-
-        }
+        NetworkClient.localPlayer.GetComponent<PlayerScript>().DiscardCard(NetworkClient.localPlayer.GetComponent<PlayerScript>(), index, NetworkClient.localPlayer.GetComponent<PlayerScript>().cardSlots);
+        NetworkClient.localPlayer.GetComponent<PlayerScript>().CmdturnIncrease();
+    }
         public void chgalycun() { //Change your ally to all cunning players
-
-        }
+        NetworkClient.localPlayer.GetComponent<PlayerScript>().DiscardCard(NetworkClient.localPlayer.GetComponent<PlayerScript>(), index, NetworkClient.localPlayer.GetComponent<PlayerScript>().cardSlots);
+        NetworkClient.localPlayer.GetComponent<PlayerScript>().CmdturnIncrease();
+    }
         public void gain10xchrPalygainhalf() { //You gain 10 x charisma power and your allies gain half of that
-
-        }
+        NetworkClient.localPlayer.GetComponent<PlayerScript>().DiscardCard(NetworkClient.localPlayer.GetComponent<PlayerScript>(), index, NetworkClient.localPlayer.GetComponent<PlayerScript>().cardSlots);
+        NetworkClient.localPlayer.GetComponent<PlayerScript>().CmdturnIncrease();
+    }
         public void bgainhalfPlostbef() { //You and your allies gain half the power you lost before playing this card
-
-        }
+        NetworkClient.localPlayer.GetComponent<PlayerScript>().DiscardCard(NetworkClient.localPlayer.GetComponent<PlayerScript>(), index, NetworkClient.localPlayer.GetComponent<PlayerScript>().cardSlots);
+        NetworkClient.localPlayer.GetComponent<PlayerScript>().CmdturnIncrease();
+    }
         public void allNalylose50Pgain3stat() { //All players that aren't your ally lose 50 power and gain 3 stat points of your current ally stat
-
-        }
+        NetworkClient.localPlayer.GetComponent<PlayerScript>().DiscardCard(NetworkClient.localPlayer.GetComponent<PlayerScript>(), index, NetworkClient.localPlayer.GetComponent<PlayerScript>().cardSlots);
+        NetworkClient.localPlayer.GetComponent<PlayerScript>().CmdturnIncrease();
+    }
         public void pNalyuntrg() { //Players who aren't your ally can not target you for the rest of this turn
-
-        }
+        NetworkClient.localPlayer.GetComponent<PlayerScript>().DiscardCard(NetworkClient.localPlayer.GetComponent<PlayerScript>(), index, NetworkClient.localPlayer.GetComponent<PlayerScript>().cardSlots);
+        NetworkClient.localPlayer.GetComponent<PlayerScript>().CmdturnIncrease();
+    }
         public void trgalygain25Plose3stat() { //Target an ally they gain 25 power and lose 3 points of their highest stat
-
-        }
+        NetworkClient.localPlayer.GetComponent<PlayerScript>().DiscardCard(NetworkClient.localPlayer.GetComponent<PlayerScript>(), index, NetworkClient.localPlayer.GetComponent<PlayerScript>().cardSlots);
+        NetworkClient.localPlayer.GetComponent<PlayerScript>().CmdturnIncrease();
+    }
         public void trgallcuraly() { //gain 3 stats points of your current ally stat
-
-        }
+        NetworkClient.localPlayer.GetComponent<PlayerScript>().DiscardCard(NetworkClient.localPlayer.GetComponent<PlayerScript>(), index, NetworkClient.localPlayer.GetComponent<PlayerScript>().cardSlots);
+        NetworkClient.localPlayer.GetComponent<PlayerScript>().CmdturnIncrease();
+    }
 
     #endregion
     //-----------------------------------------strength-----------------------------------------
@@ -437,6 +469,7 @@ public class DeckScript : NetworkBehaviour
         Debug.Log("gain 2 strength points");
         NetworkClient.localPlayer.GetComponent<PlayerScript>().ModifyStats("strength", 2, NetworkClient.localPlayer.GetComponent<PlayerScript>());
         NetworkClient.localPlayer.GetComponent<PlayerScript>().DiscardCard(NetworkClient.localPlayer.GetComponent<PlayerScript>(), index, NetworkClient.localPlayer.GetComponent<PlayerScript>().cardSlots);
+        NetworkClient.localPlayer.GetComponent<PlayerScript>().CmdturnIncrease();
     }
     public void trglose1() { // Target 1 player make them lose 1 point of your choice
         Debug.Log("Target 1 player make them lose 1 point of their highest stat");
@@ -446,7 +479,8 @@ public class DeckScript : NetworkBehaviour
                 readytrg = false;
                 targetPlayer.ModifyStats(targetPlayer.Highest, -1, targetPlayer);
                 NetworkClient.localPlayer.GetComponent<PlayerScript>().hideButtons();      
-                NetworkClient.localPlayer.GetComponent<PlayerScript>().DiscardCard(NetworkClient.localPlayer.GetComponent<PlayerScript>(), index, NetworkClient.localPlayer.GetComponent<PlayerScript>().cardSlots);    
+                NetworkClient.localPlayer.GetComponent<PlayerScript>().DiscardCard(NetworkClient.localPlayer.GetComponent<PlayerScript>(), index, NetworkClient.localPlayer.GetComponent<PlayerScript>().cardSlots);
+                NetworkClient.localPlayer.GetComponent<PlayerScript>().CmdturnIncrease();
                 break;
             case false:
                 trgbntActive("trglose1");
@@ -458,6 +492,7 @@ public class DeckScript : NetworkBehaviour
         Debug.Log("gain 4 strength points");
         NetworkClient.localPlayer.GetComponent<PlayerScript>().ModifyStats("strength", 4, NetworkClient.localPlayer.GetComponent<PlayerScript>());
         NetworkClient.localPlayer.GetComponent<PlayerScript>().DiscardCard(NetworkClient.localPlayer.GetComponent<PlayerScript>(), index, NetworkClient.localPlayer.GetComponent<PlayerScript>().cardSlots);
+        NetworkClient.localPlayer.GetComponent<PlayerScript>().CmdturnIncrease();
     }
     public void losePG1str() { // lose power and gain 1 strength point per X power lost
         Debug.Log("lose power and gain 1 strength point per 30 power lost");
@@ -475,6 +510,7 @@ public class DeckScript : NetworkBehaviour
             NetworkClient.localPlayer.GetComponent<PlayerScript>().ModifyPower(X * am, NetworkClient.localPlayer.GetComponent<PlayerScript>());
         }
         NetworkClient.localPlayer.GetComponent<PlayerScript>().DiscardCard(NetworkClient.localPlayer.GetComponent<PlayerScript>(), index, NetworkClient.localPlayer.GetComponent<PlayerScript>().cardSlots);
+        NetworkClient.localPlayer.GetComponent<PlayerScript>().CmdturnIncrease();
 
     }
     public void trglosePGP() { //Target 1 player make them lose (GAINER) power, gain gain power = .5 of what player lost
@@ -487,6 +523,7 @@ public class DeckScript : NetworkBehaviour
                 NetworkClient.localPlayer.GetComponent<PlayerScript>().ModifyPower(Mathf.RoundToInt(3 * NetworkClient.localPlayer.GetComponent<PlayerScript>().Strength / 2), NetworkClient.localPlayer.GetComponent<PlayerScript>());
                 NetworkClient.localPlayer.GetComponent<PlayerScript>().hideButtons();
                 NetworkClient.localPlayer.GetComponent<PlayerScript>().DiscardCard(NetworkClient.localPlayer.GetComponent<PlayerScript>(), index, NetworkClient.localPlayer.GetComponent<PlayerScript>().cardSlots);
+                NetworkClient.localPlayer.GetComponent<PlayerScript>().CmdturnIncrease();
                 break;
             case false:
                 trgbntActive("trglosePGP");
@@ -503,6 +540,7 @@ public class DeckScript : NetworkBehaviour
                 NetworkClient.localPlayer.GetComponent<PlayerScript>().ModifyStats("strength", 1, NetworkClient.localPlayer.GetComponent<PlayerScript>());
                 NetworkClient.localPlayer.GetComponent<PlayerScript>().hideButtons();
                 NetworkClient.localPlayer.GetComponent<PlayerScript>().DiscardCard(NetworkClient.localPlayer.GetComponent<PlayerScript>(), index, NetworkClient.localPlayer.GetComponent<PlayerScript>().cardSlots);
+                NetworkClient.localPlayer.GetComponent<PlayerScript>().CmdturnIncrease();
                 break;
             case false:
                 trgbntActive("trglosePG1str");
@@ -514,23 +552,27 @@ public class DeckScript : NetworkBehaviour
         NetworkClient.localPlayer.GetComponent<PlayerScript>().ModifyPower(10 * Mathf.RoundToInt(NetworkClient.localPlayer.GetComponent<PlayerScript>().Strength / 2), NetworkClient.localPlayer.GetComponent<PlayerScript>());
         NetworkClient.localPlayer.GetComponent<PlayerScript>().ModifyStats("strength", -1 * Mathf.RoundToInt(NetworkClient.localPlayer.GetComponent<PlayerScript>().Strength / 2), NetworkClient.localPlayer.GetComponent<PlayerScript>());
         NetworkClient.localPlayer.GetComponent<PlayerScript>().DiscardCard(NetworkClient.localPlayer.GetComponent<PlayerScript>(), index, NetworkClient.localPlayer.GetComponent<PlayerScript>().cardSlots);
+        NetworkClient.localPlayer.GetComponent<PlayerScript>().CmdturnIncrease();
     }
     public void loseHGP() { // lose half your strength points and gain power = 20 * lost points
         Debug.Log("lose half your strength points and gain power = X * lost points");
         NetworkClient.localPlayer.GetComponent<PlayerScript>().AddPoints(Mathf.RoundToInt(NetworkClient.localPlayer.GetComponent<PlayerScript>().Strength / 2), NetworkClient.localPlayer.GetComponent<PlayerScript>());
         NetworkClient.localPlayer.GetComponent<PlayerScript>().ModifyStats("strength", NetworkClient.localPlayer.GetComponent<PlayerScript>().Strength, NetworkClient.localPlayer.GetComponent<PlayerScript>());
         NetworkClient.localPlayer.GetComponent<PlayerScript>().DiscardCard(NetworkClient.localPlayer.GetComponent<PlayerScript>(), index, NetworkClient.localPlayer.GetComponent<PlayerScript>().cardSlots);
+        NetworkClient.localPlayer.GetComponent<PlayerScript>().CmdturnIncrease();
 
     }
     public void trgAloseP() { // Target all players make them lose power = 2*(GAINER) the amount of strength points you have
         Debug.Log("Target all players make them lose power = 2*(GAINER) the amount of strength points you have");
         NetworkClient.localPlayer.GetComponent<PlayerScript>().DiscardCard(NetworkClient.localPlayer.GetComponent<PlayerScript>(), index, NetworkClient.localPlayer.GetComponent<PlayerScript>().cardSlots);
+        NetworkClient.localPlayer.GetComponent<PlayerScript>().CmdturnIncrease();
 
         //ModifyStats("strength", 1, NetworkClient.localPlayer.GetComponent<PlayerScript>());
     }
     public void GPpeqstr() { //Gain performance points = strength points 
         Debug.Log("Gain performance points = strength points");
         NetworkClient.localPlayer.GetComponent<PlayerScript>().DiscardCard(NetworkClient.localPlayer.GetComponent<PlayerScript>(), index, NetworkClient.localPlayer.GetComponent<PlayerScript>().cardSlots);
+        NetworkClient.localPlayer.GetComponent<PlayerScript>().CmdturnIncrease();
 
         // ModifyStats("strength", 1, NetworkClient.localPlayer.GetComponent<PlayerScript>());
     }
@@ -541,18 +583,21 @@ public class DeckScript : NetworkBehaviour
     public void gainstreqcun() { //Gain strength equal to cunning
             Debug.Log("Gain strength equal to cunning");
             NetworkClient.localPlayer.GetComponent<PlayerScript>().ModifyStats("strength", NetworkClient.localPlayer.GetComponent<PlayerScript>().Cunning, NetworkClient.localPlayer.GetComponent<PlayerScript>());
-            NetworkClient.localPlayer.GetComponent<PlayerScript>().DiscardCard(NetworkClient.localPlayer.GetComponent<PlayerScript>(), index, NetworkClient.localPlayer.GetComponent<PlayerScript>().cardSlots);        
-        }
+            NetworkClient.localPlayer.GetComponent<PlayerScript>().DiscardCard(NetworkClient.localPlayer.GetComponent<PlayerScript>(), index, NetworkClient.localPlayer.GetComponent<PlayerScript>().cardSlots);
+        NetworkClient.localPlayer.GetComponent<PlayerScript>().CmdturnIncrease();
+    }
         public void gaininteqcun() { //Gain intelligence equal to cunning
             Debug.Log("Gain strength equal to cunning");
             NetworkClient.localPlayer.GetComponent<PlayerScript>().ModifyStats("intelligence", NetworkClient.localPlayer.GetComponent<PlayerScript>().Cunning, NetworkClient.localPlayer.GetComponent<PlayerScript>());
-            NetworkClient.localPlayer.GetComponent<PlayerScript>().DiscardCard(NetworkClient.localPlayer.GetComponent<PlayerScript>(), index, NetworkClient.localPlayer.GetComponent<PlayerScript>().cardSlots);       
-        }
+            NetworkClient.localPlayer.GetComponent<PlayerScript>().DiscardCard(NetworkClient.localPlayer.GetComponent<PlayerScript>(), index, NetworkClient.localPlayer.GetComponent<PlayerScript>().cardSlots);
+            NetworkClient.localPlayer.GetComponent<PlayerScript>().CmdturnIncrease();
+    }
         public void gainchreqcun() { //Gain charisma equal to cunning
             Debug.Log("Gain strength equal to cunning");
             NetworkClient.localPlayer.GetComponent<PlayerScript>().ModifyStats("charisma", NetworkClient.localPlayer.GetComponent<PlayerScript>().Cunning, NetworkClient.localPlayer.GetComponent<PlayerScript>());
-            NetworkClient.localPlayer.GetComponent<PlayerScript>().DiscardCard(NetworkClient.localPlayer.GetComponent<PlayerScript>(), index, NetworkClient.localPlayer.GetComponent<PlayerScript>().cardSlots);          
-        }
+            NetworkClient.localPlayer.GetComponent<PlayerScript>().DiscardCard(NetworkClient.localPlayer.GetComponent<PlayerScript>(), index, NetworkClient.localPlayer.GetComponent<PlayerScript>().cardSlots);
+            NetworkClient.localPlayer.GetComponent<PlayerScript>().CmdturnIncrease();
+    }
         public void trggain4cun() { // Target an opponent - they gain 4 cunning
             Debug.Log("Target an opponent - they gain 4 cunning");
             switch (readytrg)
@@ -562,7 +607,8 @@ public class DeckScript : NetworkBehaviour
                     targetPlayer.ModifyStats("cunning", 4, targetPlayer);
                     NetworkClient.localPlayer.GetComponent<PlayerScript>().hideButtons();
                 NetworkClient.localPlayer.GetComponent<PlayerScript>().DiscardCard(NetworkClient.localPlayer.GetComponent<PlayerScript>(), index, NetworkClient.localPlayer.GetComponent<PlayerScript>().cardSlots);
-                    break;
+                NetworkClient.localPlayer.GetComponent<PlayerScript>().CmdturnIncrease();
+                break;
                 case false:
                     trgbntActive("trggain4cun");
                     break;
@@ -577,7 +623,8 @@ public class DeckScript : NetworkBehaviour
                     targetPlayer.ModifyStats("strength", 4, targetPlayer);
                     NetworkClient.localPlayer.GetComponent<PlayerScript>().hideButtons();
                     NetworkClient.localPlayer.GetComponent<PlayerScript>().DiscardCard(NetworkClient.localPlayer.GetComponent<PlayerScript>(), index, NetworkClient.localPlayer.GetComponent<PlayerScript>().cardSlots);
-                    break;
+                NetworkClient.localPlayer.GetComponent<PlayerScript>().CmdturnIncrease();
+                break;
                 case false:
                     trgbntActive("trggain4str");
                     break;
@@ -591,7 +638,8 @@ public class DeckScript : NetworkBehaviour
                     targetPlayer.ModifyStats("charisma", 4, targetPlayer);
                     NetworkClient.localPlayer.GetComponent<PlayerScript>().hideButtons();
                 NetworkClient.localPlayer.GetComponent<PlayerScript>().DiscardCard(NetworkClient.localPlayer.GetComponent<PlayerScript>(), index, NetworkClient.localPlayer.GetComponent<PlayerScript>().cardSlots);
-                    break;
+                NetworkClient.localPlayer.GetComponent<PlayerScript>().CmdturnIncrease();
+                break;
                 case false:
                     trgbntActive("trggain4chr");
                     break;
@@ -605,7 +653,8 @@ public class DeckScript : NetworkBehaviour
                     targetPlayer.ModifyStats("intelligence", 4, targetPlayer);
                     NetworkClient.localPlayer.GetComponent<PlayerScript>().hideButtons();
                 NetworkClient.localPlayer.GetComponent<PlayerScript>().DiscardCard(NetworkClient.localPlayer.GetComponent<PlayerScript>(), index, NetworkClient.localPlayer.GetComponent<PlayerScript>().cardSlots);
-                    break;
+                NetworkClient.localPlayer.GetComponent<PlayerScript>().CmdturnIncrease();
+                break;
                 case false:
                     trgbntActive("trggain4int");
                     break;
@@ -615,8 +664,9 @@ public class DeckScript : NetworkBehaviour
             Debug.Log("Become untargetable for the rest of this turn");
             NetworkClient.localPlayer.GetComponent<PlayerScript>().setUntargetable(NetworkClient.localPlayer.GetComponent<PlayerScript>());
             NetworkClient.localPlayer.GetComponent<PlayerScript>().DiscardCard(NetworkClient.localPlayer.GetComponent<PlayerScript>(), index, NetworkClient.localPlayer.GetComponent<PlayerScript>().cardSlots);
-            // need to handle untargetable when turn ends when turn ends
-        }
+        NetworkClient.localPlayer.GetComponent<PlayerScript>().CmdturnIncrease();
+        // need to handle untargetable when turn ends when turn ends
+    }
         public void selpaslowstat() { //Select a passive from your lowest stat
             Debug.Log("Select a passive from your lowest stat");
 
@@ -628,7 +678,8 @@ public class DeckScript : NetworkBehaviour
 
 
             NetworkClient.localPlayer.GetComponent<PlayerScript>().DiscardCard(NetworkClient.localPlayer.GetComponent<PlayerScript>(), index, NetworkClient.localPlayer.GetComponent<PlayerScript>().cardSlots);
-        }
+        NetworkClient.localPlayer.GetComponent<PlayerScript>().CmdturnIncrease();
+    }
         public void gainPeq5xallstat() { //Gain power equal to 5x all your stat points
             Debug.Log("Gain power equal to 5x all your stat points");
             NetworkClient.localPlayer.GetComponent<PlayerScript>().ModifyPower((NetworkClient.localPlayer.GetComponent<PlayerScript>().Strength + 
@@ -637,7 +688,8 @@ public class DeckScript : NetworkBehaviour
                                                                                          NetworkClient.localPlayer.GetComponent<PlayerScript>().Intelligence) * 5, 
                                                                                          NetworkClient.localPlayer.GetComponent<PlayerScript>());                                                                
             NetworkClient.localPlayer.GetComponent<PlayerScript>().DiscardCard(NetworkClient.localPlayer.GetComponent<PlayerScript>(), index, NetworkClient.localPlayer.GetComponent<PlayerScript>().cardSlots);
-        }
+        NetworkClient.localPlayer.GetComponent<PlayerScript>().CmdturnIncrease();
+    }
         public void relocateAllStats() { //Relocate all your stat points
             Debug.Log("Relocate all your stat points");
 
@@ -650,8 +702,9 @@ public class DeckScript : NetworkBehaviour
 
         NetworkClient.localPlayer.GetComponent<PlayerScript>().ResetStats(NetworkClient.localPlayer.GetComponent<PlayerScript>());
             NetworkClient.localPlayer.GetComponent<PlayerScript>().DiscardCard(NetworkClient.localPlayer.GetComponent<PlayerScript>(), index, NetworkClient.localPlayer.GetComponent<PlayerScript>().cardSlots);
+        NetworkClient.localPlayer.GetComponent<PlayerScript>().CmdturnIncrease();
 
-        }
+    }
     #endregion
     //---------------------------------General Methods-------------------------------------------
 
@@ -665,5 +718,31 @@ public class DeckScript : NetworkBehaviour
         readytrg = true;
         pullEff(currentMethod, currentID);
 
+    }
+
+    public void RevealCards(PlayerScript p, int amount)
+    {
+        NetworkClient.localPlayer.GetComponent<PlayerScript>().numToReveal = amount;
+        if (p.netId == NetworkClient.localPlayer.GetComponent<PlayerScript>().enemy1.netId)
+        {
+            foreach (GameObject g in NetworkClient.localPlayer.GetComponent<PlayerScript>().enemySlots1)
+            {
+                g.GetComponent<CardScript>().revealable = true;
+            }
+        }
+        else if (p.netId == NetworkClient.localPlayer.GetComponent<PlayerScript>().enemy2.netId)
+        {
+            foreach (GameObject g in NetworkClient.localPlayer.GetComponent<PlayerScript>().enemySlots2)
+            {
+                g.GetComponent<CardScript>().revealable = true;
+            }
+        }
+        else if (p.netId == NetworkClient.localPlayer.GetComponent<PlayerScript>().enemy3.netId)
+        {
+            foreach (GameObject g in NetworkClient.localPlayer.GetComponent<PlayerScript>().enemySlots2)
+            {
+                g.GetComponent<CardScript>().revealable = true;
+            }
+        }
     }
 }
