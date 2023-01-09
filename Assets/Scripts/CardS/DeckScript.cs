@@ -146,12 +146,21 @@ public class DeckScript : NetworkBehaviour
         effects.Add(GPpeqstr);
 
         //-----------------------------------------Intelligence-----------------------------------------
-        effects.Add(exTitle);
+        effects.Add(lkENcrduptoint);
+        effects.Add(iflostPgainPrethalfelselose100);
+        effects.Add(trggainhalfP);
+        effects.Add(trgdisallrev);
+        effects.Add(trganyrevhndgain50P);
+        effects.Add(trglosePeq20xrev);
+        effects.Add(trgLS2R);
+        effects.Add(gainP10XRAllE);
+        effects.Add(losePMult25RAllE);
+        effects.Add(selectNP);
 
 
         //-----------------------------------------Charisma-----------------------------------------
 
-            effects.Add(chgalystr);
+        effects.Add(chgalystr);
             effects.Add(chgalyint);
             effects.Add(chgalycun);
             effects.Add(gain10xchrPalygainhalf);
@@ -181,6 +190,7 @@ public class DeckScript : NetworkBehaviour
     // CARD EFFECTS ARE CALLED IN CARDSCRIPT
 
     //-----------------------------------------default-----------------------------------------
+    #region defaultcards
     public void gainstr1() { //Gain 1 point in strength
         Debug.Log("gain 1 strength point");
         NetworkClient.localPlayer.GetComponent<PlayerScript>().ModifyStats("strength", 1, NetworkClient.localPlayer.GetComponent<PlayerScript>());
@@ -271,16 +281,128 @@ public class DeckScript : NetworkBehaviour
         Debug.Log("gain 50 power");
         NetworkClient.localPlayer.GetComponent<PlayerScript>().ModifyPower(50, NetworkClient.localPlayer.GetComponent<PlayerScript>());
     }
+    #endregion
     //-----------------------------------------intelligence-----------------------------------------
-    public void exTitle()
+    #region intelligencecards
+    public void lkENcrduptoint()
     {
         Debug.Log("Not implemented yet");
         NetworkClient.localPlayer.GetComponent<PlayerScript>().DiscardCard(NetworkClient.localPlayer.GetComponent<PlayerScript>(), index, NetworkClient.localPlayer.GetComponent<PlayerScript>().cardSlots);
 
     }
-    //-----------------------------------------charisma-----------------------------------------
+    public void iflostPgainPrethalfelselose100()
+    {
+        Debug.Log("Not implemented yet");
+        NetworkClient.localPlayer.GetComponent<PlayerScript>().DiscardCard(NetworkClient.localPlayer.GetComponent<PlayerScript>(), index, NetworkClient.localPlayer.GetComponent<PlayerScript>().cardSlots);
 
-        public void chgalystr() { //Change your ally to all strength players
+    }
+    public void trggainhalfP()
+    {
+        Debug.Log("Not implemented yet");
+        switch (readytrg)
+        {
+            case true:
+                readytrg = false;
+                targetPlayer.ModifyStats(targetPlayer.Highest, -1, targetPlayer);
+                NetworkClient.localPlayer.GetComponent<PlayerScript>().hideButtons();
+                NetworkClient.localPlayer.GetComponent<PlayerScript>().DiscardCard(NetworkClient.localPlayer.GetComponent<PlayerScript>(), index, NetworkClient.localPlayer.GetComponent<PlayerScript>().cardSlots);
+                break;
+            case false:
+                trgbntActive("trglose1");
+                break;
+        }
+
+    }
+    public void trgdisallrev()
+    {
+        Debug.Log("Not implemented yet");
+        switch (readytrg)
+        {
+            case true:
+                readytrg = false;
+                targetPlayer.ModifyStats(targetPlayer.Highest, -1, targetPlayer);
+                NetworkClient.localPlayer.GetComponent<PlayerScript>().hideButtons();
+                NetworkClient.localPlayer.GetComponent<PlayerScript>().DiscardCard(NetworkClient.localPlayer.GetComponent<PlayerScript>(), index, NetworkClient.localPlayer.GetComponent<PlayerScript>().cardSlots);
+                break;
+            case false:
+                trgbntActive("trglose1");
+                break;
+        }
+
+    }
+    public void trganyrevhndgain50P()
+    {
+        Debug.Log("Not implemented yet");
+        switch (readytrg)
+        {
+            case true:
+                readytrg = false;
+                targetPlayer.ModifyStats(targetPlayer.Highest, -1, targetPlayer);
+                NetworkClient.localPlayer.GetComponent<PlayerScript>().hideButtons();
+                NetworkClient.localPlayer.GetComponent<PlayerScript>().DiscardCard(NetworkClient.localPlayer.GetComponent<PlayerScript>(), index, NetworkClient.localPlayer.GetComponent<PlayerScript>().cardSlots);
+                break;
+            case false:
+                trgbntActive("trglose1");
+                break;
+        }
+
+    }
+    public void trglosePeq20xrev()
+    {
+        Debug.Log("Not implemented yet");
+        switch (readytrg)
+        {
+            case true:
+                readytrg = false;
+                targetPlayer.ModifyStats(targetPlayer.Highest, -1, targetPlayer);
+                NetworkClient.localPlayer.GetComponent<PlayerScript>().hideButtons();
+                NetworkClient.localPlayer.GetComponent<PlayerScript>().DiscardCard(NetworkClient.localPlayer.GetComponent<PlayerScript>(), index, NetworkClient.localPlayer.GetComponent<PlayerScript>().cardSlots);
+                break;
+            case false:
+                trgbntActive("trglose1");
+                break;
+        }
+
+    }
+    public void trgLS2R()
+    {
+        Debug.Log("Not implemented yet");
+        switch (readytrg)
+        {
+            case true:
+                readytrg = false;
+                targetPlayer.ModifyStats(targetPlayer.Highest, -1, targetPlayer);
+                NetworkClient.localPlayer.GetComponent<PlayerScript>().hideButtons();
+                NetworkClient.localPlayer.GetComponent<PlayerScript>().DiscardCard(NetworkClient.localPlayer.GetComponent<PlayerScript>(), index, NetworkClient.localPlayer.GetComponent<PlayerScript>().cardSlots);
+                break;
+            case false:
+                trgbntActive("trglose1");
+                break;
+        }
+
+    }
+    public void gainP10XRAllE()
+    {
+        Debug.Log("Not implemented yet");
+        NetworkClient.localPlayer.GetComponent<PlayerScript>().DiscardCard(NetworkClient.localPlayer.GetComponent<PlayerScript>(), index, NetworkClient.localPlayer.GetComponent<PlayerScript>().cardSlots);
+
+    }
+    public void losePMult25RAllE()
+    {
+        Debug.Log("Not implemented yet");
+        NetworkClient.localPlayer.GetComponent<PlayerScript>().DiscardCard(NetworkClient.localPlayer.GetComponent<PlayerScript>(), index, NetworkClient.localPlayer.GetComponent<PlayerScript>().cardSlots);
+
+    }
+    public void selectNP()
+    {
+        Debug.Log("Not implemented yet");
+        NetworkClient.localPlayer.GetComponent<PlayerScript>().DiscardCard(NetworkClient.localPlayer.GetComponent<PlayerScript>(), index, NetworkClient.localPlayer.GetComponent<PlayerScript>().cardSlots);
+
+    }
+    #endregion
+    //-----------------------------------------charisma-----------------------------------------
+    #region charismacards
+    public void chgalystr() { //Change your ally to all strength players
 
         }
         public void chgalyint() { //Change your ally to all intelligence players
@@ -308,8 +430,9 @@ public class DeckScript : NetworkBehaviour
 
         }
 
-
+    #endregion
     //-----------------------------------------strength-----------------------------------------
+    #region strengthcards
     public void gainstr2() { //Gain 2 point in strength
         Debug.Log("gain 2 strength points");
         NetworkClient.localPlayer.GetComponent<PlayerScript>().ModifyStats("strength", 2, NetworkClient.localPlayer.GetComponent<PlayerScript>());
@@ -411,9 +534,9 @@ public class DeckScript : NetworkBehaviour
 
         // ModifyStats("strength", 1, NetworkClient.localPlayer.GetComponent<PlayerScript>());
     }
-
+    #endregion
     //-----------------------------------------cunning-----------------------------------------
-
+    #region cunningcards
 
     public void gainstreqcun() { //Gain strength equal to cunning
             Debug.Log("Gain strength equal to cunning");
@@ -529,7 +652,7 @@ public class DeckScript : NetworkBehaviour
             NetworkClient.localPlayer.GetComponent<PlayerScript>().DiscardCard(NetworkClient.localPlayer.GetComponent<PlayerScript>(), index, NetworkClient.localPlayer.GetComponent<PlayerScript>().cardSlots);
 
         }
-
+    #endregion
     //---------------------------------General Methods-------------------------------------------
 
     public void trgbntActive(string meth) {

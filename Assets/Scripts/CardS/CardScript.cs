@@ -25,6 +25,8 @@ public class CardScript : NetworkBehaviour
     public bool hovered;
     public bool selected = false;
     public bool prevSelected = false;
+    public bool disabled = false;
+    public bool revealed = false;
     public int sortingDefault;
     public float defaultY;
 

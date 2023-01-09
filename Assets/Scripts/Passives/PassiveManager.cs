@@ -103,25 +103,10 @@ public class PassiveManager : NetworkBehaviour
                 effects.Add(ShadyAllies);
 
                 effects.Add(Tactician);
-                effects.Add(Precise);
                 effects.Add(SeeDeck);
 
-                effects.Add(Scrapper);
-                effects.Add(Taunt);
-                effects.Add(Unstable);
-
-                effects.Add(ShadyBusiness);
                 effects.Add(BlackMarket);
                 effects.Add(WireTapping);
-
-    /* needs PassiveEffect to return a methodName
-            for (int i = 0; i < effects.Count; i++)
-            {
-                effects.Add(passives[i].PassiveEffect);
-            }
-
-
-        */
      }
 
 
@@ -145,10 +130,6 @@ public class PassiveManager : NetworkBehaviour
     void Tactician() {
         Debug.Log("tactician");
     }
-    void Precise() {
-        Debug.Log("precise");
-        //just add checks in deckscript target methods
-    }
     void SeeDeck() {
         Debug.Log("seeDeck");
         //add disabled bool to card script
@@ -156,28 +137,7 @@ public class PassiveManager : NetworkBehaviour
     }
 
     //-----------------------------------------strength-----------------------------------------
-
-
-    void Scrapper() {
-        Debug.Log("unrelenting");
-        //more if statements
-    }
-    void Taunt() {
-        Debug.Log("displayOfSkill");
-        //if statement in ModifyPower
-    }
-    void Unstable() {
-        Debug.Log("unstable");
-        //add reward multiplier syncarvar int
-    }
-
     //-----------------------------------------cunning-----------------------------------------
-
-
-    void ShadyBusiness() {
-        Debug.Log("shadyBusiness");
-        //more ifs for leaderboard
-    }
     void BlackMarket() {
         Debug.Log("blackMarket");
         //complicated... do last...

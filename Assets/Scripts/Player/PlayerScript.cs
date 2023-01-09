@@ -128,6 +128,10 @@ public class PlayerScript : NetworkBehaviour
             highest = value;
             if (FSM.CurrentState == GameStates.Turn || FSM.CurrentState == GameStates.Event)
             {
+                if (passive.passiveName == "ShadyBusiness")
+                {
+                    Power = 50;
+                }
                 deck.CreateDeck(highest);
                 cards.Clear();
                 hand.Clear();
@@ -329,6 +333,10 @@ public class PlayerScript : NetworkBehaviour
 
             case GameStates.LoadEnemyCards:
                 TransferEnemyData();
+                if (passive.passiveName == "SeeDeck")
+                {
+                    //complete later
+                }
                 numSelected = 0;
                 foreach (GameObject g in cardSlots)
                 {
@@ -551,15 +559,12 @@ public class PlayerScript : NetworkBehaviour
     }
 
     public void UnhideButtons() {
-        if (sendPlayerData()[0].untargetable == false)  //enemy1
+        if (enemy1.untargetable == false && passive.passiveName != "Precise" || (enemy1.passive.passiveName != "Scrapper" && enemy1.Power < power))  //enemy1
             bntRight.SetActive(true);
-        if (sendPlayerData()[1].untargetable == false)  //enemy2
+        if (enemy2.untargetable == false && passive.passiveName != "Precise" || (enemy1.passive.passiveName != "Scrapper" && enemy1.Power < power))  //enemy2
             bntLeft.SetActive(true);
-        if (sendPlayerData()[2].untargetable == false)  //enemy3
+        if (enemy3.untargetable == false && passive.passiveName != "Precise" || (enemy1.passive.passiveName != "Scrapper" && enemy1.Power < power))  //enemy3
             bntTop.SetActive(true);
-        //bntTop.SetActive(true);
-        //bntLeft.SetActive(true);
-        //bntRight.SetActive(true);
     }
 
     public void hideButtons() {
@@ -569,9 +574,6 @@ public class PlayerScript : NetworkBehaviour
             bntLeft.SetActive(false);
         if (bntTop.activeInHierarchy == true)  //enemy3
             bntTop.SetActive(false);
-        //bntTop.SetActive(false);
-        //bntLeft.SetActive(false);
-        //bntRight.SetActive(false);
     }
     
     public void Turn() {
@@ -611,6 +613,14 @@ public class PlayerScript : NetworkBehaviour
     [Command(requiresAuthority = false)]
     public void ModifyPower(int amount, PlayerScript p)
     {
+        if (amount < 0 && p.passive.passiveName == "Taunt")
+        {
+            p.Strength = 1;
+        }
+        if (p.passive.passiveName == "Unstable")
+        {
+            amount *= 2;
+        }
         p.Power = amount;
     }
 
