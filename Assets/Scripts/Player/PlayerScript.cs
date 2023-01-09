@@ -39,22 +39,41 @@ public class PlayerScript : NetworkBehaviour
     public int Charisma
     {
         get { return charisma; }
-        set { charisma += value; }
+        set {
+            if (value == 0)
+                charisma = value;
+            charisma += value; 
+        }
     }
     public int Strength
     {
         get { return strength; }
-        set { strength += value; }
+        set
+        {
+            if (value == 0)
+                strength = value;
+            strength += value;
+        }
     }
     public int Intelligence
     {
         get { return intelligence; }
-        set { intelligence += value; }
+        set
+        {
+            if (value == 0)
+                intelligence = value;
+            intelligence += value;
+        }
     }
     public int Cunning
     {
         get { return cunning; }
-        set { cunning += value; }
+        set
+        {
+            if (value == 0)
+                cunning = value;
+            cunning += value;
+        }
     }
 
     public Text charismaText;
@@ -571,6 +590,16 @@ public class PlayerScript : NetworkBehaviour
                     break;
             }
             p.MaxPoints = amount;
+    }
+
+    [Command(requiresAuthority = false)]
+    public void ResetStats(PlayerScript p, int max)
+    {
+        p.AvailablePoints = p.Charisma + p.Strength + p.Cunning + p.Intelligence;
+        p.Strength = 0;
+        p.Charisma = 0;
+        p.Intelligence = 0;
+        p.Cunning = 0;
     }
 
     [Command(requiresAuthority = false)]

@@ -90,7 +90,7 @@ public class CardScript : NetworkBehaviour
         sortingDefault = gameObject.GetComponent<SpriteRenderer>().sortingOrder;
         gameState = GameObject.Find("FSM").GetComponent<GameState>();
 
-        sprArray = Resources.LoadAll<Sprite>("Test-1");
+        sprArray = Resources.LoadAll<Sprite>("CardsAlphaSpriteSheet");
     }
 
     // Update is called once per frame

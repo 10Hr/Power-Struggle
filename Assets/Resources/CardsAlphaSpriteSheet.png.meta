@@ -1,0 +1,2322 @@
+fileFormatVersion: 2
+guid: 05360c01bd2a7c0418859484cf28d7e0
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 11
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMasterTextureLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 210
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: CardsAlphaSpriteSheet_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 6552
+        width: 520
+        height: 728
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e063cf6057a7aad4fa5a15d3af9a7dc9
+      internalID: -93499950
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CardsAlphaSpriteSheet_1
+      rect:
+        serializedVersion: 2
+        x: 520
+        y: 6552
+        width: 520
+        height: 728
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 608e9365994724f4ab8ef98408f319df
+      internalID: 1663921565
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CardsAlphaSpriteSheet_2
+      rect:
+        serializedVersion: 2
+        x: 1040
+        y: 6552
+        width: 520
+        height: 728
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 96ab5682230b5ec459c89b86f78d6b61
+      internalID: -166915159
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CardsAlphaSpriteSheet_3
+      rect:
+        serializedVersion: 2
+        x: 1560
+        y: 6552
+        width: 520
+        height: 728
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4af7cafe34fceae469d01dcd3729bd4c
+      internalID: -1761066774
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CardsAlphaSpriteSheet_4
+      rect:
+        serializedVersion: 2
+        x: 2080
+        y: 6552
+        width: 520
+        height: 728
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fb4b34786f384b340a7c65a9fa5ff067
+      internalID: 790364034
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CardsAlphaSpriteSheet_5
+      rect:
+        serializedVersion: 2
+        x: 2600
+        y: 6552
+        width: 520
+        height: 728
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7c8186b1587b6994fa80a8d854f9ba1a
+      internalID: 926244816
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CardsAlphaSpriteSheet_6
+      rect:
+        serializedVersion: 2
+        x: 3120
+        y: 6552
+        width: 520
+        height: 728
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6540676cdc31184439c6c7eaf9589fdd
+      internalID: -1067223669
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CardsAlphaSpriteSheet_7
+      rect:
+        serializedVersion: 2
+        x: 3640
+        y: 6552
+        width: 520
+        height: 728
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 645afeeb0b357fa4c97c6f2dd3ef258f
+      internalID: -1011174577
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CardsAlphaSpriteSheet_8
+      rect:
+        serializedVersion: 2
+        x: 4160
+        y: 6552
+        width: 520
+        height: 728
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6579097bc4ec2704cba3ce2f06991b87
+      internalID: -473162434
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CardsAlphaSpriteSheet_9
+      rect:
+        serializedVersion: 2
+        x: 4680
+        y: 6552
+        width: 520
+        height: 728
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9d4d8fd6661be1a47a290c8f43cf3ab8
+      internalID: -1009593580
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CardsAlphaSpriteSheet_10
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 5824
+        width: 520
+        height: 728
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 080703ce43954d24ea63f37803bb7a3d
+      internalID: 583436594
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CardsAlphaSpriteSheet_11
+      rect:
+        serializedVersion: 2
+        x: 520
+        y: 5824
+        width: 520
+        height: 728
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3b9adcfd087d53241a51323f9e4d38ce
+      internalID: -364433301
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CardsAlphaSpriteSheet_12
+      rect:
+        serializedVersion: 2
+        x: 1040
+        y: 5824
+        width: 520
+        height: 728
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6f6858f348b28194aaf7de83bc8ad5b2
+      internalID: -1673446925
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CardsAlphaSpriteSheet_13
+      rect:
+        serializedVersion: 2
+        x: 1560
+        y: 5824
+        width: 520
+        height: 728
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f5100fe0f32fe514aa9a89b7088651f9
+      internalID: 369527646
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CardsAlphaSpriteSheet_14
+      rect:
+        serializedVersion: 2
+        x: 2080
+        y: 5824
+        width: 520
+        height: 728
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 155582e02826160459821a50be7b14f3
+      internalID: 2057827365
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CardsAlphaSpriteSheet_15
+      rect:
+        serializedVersion: 2
+        x: 2600
+        y: 5824
+        width: 520
+        height: 728
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4d256636c1baf49448c52fe95fd5ed8a
+      internalID: 434429625
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CardsAlphaSpriteSheet_16
+      rect:
+        serializedVersion: 2
+        x: 3120
+        y: 5824
+        width: 520
+        height: 728
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 681e746ff2841984d80f30e5dfdfaf72
+      internalID: -8849123
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CardsAlphaSpriteSheet_17
+      rect:
+        serializedVersion: 2
+        x: 3640
+        y: 5824
+        width: 520
+        height: 728
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 65d14cd29f8f0314a91b7bc1874f913b
+      internalID: -1586432235
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CardsAlphaSpriteSheet_18
+      rect:
+        serializedVersion: 2
+        x: 4160
+        y: 5824
+        width: 520
+        height: 728
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 92eac67fc8a99c14f9680ffa1ac400da
+      internalID: -414129613
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CardsAlphaSpriteSheet_19
+      rect:
+        serializedVersion: 2
+        x: 4680
+        y: 5824
+        width: 520
+        height: 728
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 79e0c178d5caaf340904bbab5599e519
+      internalID: 2100432323
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CardsAlphaSpriteSheet_20
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 5096
+        width: 520
+        height: 728
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 40d22965a26733f458ec4cb26306f659
+      internalID: -1372136047
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CardsAlphaSpriteSheet_21
+      rect:
+        serializedVersion: 2
+        x: 520
+        y: 5096
+        width: 520
+        height: 728
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ad6a5d268f9b48e48ba46f6335a56e7b
+      internalID: -262678847
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CardsAlphaSpriteSheet_22
+      rect:
+        serializedVersion: 2
+        x: 1040
+        y: 5096
+        width: 520
+        height: 728
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0c88c9a434e0ade49969f61fc6c284d7
+      internalID: 1672602314
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CardsAlphaSpriteSheet_23
+      rect:
+        serializedVersion: 2
+        x: 1560
+        y: 5096
+        width: 520
+        height: 728
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0b2c9ec8c40ce0e4fb90f8137392772a
+      internalID: 384041504
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CardsAlphaSpriteSheet_24
+      rect:
+        serializedVersion: 2
+        x: 2080
+        y: 5096
+        width: 520
+        height: 728
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 65874fa87d119f44fb535e563e1cb4f1
+      internalID: -1801159775
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CardsAlphaSpriteSheet_25
+      rect:
+        serializedVersion: 2
+        x: 2600
+        y: 5096
+        width: 520
+        height: 728
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d5d932e925336c84991398443a31b8fc
+      internalID: -1132513443
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CardsAlphaSpriteSheet_26
+      rect:
+        serializedVersion: 2
+        x: 3120
+        y: 5096
+        width: 520
+        height: 728
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f26222e3a74e0764ca78566341279a18
+      internalID: 104680257
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CardsAlphaSpriteSheet_27
+      rect:
+        serializedVersion: 2
+        x: 3640
+        y: 5096
+        width: 520
+        height: 728
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a285ef47fde2f6b4c98db4461615c022
+      internalID: 145912288
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CardsAlphaSpriteSheet_28
+      rect:
+        serializedVersion: 2
+        x: 4160
+        y: 5096
+        width: 520
+        height: 728
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: caea67f1c1dc2484fb49d25284ed0a84
+      internalID: 323033563
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CardsAlphaSpriteSheet_29
+      rect:
+        serializedVersion: 2
+        x: 4680
+        y: 5096
+        width: 520
+        height: 728
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1498f85ec3af8244b800bd9d92a3b8c4
+      internalID: -1255414377
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CardsAlphaSpriteSheet_30
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 4368
+        width: 520
+        height: 728
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7e2cb3198971623419f591048b9dd51f
+      internalID: 725419238
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CardsAlphaSpriteSheet_31
+      rect:
+        serializedVersion: 2
+        x: 520
+        y: 4368
+        width: 520
+        height: 728
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e92d366c23f3f5c4a8433ba38d33f071
+      internalID: -1165391730
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CardsAlphaSpriteSheet_32
+      rect:
+        serializedVersion: 2
+        x: 1040
+        y: 4368
+        width: 520
+        height: 728
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4debd901502f883498ba3f429f2915be
+      internalID: -1498896115
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CardsAlphaSpriteSheet_33
+      rect:
+        serializedVersion: 2
+        x: 1560
+        y: 4368
+        width: 520
+        height: 728
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c282df672ed0a6f4a8bd24a8d66febd8
+      internalID: -648358863
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CardsAlphaSpriteSheet_34
+      rect:
+        serializedVersion: 2
+        x: 2080
+        y: 4368
+        width: 520
+        height: 728
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5bfd298c6bf3e6b458c996e285dbf596
+      internalID: -1862728034
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CardsAlphaSpriteSheet_35
+      rect:
+        serializedVersion: 2
+        x: 2600
+        y: 4368
+        width: 520
+        height: 728
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e8ebb953d3d4e5847afea99782596efd
+      internalID: 313251488
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CardsAlphaSpriteSheet_36
+      rect:
+        serializedVersion: 2
+        x: 3120
+        y: 4368
+        width: 520
+        height: 728
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 72f3f0942a7738e4f957a49d0e718928
+      internalID: -370927950
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CardsAlphaSpriteSheet_37
+      rect:
+        serializedVersion: 2
+        x: 3640
+        y: 4368
+        width: 520
+        height: 728
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 554db7ce1facb7b49baefda2a9cb41ef
+      internalID: 192162399
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CardsAlphaSpriteSheet_38
+      rect:
+        serializedVersion: 2
+        x: 4160
+        y: 4368
+        width: 520
+        height: 728
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9b39fdea37e20894eb7b560d2e3dda24
+      internalID: -126741950
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CardsAlphaSpriteSheet_39
+      rect:
+        serializedVersion: 2
+        x: 4680
+        y: 4368
+        width: 520
+        height: 728
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 26d1d5aebccadd742a83818d6a6fdc88
+      internalID: 1911374069
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CardsAlphaSpriteSheet_40
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 3640
+        width: 520
+        height: 728
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 55ce8ed73de62a948b8897040f0176da
+      internalID: 650433482
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CardsAlphaSpriteSheet_41
+      rect:
+        serializedVersion: 2
+        x: 520
+        y: 3640
+        width: 520
+        height: 728
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e15848c2d27dd244eb049f977d33b4de
+      internalID: 1460092426
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CardsAlphaSpriteSheet_42
+      rect:
+        serializedVersion: 2
+        x: 1040
+        y: 3640
+        width: 520
+        height: 728
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0b4c3f20f5ade2c4f93cc8e6753010d9
+      internalID: 1354246043
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CardsAlphaSpriteSheet_43
+      rect:
+        serializedVersion: 2
+        x: 1560
+        y: 3640
+        width: 520
+        height: 728
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3321b657cc1583c4380a53b39b2a492c
+      internalID: 1759709397
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CardsAlphaSpriteSheet_44
+      rect:
+        serializedVersion: 2
+        x: 2080
+        y: 3640
+        width: 520
+        height: 728
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5a7adcc6aa6b985438963682207a21a2
+      internalID: -1506867618
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CardsAlphaSpriteSheet_45
+      rect:
+        serializedVersion: 2
+        x: 2600
+        y: 3640
+        width: 520
+        height: 728
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6e2e719d1831e6142b497c85c48ef747
+      internalID: -345065775
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CardsAlphaSpriteSheet_46
+      rect:
+        serializedVersion: 2
+        x: 3120
+        y: 3640
+        width: 520
+        height: 728
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 866eebf5199d0d94c84d0efb198297d9
+      internalID: -1814505628
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CardsAlphaSpriteSheet_47
+      rect:
+        serializedVersion: 2
+        x: 3640
+        y: 3640
+        width: 520
+        height: 728
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6e373babc61559c438f7fca9ff547bb7
+      internalID: -1100446982
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CardsAlphaSpriteSheet_48
+      rect:
+        serializedVersion: 2
+        x: 4160
+        y: 3640
+        width: 520
+        height: 728
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 706d45a69d10f1d43a5c1a02abc2962b
+      internalID: 2084944735
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CardsAlphaSpriteSheet_49
+      rect:
+        serializedVersion: 2
+        x: 4680
+        y: 3640
+        width: 520
+        height: 728
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cc6e8853d26e7134899a8a6494c2126e
+      internalID: -1901505112
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CardsAlphaSpriteSheet_50
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 2912
+        width: 520
+        height: 728
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f9e9fae88f610ee4c91834b7073e94ab
+      internalID: -1513888985
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CardsAlphaSpriteSheet_51
+      rect:
+        serializedVersion: 2
+        x: 520
+        y: 2912
+        width: 520
+        height: 728
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 629c5679d9e61ce4aa53c6bac20908cc
+      internalID: -280749451
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CardsAlphaSpriteSheet_52
+      rect:
+        serializedVersion: 2
+        x: 1040
+        y: 2912
+        width: 520
+        height: 728
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: aefa4796dc56aa24db38143742eeb436
+      internalID: -1587829022
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CardsAlphaSpriteSheet_53
+      rect:
+        serializedVersion: 2
+        x: 1560
+        y: 2912
+        width: 520
+        height: 728
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 074f962071111e74290eda12aa3b0ce6
+      internalID: 139898751
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CardsAlphaSpriteSheet_54
+      rect:
+        serializedVersion: 2
+        x: 2080
+        y: 2912
+        width: 520
+        height: 728
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dfb97f0b6ecd7204c822646e6e2c6c84
+      internalID: -47273003
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CardsAlphaSpriteSheet_55
+      rect:
+        serializedVersion: 2
+        x: 2600
+        y: 2912
+        width: 520
+        height: 728
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3031500745d9b7c4b9a6ee644590cd41
+      internalID: 1079466120
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CardsAlphaSpriteSheet_56
+      rect:
+        serializedVersion: 2
+        x: 3120
+        y: 2912
+        width: 520
+        height: 728
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2c4cb0428a2a03748a9098d172b5b3a1
+      internalID: 486811101
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CardsAlphaSpriteSheet_57
+      rect:
+        serializedVersion: 2
+        x: 3640
+        y: 2912
+        width: 520
+        height: 728
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1629c3593db8c90458d054b177936bfb
+      internalID: 818526000
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CardsAlphaSpriteSheet_58
+      rect:
+        serializedVersion: 2
+        x: 4160
+        y: 2912
+        width: 520
+        height: 728
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c305973e802015a448aa547733dd7560
+      internalID: 1841752771
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CardsAlphaSpriteSheet_59
+      rect:
+        serializedVersion: 2
+        x: 4680
+        y: 2912
+        width: 520
+        height: 728
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: eda41186e16464344a257182ca161d4d
+      internalID: 1798955648
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CardsAlphaSpriteSheet_60
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 2184
+        width: 520
+        height: 728
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6c254237bf913d849b6612e93672940b
+      internalID: 471974859
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CardsAlphaSpriteSheet_61
+      rect:
+        serializedVersion: 2
+        x: 520
+        y: 2184
+        width: 520
+        height: 728
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2e973548bf68f7c4c840e0a6eb136f32
+      internalID: 1297268915
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CardsAlphaSpriteSheet_62
+      rect:
+        serializedVersion: 2
+        x: 1040
+        y: 2184
+        width: 520
+        height: 728
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3976250ff65bc4544ad22ae9266533b9
+      internalID: -914251762
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CardsAlphaSpriteSheet_63
+      rect:
+        serializedVersion: 2
+        x: 1560
+        y: 2184
+        width: 520
+        height: 728
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b870156efe93d604d9a9a61370146f2c
+      internalID: -490674210
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CardsAlphaSpriteSheet_64
+      rect:
+        serializedVersion: 2
+        x: 2080
+        y: 2184
+        width: 520
+        height: 728
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f65b001f8dafb124f92cab8f5ba4b689
+      internalID: -1630529387
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CardsAlphaSpriteSheet_65
+      rect:
+        serializedVersion: 2
+        x: 2600
+        y: 2184
+        width: 520
+        height: 728
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6201f51acc800ce4ba9a18ae19e2a6ea
+      internalID: 770079692
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CardsAlphaSpriteSheet_66
+      rect:
+        serializedVersion: 2
+        x: 3120
+        y: 2184
+        width: 520
+        height: 728
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a391fdd080b3d9f45a5256b14d3317a9
+      internalID: 1292518271
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CardsAlphaSpriteSheet_67
+      rect:
+        serializedVersion: 2
+        x: 3640
+        y: 2184
+        width: 520
+        height: 728
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 749df1f1dada9ca40acb1ec9fee4ec44
+      internalID: 1076817897
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CardsAlphaSpriteSheet_68
+      rect:
+        serializedVersion: 2
+        x: 4160
+        y: 2184
+        width: 520
+        height: 728
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 28d63f64142c1dc4c965ce690c72dfc4
+      internalID: 1395216999
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CardsAlphaSpriteSheet_69
+      rect:
+        serializedVersion: 2
+        x: 4680
+        y: 2184
+        width: 520
+        height: 728
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bdee759b7f590be4ebb4fc0203ba10a9
+      internalID: -2012299186
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CardsAlphaSpriteSheet_70
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1456
+        width: 520
+        height: 728
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8491789f3a06a0540b810516660157b1
+      internalID: 1914667349
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CardsAlphaSpriteSheet_71
+      rect:
+        serializedVersion: 2
+        x: 520
+        y: 1456
+        width: 520
+        height: 728
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5c4bf402eaceb3740b0df98b339a5246
+      internalID: -1769115516
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CardsAlphaSpriteSheet_72
+      rect:
+        serializedVersion: 2
+        x: 1040
+        y: 1456
+        width: 520
+        height: 728
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a876b17bbb13d6742a9df466ab59c390
+      internalID: 1159609505
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CardsAlphaSpriteSheet_73
+      rect:
+        serializedVersion: 2
+        x: 1560
+        y: 1456
+        width: 520
+        height: 728
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e4928d26fa57f884083c34567fc46ec7
+      internalID: -213682250
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CardsAlphaSpriteSheet_74
+      rect:
+        serializedVersion: 2
+        x: 2080
+        y: 1456
+        width: 520
+        height: 728
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8004fdde5ce5ec749883f51b4b04581f
+      internalID: -13967500
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CardsAlphaSpriteSheet_75
+      rect:
+        serializedVersion: 2
+        x: 2600
+        y: 1456
+        width: 520
+        height: 728
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 39180be7c8049c042acf4b3341d539c7
+      internalID: -794686483
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CardsAlphaSpriteSheet_76
+      rect:
+        serializedVersion: 2
+        x: 3120
+        y: 1456
+        width: 520
+        height: 728
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f485b19a4fd541f46ba0cdd9e04272d8
+      internalID: -2059493481
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CardsAlphaSpriteSheet_77
+      rect:
+        serializedVersion: 2
+        x: 3640
+        y: 1456
+        width: 520
+        height: 728
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 53d6fa5d02a7b394b8036a8d57908b37
+      internalID: -485892181
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CardsAlphaSpriteSheet_78
+      rect:
+        serializedVersion: 2
+        x: 4160
+        y: 1456
+        width: 520
+        height: 728
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 11dd2f144ac94854ba72211c47fd19e4
+      internalID: -987870910
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CardsAlphaSpriteSheet_79
+      rect:
+        serializedVersion: 2
+        x: 4680
+        y: 1456
+        width: 520
+        height: 728
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6c648fbece2588d4480fab13422d347b
+      internalID: 1709619394
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CardsAlphaSpriteSheet_80
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 728
+        width: 520
+        height: 728
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 009c42df9e7370e4cb501af4ea9ac004
+      internalID: -1558962437
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CardsAlphaSpriteSheet_81
+      rect:
+        serializedVersion: 2
+        x: 520
+        y: 728
+        width: 520
+        height: 728
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fc35b7691d2903b4d903e1eabb3d7f5c
+      internalID: -1429318672
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CardsAlphaSpriteSheet_82
+      rect:
+        serializedVersion: 2
+        x: 1040
+        y: 728
+        width: 520
+        height: 728
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ea98c8258f636f642be50d22198abb34
+      internalID: -927581691
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CardsAlphaSpriteSheet_83
+      rect:
+        serializedVersion: 2
+        x: 1560
+        y: 728
+        width: 520
+        height: 728
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 70acea3b4ca2ef440b527fb83413131c
+      internalID: 189434500
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CardsAlphaSpriteSheet_84
+      rect:
+        serializedVersion: 2
+        x: 2080
+        y: 728
+        width: 520
+        height: 728
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9a66acb0bc4b8cc4d8c10521e2cb44b9
+      internalID: -628518175
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CardsAlphaSpriteSheet_85
+      rect:
+        serializedVersion: 2
+        x: 2600
+        y: 728
+        width: 520
+        height: 728
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 882ac9db313540a40b40f89ceafddadd
+      internalID: -1497049491
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CardsAlphaSpriteSheet_86
+      rect:
+        serializedVersion: 2
+        x: 3120
+        y: 728
+        width: 520
+        height: 728
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e2dd8c6b6d2c55f47855267be479a83c
+      internalID: -1378980715
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CardsAlphaSpriteSheet_87
+      rect:
+        serializedVersion: 2
+        x: 3640
+        y: 728
+        width: 520
+        height: 728
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b93cb8276ae62a9498197880800c3d6d
+      internalID: 130140340
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CardsAlphaSpriteSheet_88
+      rect:
+        serializedVersion: 2
+        x: 4160
+        y: 728
+        width: 520
+        height: 728
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6d13af1a3a4a6524f8452593da241b3f
+      internalID: -29910797
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CardsAlphaSpriteSheet_89
+      rect:
+        serializedVersion: 2
+        x: 4680
+        y: 728
+        width: 520
+        height: 728
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e1f05268b1d411540b58208672d2b610
+      internalID: 1564820626
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CardsAlphaSpriteSheet_90
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 520
+        height: 728
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 56adc23451296a540810d24b66d14859
+      internalID: -100621006
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CardsAlphaSpriteSheet_91
+      rect:
+        serializedVersion: 2
+        x: 520
+        y: 0
+        width: 520
+        height: 728
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0788eadca00995c4e9ec1df76b020c29
+      internalID: -1755353014
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CardsAlphaSpriteSheet_92
+      rect:
+        serializedVersion: 2
+        x: 1040
+        y: 0
+        width: 520
+        height: 728
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 07ec47cfc4caff347828012908eeb225
+      internalID: 1710927311
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CardsAlphaSpriteSheet_93
+      rect:
+        serializedVersion: 2
+        x: 1560
+        y: 0
+        width: 520
+        height: 728
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1272c559c99677c448fd39c494141981
+      internalID: -1623192212
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CardsAlphaSpriteSheet_94
+      rect:
+        serializedVersion: 2
+        x: 2080
+        y: 0
+        width: 520
+        height: 728
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e7e8dac65bef899419a8320061515eb7
+      internalID: 1354144888
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CardsAlphaSpriteSheet_95
+      rect:
+        serializedVersion: 2
+        x: 2600
+        y: 0
+        width: 520
+        height: 728
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 93e36d942088a1d44a95ff1b7b0ceb3e
+      internalID: 51143844
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CardsAlphaSpriteSheet_96
+      rect:
+        serializedVersion: 2
+        x: 3120
+        y: 0
+        width: 520
+        height: 728
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c52af12f611a26c4799b597efe544f40
+      internalID: -561153330
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CardsAlphaSpriteSheet_97
+      rect:
+        serializedVersion: 2
+        x: 3640
+        y: 0
+        width: 520
+        height: 728
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c6c0f615eba8a1a449564d5c75de6fd1
+      internalID: -1877229151
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CardsAlphaSpriteSheet_98
+      rect:
+        serializedVersion: 2
+        x: 4160
+        y: 0
+        width: 520
+        height: 728
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7f641fbd53a21b0428d2a5a7da95913d
+      internalID: 651896313
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CardsAlphaSpriteSheet_99
+      rect:
+        serializedVersion: 2
+        x: 4680
+        y: 0
+        width: 520
+        height: 728
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f38acc8b4291a1444a3c4970da7c64ee
+      internalID: -1842436754
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      CardsAlphaSpriteSheet_99: -1842436754
+      CardsAlphaSpriteSheet_50: -1513888985
+      CardsAlphaSpriteSheet_79: 1709619394
+      CardsAlphaSpriteSheet_32: -1498896115
+      CardsAlphaSpriteSheet_25: -1132513443
+      CardsAlphaSpriteSheet_65: 770079692
+      CardsAlphaSpriteSheet_86: -1378980715
+      CardsAlphaSpriteSheet_30: 725419238
+      CardsAlphaSpriteSheet_74: -13967500
+      CardsAlphaSpriteSheet_42: 1354246043
+      CardsAlphaSpriteSheet_1: 1663921565
+      CardsAlphaSpriteSheet_12: -1673446925
+      CardsAlphaSpriteSheet_56: 486811101
+      CardsAlphaSpriteSheet_66: 1292518271
+      CardsAlphaSpriteSheet_76: -2059493481
+      CardsAlphaSpriteSheet_46: -1814505628
+      CardsAlphaSpriteSheet_72: 1159609505
+      CardsAlphaSpriteSheet_64: -1630529387
+      CardsAlphaSpriteSheet_16: -8849123
+      CardsAlphaSpriteSheet_73: -213682250
+      CardsAlphaSpriteSheet_15: 434429625
+      CardsAlphaSpriteSheet_93: -1623192212
+      CardsAlphaSpriteSheet_94: 1354144888
+      CardsAlphaSpriteSheet_51: -280749451
+      CardsAlphaSpriteSheet_90: -100621006
+      CardsAlphaSpriteSheet_59: 1798955648
+      CardsAlphaSpriteSheet_88: -29910797
+      CardsAlphaSpriteSheet_40: 650433482
+      CardsAlphaSpriteSheet_60: 471974859
+      CardsAlphaSpriteSheet_71: -1769115516
+      CardsAlphaSpriteSheet_63: -490674210
+      CardsAlphaSpriteSheet_81: -1429318672
+      CardsAlphaSpriteSheet_3: -1761066774
+      CardsAlphaSpriteSheet_9: -1009593580
+      CardsAlphaSpriteSheet_8: -473162434
+      CardsAlphaSpriteSheet_38: -126741950
+      CardsAlphaSpriteSheet_57: 818526000
+      CardsAlphaSpriteSheet_33: -648358863
+      CardsAlphaSpriteSheet_2: -166915159
+      CardsAlphaSpriteSheet_13: 369527646
+      CardsAlphaSpriteSheet_78: -987870910
+      CardsAlphaSpriteSheet_4: 790364034
+      CardsAlphaSpriteSheet_95: 51143844
+      CardsAlphaSpriteSheet_10: 583436594
+      CardsAlphaSpriteSheet_18: -414129613
+      CardsAlphaSpriteSheet_62: -914251762
+      CardsAlphaSpriteSheet_37: 192162399
+      CardsAlphaSpriteSheet_19: 2100432323
+      CardsAlphaSpriteSheet_45: -345065775
+      CardsAlphaSpriteSheet_5: 926244816
+      CardsAlphaSpriteSheet_36: -370927950
+      CardsAlphaSpriteSheet_80: -1558962437
+      CardsAlphaSpriteSheet_92: 1710927311
+      CardsAlphaSpriteSheet_24: -1801159775
+      CardsAlphaSpriteSheet_29: -1255414377
+      CardsAlphaSpriteSheet_67: 1076817897
+      CardsAlphaSpriteSheet_84: -628518175
+      CardsAlphaSpriteSheet_91: -1755353014
+      CardsAlphaSpriteSheet_87: 130140340
+      CardsAlphaSpriteSheet_98: 651896313
+      CardsAlphaSpriteSheet_96: -561153330
+      CardsAlphaSpriteSheet_11: -364433301
+      CardsAlphaSpriteSheet_0: -93499950
+      CardsAlphaSpriteSheet_35: 313251488
+      CardsAlphaSpriteSheet_28: 323033563
+      CardsAlphaSpriteSheet_70: 1914667349
+      CardsAlphaSpriteSheet_97: -1877229151
+      CardsAlphaSpriteSheet_7: -1011174577
+      CardsAlphaSpriteSheet_69: -2012299186
+      CardsAlphaSpriteSheet_14: 2057827365
+      CardsAlphaSpriteSheet_43: 1759709397
+      CardsAlphaSpriteSheet_75: -794686483
+      CardsAlphaSpriteSheet_31: -1165391730
+      CardsAlphaSpriteSheet_27: 145912288
+      CardsAlphaSpriteSheet_68: 1395216999
+      CardsAlphaSpriteSheet_34: -1862728034
+      CardsAlphaSpriteSheet_61: 1297268915
+      CardsAlphaSpriteSheet_85: -1497049491
+      CardsAlphaSpriteSheet_89: 1564820626
+      CardsAlphaSpriteSheet_41: 1460092426
+      CardsAlphaSpriteSheet_6: -1067223669
+      CardsAlphaSpriteSheet_22: 1672602314
+      CardsAlphaSpriteSheet_48: 2084944735
+      CardsAlphaSpriteSheet_44: -1506867618
+      CardsAlphaSpriteSheet_23: 384041504
+      CardsAlphaSpriteSheet_47: -1100446982
+      CardsAlphaSpriteSheet_55: 1079466120
+      CardsAlphaSpriteSheet_83: 189434500
+      CardsAlphaSpriteSheet_17: -1586432235
+      CardsAlphaSpriteSheet_49: -1901505112
+      CardsAlphaSpriteSheet_39: 1911374069
+      CardsAlphaSpriteSheet_82: -927581691
+      CardsAlphaSpriteSheet_77: -485892181
+      CardsAlphaSpriteSheet_52: -1587829022
+      CardsAlphaSpriteSheet_26: 104680257
+      CardsAlphaSpriteSheet_21: -262678847
+      CardsAlphaSpriteSheet_53: 139898751
+      CardsAlphaSpriteSheet_20: -1372136047
+      CardsAlphaSpriteSheet_54: -47273003
+      CardsAlphaSpriteSheet_58: 1841752771
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
