@@ -20,6 +20,7 @@ TagManager:
   - top
   - left
   - right
+  - Display
   layers:
   - Default
   - TransparentFX
