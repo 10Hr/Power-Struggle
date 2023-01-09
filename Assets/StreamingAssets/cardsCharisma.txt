@@ -1,17 +1,17 @@
-charisma,exTitle,0,Change your ally to all strength players,57
-charisma,exTitle,0,Change your ally to all intelligence players,58
-charisma,exTitle,0,Change your ally to all cunning players,59
-charisma,exTitle,0,You gain 10 x charisma power and your allies gain half of that,60
-charisma,exTitle,0,You gain 10 x charisma power and your allies gain half of that,61
-charisma,exTitle,0,You and your allies gain half the power you lost before playing this card,62
-charisma,exTitle,0,You and your allies gain half the power you lost before playing this card,63
-charisma,exTitle,0,All players that aren't your ally lose 50 power and gain 3 stat points of your current ally stat,64
-charisma,exTitle,0,All players that aren't your ally lose 50 power and gain 3 stat points of your current ally stat,65
-charisma,exTitle,0,All players that aren't your ally lose 50 power and gain 3 stat points of your current ally stat,66
-charisma,exTitle,0,All players that aren't your ally lose 50 power and gain 3 stat points of your current ally stat,67
-charisma,exTitle,0,Players who aren't your ally can not target you for the rest of this turn,68
-charisma,exTitle,0,Players who aren't your ally can not target you for the rest of this turn,69
-charisma,exTitle,0,Target an ally they gain 25 power and lose 3 points of their highest stat,70
-charisma,exTitle,0,Target an ally they gain 25 power and lose 3 points of their highest stat,71
-charisma,exTitle,0,Target an ally they gain 25 power and lose 3 points of their highest stat,72
-charisma,exTitle,0, All players gain 3 stats points of your current ally stat,73
+charisma,chgalystr,0,Change your ally to all strength players,57
+charisma,chgalyint,0,Change your ally to all intelligence players,58
+charisma,chgalycun,0,Change your ally to all cunning players,59
+charisma,gain10xchrPalygainhalf,0,You gain 10 x charisma power and your allies gain half of that,60
+charisma,gain10xchrPalygainhalf,0,You gain 10 x charisma power and your allies gain half of that,61
+charisma,bgainhalfPlostbef,0,You and your allies gain half the power you lost before playing this card,62
+charisma,bgainhalfPlostbef,0,You and your allies gain half the power you lost before playing this card,63
+charisma,allNalylose50Pgain3stat,0,All players that aren't your ally lose 50 power and gain 3 stat points of your current ally stat,64
+charisma,allNalylose50Pgain3stat,0,All players that aren't your ally lose 50 power and gain 3 stat points of your current ally stat,65
+charisma,allNalylose50Pgain3stat,0,All players that aren't your ally lose 50 power and gain 3 stat points of your current ally stat,66
+charisma,allNalylose50Pgain3stat,0,All players that aren't your ally lose 50 power and gain 3 stat points of your current ally stat,67
+charisma,pNalyuntrg,0,Players who aren't your ally can not target you for the rest of this turn,68
+charisma,pNalyuntrg,0,Players who aren't your ally can not target you for the rest of this turn,69
+charisma,trgalygain25Plose3stat,0,Target an ally they gain 25 power and lose 3 points of their highest stat,70
+charisma,trgalygain25Plose3stat,0,Target an ally they gain 25 power and lose 3 points of their highest stat,71
+charisma,trgalygain25Plose3stat,0,Target an ally they gain 25 power and lose 3 points of their highest stat,72
+charisma,trgallcuraly,0, All players gain 3 stats points of your current ally stat,73

@@ -151,7 +151,15 @@ public class DeckScript : NetworkBehaviour
 
         //-----------------------------------------Charisma-----------------------------------------
 
-
+            effects.Add(chgalystr);
+            effects.Add(chgalyint);
+            effects.Add(chgalycun);
+            effects.Add(gain10xchrPalygainhalf);
+            effects.Add(bgainhalfPlostbef);
+            effects.Add(allNalylose50Pgain3stat);
+            effects.Add(pNalyuntrg);
+            effects.Add(trgalygain25Plose3stat);
+            effects.Add(trgallcuraly);
 
         //-----------------------------------------Cunning-----------------------------------------
 
@@ -271,6 +279,35 @@ public class DeckScript : NetworkBehaviour
 
     }
     //-----------------------------------------charisma-----------------------------------------
+
+        public void chgalystr() { //Change your ally to all strength players
+
+        }
+        public void chgalyint() { //Change your ally to all intelligence players
+
+        }
+        public void chgalycun() { //Change your ally to all cunning players
+
+        }
+        public void gain10xchrPalygainhalf() { //You gain 10 x charisma power and your allies gain half of that
+
+        }
+        public void bgainhalfPlostbef() { //You and your allies gain half the power you lost before playing this card
+
+        }
+        public void allNalylose50Pgain3stat() { //All players that aren't your ally lose 50 power and gain 3 stat points of your current ally stat
+
+        }
+        public void pNalyuntrg() { //Players who aren't your ally can not target you for the rest of this turn
+
+        }
+        public void trgalygain25Plose3stat() { //Target an ally they gain 25 power and lose 3 points of their highest stat
+
+        }
+        public void trgallcuraly() { //gain 3 stats points of your current ally stat
+
+        }
+
 
     //-----------------------------------------strength-----------------------------------------
     public void gainstr2() { //Gain 2 point in strength
