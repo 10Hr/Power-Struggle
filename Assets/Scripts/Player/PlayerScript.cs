@@ -152,35 +152,7 @@ public class PlayerScript : NetworkBehaviour
         get { return highest; }
         set
         {
-            Debug.Log(highest + " " + value);
             highest = value;
-            if ((FSM.CurrentState == GameStates.Turn || FSM.CurrentState == GameStates.Event) && highest != value)
-            {
-                Debug.Log(true);
-                if (passive.passiveName == "ShadyBusiness")
-                {
-                    Power = 50;
-                }
-                deck.CreateDeck(highest);
-                cards.Clear();
-                hand.Clear();
-
-                while (deck.cardData.Count < 40) { }
-
-                CmdFillDeck(deck.cardData, this);
-
-                while (cards.Count < 40) { }
-
-                for (int i = 0; i < 6; i++)
-                {
-                    CmdDrawCard(this);
-                }
-                foreach (GameObject g in cardSlots)
-                {
-                    g.GetComponent<CardScript>().Title = "";
-                }    
-                TransferData(cardSlots, this);
-            }
         }
     }
 
@@ -551,11 +523,34 @@ public class PlayerScript : NetworkBehaviour
         }
     }
 
+    [Command(requiresAuthority = false)]
+    public void UpdateHighest(PlayerScript p)
+    {
+    }
+
     [Command (requiresAuthority = false)]
-    private void CmdCalcHighest(PlayerScript p)
+    public void CmdCalcHighest(PlayerScript p)
     {
         int currentHigh = 0;
-        string currentHighest = "";
+        switch (highest)
+        {
+            case "charisma":
+                currentHigh = p.Charisma;
+                break;
+            case "intelligence":
+                currentHigh = p.Intelligence;
+                break;
+            case "strength":
+                currentHigh = p.Strength;
+                break;
+            case "cunning":
+                currentHigh = p.Cunning;
+                break;
+            default:
+                break;
+        }
+
+        string currentHighest = p.Highest;
         string currentLowest = "";
         if (p.charisma > currentHigh)
         {
@@ -578,7 +573,20 @@ public class PlayerScript : NetworkBehaviour
             currentHighest = "cunning";
         }
 
-        p.Highest = currentHighest;
+        if (currentHighest != p.Highest)
+        {
+            Debug.Log("Changing Deck");
+            p.Highest = currentHighest;
+            if (FSM.CurrentState == GameStates.Turn || FSM.CurrentState == GameStates.Event)
+            {
+                if (p.passive.passiveName == "ShadyBusiness")
+                {
+                    p.Power = 50;
+                }
+                CmdSwapDeck(p, currentHighest);
+            }
+
+        }
 
         int currentLow = 1000;
         if (p.charisma > currentLow)
@@ -604,6 +612,30 @@ public class PlayerScript : NetworkBehaviour
         p.lowest = currentLowest;
 
         p.hasHighest = true;
+    }
+
+    [Command(requiresAuthority = false)]
+    public void CmdSwapDeck(PlayerScript p, string h)
+    {
+        p.deck.CreateDeck(h);
+        p.cards.Clear();
+        p.hand.Clear();
+
+        while (p.deck.cardData.Count < 40) { }
+
+        CmdFillDeck(p.deck.cardData, p);
+
+        while (p.cards.Count < 40) { }
+
+        for (int i = 0; i < 6; i++)
+        {
+            CmdDrawCard(p);
+        }
+        foreach (GameObject g in p.cardSlots)
+        {
+            g.GetComponent<CardScript>().Title = "";
+        }
+        TransferData(p.cardSlots, p);
     }
 
     [Command(requiresAuthority = false)]
