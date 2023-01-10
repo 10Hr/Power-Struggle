@@ -292,7 +292,7 @@ public class PlayerScript : NetworkBehaviour
                     readyButton.SetActive(false);
 
                 //calculate players highest stat
-                CmdCalcHighest(this);
+                CmdCalcHighest(this, deck);
 
                 //create deck and get cards data
                 if (!hasDeck && hasHighest)
@@ -367,7 +367,7 @@ public class PlayerScript : NetworkBehaviour
                 break;
 
             case GameStates.Turn:
-                CmdCalcHighest(this);
+                CmdCalcHighest(this, deck);
                 UpdateData(enemySlots1, enemy1);
                 UpdateData(enemySlots2, enemy2);
                 UpdateData(enemySlots3, enemy3);
@@ -529,7 +529,7 @@ public class PlayerScript : NetworkBehaviour
     }
 
     [Command (requiresAuthority = false)]
-    public void CmdCalcHighest(PlayerScript p)
+    public void CmdCalcHighest(PlayerScript p, DeckScript deck)
     {
         int currentHigh = 0;
         switch (highest)
@@ -583,7 +583,10 @@ public class PlayerScript : NetworkBehaviour
                 {
                     p.Power = 50;
                 }
-                CmdSwapDeck(p, currentHighest);
+                p.deck.CreateDeck(p.highest);
+                p.cards.Clear();
+                p.hand.Clear();
+                CmdSwapDeck(p.connectionToClient);
             }
 
         }
@@ -614,28 +617,26 @@ public class PlayerScript : NetworkBehaviour
         p.hasHighest = true;
     }
 
-    [Command(requiresAuthority = false)]
-    public void CmdSwapDeck(PlayerScript p, string h)
+    [TargetRpc]
+    public void CmdSwapDeck(NetworkConnection conn)
     {
-        p.deck.CreateDeck(h);
-        p.cards.Clear();
-        p.hand.Clear();
+        while (deck.cardData.Count < 40) { }
 
-        while (p.deck.cardData.Count < 40) { }
+        CmdFillDeck(deck.cardData, this);
 
-        CmdFillDeck(p.deck.cardData, p);
-
-        while (p.cards.Count < 40) { }
+        while (cards.Count < 40) { Debug.Log(this.cards.Count); }
 
         for (int i = 0; i < 6; i++)
         {
-            CmdDrawCard(p);
+            Debug.Log(i);
+           CmdDrawCard(this);
         }
-        foreach (GameObject g in p.cardSlots)
+        foreach (GameObject g in this.cardSlots)
         {
+            Debug.Log("making slot blank");
             g.GetComponent<CardScript>().Title = "";
         }
-        TransferData(p.cardSlots, p);
+        TransferData(this.cardSlots, this);
     }
 
     [Command(requiresAuthority = false)]
