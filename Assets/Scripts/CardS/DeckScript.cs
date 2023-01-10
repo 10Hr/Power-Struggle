@@ -284,17 +284,39 @@ public class DeckScript : NetworkBehaviour
     public void trgLoseHighest()
     {
         Debug.Log("opponent loses stat point of their highest");
-        targetPlayer.ModifyStats(targetPlayer.Highest, -1, targetPlayer);
-        currentPlayer.DiscardCard(currentPlayer, index, currentPlayer.cardSlots);
-        currentPlayer.CmdturnIncrease(currentPlayer);
+
+        switch (readytrg)
+        {
+            case true:
+                readytrg = false;
+                targetPlayer.ModifyStats(targetPlayer.Highest, -1, targetPlayer);
+                currentPlayer.hideButtons();
+                currentPlayer.DiscardCard(currentPlayer, index, currentPlayer.cardSlots);
+                currentPlayer.CmdturnIncrease(currentPlayer);
+                break;
+            case false:
+                trgbntActive("trgLoseHighest");
+                break;
+        }
 
     }
     public void trgLoseP50()
     {
         Debug.Log("opponent loses 50 power");
-        targetPlayer.ModifyPower(-50, targetPlayer);
-        currentPlayer.DiscardCard(currentPlayer, index, currentPlayer.cardSlots);
-        currentPlayer.CmdturnIncrease(currentPlayer);
+
+        switch (readytrg)
+        {
+            case true:
+                readytrg = false;
+                targetPlayer.ModifyPower(-50, targetPlayer);
+                currentPlayer.hideButtons();
+                currentPlayer.DiscardCard(currentPlayer, index, currentPlayer.cardSlots);
+                currentPlayer.CmdturnIncrease(currentPlayer);
+                break;
+            case false:
+                trgbntActive("trgLoseP50");
+                break;
+        }
     }
     public void gainPower50()
     {
@@ -326,7 +348,7 @@ public class DeckScript : NetworkBehaviour
                 currentPlayer.CmdturnIncrease(currentPlayer);
                 break;
             case false:
-                trgbntActive("trglose1");
+                trgbntActive("trggainhalfP");
                 break;
         }
 
@@ -344,7 +366,7 @@ public class DeckScript : NetworkBehaviour
                 currentPlayer.CmdturnIncrease(currentPlayer);
                 break;
             case false:
-                trgbntActive("trglose1");
+                trgbntActive("trgdisallrev");
                 break;
         }
 
@@ -362,7 +384,7 @@ public class DeckScript : NetworkBehaviour
                 currentPlayer.CmdturnIncrease(currentPlayer);
                 break;
             case false:
-                trgbntActive("trglose1");
+                trgbntActive("trganyrevhndgain50P");
                 break;
         }
 
@@ -380,7 +402,7 @@ public class DeckScript : NetworkBehaviour
                 currentPlayer.CmdturnIncrease(currentPlayer);
                 break;
             case false:
-                trgbntActive("trglose1");
+                trgbntActive("trglosePeq20xrev");
                 break;
         }
 
@@ -398,7 +420,7 @@ public class DeckScript : NetworkBehaviour
                 currentPlayer.CmdturnIncrease(currentPlayer);
                 break;
             case false:
-                trgbntActive("trglose1");
+                trgbntActive("trgLS2R");
                 break;
         }
 

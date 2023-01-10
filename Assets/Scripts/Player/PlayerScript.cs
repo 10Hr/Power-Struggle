@@ -152,9 +152,11 @@ public class PlayerScript : NetworkBehaviour
         get { return highest; }
         set
         {
+            Debug.Log(highest + " " + value);
             highest = value;
-            if (FSM.CurrentState == GameStates.Turn || FSM.CurrentState == GameStates.Event && highest != value)
+            if ((FSM.CurrentState == GameStates.Turn || FSM.CurrentState == GameStates.Event) && highest != value)
             {
+                Debug.Log(true);
                 if (passive.passiveName == "ShadyBusiness")
                 {
                     Power = 50;
@@ -373,12 +375,9 @@ public class PlayerScript : NetworkBehaviour
                     case "ShadyAllies":
                         allyStat = "cunning";
                         break;
+                    default:
+                        break;
                 }
-                if (passive.passiveName == "SeeDeck")
-                {
-                    //complete later
-                }
-                if (passive.passiveName == "")
                 numSelected = 0;
                 foreach (GameObject g in cardSlots)
                 {
@@ -511,7 +510,7 @@ public class PlayerScript : NetworkBehaviour
     [Command(requiresAuthority = false)]
     public void CmdDrawCard(PlayerScript p)
     {
-        int rand = UnityEngine.Random.Range(0, 33);
+        int rand = UnityEngine.Random.Range(0, p.cards.Count - 1);
         if (p.hand.Count < 6)
         {
             p.hand.Add(p.cards[rand]);
@@ -556,48 +555,53 @@ public class PlayerScript : NetworkBehaviour
     private void CmdCalcHighest(PlayerScript p)
     {
         int currentHigh = 0;
-        if (p.charisma >= currentHigh)
+        string currentHighest = "";
+        string currentLowest = "";
+        if (p.charisma > currentHigh)
         {
             currentHigh = charisma;
-            p.highest = "charisma";
+            currentHighest = "charisma";
         }
-        if (p.strength >= currentHigh)
+        if (p.strength > currentHigh)
         {
             currentHigh = strength;
-            p.highest = "strength";
+            currentHighest = "strength";
         }
-        if (p.intelligence >= currentHigh)
+        if (p.intelligence > currentHigh)
         {
             currentHigh = intelligence;
-            p.highest = "intelligence";
+            currentHighest = "intelligence";
         }
-        if (p.cunning >= currentHigh)
+        if (p.cunning > currentHigh)
         {
             currentHigh = cunning;
-            p.highest = "cunning";
+            currentHighest = "cunning";
         }
 
+        p.Highest = currentHighest;
+
         int currentLow = 1000;
-        if (p.charisma >= currentLow)
+        if (p.charisma > currentLow)
         {
             currentLow = charisma;
-            p.lowest = "charisma";
+            currentLowest = "charisma";
         }
-        if (p.strength >= currentLow)
+        if (p.strength > currentLow)
         {
             currentLow = strength;
-            p.lowest = "strength";
+            currentLowest = "strength";
         }
-        if (p.intelligence >= currentLow)
+        if (p.intelligence > currentLow)
         {
             currentLow = intelligence;
-            p.lowest = "intelligence";
+            currentLowest = "intelligence";
         }
-        if (p.cunning >= currentLow)
+        if (p.cunning > currentLow)
         {
             currentLow = cunning;
-            p.lowest = "cunning";
+            currentLowest = "cunning";
         }
+        p.lowest = currentLowest;
 
         p.hasHighest = true;
     }
@@ -728,7 +732,7 @@ public class PlayerScript : NetworkBehaviour
     [Command(requiresAuthority = false)]
     public void DiscardCard(PlayerScript p, int index, GameObject[] slots)
     {
-        int rand = UnityEngine.Random.Range(0, 33);
+        int rand = UnityEngine.Random.Range(0, p.cards.Count - 1);
         p.cards.Add(p.hand[index]);
         p.hand[index] = p.cards[rand];
         p.cards.Remove(p.cards[rand]);
