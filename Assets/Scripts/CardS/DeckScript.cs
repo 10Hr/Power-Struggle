@@ -748,6 +748,7 @@ public class DeckScript : NetworkBehaviour
         public void selpaslowstat() { //Select a passive from your lowest stat
             Debug.Log("Select a passive from your lowest stat");
 
+        currentPlayer.passiveManager.CmdSelectPassive(currentPlayer.lowest, currentPlayer);
         currentPlayer.passiveOption1.SetActive(true);
         currentPlayer.passiveOption2.SetActive(true);
         currentPlayer.passiveOption3.SetActive(true);
@@ -759,10 +760,10 @@ public class DeckScript : NetworkBehaviour
         public void gainPeq5xallstat() { //Gain power equal to 5x all your stat points
             Debug.Log("Gain power equal to 5x all your stat points");
             currentPlayer.ModifyPower((currentPlayer.Strength + 
-                                                                                         currentPlayer.Cunning + 
-                                                                                         currentPlayer.Charisma + 
-                                                                                         currentPlayer.Intelligence) * 5, 
-                                                                                         currentPlayer);                                                                
+                                       currentPlayer.Cunning + 
+                                       currentPlayer.Charisma + 
+                                       currentPlayer.Intelligence) * 5, 
+                                       currentPlayer);                                                                
             currentPlayer.DiscardCard(currentPlayer, index, currentPlayer.cardSlots);
         currentPlayer.CmdturnIncrease(currentPlayer);
         

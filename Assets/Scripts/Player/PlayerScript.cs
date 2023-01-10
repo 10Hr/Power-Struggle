@@ -149,7 +149,7 @@ public class PlayerScript : NetworkBehaviour
     private string highest = "";
 
     [SyncVar]
-    public string lowest;
+    public string lowest = "";
 
     public string Highest
     {
@@ -263,6 +263,9 @@ public class PlayerScript : NetworkBehaviour
             bntTop.SetActive(false);
             bntLeft.SetActive(false);
             bntRight.SetActive(false);
+            passiveOption1.SetActive(false);
+            passiveOption2.SetActive(false);
+            passiveOption3.SetActive(false);
         }
 
     }
@@ -312,6 +315,9 @@ public class PlayerScript : NetworkBehaviour
 
                 //spawn passive choices
                 if (g == 0 && hasHighest) {
+                    passiveOption1.SetActive(true);
+                    passiveOption2.SetActive(true);
+                    passiveOption3.SetActive(true);
                     passiveManager.CmdSelectPassive(highest, this);
                     g = 1;
                 }
@@ -372,25 +378,14 @@ public class PlayerScript : NetworkBehaviour
                 break;
 
             case GameStates.Turn:
-                if (swapDeck)
-                {
+                CalcLowest();
+                if (swapDeck) {
                     CmdConfirm();
                     SwapDeck();
-                    //CmdsWapDeck(this);
-                    //foreach (GameObject g in cardSlots)
-                    //{
-                    //    Debug.Log("making slot blank");
-                    //    g.GetComponent<CardScript>().Title = "";
-                    //}
-                    //foreach (GameObject g in cardSlots)
-                    //TransferData(cardSlots, this);
-
-                   // CmdDeckSwapped(this);
                 }
                 else
-                {
                     CalcHighest();
-                }
+
                 UpdateData(enemySlots1, enemy1);
                 UpdateData(enemySlots2, enemy2);
                 UpdateData(enemySlots3, enemy3);
@@ -658,13 +653,55 @@ public class PlayerScript : NetworkBehaviour
         }
     }
 
+    public void CalcLowest() {
+        string currentLowest = lowest;
+        string newlow;
+        int currentlow = 1000;
+
+        switch (currentLowest)
+        {
+            case "strength":
+                currentlow = strength;
+                break;
+            case "intelligence":
+                currentlow = intelligence;
+                break;
+            case "charisma":
+                currentlow = charisma;
+                break;
+            case "cunning":
+                currentlow = cunning;
+                break;
+        }
+
+        int[] statList = {strength, intelligence, charisma, cunning};
+        int min = statList.Min();
+
+        if (min > currentlow) {
+            if (statList[0] == min)
+                newlow = "strength";
+            else if (statList[1] == min)
+                newlow = "intelligence";
+            else if(statList[2] == min)
+                newlow = "charisma";
+            else
+                newlow = "cunning";
+            CmdSendLowest(this, newlow);
+        }
+    }
+
     [Command(requiresAuthority = false)]
     public void CmdSendHighest(PlayerScript p, string h)
     {
-        Debug.Log(p.netId + " got this far");
         p.Highest = h;
         p.swapDeck = true;
         p.hasHighest = true;
+    }
+
+    [Command(requiresAuthority = false)]
+    public void CmdSendLowest(PlayerScript p, string l)
+    {
+        p.lowest = l;
     }
 
     [Command(requiresAuthority = false)]

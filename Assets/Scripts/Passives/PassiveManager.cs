@@ -46,6 +46,8 @@ public class PassiveManager : NetworkBehaviour
 
     [Command (requiresAuthority = false)]
     public void CmdSelectPassive(string highest, PlayerScript player) {
+        possible.Clear();
+        choices.Clear();
         foreach (Passive p in passives) 
             if (p.passiveType == highest) 
                 possible.Add(p);
@@ -53,12 +55,7 @@ public class PassiveManager : NetworkBehaviour
         for (int i = 0; i < 3; i++) {
             choices.Add(possible[i]);
         }
-        Debug.Log("Passives added");
 
-
-        //pullEff();
-
-        //setChoices(player, choices);
         RpcSetLabels(player.connectionToClient, choices[0].passiveName, choices[1].passiveName, choices[2].passiveName);
 
         possible.Clear();
@@ -72,16 +69,6 @@ public class PassiveManager : NetworkBehaviour
         bntChoice1.GetComponent<TextMeshProUGUI>().text = p1;
         bntChoice2.GetComponent<TextMeshProUGUI>().text = p2;
         bntChoice3.GetComponent<TextMeshProUGUI>().text = p3;
-    }
-
-    //[Command (requiresAuthority = false)]
-    public void setChoices(PlayerScript player, List<Passive> pl)
-    {
-        foreach (Passive p in pl)
-        {
-            player.choicesList.Add(p);
-            Debug.Log(p.passiveName);
-        }
     }
 
    void pullEff() { // waste of time
