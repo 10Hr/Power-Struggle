@@ -325,7 +325,7 @@ public class PlayerScript : NetworkBehaviour
                 break;
 
             case GameStates.DrawCards:
-                swapDeck = false;
+                CmdsWfakse(this);
                 CmdDrawCard(this);
                 if (hand.Count == 6 && !cardsSpawned)
                 {
@@ -376,6 +376,16 @@ public class PlayerScript : NetworkBehaviour
                 {
                     CmdConfirm();
                     SwapDeck();
+                    //CmdsWapDeck(this);
+                    //foreach (GameObject g in cardSlots)
+                    //{
+                    //    Debug.Log("making slot blank");
+                    //    g.GetComponent<CardScript>().Title = "";
+                    //}
+                    //foreach (GameObject g in cardSlots)
+                    //TransferData(cardSlots, this);
+
+                   // CmdDeckSwapped(this);
                 }
                 else
                 {
@@ -447,6 +457,12 @@ public class PlayerScript : NetworkBehaviour
     }
 
     [Command(requiresAuthority = false)]
+    public void CmdsWfakse(PlayerScript p)
+    {
+        p.swapDeck = false;
+    }
+
+    [Command(requiresAuthority = false)]
     public void CmdResetCards(PlayerScript p)
     {
         p.cards.Clear();
@@ -478,6 +494,25 @@ public class PlayerScript : NetworkBehaviour
             TransferData(cardSlots, this);
 
         CmdDeckSwapped(this);
+    }
+
+    [Command(requiresAuthority = false)] 
+    public void CmdsWapDeck(PlayerScript o) {
+        o.deck.CreateDeck(o.highest);
+        CmdResetCards(o);
+
+        while (o.deck.cardData.Count < 40) { }
+        CmdFillDeck(deck.cardData, o);
+        while (o.cards.Count < 40) { }
+
+        for (int i = 0; i < 6; i++)
+        {
+            Debug.Log(i);
+            CmdDrawCard(o);
+        }
+       
+
+        
     }
 
     [Command (requiresAuthority = false)]
