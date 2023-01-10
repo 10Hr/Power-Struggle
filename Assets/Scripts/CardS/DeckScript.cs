@@ -118,6 +118,7 @@ public class DeckScript : NetworkBehaviour
         // note the methods must all be of type void with no parameters
         // that is they must all have the same signature.
         Debug.Log("creating card effect list");
+        effects.Clear();
 
     //-----------------------------------------default-----------------------------------------
         effects.Add(gainstr1);

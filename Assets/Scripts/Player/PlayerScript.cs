@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using System.IO;
 using Mirror;
 using System;
+using System.Linq;
 
 //CLIENT SCRIPT
 public class PlayerScript : NetworkBehaviour
@@ -35,6 +36,9 @@ public class PlayerScript : NetworkBehaviour
 
     [SyncVar]
     public bool cantLoseStats = false;
+
+    [SyncVar]
+    public bool swapDeck = false;
 
     public int numSelected;
 
@@ -142,7 +146,7 @@ public class PlayerScript : NetworkBehaviour
     public bool ready;
 
     [SyncVar]
-    private string highest;
+    private string highest = "";
 
     [SyncVar]
     public string lowest;
@@ -292,7 +296,7 @@ public class PlayerScript : NetworkBehaviour
                     readyButton.SetActive(false);
 
                 //calculate players highest stat
-                CmdCalcHighest(this, deck);
+                CalcHighest();
 
                 //create deck and get cards data
                 if (!hasDeck && hasHighest)
@@ -321,6 +325,7 @@ public class PlayerScript : NetworkBehaviour
                 break;
 
             case GameStates.DrawCards:
+                swapDeck = false;
                 CmdDrawCard(this);
                 if (hand.Count == 6 && !cardsSpawned)
                 {
@@ -367,7 +372,15 @@ public class PlayerScript : NetworkBehaviour
                 break;
 
             case GameStates.Turn:
-                CmdCalcHighest(this, deck);
+                if (swapDeck)
+                {
+                    CmdConfirm();
+                    SwapDeck();
+                }
+                else
+                {
+                    CalcHighest();
+                }
                 UpdateData(enemySlots1, enemy1);
                 UpdateData(enemySlots2, enemy2);
                 UpdateData(enemySlots3, enemy3);
@@ -426,6 +439,56 @@ public class PlayerScript : NetworkBehaviour
             }
         }
         #endregion
+    }
+    [Command(requiresAuthority = false)]
+    public void CmdConfirm()
+    {
+        Debug.Log("Swapping Decks");
+    }
+
+    [Command(requiresAuthority = false)]
+    public void CmdResetCards(PlayerScript p)
+    {
+        p.cards.Clear();
+        p.hand.Clear();
+    }
+
+    public void SwapDeck()
+    {
+        deck.CreateDeck(highest);
+        CmdResetCards(this);
+
+        while (deck.cardData.Count < 40) { }
+
+        CmdFillDeck(deck.cardData, this);
+
+        while (cards.Count < 40) { Debug.Log(cards.Count); }
+
+        for (int i = 0; i < 6; i++)
+        {
+            Debug.Log(i);
+            CmdDrawCard(this);
+        }
+        foreach (GameObject g in cardSlots)
+        {
+            Debug.Log("making slot blank");
+            g.GetComponent<CardScript>().Title = "";
+        }
+        foreach (GameObject g in cardSlots)
+            TransferData(cardSlots, this);
+
+        CmdDeckSwapped(this);
+    }
+
+    [Command (requiresAuthority = false)]
+    public void CmdDeckSwapped(PlayerScript p)
+    {
+        if (p.passive.passiveName == "ShadyBusiness")
+        {
+            p.Power = 50;
+        }
+        Debug.Log("Deck Swapped");
+        p.swapDeck = false;
     }
 
     [Command (requiresAuthority = false)]
@@ -523,120 +586,50 @@ public class PlayerScript : NetworkBehaviour
         }
     }
 
-    [Command(requiresAuthority = false)]
-    public void UpdateHighest(PlayerScript p)
+    public void CalcHighest()
     {
-    }
-
-    [Command (requiresAuthority = false)]
-    public void CmdCalcHighest(PlayerScript p, DeckScript deck)
-    {
+        string currentHighest = highest;
+        string newHighest;
         int currentHigh = 0;
-        switch (highest)
+        switch (currentHighest)
         {
-            case "charisma":
-                currentHigh = p.Charisma;
+            case "strength":
+                currentHigh = strength;
                 break;
             case "intelligence":
-                currentHigh = p.Intelligence;
+                currentHigh = intelligence;
                 break;
-            case "strength":
-                currentHigh = p.Strength;
+            case "charisma":
+                currentHigh = charisma;
                 break;
             case "cunning":
-                currentHigh = p.Cunning;
-                break;
-            default:
+                currentHigh = cunning;
                 break;
         }
 
-        string currentHighest = p.Highest;
-        string currentLowest = "";
-        if (p.charisma > currentHigh)
+        int[] statList = {strength, intelligence, charisma, cunning};
+        int max = statList.Max();
+        if (max > currentHigh)
         {
-            currentHigh = charisma;
-            currentHighest = "charisma";
+            if (statList[0] == max)
+                newHighest = "strength";
+            else if (statList[1] == max)
+                newHighest = "intelligence";
+            else if(statList[2] == max)
+                newHighest = "charisma";
+            else
+                newHighest = "cunning";
+            CmdSendHighest(this, newHighest);
         }
-        if (p.strength > currentHigh)
-        {
-            currentHigh = strength;
-            currentHighest = "strength";
-        }
-        if (p.intelligence > currentHigh)
-        {
-            currentHigh = intelligence;
-            currentHighest = "intelligence";
-        }
-        if (p.cunning > currentHigh)
-        {
-            currentHigh = cunning;
-            currentHighest = "cunning";
-        }
-
-        if (currentHighest != p.Highest)
-        {
-            Debug.Log("Changing Deck");
-            p.Highest = currentHighest;
-            if (FSM.CurrentState == GameStates.Turn || FSM.CurrentState == GameStates.Event)
-            {
-                if (p.passive.passiveName == "ShadyBusiness")
-                {
-                    p.Power = 50;
-                }
-                p.deck.CreateDeck(p.highest);
-                p.cards.Clear();
-                p.hand.Clear();
-                CmdSwapDeck(p.connectionToClient);
-            }
-
-        }
-
-        int currentLow = 1000;
-        if (p.charisma > currentLow)
-        {
-            currentLow = charisma;
-            currentLowest = "charisma";
-        }
-        if (p.strength > currentLow)
-        {
-            currentLow = strength;
-            currentLowest = "strength";
-        }
-        if (p.intelligence > currentLow)
-        {
-            currentLow = intelligence;
-            currentLowest = "intelligence";
-        }
-        if (p.cunning > currentLow)
-        {
-            currentLow = cunning;
-            currentLowest = "cunning";
-        }
-        p.lowest = currentLowest;
-
-        p.hasHighest = true;
     }
 
-    [TargetRpc]
-    public void CmdSwapDeck(NetworkConnection conn)
+    [Command(requiresAuthority = false)]
+    public void CmdSendHighest(PlayerScript p, string h)
     {
-        while (deck.cardData.Count < 40) { }
-
-        CmdFillDeck(deck.cardData, this);
-
-        while (cards.Count < 40) { Debug.Log(this.cards.Count); }
-
-        for (int i = 0; i < 6; i++)
-        {
-            Debug.Log(i);
-           CmdDrawCard(this);
-        }
-        foreach (GameObject g in this.cardSlots)
-        {
-            Debug.Log("making slot blank");
-            g.GetComponent<CardScript>().Title = "";
-        }
-        TransferData(this.cardSlots, this);
+        Debug.Log(p.netId + " got this far");
+        p.Highest = h;
+        p.swapDeck = true;
+        p.hasHighest = true;
     }
 
     [Command(requiresAuthority = false)]
