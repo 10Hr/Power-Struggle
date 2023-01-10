@@ -164,6 +164,9 @@ public class StatManager : NetworkBehaviour
                 CmdSelectPassive(p, thisButton.GetComponentInChildren<TextMeshProUGUI>().text);
                 break;
         }
+        p.passiveOption1.SetActive(false);
+        p.passiveOption2.SetActive(false);
+        p.passiveOption3.SetActive(false);
 
     }
 

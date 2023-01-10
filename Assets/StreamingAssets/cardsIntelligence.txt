@@ -1,6 +1,6 @@
 intelligence,gainint1,0,Gain 1 point in intelligence,40
-intelligence,lkENcrduptoint,1,Look at cards in an opponents hand up to how many intelligence points you have (max 6),41
-intelligence,lkENcrduptoint,1,Look at cards in an opponents hand up to how many intelligence points you have (max 6),42
+intelligence,trgRevI,1,Look at cards in an opponents hand up to how many intelligence points you have (max 6),41
+intelligence,trgRevI,1,Look at cards in an opponents hand up to how many intelligence points you have (max 6),42
 intelligence,iflostPgainPrethalfelselose100,4,If you lost power so far this turn gain it back - return half of the loses to all players. if you haven't - lose 100 power,43
 intelligence,trggainhalfP,4,Target a player gain half the points they have gained this turn,44
 intelligence,trggainhalfP,4,Target a player gain half the points they have gained this turn,45

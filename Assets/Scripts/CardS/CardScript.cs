@@ -17,10 +17,15 @@ public class CardScript : NetworkBehaviour
 
     public Sprite[] sprArray;
 
+    [SerializeField]
     private string type = "";
+    [SerializeField]
     private string title = "";
+    [SerializeField]
     private string cost = "";
+    [SerializeField]
     private string id = "1000";
+    [SerializeField]
     private string description = "";
     public bool hovered;
     public bool selected = false;
@@ -64,7 +69,6 @@ public class CardScript : NetworkBehaviour
         get { return type; }
         set
         {
-            Debug.Log(value);
             type = value;
             switch (type)
             {
@@ -110,6 +114,10 @@ public class CardScript : NetworkBehaviour
         {
             gameObject.GetComponent<SpriteRenderer>().sprite = cardBack;
         }
+        if (revealed == true)
+        {
+            gameObject.GetComponent<SpriteRenderer>().sprite = cardFront;
+        }
 
         Enlarge();
     }
@@ -141,24 +149,22 @@ public class CardScript : NetworkBehaviour
             prevSelected = selected;
             selected = !selected;
         }
-        else if ((cardBack != null && gameObject.tag == "CardSlot" && gameState.currentState == GameStates.Turn) && gameState.currentPlayer.netId == NetworkClient.localPlayer.netId && selected)
+        else if ((cardBack != null && gameObject.tag == "CardSlot" && gameState.currentState == GameStates.Turn) && gameState.currentPlayer.netId == NetworkClient.localPlayer.netId && selected && !NetworkClient.localPlayer.GetComponent<PlayerScript>().turnTaken)
         {
+            NetworkClient.localPlayer.GetComponent<PlayerScript>().turnTaken = true;
             CmdDisplayCard(int.Parse(this.id));
             gameState.currentPlayer.deck.pullEff(title, this.id);
-            this.title = "";
-            this.description = "";
-            this.cost = "";
-            this.id = "1000";
-            this.type = "";
-            this.selected = false;
-            this.prevSelected = false;
-            gameObject.GetComponent<SpriteRenderer>().color = Color.white;
-        }
-        if (cardBack != null && revealable == true)
-        {
-            revealed = true;
+            title = "";
+            description = "";
+            cost = "";
+            id = "1000";
+            type = "";
+            selected = false;
+            prevSelected = false;
             revealable = false;
-            NetworkClient.localPlayer.GetComponent<PlayerScript>().numToReveal--;
+            revealed = false;
+            gameObject.GetComponent<SpriteRenderer>().color = Color.white;
+            //CmdResetCard(this);
         }
     }
 
@@ -168,6 +174,20 @@ public class CardScript : NetworkBehaviour
     public void CmdDisplayCard(int id)
     {
         RpcDisplayCard(id);
+    }
+
+    [Command(requiresAuthority = false)]
+    public void CmdResetCard(CardScript card)
+    {
+        card.title = "";
+        card.description = "";
+        card.cost = "";
+        card.id = "1000";
+        card.type = "";
+        card.selected = false;
+        card.prevSelected = false;
+        card.revealable = false;
+        card.revealed = false;
     }
 
     [ClientRpc]
