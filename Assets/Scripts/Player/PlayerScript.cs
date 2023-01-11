@@ -309,7 +309,7 @@ public class PlayerScript : NetworkBehaviour
                     deck.CreateDeck(highest);
                     if (deck.cardData.Count > 7)
                     {
-                        CmdFillDeck(deck.cardData, this);
+                        CmdFillDeck(deck.cardData);
                     }
                 }
 
@@ -332,7 +332,7 @@ public class PlayerScript : NetworkBehaviour
 
             case GameStates.DrawCards:
                 swapDeck = false;
-                CmdDrawCard(this);
+                CmdDrawCard();
                 if (hand.Count == 6 && !cardsSpawned)
                 {
                     //ran = true;
@@ -445,18 +445,22 @@ public class PlayerScript : NetworkBehaviour
         #endregion
     }
     [Command(requiresAuthority = false)]
+    public void CmdResetCards()
+    {
+        cards.Clear();
+        hand.Clear();
+    }
+    [Command(requiresAuthority = false)]
     public void CmdConfirm()
     {
         Debug.Log(cunning);
     }
 
-    [Command (requiresAuthority = false)]
     public void SwapDeck(PlayerScript p) // try this as a command.... i guess
     {
         Debug.Log(netId + "Swapping decks");
         deck.CreateDeck(highest);
-        cards.Clear();
-        hand.Clear();
+        CmdResetCards();
         //CmdResetCards(this); // when this is a command, clients brick
         //when its not, its breaks
 
@@ -464,19 +468,14 @@ public class PlayerScript : NetworkBehaviour
         //
         foreach (string[] s in deck.cardData)
         {
-            p.cards.Add(s);
+            CmdFillDeck(deck.cardData);
         }
         //
         while (cards.Count < 40) {}
 //
       for (int i = 0; i < 6; i++)
       {
-            int rand = UnityEngine.Random.Range(0, cards.Count - 1);
-            if (hand.Count < 6)
-            {
-                hand.Add(cards[rand]);
-                cards.Remove(cards[rand]);
-            }
+            CmdDrawCard();
       }
       foreach (GameObject g in cardSlots)
       {
@@ -546,13 +545,13 @@ public class PlayerScript : NetworkBehaviour
     }
 
     [Command(requiresAuthority = false)]
-    public void CmdDrawCard(PlayerScript p)
+    public void CmdDrawCard()
     {
-        int rand = UnityEngine.Random.Range(0, p.cards.Count - 1);
-        if (p.hand.Count < 6)
+        int rand = UnityEngine.Random.Range(0, cards.Count - 1);
+        if (hand.Count < 6)
         {
-            p.hand.Add(p.cards[rand]);
-            p.cards.Remove(p.cards[rand]);
+            hand.Add(cards[rand]);
+            cards.Remove(cards[rand]);
         }
     }
 
@@ -662,7 +661,6 @@ public class PlayerScript : NetworkBehaviour
                 newlow = "charisma";
             else
                 newlow = "cunning";
-            swapDeck = true;
             CmdSendLowest(this, newlow);
         }
     }
@@ -682,11 +680,11 @@ public class PlayerScript : NetworkBehaviour
     }
 
     [Command(requiresAuthority = false)]
-    public void CmdFillDeck(List<string[]> cards, PlayerScript p)
+    public void CmdFillDeck(List<string[]> cardData)
     {
-        foreach (string[] s in cards)
+        foreach (string[] s in cardData)
         {
-            p.cards.Add(s);
+            cards.Add(s);
         }
     }
 
