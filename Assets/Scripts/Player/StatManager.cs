@@ -100,7 +100,14 @@ public class StatManager : NetworkBehaviour
                 }
                 break;
         }
-        p.CalcHighest();
+        RpcCalcH(p.connectionToClient, p);
+        //p.CalcHighest();
+    }
+
+    [TargetRpc]
+    public void RpcCalcH(NetworkConnection conn, PlayerScript p)
+    {
+        p.CalcHighest(); 
     }
 
     public void ChangeStats() {

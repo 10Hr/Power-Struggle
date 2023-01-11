@@ -465,12 +465,12 @@ public class PlayerScript : NetworkBehaviour
         p.cards.Clear();
         p.hand.Clear();
     }
-    [Command(requiresAuthority = false)]
+
     public void SwapDeck(PlayerScript p)
     {
         deck.CreateDeck(highest);
-        p.cards.Clear();
-        p.hand.Clear();
+        CmdResetCards(this); // when this is a command, clients brick
+        //when its not, its breaks
 
       while (deck.cardData.Count < 40) { }
 //
@@ -692,6 +692,7 @@ public class PlayerScript : NetworkBehaviour
                 newlow = "charisma";
             else
                 newlow = "cunning";
+            swapDeck = true;
             CmdSendLowest(this, newlow);
         }
     }
@@ -798,7 +799,13 @@ public class PlayerScript : NetworkBehaviour
                     break;
             }
             p.MaxPoints = amount;
-            CalcHighest();
+        //p.CalcHighest();
+        RpcCalcH(p.connectionToClient, p);
+    }
+    [TargetRpc]
+    public void RpcCalcH(NetworkConnection conn, PlayerScript p)
+    {
+        p.CalcHighest();
     }
 
     [Command(requiresAuthority = false)]
