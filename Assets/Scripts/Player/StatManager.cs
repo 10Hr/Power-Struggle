@@ -100,6 +100,7 @@ public class StatManager : NetworkBehaviour
                 }
                 break;
         }
+        p.CalcHighest();
     }
 
     public void ChangeStats() {

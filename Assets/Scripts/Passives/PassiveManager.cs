@@ -46,8 +46,8 @@ public class PassiveManager : NetworkBehaviour
 
     [Command (requiresAuthority = false)]
     public void CmdSelectPassive(string highest, PlayerScript player) {
-        possible.Clear();
-        choices.Clear();
+      //  possible.Clear();
+      //  choices.Clear();
         foreach (Passive p in passives) 
             if (p.passiveType == highest) 
                 possible.Add(p);

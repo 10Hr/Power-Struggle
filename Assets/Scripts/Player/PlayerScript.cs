@@ -37,7 +37,7 @@ public class PlayerScript : NetworkBehaviour
     [SyncVar]
     public bool cantLoseStats = false;
 
-    [SyncVar]
+    //[SyncVar]
     public bool swapDeck = false;
 
     public int numSelected;
@@ -378,13 +378,15 @@ public class PlayerScript : NetworkBehaviour
                 break;
 
             case GameStates.Turn:
-                CalcLowest();
+                //CalcLowest();
                 if (swapDeck) {
-                    CmdConfirm();
-                    SwapDeck();
+                    //swapDeck = false;
+                    SwapDeck(this);
+                                      //CmdDeckSwapped(this);
                 }
-                else
-                    CalcHighest();
+                //else
+                   
+                    //CalcHighest();
 
                 UpdateData(enemySlots1, enemy1);
                 UpdateData(enemySlots2, enemy2);
@@ -463,32 +465,34 @@ public class PlayerScript : NetworkBehaviour
         p.cards.Clear();
         p.hand.Clear();
     }
-
-    public void SwapDeck()
+    [Command(requiresAuthority = false)]
+    public void SwapDeck(PlayerScript p)
     {
         deck.CreateDeck(highest);
-        CmdResetCards(this);
+        p.cards.Clear();
+        p.hand.Clear();
 
-        while (deck.cardData.Count < 40) { }
-
-        CmdFillDeck(deck.cardData, this);
-
-        while (cards.Count < 40) { Debug.Log(cards.Count); }
-
-        for (int i = 0; i < 6; i++)
-        {
-            Debug.Log(i);
-            CmdDrawCard(this);
-        }
-        foreach (GameObject g in cardSlots)
-        {
-            Debug.Log("making slot blank");
-            g.GetComponent<CardScript>().Title = "";
-        }
-        foreach (GameObject g in cardSlots)
-            TransferData(cardSlots, this);
-
-        CmdDeckSwapped(this);
+      while (deck.cardData.Count < 40) { }
+//
+      CmdFillDeck(deck.cardData, this);
+//
+      while (cards.Count < 40) { Debug.Log(cards.Count); }
+//
+      for (int i = 0; i < 6; i++)
+      {
+          Debug.Log(i);
+          CmdDrawCard(p);
+      }
+      foreach (GameObject g in cardSlots)
+      {
+          Debug.Log("making slot blank");
+          g.GetComponent<CardScript>().Title = "";
+      }
+      foreach (GameObject g in cardSlots)
+          TransferData(cardSlots, p);
+//
+      CmdDeckSwapped(p);
+    
     }
 
     [Command(requiresAuthority = false)] 
@@ -618,6 +622,7 @@ public class PlayerScript : NetworkBehaviour
 
     public void CalcHighest()
     {
+
         string currentHighest = highest;
         string newHighest;
         int currentHigh = 0;
@@ -649,6 +654,7 @@ public class PlayerScript : NetworkBehaviour
                 newHighest = "charisma";
             else
                 newHighest = "cunning";
+            swapDeck = true; // bricks lockin
             CmdSendHighest(this, newHighest);
         }
     }
@@ -694,7 +700,7 @@ public class PlayerScript : NetworkBehaviour
     public void CmdSendHighest(PlayerScript p, string h)
     {
         p.Highest = h;
-        p.swapDeck = true;
+       // p.swapDeck = true;
         p.hasHighest = true;
     }
 
@@ -792,6 +798,7 @@ public class PlayerScript : NetworkBehaviour
                     break;
             }
             p.MaxPoints = amount;
+            CalcHighest();
     }
 
     [Command(requiresAuthority = false)]

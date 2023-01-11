@@ -151,8 +151,7 @@ public class CardScript : NetworkBehaviour
         }
         else if ((cardBack != null && gameObject.tag == "CardSlot" && gameState.currentState == GameStates.Turn) && gameState.currentPlayer.netId == NetworkClient.localPlayer.netId && selected && !NetworkClient.localPlayer.GetComponent<PlayerScript>().turnTaken)
         {
-            CmdturnTaken(NetworkClient.localPlayer.GetComponent<PlayerScript>());
-            CmdDisplayCard(int.Parse(this.id));
+            CmdDisplayCard(int.Parse(this.id), NetworkClient.localPlayer.GetComponent<PlayerScript>());
             gameState.currentPlayer.deck.pullEff(title, this.id);
             title = "";
             description = "";
@@ -171,16 +170,11 @@ public class CardScript : NetworkBehaviour
 
 
     [Command(requiresAuthority = false)]
-    public void CmdDisplayCard(int id)
-    {
-        RpcDisplayCard(id);
-    }
-    [Command(requiresAuthority = false)]
-    public void CmdturnTaken(PlayerScript p)
+    public void CmdDisplayCard(int id, PlayerScript p)
     {
         p.turnTaken = true;
-    }
-                
+        RpcDisplayCard(id);
+    }  
 
     [Command(requiresAuthority = false)]
     public void CmdResetCard(CardScript card)
