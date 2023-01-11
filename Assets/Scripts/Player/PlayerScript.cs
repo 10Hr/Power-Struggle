@@ -331,7 +331,7 @@ public class PlayerScript : NetworkBehaviour
                 break;
 
             case GameStates.DrawCards:
-                CmdsWfakse(this);
+                swapDeck = false;
                 CmdDrawCard(this);
                 if (hand.Count == 6 && !cardsSpawned)
                 {
@@ -380,13 +380,10 @@ public class PlayerScript : NetworkBehaviour
             case GameStates.Turn:
                 //CalcLowest();
                 if (swapDeck) {
-                    //swapDeck = false;
+                    CmdConfirm();
                     SwapDeck(this);
-                                      //CmdDeckSwapped(this);
+                    swapDeck = false;
                 }
-                //else
-                   
-                    //CalcHighest();
 
                 UpdateData(enemySlots1, enemy1);
                 UpdateData(enemySlots2, enemy2);
@@ -450,38 +447,36 @@ public class PlayerScript : NetworkBehaviour
     [Command(requiresAuthority = false)]
     public void CmdConfirm()
     {
-        Debug.Log("Swapping Decks");
+        Debug.Log(cunning);
     }
 
-    [Command(requiresAuthority = false)]
-    public void CmdsWfakse(PlayerScript p)
+    [Command (requiresAuthority = false)]
+    public void SwapDeck(PlayerScript p) // try this as a command.... i guess
     {
-        p.swapDeck = false;
-    }
-
-    [Command(requiresAuthority = false)]
-    public void CmdResetCards(PlayerScript p)
-    {
-        p.cards.Clear();
-        p.hand.Clear();
-    }
-
-    public void SwapDeck(PlayerScript p)
-    {
+        Debug.Log(netId + "Swapping decks");
         deck.CreateDeck(highest);
-        CmdResetCards(this); // when this is a command, clients brick
+        cards.Clear();
+        hand.Clear();
+        //CmdResetCards(this); // when this is a command, clients brick
         //when its not, its breaks
 
-      while (deck.cardData.Count < 40) { }
-//
-      CmdFillDeck(deck.cardData, this);
-//
-      while (cards.Count < 40) { Debug.Log(cards.Count); }
+      while (deck.cardData.Count < 40) {}
+        //
+        foreach (string[] s in deck.cardData)
+        {
+            p.cards.Add(s);
+        }
+        //
+        while (cards.Count < 40) {}
 //
       for (int i = 0; i < 6; i++)
       {
-          Debug.Log(i);
-          CmdDrawCard(p);
+            int rand = UnityEngine.Random.Range(0, cards.Count - 1);
+            if (hand.Count < 6)
+            {
+                hand.Add(cards[rand]);
+                cards.Remove(cards[rand]);
+            }
       }
       foreach (GameObject g in cardSlots)
       {
@@ -491,38 +486,12 @@ public class PlayerScript : NetworkBehaviour
       foreach (GameObject g in cardSlots)
           TransferData(cardSlots, p);
 //
-      CmdDeckSwapped(p);
-    
-    }
-
-    [Command(requiresAuthority = false)] 
-    public void CmdsWapDeck(PlayerScript o) {
-        o.deck.CreateDeck(o.highest);
-        CmdResetCards(o);
-
-        while (o.deck.cardData.Count < 40) { }
-        CmdFillDeck(deck.cardData, o);
-        while (o.cards.Count < 40) { }
-
-        for (int i = 0; i < 6; i++)
+        if (passive.passiveName == "ShadyBusiness")
         {
-            Debug.Log(i);
-            CmdDrawCard(o);
-        }
-       
-
-        
-    }
-
-    [Command (requiresAuthority = false)]
-    public void CmdDeckSwapped(PlayerScript p)
-    {
-        if (p.passive.passiveName == "ShadyBusiness")
-        {
-            p.Power = 50;
+            Power = 50;
         }
         Debug.Log("Deck Swapped");
-        p.swapDeck = false;
+        swapDeck = false;
     }
 
     [Command (requiresAuthority = false)]
@@ -622,7 +591,7 @@ public class PlayerScript : NetworkBehaviour
 
     public void CalcHighest()
     {
-
+        CmdConfirm();
         string currentHighest = highest;
         string newHighest;
         int currentHigh = 0;
@@ -646,6 +615,7 @@ public class PlayerScript : NetworkBehaviour
         int max = statList.Max();
         if (max > currentHigh)
         {
+            CmdConfirm();
             if (statList[0] == max)
                 newHighest = "strength";
             else if (statList[1] == max)
@@ -655,7 +625,7 @@ public class PlayerScript : NetworkBehaviour
             else
                 newHighest = "cunning";
             swapDeck = true; // bricks lockin
-            CmdSendHighest(this, newHighest);
+            CmdSendHighest(newHighest);
         }
     }
 
@@ -698,11 +668,11 @@ public class PlayerScript : NetworkBehaviour
     }
 
     [Command(requiresAuthority = false)]
-    public void CmdSendHighest(PlayerScript p, string h)
+    public void CmdSendHighest(string h)
     {
-        p.Highest = h;
+        Highest = h;
        // p.swapDeck = true;
-        p.hasHighest = true;
+        hasHighest = true;
     }
 
     [Command(requiresAuthority = false)]
@@ -786,27 +756,28 @@ public class PlayerScript : NetworkBehaviour
             return;
         switch (type) {
                 case "strength":
-                   p.Strength = amount;
+                   Strength = amount;
                     break;
                 case "charisma":
-                    p.Charisma = amount;
+                    Charisma = amount;
                     break;
                 case "intelligence":
-                    p.Intelligence = amount;
+                    Intelligence = amount;
                     break;
                 case "cunning":
-                    p.Cunning = amount;
+                    Cunning = amount;
                     break;
             }
-            p.MaxPoints = amount;
-        //p.CalcHighest();
-        RpcCalcH(p.connectionToClient, p);
+            MaxPoints = amount;
+        Debug.Log(netId);
+        CalcHighest();
+        //RpcCalcH(p.connectionToClient, p);
     }
-    [TargetRpc]
-    public void RpcCalcH(NetworkConnection conn, PlayerScript p)
-    {
-        p.CalcHighest();
-    }
+    //[TargetRpc]
+    //public void RpcCalcH(NetworkConnection conn, PlayerScript p)
+    //{
+    //    CalcHighest();
+    //}
 
     [Command(requiresAuthority = false)]
     public void ResetStats(PlayerScript p)
