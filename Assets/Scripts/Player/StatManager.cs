@@ -100,8 +100,8 @@ public class StatManager : NetworkBehaviour
                 }
                 break;
         }
-        RpcCalcH(p.connectionToClient, p);
-        //p.CalcHighest();
+        //RpcCalcH(p.connectionToClient, p);
+        p.CalcHighest();
     }
 
     [TargetRpc]

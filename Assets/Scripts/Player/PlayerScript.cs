@@ -12,13 +12,7 @@ public class PlayerScript : NetworkBehaviour
 {
 
     //Fields
-    public List<CardScript> playerHand;
-
-    public List<CardScript> playerDeck;
-
     public GameState FSM;
-
-    public GameObject[] GUI;
 
     public bool added = false;
 
@@ -36,9 +30,6 @@ public class PlayerScript : NetworkBehaviour
 
     [SyncVar]
     public bool cantLoseStats = false;
-
-    //[SyncVar]
-    public bool swapDeck = false;
 
     public int numSelected;
 
@@ -146,7 +137,7 @@ public class PlayerScript : NetworkBehaviour
     public bool ready;
 
     [SyncVar]
-    private string highest = "";
+    public string highest = "";
 
     [SyncVar]
     public string lowest = "";
@@ -331,7 +322,7 @@ public class PlayerScript : NetworkBehaviour
                 break;
 
             case GameStates.DrawCards:
-                swapDeck = false;
+                //CmdSwapFalse();
                 CmdDrawCard();
                 if (hand.Count == 6 && !cardsSpawned)
                 {
@@ -379,15 +370,12 @@ public class PlayerScript : NetworkBehaviour
 
             case GameStates.Turn:
                 //CalcLowest();
-                if (swapDeck) {
-                    CmdConfirm();
-                    SwapDeck(this);
-                    swapDeck = false;
-                }
-
-                UpdateData(enemySlots1, enemy1);
-                UpdateData(enemySlots2, enemy2);
-                UpdateData(enemySlots3, enemy3);
+                if (enemy1.hand.Count == 6)
+                    UpdateData(enemySlots1, enemy1);
+                if (enemy2.hand.Count == 6)
+                    UpdateData(enemySlots2, enemy2);
+                if (enemy3.hand.Count == 6)
+                    UpdateData(enemySlots3, enemy3);
                 break;
         }
 
@@ -444,6 +432,12 @@ public class PlayerScript : NetworkBehaviour
         }
         #endregion
     }
+    //[Command(requiresAuthority = false)]
+    //public void CmdSwapFalse()
+    //{
+    //    swapDeck = false;
+    //}
+
     [Command(requiresAuthority = false)]
     public void CmdResetCards()
     {
@@ -453,29 +447,32 @@ public class PlayerScript : NetworkBehaviour
     [Command(requiresAuthority = false)]
     public void CmdConfirm()
     {
-        Debug.Log(cunning);
+        Debug.Log("");
     }
 
-    public void SwapDeck(PlayerScript p) // try this as a command.... i guess
+    [TargetRpc]
+    public void SwapDeck(string h) // try this as a command.... i guess
     {
-        Debug.Log(netId + "Swapping decks");
-        deck.CreateDeck(highest);
+        //CmdConfirm();
+        Debug.Log(highest + "Swapping decks");
+        deck.CreateDeck(h);
         CmdResetCards();
-        //CmdResetCards(this); // when this is a command, clients brick
-        //when its not, its breaks
+//        //CmdResetCards(this); // when this is a command, clients brick
+//        //when its not, its breaks
 
       while (deck.cardData.Count < 40) {}
         //
-        foreach (string[] s in deck.cardData)
-        {
+        //foreach (string[] s in deck.cardData)
+        //{
             CmdFillDeck(deck.cardData);
-        }
+        //}
         //
-        while (cards.Count < 40) {}
+        //while (cards.Count < 40) {}
 //
       for (int i = 0; i < 6; i++)
       {
             CmdDrawCard();
+            Debug.Log(hand[i][1]);
       }
       foreach (GameObject g in cardSlots)
       {
@@ -483,14 +480,13 @@ public class PlayerScript : NetworkBehaviour
           g.GetComponent<CardScript>().Title = "";
       }
       foreach (GameObject g in cardSlots)
-          TransferData(cardSlots, p);
+          TransferData(cardSlots, this);
 //
         if (passive.passiveName == "ShadyBusiness")
         {
             Power = 50;
         }
         Debug.Log("Deck Swapped");
-        swapDeck = false;
     }
 
     [Command (requiresAuthority = false)]
@@ -590,7 +586,6 @@ public class PlayerScript : NetworkBehaviour
 
     public void CalcHighest()
     {
-        CmdConfirm();
         string currentHighest = highest;
         string newHighest;
         int currentHigh = 0;
@@ -614,7 +609,6 @@ public class PlayerScript : NetworkBehaviour
         int max = statList.Max();
         if (max > currentHigh)
         {
-            CmdConfirm();
             if (statList[0] == max)
                 newHighest = "strength";
             else if (statList[1] == max)
@@ -623,8 +617,11 @@ public class PlayerScript : NetworkBehaviour
                 newHighest = "charisma";
             else
                 newHighest = "cunning";
-            swapDeck = true; // bricks lockin
+            //swapDeck = true; // bricks lockin
             CmdSendHighest(newHighest);
+
+            //Debug.LogError(FSM.CurrentState == GameStates.Turn);
+
         }
     }
 
@@ -668,9 +665,10 @@ public class PlayerScript : NetworkBehaviour
     [Command(requiresAuthority = false)]
     public void CmdSendHighest(string h)
     {
-        Highest = h;
-       // p.swapDeck = true;
+        highest = h;
         hasHighest = true;
+        if (FSM.CurrentState == GameStates.Turn)
+            SwapDeck(h);
     }
 
     [Command(requiresAuthority = false)]
@@ -685,6 +683,7 @@ public class PlayerScript : NetworkBehaviour
         foreach (string[] s in cardData)
         {
             cards.Add(s);
+            Debug.Log(s[0]);
         }
     }
 
@@ -742,11 +741,6 @@ public class PlayerScript : NetworkBehaviour
         if (bntTop.activeInHierarchy == true)  //enemy3
             bntTop.SetActive(false);
     }
-    
-    public void Turn() {
-        //Debug.Log("My Turn " + playerNumber);
-
-    }
 
         [Command(requiresAuthority = false)]
         public void ModifyStats(string type, int amount, PlayerScript p) {
@@ -769,13 +763,13 @@ public class PlayerScript : NetworkBehaviour
             MaxPoints = amount;
         Debug.Log(netId);
         CalcHighest();
-        //RpcCalcH(p.connectionToClient, p);
+        //RpcCalcH(p.connectionToClient);
     }
-    //[TargetRpc]
-    //public void RpcCalcH(NetworkConnection conn, PlayerScript p)
-    //{
-    //    CalcHighest();
-    //}
+    [TargetRpc]
+    public void RpcCalcH(NetworkConnection conn)
+    {
+        CalcHighest();
+    }
 
     [Command(requiresAuthority = false)]
     public void ResetStats(PlayerScript p)
