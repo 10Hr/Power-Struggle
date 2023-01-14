@@ -221,7 +221,7 @@ public class PlayerScript : NetworkBehaviour
     {
         playerList = GameObject.Find("PlayerList").GetComponent<PlayerList>();
         FSM = GameObject.Find("FSM").GetComponent<GameState>();
-        CmdSetPlayer(this);
+        CmdSetPlayer();
 
         passive = gameObject.GetComponent<Passive>();
 
@@ -314,10 +314,7 @@ public class PlayerScript : NetworkBehaviour
                 }
                 if (passive.passiveName != "" && isLocalPlayer)
                 {
-                    //passiveOption1.SetActive(false);
-                    //passiveOption2.SetActive(false);
-                    //passiveOption3.SetActive(false);
-                    CmdSelectedPassive(this);
+                    CmdSelectedPassive();
                 }
                 break;
 
@@ -329,7 +326,7 @@ public class PlayerScript : NetworkBehaviour
                     //ran = true;
                     TransferData(cardSlots, this);
                     if (cardSlots[5].GetComponent<CardScript>().Title != "")
-                        CmdSpawnedCards(this);
+                        CmdSpawnedCards();
                 }
 
                 break;
@@ -363,19 +360,20 @@ public class PlayerScript : NetworkBehaviour
                         g.GetComponent<SpriteRenderer>().color = Color.white;
                 }
                 if (numSelected == 3)
-                    CmdThreeSelected(this, true);
+                    CmdThreeSelected(true);
                 else
-                    CmdThreeSelected(this, false);
+                    CmdThreeSelected(false);
                 break;
 
             case GameStates.Turn:
-                //CalcLowest();
                 if (enemy1.hand.Count == 6)
                     UpdateData(enemySlots1, enemy1);
                 if (enemy2.hand.Count == 6)
                     UpdateData(enemySlots2, enemy2);
                 if (enemy3.hand.Count == 6)
                     UpdateData(enemySlots3, enemy3);
+                if (hand.Count == 6)
+                    UpdateData(cardSlots, this);
                 break;
         }
 
@@ -432,11 +430,6 @@ public class PlayerScript : NetworkBehaviour
         }
         #endregion
     }
-    //[Command(requiresAuthority = false)]
-    //public void CmdSwapFalse()
-    //{
-    //    swapDeck = false;
-    //}
 
     [Command(requiresAuthority = false)]
     public void CmdResetCards()
@@ -451,48 +444,32 @@ public class PlayerScript : NetworkBehaviour
     }
 
     [TargetRpc]
-    public void SwapDeck(string h) // try this as a command.... i guess
+    public void SwapDeck(string h)
     {
-        //CmdConfirm();
-        Debug.Log(highest + "Swapping decks");
         deck.CreateDeck(h);
         CmdResetCards();
-//        //CmdResetCards(this); // when this is a command, clients brick
-//        //when its not, its breaks
 
       while (deck.cardData.Count < 40) {}
-        //
-        //foreach (string[] s in deck.cardData)
-        //{
-            CmdFillDeck(deck.cardData);
-        //}
-        //
-        //while (cards.Count < 40) {}
-//
+
+      CmdFillDeck(deck.cardData);
+
       for (int i = 0; i < 6; i++)
-      {
             CmdDrawCard();
-            Debug.Log(hand[i][1]);
-      }
+
       foreach (GameObject g in cardSlots)
-      {
-          Debug.Log("making slot blank");
           g.GetComponent<CardScript>().Title = "";
-      }
+
       foreach (GameObject g in cardSlots)
           TransferData(cardSlots, this);
-//
-        if (passive.passiveName == "ShadyBusiness")
-        {
-            Power = 50;
-        }
-        Debug.Log("Deck Swapped");
+
+      if (passive.passiveName == "ShadyBusiness")
+          ModifyPower(50);
     }
 
     [Command (requiresAuthority = false)]
-    public void CmdThreeSelected(PlayerScript p, bool b)
+    public void CmdThreeSelected(bool b)
     {
-        p.threeSelected = b;
+        threeSelected = b;
     }
 
     public void TransferEnemyData()
@@ -514,30 +491,24 @@ public class PlayerScript : NetworkBehaviour
         }
 
         if (enemySlots1[5].GetComponent<CardScript>().Title == "")
-        {
             TransferData(enemySlots1, enemy1);
-        }
         else if (enemySlots2[5].GetComponent<CardScript>().Title == "")
-        {
             TransferData(enemySlots2, enemy2);
-        }
         else if (enemySlots3[5].GetComponent<CardScript>().Title == "")
-        {
             TransferData(enemySlots3, enemy3);
-        }
         sendPlayerData();
     }
 
     [Command(requiresAuthority = false)]
-    public void CmdSpawnedCards(PlayerScript p)
+    public void CmdSpawnedCards()
     {
-        p.cardsSpawned = true;
+        cardsSpawned = true;
     }
 
     [Command(requiresAuthority = false)]
-    public void CmdSelectedPassive(PlayerScript p)
+    public void CmdSelectedPassive()
     {
-        p.hasPassive = true;
+        hasPassive = true;
     }
 
     [Command(requiresAuthority = false)]
@@ -572,7 +543,6 @@ public class PlayerScript : NetworkBehaviour
         int index = 0;
         foreach (GameObject g in slots)
         {
-            //Debug.Log(p.netIdentity.netId + " " + g.GetComponent<CardScript>().Title + " " + slots.Length);
             if (g.GetComponent<CardScript>().Title == "")
             {
                 g.GetComponent<CardScript>().Title = p.hand[index][1];
@@ -617,11 +587,7 @@ public class PlayerScript : NetworkBehaviour
                 newHighest = "charisma";
             else
                 newHighest = "cunning";
-            //swapDeck = true; // bricks lockin
             CmdSendHighest(newHighest);
-
-            //Debug.LogError(FSM.CurrentState == GameStates.Turn);
-
         }
     }
 
@@ -658,7 +624,7 @@ public class PlayerScript : NetworkBehaviour
                 newlow = "charisma";
             else
                 newlow = "cunning";
-            CmdSendLowest(this, newlow);
+            CmdSendLowest(newlow);
         }
     }
 
@@ -672,19 +638,16 @@ public class PlayerScript : NetworkBehaviour
     }
 
     [Command(requiresAuthority = false)]
-    public void CmdSendLowest(PlayerScript p, string l)
+    public void CmdSendLowest(string l)
     {
-        p.lowest = l;
+        lowest = l;
     }
 
     [Command(requiresAuthority = false)]
     public void CmdFillDeck(List<string[]> cardData)
     {
         foreach (string[] s in cardData)
-        {
             cards.Add(s);
-            Debug.Log(s[0]);
-        }
     }
 
     [Command(requiresAuthority = false)]
@@ -694,7 +657,7 @@ public class PlayerScript : NetworkBehaviour
     }
 
     [Command(requiresAuthority = false)]
-    public void CmdSetPlayer(PlayerScript player)
+    public void CmdSetPlayer()
     {
         RpcSetPlayer();
     }
@@ -721,15 +684,15 @@ public class PlayerScript : NetworkBehaviour
             && !(passive.passiveName == "SmartAllies" && enemy1.Highest == "intelligence")
             && !(passive.passiveName == "ShadyAllies" && enemy1.Highest == "cunning"))  //enemy1
             bntRight.SetActive(true);
-        if ((!enemy1.untargetable || (enemy1.untargetable && passive.passiveName == "Precise")) && (enemy1.passive.passiveName != "Scrapper" || (enemy1.passive.passiveName == "Scrapper" && enemy1.Power < power))
-            && !(passive.passiveName == "StrongAllies" && enemy1.Highest == "strength")
-            && !(passive.passiveName == "SmartAllies" && enemy1.Highest == "intelligence")
-            && !(passive.passiveName == "ShadyAllies" && enemy1.Highest == "cunning"))  //enemy2
+        if ((!enemy2.untargetable || (enemy2.untargetable && passive.passiveName == "Precise")) && (enemy2.passive.passiveName != "Scrapper" || (enemy2.passive.passiveName == "Scrapper" && enemy2.Power < power))
+            && !(passive.passiveName == "StrongAllies" && enemy2.Highest == "strength")
+            && !(passive.passiveName == "SmartAllies" && enemy2.Highest == "intelligence")
+            && !(passive.passiveName == "ShadyAllies" && enemy2.Highest == "cunning"))  //enemy2
                 bntLeft.SetActive(true);
-        if ((!enemy1.untargetable || (enemy1.untargetable && passive.passiveName == "Precise")) && (enemy1.passive.passiveName != "Scrapper" || (enemy1.passive.passiveName == "Scrapper" && enemy1.Power < power))
-            && !(passive.passiveName == "StrongAllies" && enemy1.Highest == "strength")
-            && !(passive.passiveName == "SmartAllies" && enemy1.Highest == "intelligence")
-            && !(passive.passiveName == "ShadyAllies" && enemy1.Highest == "cunning"))  //enemy3
+        if ((!enemy3.untargetable || (enemy3.untargetable && passive.passiveName == "Precise")) && (enemy3.passive.passiveName != "Scrapper" || (enemy3.passive.passiveName == "Scrapper" && enemy3.Power < power))
+            && !(passive.passiveName == "StrongAllies" && enemy3.Highest == "strength")
+            && !(passive.passiveName == "SmartAllies" && enemy3.Highest == "intelligence")
+            && !(passive.passiveName == "ShadyAllies" && enemy3.Highest == "cunning"))  //enemy3
                 bntTop.SetActive(true);
     }
 
@@ -743,7 +706,7 @@ public class PlayerScript : NetworkBehaviour
     }
 
         [Command(requiresAuthority = false)]
-        public void ModifyStats(string type, int amount, PlayerScript p) {
+        public void ModifyStats(string type, int amount) {
         if (cantLoseStats && amount > 0)
             return;
         switch (type) {
@@ -761,57 +724,51 @@ public class PlayerScript : NetworkBehaviour
                     break;
             }
             MaxPoints = amount;
-        Debug.Log(netId);
-        CalcHighest();
-        //RpcCalcH(p.connectionToClient);
-    }
-    [TargetRpc]
-    public void RpcCalcH(NetworkConnection conn)
-    {
+        CalcLowest();
         CalcHighest();
     }
 
     [Command(requiresAuthority = false)]
-    public void ResetStats(PlayerScript p)
+    public void ResetStats()
     {
-        p.AvailablePoints = p.Charisma + p.Strength + p.Cunning + p.Intelligence;
-        p.Strength = 0;
-        p.Charisma = 0;
-        p.Intelligence = 0;
-        p.Cunning = 0;
+        AvailablePoints = Charisma + Strength + Cunning + Intelligence;
+        Strength = 0;
+        Charisma = 0;
+        Intelligence = 0;
+        Cunning = 0;
     }
 
     [Command(requiresAuthority = false)]
-    public void ModifyPower(int amount, PlayerScript p)
+    public void ModifyPower(int amount)
     {
         if (cantLosePower && amount > 0)
             return;
-        if (amount < 0 && p.passive.passiveName == "Taunt")
+        if (amount < 0 && passive.passiveName == "Taunt")
         {
-            p.Strength = 1;
+            Strength = 1;
         }
-        if (p.passive.passiveName == "Unstable")
+        if (passive.passiveName == "Unstable")
         {
             amount *= 2;
         }
-        p.Power = amount;
+        Power = amount;
     }
 
     [Command(requiresAuthority = false)]
-    public void AddPoints(int amount, PlayerScript p)
+    public void AddPoints(int amount)
     {
-        p.maxPoints = amount;
-        p.availablePoints = amount;
+        maxPoints = amount;
+        availablePoints = amount;
     }
 
     [Command(requiresAuthority = false)]
-    public void DiscardCard(PlayerScript p, int index, GameObject[] slots)
+    public void DiscardCard(int index, GameObject[] slots)
     {
-        int rand = UnityEngine.Random.Range(0, p.cards.Count - 1);
-        p.cards.Add(p.hand[index]);
-        p.hand[index] = p.cards[rand];
-        p.cards.Remove(p.cards[rand]);
-        RpcFillSlot(p.connectionToClient, slots, p.hand[index][1], p.hand[index][0], p.hand[index][4]);
+        int rand = UnityEngine.Random.Range(0, cards.Count - 1);
+        cards.Add(hand[index]);
+        hand[index] = cards[rand];
+        cards.Remove(cards[rand]);
+        RpcFillSlot(connectionToClient, slots, hand[index][1], hand[index][0], hand[index][4]);
     }
 
     [Command(requiresAuthority = false)]
