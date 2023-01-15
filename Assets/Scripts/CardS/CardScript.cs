@@ -136,15 +136,15 @@ public class CardScript : NetworkBehaviour
     }
 
     public void OnMouseEnter() {
-        hovered = true;
+            hovered = true;
     }
     public void OnMouseExit() {
-        hovered = false;
+            hovered = false;
     }
 
     public void OnMouseDown()
     {
-        if (cardBack != null && gameObject.tag == "CardSlot" && gameState.currentState == GameStates.LoadEnemyCards)
+        if (cardBack != null && gameObject.tag == "CardSlot" && gameState.currentState == GameStates.LoadEnemyCards && !NetworkClient.localPlayer.GetComponent<PlayerScript>().LockedIn)
         {
             prevSelected = selected;
             selected = !selected;

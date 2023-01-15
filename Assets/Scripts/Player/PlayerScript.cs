@@ -16,6 +16,8 @@ public class PlayerScript : NetworkBehaviour
 
     public bool added = false;
 
+    public GameObject turnToken;
+
     [SyncVar]
     public bool untargetable = false;
 
@@ -44,7 +46,7 @@ public class PlayerScript : NetworkBehaviour
     private int intelligence;
     [SyncVar]
     private int cunning;
-
+    [SyncVar]
     public string allyStat;
 
     public int Charisma
@@ -161,6 +163,9 @@ public class PlayerScript : NetworkBehaviour
     public bool hasPassive = false;
 
     [SyncVar]
+    public bool sawDeck = false;
+
+    [SyncVar]
     public bool cardSlotsSpawned = false;
 
     [SyncVar]
@@ -209,6 +214,7 @@ public class PlayerScript : NetworkBehaviour
     GameObject bntTop;
     GameObject bntLeft;
     GameObject bntRight;
+    GameObject lockInButton;
 
     //Properties
     //Methods
@@ -229,12 +235,16 @@ public class PlayerScript : NetworkBehaviour
         passiveOption2 = GameObject.Find("bntChoice2");
         passiveOption3 = GameObject.Find("bntChoice3");
 
+        lockInButton = GameObject.Find("LockInButton1");
+
         charismaText = GameObject.Find("CharismaCounter").GetComponent<Text>();
         strengthText = GameObject.Find("StrengthCounter").GetComponent<Text>();
         intelligenceText = GameObject.Find("IntelligenceCounter").GetComponent<Text>();
         cunningText = GameObject.Find("CunningCounter").GetComponent<Text>();
         addButtons = GameObject.FindGameObjectsWithTag("add");
         subButtons = GameObject.FindGameObjectsWithTag("sub");
+
+        turnToken = GameObject.Find("Token");
 
         cardSlots = GameObject.FindGameObjectsWithTag("CardSlot");
         enemySlots1 = GameObject.FindGameObjectsWithTag("1");
@@ -257,6 +267,8 @@ public class PlayerScript : NetworkBehaviour
             passiveOption1.SetActive(false);
             passiveOption2.SetActive(false);
             passiveOption3.SetActive(false);
+            lockInButton.SetActive(false);
+            turnToken.SetActive(false);
         }
 
     }
@@ -338,13 +350,13 @@ public class PlayerScript : NetworkBehaviour
                     case "SeeDeck":
                         break;
                     case "StrongAllies":
-                        allyStat = "strength";
+                        CmdSetAllyStat("strength");
                         break;
                     case "SmartAllies":
-                        allyStat = "intelligence";
+                        CmdSetAllyStat("intelligence");
                         break;
                     case "ShadyAllies":
-                        allyStat = "cunning";
+                        CmdSetAllyStat("cunning");
                         break;
                     default:
                         break;
@@ -359,10 +371,16 @@ public class PlayerScript : NetworkBehaviour
                     } else
                         g.GetComponent<SpriteRenderer>().color = Color.white;
                 }
-                if (numSelected == 3)
+                if (numSelected == 3 && !LockedIn)
+                {
                     CmdThreeSelected(true);
+                    lockInButton.SetActive(true);
+                }
                 else
+                {
                     CmdThreeSelected(false);
+                    lockInButton.SetActive(false);
+                }
                 break;
 
             case GameStates.Turn:
@@ -374,6 +392,10 @@ public class PlayerScript : NetworkBehaviour
                     UpdateData(enemySlots3, enemy3);
                 if (hand.Count == 6)
                     UpdateData(cardSlots, this);
+                if (FSM.currentPlayer.netId == netId)
+                    turnToken.SetActive(true);
+                else
+                    turnToken.SetActive(false);
                 break;
         }
 
@@ -679,20 +701,29 @@ public class PlayerScript : NetworkBehaviour
     }
 
     public void UnhideButtons() {
-        if ((!enemy1.untargetable || (enemy1.untargetable && passive.passiveName == "Precise")) && (enemy1.passive.passiveName != "Scrapper" || (enemy1.passive.passiveName == "Scrapper"  && enemy1.Power < power))
+        if (passive.passiveName == "Precise" || ((!enemy1.untargetable) && (enemy1.passive.passiveName != "Scrapper" || (enemy1.passive.passiveName == "Scrapper"  && enemy1.Power < power))
             && !(passive.passiveName == "StrongAllies" && enemy1.Highest == "strength")
             && !(passive.passiveName == "SmartAllies" && enemy1.Highest == "intelligence")
-            && !(passive.passiveName == "ShadyAllies" && enemy1.Highest == "cunning"))  //enemy1
+            && !(passive.passiveName == "ShadyAllies" && enemy1.Highest == "cunning")
+            && !(enemy1.passiveName == "StrongAllies" && Highest == "strength")
+            && !(enemy1.passiveName == "SmartAllies" && Highest == "intelligence")
+            && !(enemy1.passiveName == "ShadyAllies" && Highest == "cunning")))//enemy1
             bntRight.SetActive(true);
-        if ((!enemy2.untargetable || (enemy2.untargetable && passive.passiveName == "Precise")) && (enemy2.passive.passiveName != "Scrapper" || (enemy2.passive.passiveName == "Scrapper" && enemy2.Power < power))
+        if (passive.passiveName == "Precise" || ((!enemy2.untargetable) && (enemy2.passive.passiveName != "Scrapper" || (enemy2.passive.passiveName == "Scrapper" && enemy2.Power < power))
             && !(passive.passiveName == "StrongAllies" && enemy2.Highest == "strength")
             && !(passive.passiveName == "SmartAllies" && enemy2.Highest == "intelligence")
-            && !(passive.passiveName == "ShadyAllies" && enemy2.Highest == "cunning"))  //enemy2
+            && !(passive.passiveName == "ShadyAllies" && enemy2.Highest == "cunning")
+            && !(enemy2.passiveName == "StrongAllies" && Highest == "strength")
+            && !(enemy2.passiveName == "SmartAllies" && Highest == "intelligence")
+            && !(enemy2.passiveName == "ShadyAllies" && Highest == "cunning")))//enemy2
                 bntLeft.SetActive(true);
-        if ((!enemy3.untargetable || (enemy3.untargetable && passive.passiveName == "Precise")) && (enemy3.passive.passiveName != "Scrapper" || (enemy3.passive.passiveName == "Scrapper" && enemy3.Power < power))
+        if (passive.passiveName == "Precise" || ((!enemy3.untargetable) && (enemy3.passive.passiveName != "Scrapper" || (enemy3.passive.passiveName == "Scrapper" && enemy3.Power < power))
             && !(passive.passiveName == "StrongAllies" && enemy3.Highest == "strength")
             && !(passive.passiveName == "SmartAllies" && enemy3.Highest == "intelligence")
-            && !(passive.passiveName == "ShadyAllies" && enemy3.Highest == "cunning"))  //enemy3
+            && !(passive.passiveName == "ShadyAllies" && enemy3.Highest == "cunning")
+            && !(enemy3.passiveName == "StrongAllies" && Highest == "strength")
+            && !(enemy3.passiveName == "SmartAllies" && Highest == "intelligence")
+            && !(enemy3.passiveName == "ShadyAllies" && Highest == "cunning")))  //enemy3
                 bntTop.SetActive(true);
     }
 
@@ -798,27 +829,42 @@ public class PlayerScript : NetworkBehaviour
         }
     }
 
-    [Command(requiresAuthority = false)]
-    public void setUntargetable(PlayerScript p)
+    [TargetRpc]
+    public void Turn(NetworkConnection conn)
     {
-        p.untargetable = true;
+        if (passive.passiveName == "SeeDeck")
+        {
+            deck.SeeDeck();
+        }
     }
 
     [Command(requiresAuthority = false)]
-    public void CmdturnIncrease(PlayerScript p)
+    public void setUntargetable()
+    {
+        untargetable = true;
+    }
+
+    [Command(requiresAuthority = false)]
+    public void CmdturnIncrease()
     {
         FSM.turn++;
-        p.turnTaken = false;
+        turnTaken = false;
     }
 
     [Command (requiresAuthority = false)]
-    public void CmdDisablePLoss(PlayerScript p)
+    public void CmdDisablePLoss()
     {
-        p.cantLosePower = true;
+        cantLosePower = true;
     }
     [Command(requiresAuthority = false)]
-    public void CmdDisableSLoss(PlayerScript p)
+    public void CmdDisableSLoss()
     {
-        p.cantLoseStats = true;
+        cantLoseStats = true;
+    }
+
+    [Command(requiresAuthority = false)]
+    public void CmdSetAllyStat(string s)
+    {
+        allyStat = s;
     }
 }

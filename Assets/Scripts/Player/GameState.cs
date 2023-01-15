@@ -121,7 +121,10 @@ public class GameState : NetworkBehaviour
                     currentState = GameStates.Event;
                 } else {
                     currentPlayer = playerList.players[turn % 4];
-                    //currentPlayer.Turn();
+                    if (currentPlayer.sawDeck == false)
+                    {
+                        currentPlayer.Turn(currentPlayer.connectionToClient);
+                    }
                 }
 
                 break;

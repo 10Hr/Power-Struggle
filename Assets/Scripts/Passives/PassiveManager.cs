@@ -85,46 +85,18 @@ public class PassiveManager : NetworkBehaviour
         // note the methods must all be of type void with no parameters
         // that is they must all have the same signature.
         Debug.Log("creating effect list");
-                effects.Add(StrongAllies);
-                effects.Add(SmartAllies);
-                effects.Add(ShadyAllies);
 
                 effects.Add(Tactician);
-                effects.Add(SeeDeck);
 
                 effects.Add(BlackMarket);
                 effects.Add(WireTapping);
      }
 
 
-     // effect methods
-     //-----------------------------------------charisma-----------------------------------------
-
-
-     void StrongAllies() {
-         Debug.Log("Encore");
-     }
-    void SmartAllies() {
-        Debug.Log("lastingEffects");
-    }
-    void ShadyAllies() {
-        Debug.Log("naturalAlly");
-    }
-
-    //-----------------------------------------intelligence-----------------------------------------
-
-
     void Tactician() {
         Debug.Log("tactician");
     }
-    void SeeDeck() {
-        Debug.Log("seeDeck");
-        //add disabled bool to card script
-        //add disable check when selecting card
-    }
 
-    //-----------------------------------------strength-----------------------------------------
-    //-----------------------------------------cunning-----------------------------------------
     void BlackMarket() {
         Debug.Log("blackMarket");
         //complicated... do last...

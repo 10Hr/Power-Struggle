@@ -16,6 +16,8 @@ public class DeckScript : NetworkBehaviour
     public PlayerScript targetPlayer;
     public PlayerScript currentPlayer;
 
+    public List<PlayerScript> enemies;
+
     public string currentMethod;
     public string currentID;
     public int index = 0;
@@ -97,6 +99,7 @@ public class DeckScript : NetworkBehaviour
     public void pullEff(string title, string id) {
         currentID = id;
         currentPlayer = NetworkClient.localPlayer.GetComponent<PlayerScript>();
+        enemies = currentPlayer.sendPlayerData();
         index = 0;
             foreach (GameObject g in currentPlayer.cardSlots)
             {
@@ -196,28 +199,28 @@ public class DeckScript : NetworkBehaviour
         Debug.Log("gain 1 strength point");
         currentPlayer.ModifyStats("strength", 1);
         currentPlayer.DiscardCard(index, currentPlayer.cardSlots);
-        currentPlayer.CmdturnIncrease(currentPlayer);
+        currentPlayer.CmdturnIncrease();
         
     }
     public void gainchr1() { //Gain 1 point in charisma
         Debug.Log("gain 1 charisma point");
         currentPlayer.ModifyStats("charisma", 1);
         currentPlayer.DiscardCard(index, currentPlayer.cardSlots);
-        currentPlayer.CmdturnIncrease(currentPlayer);
+        currentPlayer.CmdturnIncrease();
         
     }
     public void gainint1() { //Gain 1 point in intelligence
         Debug.Log("gain 1 intelligence point");
         currentPlayer.ModifyStats("intelligence", 1);
         currentPlayer.DiscardCard(index, currentPlayer.cardSlots);
-        currentPlayer.CmdturnIncrease(currentPlayer);
+        currentPlayer.CmdturnIncrease();
         
     }
     public void gaincun1() { //Gain 1 point in cunning
         Debug.Log("gain 1 cunning point");
         currentPlayer.ModifyStats("cunning", 1);
         currentPlayer.DiscardCard(index, currentPlayer.cardSlots);
-        currentPlayer.CmdturnIncrease(currentPlayer);
+        currentPlayer.CmdturnIncrease();
         
     }
     public void trgLPSX10()
@@ -231,7 +234,7 @@ public class DeckScript : NetworkBehaviour
                 targetPlayer.ModifyPower(-10 * currentPlayer.Strength);
                 currentPlayer.hideButtons();
                 currentPlayer.DiscardCard(index, currentPlayer.cardSlots);
-                currentPlayer.CmdturnIncrease(currentPlayer);
+                currentPlayer.CmdturnIncrease();
         
                 break;
             case false:
@@ -248,7 +251,7 @@ public class DeckScript : NetworkBehaviour
                 RevealCards(targetPlayer, currentPlayer.Intelligence);
                 currentPlayer.hideButtons();      
                 currentPlayer.DiscardCard(index, currentPlayer.cardSlots);
-                currentPlayer.CmdturnIncrease(currentPlayer);
+                currentPlayer.CmdturnIncrease();
         
                 break;
             case false:
@@ -260,7 +263,7 @@ public class DeckScript : NetworkBehaviour
         Debug.Log("charisma,Gain power equal to 10 x Charisma");
         currentPlayer.ModifyPower(10 * currentPlayer.Charisma);
         currentPlayer.DiscardCard(index, currentPlayer.cardSlots);
-        currentPlayer.CmdturnIncrease(currentPlayer);
+        currentPlayer.CmdturnIncrease();
         
     }
     public void loseCUGP() { // Lose a point in cunning, gain 75 power
@@ -271,24 +274,24 @@ public class DeckScript : NetworkBehaviour
             currentPlayer.ModifyPower(75);
         }
         currentPlayer.DiscardCard(index, currentPlayer.cardSlots);
-        currentPlayer.CmdturnIncrease(currentPlayer);
+        currentPlayer.CmdturnIncrease();
         
     }
     public void prevSLoss()
     {
         Debug.Log("prevent any stat point loss after this card is played");
-        currentPlayer.CmdDisableSLoss(currentPlayer);
+        currentPlayer.CmdDisableSLoss();
         currentPlayer.DiscardCard(index, currentPlayer.cardSlots);
-        currentPlayer.CmdturnIncrease(currentPlayer);
+        currentPlayer.CmdturnIncrease();
         
 
     }
     public void prevPLoss()
     {
-        currentPlayer.CmdDisablePLoss(currentPlayer);
+        currentPlayer.CmdDisablePLoss();
         Debug.Log("prevent any power loss after this card is played");
         currentPlayer.DiscardCard(index, currentPlayer.cardSlots);
-        currentPlayer.CmdturnIncrease(currentPlayer);
+        currentPlayer.CmdturnIncrease();
         
 
     }
@@ -303,7 +306,7 @@ public class DeckScript : NetworkBehaviour
                 targetPlayer.ModifyStats(targetPlayer.Highest, -1);
                 currentPlayer.hideButtons();
                 currentPlayer.DiscardCard(index, currentPlayer.cardSlots);
-                currentPlayer.CmdturnIncrease(currentPlayer);
+                currentPlayer.CmdturnIncrease();
         
                 break;
             case false:
@@ -323,7 +326,7 @@ public class DeckScript : NetworkBehaviour
                 targetPlayer.ModifyPower(-50);
                 currentPlayer.hideButtons();
                 currentPlayer.DiscardCard(index, currentPlayer.cardSlots);
-                currentPlayer.CmdturnIncrease(currentPlayer);
+                currentPlayer.CmdturnIncrease();
         
                 break;
             case false:
@@ -336,7 +339,7 @@ public class DeckScript : NetworkBehaviour
         Debug.Log("gain 50 power");
         currentPlayer.ModifyPower(50);
         currentPlayer.DiscardCard(index, currentPlayer.cardSlots);
-        currentPlayer.CmdturnIncrease(currentPlayer);
+        currentPlayer.CmdturnIncrease();
         
     }
     #endregion
@@ -347,7 +350,7 @@ public class DeckScript : NetworkBehaviour
         Debug.Log("CHANGE TO NET");
 
         currentPlayer.DiscardCard(index, currentPlayer.cardSlots);
-        currentPlayer.CmdturnIncrease(currentPlayer);
+        currentPlayer.CmdturnIncrease();
         
     }
     public void trggainhalfP()
@@ -360,7 +363,7 @@ public class DeckScript : NetworkBehaviour
                 targetPlayer.ModifyStats(targetPlayer.Highest, -1);
                 currentPlayer.hideButtons();
                 currentPlayer.DiscardCard(index, currentPlayer.cardSlots);
-                currentPlayer.CmdturnIncrease(currentPlayer);
+                currentPlayer.CmdturnIncrease();
         
                 break;
             case false:
@@ -379,7 +382,7 @@ public class DeckScript : NetworkBehaviour
                 targetPlayer.DiscardRevealed(currentPlayer, GetEnemySlots(targetPlayer), targetPlayer, GetRevealedIndexes(targetPlayer));
                 currentPlayer.hideButtons();
                 currentPlayer.DiscardCard(index, currentPlayer.cardSlots);
-                currentPlayer.CmdturnIncrease(currentPlayer);
+                currentPlayer.CmdturnIncrease();
         
                 break;
             case false:
@@ -398,7 +401,7 @@ public class DeckScript : NetworkBehaviour
                 targetPlayer.ModifyStats(targetPlayer.Highest, -1);
                 currentPlayer.hideButtons();
                 currentPlayer.DiscardCard(index, currentPlayer.cardSlots);
-                currentPlayer.CmdturnIncrease(currentPlayer);
+                currentPlayer.CmdturnIncrease();
         
                 break;
             case false:
@@ -417,7 +420,7 @@ public class DeckScript : NetworkBehaviour
                 targetPlayer.ModifyPower(-20 * GetRevealedIndexes(targetPlayer).Count);
                 currentPlayer.hideButtons();
                 currentPlayer.DiscardCard(index, currentPlayer.cardSlots);
-                currentPlayer.CmdturnIncrease(currentPlayer);
+                currentPlayer.CmdturnIncrease();
         
                 break;
             case false:
@@ -436,7 +439,7 @@ public class DeckScript : NetworkBehaviour
                 targetPlayer.ModifyStats(targetPlayer.Highest, Mathf.RoundToInt(GetRevealedIndexes(targetPlayer).Count/2));
                 currentPlayer.hideButtons();
                 currentPlayer.DiscardCard(index, currentPlayer.cardSlots);
-                currentPlayer.CmdturnIncrease(currentPlayer);
+                currentPlayer.CmdturnIncrease();
         
                 break;
             case false:
@@ -450,7 +453,7 @@ public class DeckScript : NetworkBehaviour
         Debug.Log("Gain power equal to all revealed cards * 10");
         currentPlayer.ModifyPower(10 * (GetRevealedIndexes(currentPlayer.enemy1).Count + GetRevealedIndexes(currentPlayer.enemy2).Count + GetRevealedIndexes(currentPlayer.enemy3).Count));
         currentPlayer.DiscardCard(index, currentPlayer.cardSlots);
-        currentPlayer.CmdturnIncrease(currentPlayer);
+        currentPlayer.CmdturnIncrease();
         
 
     }
@@ -458,7 +461,7 @@ public class DeckScript : NetworkBehaviour
     {
         Debug.Log("Later");
         currentPlayer.DiscardCard(index, currentPlayer.cardSlots);
-        currentPlayer.CmdturnIncrease(currentPlayer);
+        currentPlayer.CmdturnIncrease();
         
 
     }
@@ -469,7 +472,7 @@ public class DeckScript : NetworkBehaviour
         currentPlayer.passiveOption2.SetActive(true);
         currentPlayer.passiveOption3.SetActive(true);
         currentPlayer.DiscardCard(index, currentPlayer.cardSlots);
-        currentPlayer.CmdturnIncrease(currentPlayer);
+        currentPlayer.CmdturnIncrease();
         
 
     }
@@ -477,48 +480,78 @@ public class DeckScript : NetworkBehaviour
     //-----------------------------------------charisma-----------------------------------------
     #region charismacards
     public void chgalystr() { //Change your ally to all strength players
+        currentPlayer.CmdSetAllyStat("strength");
         currentPlayer.DiscardCard(index, currentPlayer.cardSlots);
-        currentPlayer.CmdturnIncrease(currentPlayer);
-        
+        currentPlayer.CmdturnIncrease();
     }
         public void chgalyint() { //Change your ally to all intelligence players
+        currentPlayer.CmdSetAllyStat("intelligence");
         currentPlayer.DiscardCard(index, currentPlayer.cardSlots);
-        currentPlayer.CmdturnIncrease(currentPlayer);
+        currentPlayer.CmdturnIncrease();
         
     }
         public void chgalycun() { //Change your ally to all cunning players
+        currentPlayer.CmdSetAllyStat("cunning");
         currentPlayer.DiscardCard(index, currentPlayer.cardSlots);
-        currentPlayer.CmdturnIncrease(currentPlayer);
+        currentPlayer.CmdturnIncrease();
         
     }
         public void gain10xchrPalygainhalf() { //You gain 10 x charisma power and your allies gain half of that
+        currentPlayer.ModifyPower(currentPlayer.Charisma * 10);
+        foreach (PlayerScript p in enemies)
+        {
+            if (p.Highest == currentPlayer.allyStat)
+                p.ModifyPower((currentPlayer.Charisma * 10) / 2);
+        }
         currentPlayer.DiscardCard(index, currentPlayer.cardSlots);
-        currentPlayer.CmdturnIncrease(currentPlayer);
+        currentPlayer.CmdturnIncrease();
         
     }
         public void bgainhalfPlostbef() { //You and your allies gain half the power you lost before playing this card
         currentPlayer.DiscardCard(index, currentPlayer.cardSlots);
-        currentPlayer.CmdturnIncrease(currentPlayer);
+        currentPlayer.CmdturnIncrease();
         
     }
         public void allNalylose50Pgain3stat() { //All players that aren't your ally lose 50 power and gain 3 stat points of your current ally stat
+        foreach (PlayerScript p in enemies)
+        {
+            if (p.Highest != currentPlayer.allyStat)
+            {
+                p.ModifyPower(-50);
+                p.ModifyStats(currentPlayer.allyStat, 3);
+            }
+        }
         currentPlayer.DiscardCard(index, currentPlayer.cardSlots);
-        currentPlayer.CmdturnIncrease(currentPlayer);
+        currentPlayer.CmdturnIncrease();
         
     }
         public void pNalyuntrg() { //Players who aren't your ally can not target you for the rest of this turn
+        currentPlayer.setUntargetable();
         currentPlayer.DiscardCard(index, currentPlayer.cardSlots);
-        currentPlayer.CmdturnIncrease(currentPlayer);
+        currentPlayer.CmdturnIncrease();
         
     }
         public void trgalygain25Plose3stat() { //Target an ally they gain 25 power and lose 3 points of their highest stat
+        foreach (PlayerScript p in enemies)
+        {
+            if (p.Highest != currentPlayer.allyStat)
+            {
+                p.ModifyPower(25);
+                p.ModifyStats(currentPlayer.allyStat, -3);
+            }
+        }
         currentPlayer.DiscardCard(index, currentPlayer.cardSlots);
-        currentPlayer.CmdturnIncrease(currentPlayer);
+        currentPlayer.CmdturnIncrease();
         
     }
         public void trgallcuraly() { //gain 3 stats points of your current ally stat
+        foreach (PlayerScript p in enemies)
+        {
+            p.ModifyStats(currentPlayer.allyStat, 3);
+        }
+        currentPlayer.ModifyStats(currentPlayer.allyStat, 3);
         currentPlayer.DiscardCard(index, currentPlayer.cardSlots);
-        currentPlayer.CmdturnIncrease(currentPlayer);
+        currentPlayer.CmdturnIncrease();
         
     }
 
@@ -529,7 +562,7 @@ public class DeckScript : NetworkBehaviour
         Debug.Log("gain 2 strength points");
         currentPlayer.ModifyStats("strength", 2);
         currentPlayer.DiscardCard(index, currentPlayer.cardSlots);
-        currentPlayer.CmdturnIncrease(currentPlayer);
+        currentPlayer.CmdturnIncrease();
         
     }
     public void trglose1() { // Target 1 player make them lose 1 point of your choice
@@ -541,7 +574,7 @@ public class DeckScript : NetworkBehaviour
                 targetPlayer.ModifyStats(targetPlayer.Highest, -1);
                 currentPlayer.hideButtons();      
                 currentPlayer.DiscardCard(index, currentPlayer.cardSlots);
-                currentPlayer.CmdturnIncrease(currentPlayer);
+                currentPlayer.CmdturnIncrease();
         
                 break;
             case false:
@@ -554,7 +587,7 @@ public class DeckScript : NetworkBehaviour
         Debug.Log("gain 4 strength points");
         currentPlayer.ModifyStats("strength", 4);
         currentPlayer.DiscardCard(index, currentPlayer.cardSlots);
-        currentPlayer.CmdturnIncrease(currentPlayer);
+        currentPlayer.CmdturnIncrease();
         
     }
     public void losePG1str() { // lose power and gain 1 strength point per X power lost
@@ -573,7 +606,7 @@ public class DeckScript : NetworkBehaviour
             currentPlayer.ModifyPower(X * am);
         }
         currentPlayer.DiscardCard(index, currentPlayer.cardSlots);
-        currentPlayer.CmdturnIncrease(currentPlayer);
+        currentPlayer.CmdturnIncrease();
         
 
     }
@@ -587,7 +620,7 @@ public class DeckScript : NetworkBehaviour
                 currentPlayer.ModifyPower(Mathf.RoundToInt(3 * currentPlayer.Strength / 2));
                 currentPlayer.hideButtons();
                 currentPlayer.DiscardCard(index, currentPlayer.cardSlots);
-                currentPlayer.CmdturnIncrease(currentPlayer);
+                currentPlayer.CmdturnIncrease();
         
                 break;
             case false:
@@ -605,7 +638,7 @@ public class DeckScript : NetworkBehaviour
                 currentPlayer.ModifyStats("strength", 1);
                 currentPlayer.hideButtons();
                 currentPlayer.DiscardCard(index, currentPlayer.cardSlots);
-                currentPlayer.CmdturnIncrease(currentPlayer);
+                currentPlayer.CmdturnIncrease();
         
                 break;
             case false:
@@ -618,7 +651,7 @@ public class DeckScript : NetworkBehaviour
         currentPlayer.ModifyPower(10 * Mathf.RoundToInt(currentPlayer.Strength / 2));
         currentPlayer.ModifyStats("strength", -1 * Mathf.RoundToInt(currentPlayer.Strength / 2));
         currentPlayer.DiscardCard(index, currentPlayer.cardSlots);
-        currentPlayer.CmdturnIncrease(currentPlayer);
+        currentPlayer.CmdturnIncrease();
         
     }
     public void loseHGP() { // lose half your strength points and gain power = 20 * lost points
@@ -626,14 +659,14 @@ public class DeckScript : NetworkBehaviour
         currentPlayer.AddPoints(Mathf.RoundToInt(currentPlayer.Strength / 2));
         currentPlayer.ModifyStats("strength", currentPlayer.Strength);
         currentPlayer.DiscardCard(index, currentPlayer.cardSlots);
-        currentPlayer.CmdturnIncrease(currentPlayer);
+        currentPlayer.CmdturnIncrease();
         
 
     }
     public void trgAloseP() { // Target all players make them lose power = 2*(GAINER) the amount of strength points you have
         Debug.Log("Target all players make them lose power = 2*(GAINER) the amount of strength points you have");
         currentPlayer.DiscardCard(index, currentPlayer.cardSlots);
-        currentPlayer.CmdturnIncrease(currentPlayer);
+        currentPlayer.CmdturnIncrease();
         
 
         //ModifyStats("strength", 1, currentPlayer);
@@ -641,7 +674,7 @@ public class DeckScript : NetworkBehaviour
     public void GPpeqstr() { //Gain performance points = strength points 
         Debug.Log("Gain performance points = strength points");
         currentPlayer.DiscardCard(index, currentPlayer.cardSlots);
-        currentPlayer.CmdturnIncrease(currentPlayer);
+        currentPlayer.CmdturnIncrease();
         
 
         // ModifyStats("strength", 1, currentPlayer);
@@ -654,21 +687,21 @@ public class DeckScript : NetworkBehaviour
             Debug.Log("Gain strength equal to cunning");
             currentPlayer.ModifyStats("strength", currentPlayer.Cunning);
             currentPlayer.DiscardCard(index, currentPlayer.cardSlots);
-        currentPlayer.CmdturnIncrease(currentPlayer);
+        currentPlayer.CmdturnIncrease();
         
     }
         public void gaininteqcun() { //Gain intelligence equal to cunning
             Debug.Log("Gain strength equal to cunning");
             currentPlayer.ModifyStats("intelligence", currentPlayer.Cunning);
             currentPlayer.DiscardCard(index, currentPlayer.cardSlots);
-            currentPlayer.CmdturnIncrease(currentPlayer);
+            currentPlayer.CmdturnIncrease();
         
     }
         public void gainchreqcun() { //Gain charisma equal to cunning
             Debug.Log("Gain strength equal to cunning");
             currentPlayer.ModifyStats("charisma", currentPlayer.Cunning);
             currentPlayer.DiscardCard(index, currentPlayer.cardSlots);
-            currentPlayer.CmdturnIncrease(currentPlayer);
+            currentPlayer.CmdturnIncrease();
         
     }
         public void trggain4cun() { // Target an opponent - they gain 4 cunning
@@ -680,7 +713,7 @@ public class DeckScript : NetworkBehaviour
                     targetPlayer.ModifyStats("cunning", 4);
                     currentPlayer.hideButtons();
                 currentPlayer.DiscardCard(index, currentPlayer.cardSlots);
-                currentPlayer.CmdturnIncrease(currentPlayer);
+                currentPlayer.CmdturnIncrease();
         
                 break;
                 case false:
@@ -697,7 +730,7 @@ public class DeckScript : NetworkBehaviour
                     targetPlayer.ModifyStats("strength", 4);
                     currentPlayer.hideButtons();
                     currentPlayer.DiscardCard(index, currentPlayer.cardSlots);
-                currentPlayer.CmdturnIncrease(currentPlayer);
+                currentPlayer.CmdturnIncrease();
         
                 break;
                 case false:
@@ -713,7 +746,7 @@ public class DeckScript : NetworkBehaviour
                     targetPlayer.ModifyStats("charisma", 4);
                     currentPlayer.hideButtons();
                 currentPlayer.DiscardCard(index, currentPlayer.cardSlots);
-                currentPlayer.CmdturnIncrease(currentPlayer);
+                currentPlayer.CmdturnIncrease();
         
                 break;
                 case false:
@@ -729,7 +762,7 @@ public class DeckScript : NetworkBehaviour
                     targetPlayer.ModifyStats("intelligence", 4);
                     currentPlayer.hideButtons();
                 currentPlayer.DiscardCard(index, currentPlayer.cardSlots);
-                currentPlayer.CmdturnIncrease(currentPlayer);
+                currentPlayer.CmdturnIncrease();
         
                 break;
                 case false:
@@ -739,9 +772,9 @@ public class DeckScript : NetworkBehaviour
         }
         public void bcuntrg() { // Become untargetable for the rest of this turn
             Debug.Log("Become untargetable for the rest of this turn");
-            currentPlayer.setUntargetable(currentPlayer);
+            currentPlayer.setUntargetable();
             currentPlayer.DiscardCard(index, currentPlayer.cardSlots);
-        currentPlayer.CmdturnIncrease(currentPlayer);
+        currentPlayer.CmdturnIncrease();
         
         // need to handle untargetable when turn ends when turn ends
     }
@@ -754,7 +787,7 @@ public class DeckScript : NetworkBehaviour
         currentPlayer.passiveOption3.SetActive(true);
 
         currentPlayer.DiscardCard(index, currentPlayer.cardSlots);
-        currentPlayer.CmdturnIncrease(currentPlayer);
+        currentPlayer.CmdturnIncrease();
         
     }
         public void gainPeq5xallstat() { //Gain power equal to 5x all your stat points
@@ -764,14 +797,14 @@ public class DeckScript : NetworkBehaviour
                                        currentPlayer.Charisma + 
                                        currentPlayer.Intelligence) * 5);                                                                
             currentPlayer.DiscardCard(index, currentPlayer.cardSlots);
-        currentPlayer.CmdturnIncrease(currentPlayer);
+        currentPlayer.CmdturnIncrease();
         
     }
         public void relocateAllStats() { //Relocate all your stat points
             Debug.Log("Relocate all your stat points");
         currentPlayer.ResetStats();
             currentPlayer.DiscardCard(index, currentPlayer.cardSlots);
-        currentPlayer.CmdturnIncrease(currentPlayer);
+        currentPlayer.CmdturnIncrease();
         
 
     }
@@ -779,7 +812,7 @@ public class DeckScript : NetworkBehaviour
     //---------------------------------General Methods-------------------------------------------
 
     public void trgbntActive(string meth) {
-        currentPlayer.UnhideButtons();
+        NetworkClient.localPlayer.GetComponent<PlayerScript>().UnhideButtons();
         currentMethod = meth;
     }
 
@@ -829,5 +862,22 @@ public class DeckScript : NetworkBehaviour
             index++;
         }
         return indexes;
+    }
+
+    //Passive Methods
+    public void SeeDeck()
+    {
+        switch (readytrg)
+        {
+            case true:
+                readytrg = false;
+                RevealCards(targetPlayer, 6);
+                NetworkClient.localPlayer.GetComponent<PlayerScript>().sawDeck = true;
+                NetworkClient.localPlayer.GetComponent<PlayerScript>().hideButtons();
+                break;
+            case false:
+                trgbntActive("SeeDeck");
+                break;
+        }
     }
 }
