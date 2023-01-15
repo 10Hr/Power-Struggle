@@ -19,6 +19,9 @@ public class PlayerScript : NetworkBehaviour
     public GameObject turnToken;
 
     [SyncVar]
+    public string playerName = "";
+
+    [SyncVar]
     public bool untargetable = false;
 
     [SyncVar]
@@ -216,6 +219,10 @@ public class PlayerScript : NetworkBehaviour
     GameObject bntRight;
     GameObject lockInButton;
 
+    Text pLabel1;
+    Text pLabel2;
+    Text pLabel3;
+
     //Properties
     //Methods
     public override void OnStartLocalPlayer()
@@ -227,7 +234,6 @@ public class PlayerScript : NetworkBehaviour
     {
         playerList = GameObject.Find("PlayerList").GetComponent<PlayerList>();
         FSM = GameObject.Find("FSM").GetComponent<GameState>();
-        CmdSetPlayer();
 
         passive = gameObject.GetComponent<Passive>();
 
@@ -259,6 +265,10 @@ public class PlayerScript : NetworkBehaviour
         bntLeft = GameObject.Find("PlayerLeft");
         bntRight = GameObject.Find("PlayerRight");
 
+        pLabel1 = GameObject.Find("PlayerLabel1").GetComponent<Text>();
+        pLabel2 = GameObject.Find("PlayerLabel2").GetComponent<Text>();
+        pLabel3 = GameObject.Find("PlayerLabel3").GetComponent<Text>();
+
         if (isLocalPlayer)
         {
             bntTop.SetActive(false);
@@ -284,9 +294,7 @@ public class PlayerScript : NetworkBehaviour
         {
             CmdSendPlayers(this);
             added = true;
-
         }
-
         if (!isLocalPlayer)
             return;
         if (FSM == null)
@@ -296,6 +304,10 @@ public class PlayerScript : NetworkBehaviour
         switch (FSM.CurrentState)
         {
             case GameStates.Setup:
+                if (playerList.players.Count == 4)
+                {
+                    CmdSetPlayer();
+                }
                 break;
             case GameStates.Passive:
                 if (isLocalPlayer)
@@ -376,6 +388,7 @@ public class PlayerScript : NetworkBehaviour
                     CmdThreeSelected(true);
                     lockInButton.SetActive(true);
                 }
+
                 else
                 {
                     CmdThreeSelected(false);
@@ -518,6 +531,12 @@ public class PlayerScript : NetworkBehaviour
             TransferData(enemySlots2, enemy2);
         else if (enemySlots3[5].GetComponent<CardScript>().Title == "")
             TransferData(enemySlots3, enemy3);
+        if (enemy1 != null && enemy2 != null && enemy3 != null)
+        {
+            pLabel1.text = enemy1.playerName;
+            pLabel2.text = enemy2.playerName;
+            pLabel3.text = enemy3.playerName;
+        }
         sendPlayerData();
     }
 
@@ -688,6 +707,7 @@ public class PlayerScript : NetworkBehaviour
     public void RpcSetPlayer()
     {
         playerNumber = (int)netIdentity.netId;
+        playerName = "Player " + (playerList.players.IndexOf(this) + 1);
         gameObject.name = $"{playerNumber}";
     } 
 
