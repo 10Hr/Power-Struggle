@@ -34,6 +34,13 @@ public class PlayerScript : NetworkBehaviour
     public bool cantLosePower = false;
 
     [SyncVar]
+    public string guess1 = "";
+    [SyncVar]
+    public string guess2 = "";
+    [SyncVar]
+    public string guess3 = "";
+
+    [SyncVar]
     public bool cantLoseStats = false;
 
     public int numSelected;
@@ -112,7 +119,7 @@ public class PlayerScript : NetworkBehaviour
     public GameObject passiveOption2;
     public GameObject passiveOption3;
 
-    [SyncVar]          
+    [SyncVar]
     private int maxPoints = 8;
     [SyncVar]
     private int availablePoints = 8;
@@ -122,7 +129,7 @@ public class PlayerScript : NetworkBehaviour
         get { return availablePoints; }
         set { availablePoints += value; }
     }
-        public int MaxPoints
+    public int MaxPoints
     {
         get { return maxPoints; }
         set { maxPoints += value; }
@@ -210,9 +217,9 @@ public class PlayerScript : NetworkBehaviour
     public PlayerScript enemy3;
 
     int g = 0;
-    public SyncList<string[]> cards = new SyncList<string[]>();
-    public SyncList<string[]> hand = new SyncList<string[]>();
-    public SyncList<Passive> choicesList = new SyncList<Passive>();
+    public readonly SyncList<string[]> cards = new SyncList<string[]>();
+    public readonly SyncList<string[]> hand = new SyncList<string[]>();
+    public readonly SyncList<Passive> choicesList = new SyncList<Passive>();
 
     GameObject bntTop;
     GameObject bntLeft;
@@ -315,6 +322,7 @@ public class PlayerScript : NetworkBehaviour
 
                 //calculate players highest stat
                 CalcHighest();
+                CalcLowest();
 
                 //create deck and get cards data
                 if (!hasDeck && hasHighest)
@@ -397,6 +405,8 @@ public class PlayerScript : NetworkBehaviour
                 break;
 
             case GameStates.Turn:
+                if (LockedIn)
+                    CmdUnlock();
                 if (enemy1.hand.Count == 6)
                     UpdateData(enemySlots1, enemy1);
                 if (enemy2.hand.Count == 6)
@@ -405,7 +415,7 @@ public class PlayerScript : NetworkBehaviour
                     UpdateData(enemySlots3, enemy3);
                 if (hand.Count == 6)
                     UpdateData(cardSlots, this);
-                if (FSM.currentPlayer.netId == netId)
+                if (FSM != null && FSM.currentPlayer.netId == this.netIdentity.netId && FSM.currentPlayer != null)
                     turnToken.SetActive(true);
                 else
                     turnToken.SetActive(false);
@@ -430,7 +440,7 @@ public class PlayerScript : NetworkBehaviour
                 b.SetActive(true);
             }
         }
-        else if(availablePoints == maxPoints)
+        else if (availablePoints == maxPoints)
         {
             foreach (GameObject b in addButtons)
             {
@@ -464,6 +474,12 @@ public class PlayerScript : NetworkBehaviour
             }
         }
         #endregion
+    }
+
+    [Command(requiresAuthority = false)]
+    public void CmdUnlock()
+    {
+        LockedIn = false;
     }
 
     [Command(requiresAuthority = false)]
@@ -656,7 +672,7 @@ public class PlayerScript : NetworkBehaviour
         int[] statList = {strength, intelligence, charisma, cunning};
         int min = statList.Min();
 
-        if (min > currentlow) {
+        if (min < currentlow) {
             if (statList[0] == min)
                 newlow = "strength";
             else if (statList[1] == min)
@@ -859,9 +875,9 @@ public class PlayerScript : NetworkBehaviour
     }
 
     [Command(requiresAuthority = false)]
-    public void setUntargetable()
+    public void setUntargetable(bool b)
     {
-        untargetable = true;
+        untargetable = b;
     }
 
     [Command(requiresAuthority = false)]
@@ -872,19 +888,56 @@ public class PlayerScript : NetworkBehaviour
     }
 
     [Command (requiresAuthority = false)]
-    public void CmdDisablePLoss()
+    public void CmdDisablePLoss(bool b)
     {
-        cantLosePower = true;
+        cantLosePower = b;
     }
     [Command(requiresAuthority = false)]
-    public void CmdDisableSLoss()
+    public void CmdDisableSLoss(bool b)
     {
-        cantLoseStats = true;
+        cantLoseStats = b;
     }
 
     [Command(requiresAuthority = false)]
     public void CmdSetAllyStat(string s)
     {
         allyStat = s;
+    }
+
+    [TargetRpc]
+    public void CheckGuess(NetworkConnection conn)
+    {
+            if (guess1 == enemy1.Highest)
+            {
+                enemy1.ModifyPower(-50);
+                ModifyPower(50);
+            }
+            else
+            {
+                enemy1.ModifyPower(50);
+                ModifyPower(-50);
+            }
+
+            if (guess2 == enemy2.Highest)
+            {
+                enemy2.ModifyPower(-50);
+                ModifyPower(50);
+            }
+            else
+            {
+                enemy2.ModifyPower(50);
+                ModifyPower(-50);
+            }
+
+            if (guess3 == enemy3.Highest)
+            {
+                enemy3.ModifyPower(-50);
+                ModifyPower(50);
+            }
+            else
+            {
+                enemy3.ModifyPower(50);
+                ModifyPower(-50);
+            }
     }
 }

@@ -24,7 +24,11 @@ public class GameState : NetworkBehaviour
     [SyncVar]
     public PlayerScript currentPlayer;
 
+    [SyncVar]
+    public bool EndEvent = false;
+
     public PlayerList playerList;
+    public EventManager eMan;
     private bool allReady = false;
     private bool allDrawn = false;
     private bool passivesSelected = false;
@@ -54,6 +58,7 @@ public class GameState : NetworkBehaviour
     public override void OnStartServer()
     {
         base.OnStartServer();
+        eMan = GameObject.Find("EventManager").GetComponent<EventManager>();
         playerList = GameObject.Find("PlayerList").GetComponent<PlayerList>();
         Debug.Log(playerList);
     }
@@ -86,6 +91,7 @@ public class GameState : NetworkBehaviour
 
                 if (allReady)
                 {
+                    eMan.GetEvents();
                     currentState = GameStates.Passive;
                 }
                 break;
@@ -130,6 +136,14 @@ public class GameState : NetworkBehaviour
                 break;
 
             case GameStates.Event:
+                if (EndEvent)
+                {
+                    currentState = GameStates.LoadEnemyCards;
+                    EndEvent = false;
+                    break;
+                }
+                if (eMan.currentEvent == "")
+                    eMan.SelectEvent();
                 break;
 
         }

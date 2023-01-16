@@ -280,7 +280,7 @@ public class DeckScript : NetworkBehaviour
     public void prevSLoss()
     {
         Debug.Log("prevent any stat point loss after this card is played");
-        currentPlayer.CmdDisableSLoss();
+        currentPlayer.CmdDisableSLoss(true);
         currentPlayer.DiscardCard(index, currentPlayer.cardSlots);
         currentPlayer.CmdturnIncrease();
         
@@ -288,7 +288,7 @@ public class DeckScript : NetworkBehaviour
     }
     public void prevPLoss()
     {
-        currentPlayer.CmdDisablePLoss();
+        currentPlayer.CmdDisablePLoss(true);
         Debug.Log("prevent any power loss after this card is played");
         currentPlayer.DiscardCard(index, currentPlayer.cardSlots);
         currentPlayer.CmdturnIncrease();
@@ -526,7 +526,7 @@ public class DeckScript : NetworkBehaviour
         
     }
         public void pNalyuntrg() { //Players who aren't your ally can not target you for the rest of this turn
-        currentPlayer.setUntargetable();
+        currentPlayer.setUntargetable(true);
         currentPlayer.DiscardCard(index, currentPlayer.cardSlots);
         currentPlayer.CmdturnIncrease();
         
@@ -772,7 +772,7 @@ public class DeckScript : NetworkBehaviour
         }
         public void bcuntrg() { // Become untargetable for the rest of this turn
             Debug.Log("Become untargetable for the rest of this turn");
-            currentPlayer.setUntargetable();
+            currentPlayer.setUntargetable(true);
             currentPlayer.DiscardCard(index, currentPlayer.cardSlots);
         currentPlayer.CmdturnIncrease();
         

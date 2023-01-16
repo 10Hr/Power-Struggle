@@ -21,6 +21,10 @@ TagManager:
   - left
   - right
   - Display
+  - e1g
+  - e2g
+  - e3g
+  - eventLabels
   layers:
   - Default
   - TransparentFX

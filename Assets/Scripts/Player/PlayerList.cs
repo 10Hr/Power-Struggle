@@ -5,7 +5,7 @@ using Mirror;
 
 public class PlayerList : NetworkBehaviour
 {
-    public SyncList<PlayerScript> players = new SyncList<PlayerScript>();
+    public readonly SyncList<PlayerScript> players = new SyncList<PlayerScript>();
 
     public override void OnStartServer()
     {

@@ -34,10 +34,40 @@ public class StatManager : NetworkBehaviour
         CmdReadyUp(p);
     }
 
+    public void Guess()
+    {
+        GameObject thisButton = UnityEngine.EventSystems.EventSystem.current.currentSelectedGameObject;
+        string thisButName = thisButton.name;
+        string buttontag = UnityEngine.EventSystems.EventSystem.current.currentSelectedGameObject.tag;
+        PlayerScript p = GetPlayer();
+        CmdGuess(p, buttontag, thisButName);
+    }
+
+    [Command(requiresAuthority = false)]
+    public void CmdGuess(PlayerScript p, string butTag, string butName)
+    {
+        switch (butTag)
+        {
+            case "e1g":
+                p.guess1 = butName;
+                break;
+            case "e2g":
+                p.guess2 = butName;
+                break;
+            case "e3g":
+                p.guess3 = butName;
+                break;
+            default:
+                break;
+        }    
+    }
+
+
     [Command(requiresAuthority = false)]
     public void CmdReadyUp(PlayerScript p)
     {
-        p.ready = true;
+        if (p.AvailablePoints == 0)
+            p.ready = true;
     }
 
     [Command(requiresAuthority = false)]
