@@ -30,6 +30,8 @@ public class PlayerScript : NetworkBehaviour
     [SyncVar]
     public bool turnTaken = false;
 
+    public int currentBet = 0;
+
     [SyncVar]
     public bool cantLosePower = false;
 

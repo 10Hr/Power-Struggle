@@ -13,10 +13,11 @@ public class StatManager : NetworkBehaviour
 
     public PassiveManager passiveManager;
     public GameState gameState;
-
+    public EventManager eMan;
 
     void Start() {
         gameState = GameObject.Find("FSM").GetComponent<GameState>();
+        eMan = GameObject.Find("EventManager").GetComponent<EventManager>();
     }
     public PlayerScript GetPlayer() {
 
@@ -32,6 +33,63 @@ public class StatManager : NetworkBehaviour
     {
         PlayerScript p = GetPlayer();
         CmdReadyUp(p);
+    }
+
+    public void Bet()
+    {
+        GameObject thisButton = UnityEngine.EventSystems.EventSystem.current.currentSelectedGameObject;
+        //TextMeshProUGUI txt = thisButton.GetComponentInChildren<TextMeshProUGUI>();
+        PlayerScript p = GetPlayer();
+        CmdBet(p, thisButton, p.currentBet);
+        p.currentBet = 0;
+        thisButton.GetComponentInChildren<TextMeshProUGUI>().text = "Bet: 0";
+    }
+
+    [Command(requiresAuthority = false)]
+    public void CmdBet(PlayerScript p, GameObject button, int bet)
+    {
+        switch (p.playerName)
+        {
+            case "Player 1":
+            case "Player 4":
+                p.Power -= bet;
+                eMan.OneFourTotal += bet;
+                break;
+
+            case "Player 2":
+            case "Player 3":
+                p.Power -= bet;
+                eMan.TwoThreeTotal += bet;
+                break;
+        }
+        eMan.currentIndex++;
+        if (bet == 0)
+        {
+            eMan.turnsInARow++;
+        }
+        else
+        {
+            eMan.turnsInARow = 0;
+        }
+    }
+
+    public void ModifyBet()
+    {
+        GameObject thisButton = UnityEngine.EventSystems.EventSystem.current.currentSelectedGameObject;
+        string thisButName = thisButton.name;
+        PlayerScript p = GetPlayer();
+        switch (thisButName)
+        {
+            case "Add":
+                if (p.currentBet < p.Power)
+                    p.currentBet += 25;
+                break;
+            case "Sub":
+                if (p.currentBet > 0)
+                    p.currentBet -= 25;
+                break;
+        }
+        GameObject.Find("Bet").GetComponentInChildren<TextMeshProUGUI>().text = "Bet: " + p.currentBet;
     }
 
     public void Guess()

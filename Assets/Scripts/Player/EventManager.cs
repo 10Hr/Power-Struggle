@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Mirror;
+using UnityEngine.UI;
 
 public class EventManager : NetworkBehaviour
 {
@@ -10,6 +11,21 @@ public class EventManager : NetworkBehaviour
     [SyncVar]
     public string currentEvent;
 
+    [SyncVar]
+    public PlayerScript currentBetter;
+
+    [SyncVar]
+    public int currentIndex = 0;
+
+    [SyncVar]
+    public int turnsInARow = 0;
+
+    [SyncVar]
+    public int OneFourTotal = 0;
+
+    [SyncVar]
+    public int TwoThreeTotal = 0;
+
     public PlayerList playerList;
     GameObject ReadyButton;
     GameObject[] gos;
@@ -17,7 +33,13 @@ public class EventManager : NetworkBehaviour
     GameObject[] e2gs;
     GameObject[] e3gs;
     GameState FSM;
+    public GameObject BetButton;
+    public GameObject BetSub;
+    public GameObject BetAdd;
     private bool ran = false;
+
+    public GameObject OneFour;
+    public GameObject TwoThree;
 
     private void Start()
     {
@@ -29,6 +51,17 @@ public class EventManager : NetworkBehaviour
         e3gs = GameObject.FindGameObjectsWithTag("e3g");
         FSM = GameObject.Find("FSM").GetComponent<GameState>();
 
+        OneFour = GameObject.Find("1and4");
+        TwoThree = GameObject.Find("2and3");
+
+        BetButton = GameObject.Find("Bet");
+        BetAdd = GameObject.Find("Add");
+        BetSub = GameObject.Find("Sub");
+
+        BetButton.SetActive(false);
+        BetAdd.SetActive(false);
+        BetSub.SetActive(false);
+
         foreach (GameObject g in e1gs)
             g.SetActive(false);
         foreach (GameObject g in e2gs)
@@ -37,6 +70,9 @@ public class EventManager : NetworkBehaviour
             g.SetActive(false);
         foreach (GameObject g in gos)
             g.SetActive(false);
+
+        TwoThree.SetActive(false);
+        OneFour.SetActive(false);
     }
 
     private void Update()
@@ -65,6 +101,19 @@ public class EventManager : NetworkBehaviour
                 break;
             case "Two":
                 break;
+            case "Three":
+                RpcSpawnBet(currentBetter.connectionToClient);
+                if (currentIndex == 4)
+                    currentIndex = 0;
+                currentBetter = playerList.players[currentIndex];
+                OneFour.GetComponent<Text>().text = "Player 1 and 4's Total: " + OneFourTotal;
+                TwoThree.GetComponent<Text>().text = "Player 2 and 3's Total: " + TwoThreeTotal;
+                if (turnsInARow == 3)
+                {
+                    CmdEndEvent();
+                }
+                break;
+
             default:
                 break;
         }
@@ -81,7 +130,7 @@ public class EventManager : NetworkBehaviour
     [Command (requiresAuthority = false)]
     public void SelectEvent()
     {
-        currentEvent = eventList[0];
+        currentEvent = eventList[2];
         RunEvent();
     }
 
@@ -102,7 +151,9 @@ public class EventManager : NetworkBehaviour
                     }
                     break;
                 case "Two":
-                    
+                    break;
+                case "Three":
+                    currentBetter = playerList.players[0];
                     break;
                 default:
                     break;
@@ -116,6 +167,7 @@ public class EventManager : NetworkBehaviour
         eventList.Remove(eventList[0]);
         FSM.EndEvent = true;
         currentEvent = "";
+        ran = false;
 
         RpcDespawnAll();
 
@@ -155,5 +207,21 @@ public class EventManager : NetworkBehaviour
             g.SetActive(false);
         foreach (GameObject g in gos)
             g.SetActive(false);
+
+        OneFour.SetActive(false);
+        TwoThree.SetActive(false);
+        BetButton.SetActive(false);
+        BetAdd.SetActive(false);
+        BetSub.SetActive(false);
+    }
+
+    [TargetRpc]
+    public void RpcSpawnBet(NetworkConnection conn)
+    {
+        BetButton.SetActive(true);
+        BetAdd.SetActive(true);
+        BetSub.SetActive(true);
+        OneFour.SetActive(true);
+        TwoThree.SetActive(true);
     }
 }
