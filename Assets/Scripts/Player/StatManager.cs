@@ -162,6 +162,12 @@ public class StatManager : NetworkBehaviour
                         {
                             p.Charisma = -1;
                             p.AvailablePoints = 1;
+                            if (eMan.currentEvent == "Three")
+                            {
+                                p.MaxPoints = -1;
+                                p.AvailablePoints = -1;
+                                p.Power = 50;
+                            }
                         }
                         break;
                     case "Strength":
@@ -169,6 +175,12 @@ public class StatManager : NetworkBehaviour
                         {
                             p.Strength = -1;
                             p.AvailablePoints = 1;
+                            if (eMan.currentEvent == "Three")
+                            {
+                                p.MaxPoints = -1;
+                                p.AvailablePoints = -1;
+                                p.Power = 50;
+                            }
                         }
                         break;
                     case "Intelligence":
@@ -176,6 +188,12 @@ public class StatManager : NetworkBehaviour
                         {
                             p.Intelligence = -1;
                             p.AvailablePoints = 1;
+                            if (eMan.currentEvent == "Three")
+                            {
+                                p.MaxPoints = -1;
+                                p.AvailablePoints = -1;
+                                p.Power = 50;
+                            }
                         }
                         break;
                     case "Cunning":
@@ -183,6 +201,12 @@ public class StatManager : NetworkBehaviour
                         {
                             p.Cunning = -1;
                             p.AvailablePoints = 1;
+                            if (eMan.currentEvent == "Three")
+                            {
+                                p.MaxPoints = -1;
+                                p.AvailablePoints = -1;
+                                p.Power = 50;
+                            }
                         }
                         break;
                 }
@@ -211,7 +235,7 @@ public class StatManager : NetworkBehaviour
     [Command (requiresAuthority = false)]
     public void CmdLockIn(PlayerScript p)
     {
-        if (p.threeSelected)
+        if (p.threeSelected && gameState.CurrentState == GameStates.LoadEnemyCards)
         {
             p.LockedIn = true;
         }

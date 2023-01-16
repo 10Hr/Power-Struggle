@@ -14,6 +14,8 @@ public class PlayerScript : NetworkBehaviour
     //Fields
     public GameState FSM;
 
+    public EventManager eMan;
+
     public bool added = false;
 
     public GameObject turnToken;
@@ -252,6 +254,8 @@ public class PlayerScript : NetworkBehaviour
 
         lockInButton = GameObject.Find("LockInButton1");
 
+        eMan = GameObject.Find("EventManager").GetComponent<EventManager>();
+
         charismaText = GameObject.Find("CharismaCounter").GetComponent<Text>();
         strengthText = GameObject.Find("StrengthCounter").GetComponent<Text>();
         intelligenceText = GameObject.Find("IntelligenceCounter").GetComponent<Text>();
@@ -431,7 +435,18 @@ public class PlayerScript : NetworkBehaviour
         intelligenceText.text = "Intelligence: " + intelligence;
         cunningText.text = "Cunning: " + cunning;
 
-        if (availablePoints > 0 && availablePoints < maxPoints)
+        if (FSM.CurrentState == GameStates.Event && eMan.currentEvent == "Three")
+        {
+            foreach (GameObject b in addButtons)
+            {
+                b.SetActive(false);
+            }
+            foreach (GameObject b in subButtons)
+            {
+                b.SetActive(true);
+            }
+        }
+        else if (availablePoints > 0 && availablePoints < maxPoints)
         {
             foreach (GameObject b in addButtons)
             {
@@ -692,7 +707,7 @@ public class PlayerScript : NetworkBehaviour
     {
         highest = h;
         hasHighest = true;
-        if (FSM.CurrentState == GameStates.Turn)
+        if (FSM.CurrentState == GameStates.Turn || FSM.CurrentState == GameStates.Event)
             SwapDeck(h);
     }
 
@@ -739,7 +754,7 @@ public class PlayerScript : NetworkBehaviour
     }
 
     public void UnhideButtons() {
-        if (passive.passiveName == "Precise" || ((!enemy1.untargetable) && (enemy1.passive.passiveName != "Scrapper" || (enemy1.passive.passiveName == "Scrapper"  && enemy1.Power < power))
+        if (passive.passiveName == "Precise" || ((!enemy1.untargetable) && (enemy1.passive.passiveName != "Scrapper" || (enemy1.passive.passiveName == "Scrapper"  && enemy1.Power >= power))
             && !(passive.passiveName == "StrongAllies" && enemy1.Highest == "strength")
             && !(passive.passiveName == "SmartAllies" && enemy1.Highest == "intelligence")
             && !(passive.passiveName == "ShadyAllies" && enemy1.Highest == "cunning")
@@ -747,7 +762,7 @@ public class PlayerScript : NetworkBehaviour
             && !(enemy1.passiveName == "SmartAllies" && Highest == "intelligence")
             && !(enemy1.passiveName == "ShadyAllies" && Highest == "cunning")))//enemy1
             bntRight.SetActive(true);
-        if (passive.passiveName == "Precise" || ((!enemy2.untargetable) && (enemy2.passive.passiveName != "Scrapper" || (enemy2.passive.passiveName == "Scrapper" && enemy2.Power < power))
+        if (passive.passiveName == "Precise" || ((!enemy2.untargetable) && (enemy2.passive.passiveName != "Scrapper" || (enemy2.passive.passiveName == "Scrapper" && enemy2.Power >= power))
             && !(passive.passiveName == "StrongAllies" && enemy2.Highest == "strength")
             && !(passive.passiveName == "SmartAllies" && enemy2.Highest == "intelligence")
             && !(passive.passiveName == "ShadyAllies" && enemy2.Highest == "cunning")
@@ -755,7 +770,7 @@ public class PlayerScript : NetworkBehaviour
             && !(enemy2.passiveName == "SmartAllies" && Highest == "intelligence")
             && !(enemy2.passiveName == "ShadyAllies" && Highest == "cunning")))//enemy2
                 bntLeft.SetActive(true);
-        if (passive.passiveName == "Precise" || ((!enemy3.untargetable) && (enemy3.passive.passiveName != "Scrapper" || (enemy3.passive.passiveName == "Scrapper" && enemy3.Power < power))
+        if (passive.passiveName == "Precise" || ((!enemy3.untargetable) && (enemy3.passive.passiveName != "Scrapper" || (enemy3.passive.passiveName == "Scrapper" && enemy3.Power >= power))
             && !(passive.passiveName == "StrongAllies" && enemy3.Highest == "strength")
             && !(passive.passiveName == "SmartAllies" && enemy3.Highest == "intelligence")
             && !(passive.passiveName == "ShadyAllies" && enemy3.Highest == "cunning")

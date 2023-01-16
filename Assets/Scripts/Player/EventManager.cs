@@ -103,7 +103,14 @@ public class EventManager : NetworkBehaviour
                 break;
             case "Three":
                 if (isServer)
+                {
                     RpcSpawnBet(currentBetter.connectionToClient);
+                    foreach (PlayerScript p in playerList.players)
+                    {
+                        if (p.netId != currentBetter.netId)
+                            RpcDespawnBet(p.connectionToClient);
+                    }
+                }
                 if (currentIndex == 4)
                     currentIndex = 0;
                 currentBetter = playerList.players[currentIndex];
@@ -118,6 +125,14 @@ public class EventManager : NetworkBehaviour
             default:
                 break;
         }
+    }
+
+    [TargetRpc]
+    public void RpcDespawnBet(NetworkConnection conn)
+    {
+        BetButton.SetActive(false);
+        BetAdd.SetActive(false);
+        BetSub.SetActive(false);
     }
 
     [Command (requiresAuthority = false)]
