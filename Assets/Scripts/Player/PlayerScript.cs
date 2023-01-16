@@ -417,7 +417,7 @@ public class PlayerScript : NetworkBehaviour
                     UpdateData(enemySlots3, enemy3);
                 if (hand.Count == 6)
                     UpdateData(cardSlots, this);
-                if (FSM != null && FSM.currentPlayer.netId == this.netIdentity.netId && FSM.currentPlayer != null)
+                if (FSM.currentPlayer.netId == this.netIdentity.netId)
                     turnToken.SetActive(true);
                 else
                     turnToken.SetActive(false);

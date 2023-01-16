@@ -118,6 +118,7 @@ public class GameState : NetworkBehaviour
                 if (playerList.players[0].LockedIn && playerList.players[1].LockedIn
                     && playerList.players[2].LockedIn && playerList.players[3].LockedIn)
                 {
+                    currentPlayer = playerList.players[0];
                     currentState = GameStates.Turn;
                 }
                 break;

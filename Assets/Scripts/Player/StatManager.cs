@@ -52,13 +52,13 @@ public class StatManager : NetworkBehaviour
         {
             case "Player 1":
             case "Player 4":
-                p.Power -= bet;
+                p.Power = -bet;
                 eMan.OneFourTotal += bet;
                 break;
 
             case "Player 2":
             case "Player 3":
-                p.Power -= bet;
+                p.Power = -bet;
                 eMan.TwoThreeTotal += bet;
                 break;
         }

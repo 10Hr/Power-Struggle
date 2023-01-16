@@ -102,7 +102,8 @@ public class EventManager : NetworkBehaviour
             case "Two":
                 break;
             case "Three":
-                RpcSpawnBet(currentBetter.connectionToClient);
+                if (isServer)
+                    RpcSpawnBet(currentBetter.connectionToClient);
                 if (currentIndex == 4)
                     currentIndex = 0;
                 currentBetter = playerList.players[currentIndex];
@@ -153,12 +154,20 @@ public class EventManager : NetworkBehaviour
                 case "Two":
                     break;
                 case "Three":
+                    RpcSpawnLabels();
                     currentBetter = playerList.players[0];
                     break;
                 default:
                     break;
             }
         }
+    }
+
+    [ClientRpc]
+    public void RpcSpawnLabels()
+    {
+        OneFour.SetActive(true);
+        TwoThree.SetActive(true);
     }
 
     [Command(requiresAuthority = false)]
@@ -221,7 +230,5 @@ public class EventManager : NetworkBehaviour
         BetButton.SetActive(true);
         BetAdd.SetActive(true);
         BetSub.SetActive(true);
-        OneFour.SetActive(true);
-        TwoThree.SetActive(true);
     }
 }
