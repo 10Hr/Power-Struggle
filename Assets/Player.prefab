@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 9144617900700018484}
   - component: {fileID: -3502643074226097910}
   - component: {fileID: 1841240229337283382}
+  - component: {fileID: 8524307546103027209}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -48,13 +49,28 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
-  buttons: []
-  childButtons: []
-  player1GUI: []
-  player2GUI: []
-  player3GUI: []
-  player4GUI: []
-  hand: []
+  playerHand: []
+  playerDeck: []
+  FSM: {fileID: 0}
+  GUI: []
+  added: 0
+  charismaText: {fileID: 0}
+  strengthText: {fileID: 0}
+  intelligenceText: {fileID: 0}
+  cunningText: {fileID: 0}
+  playerList: {fileID: 0}
+  playerNumber: 0
+  ready: 0
+  highest: 
+  hasHighest: 0
+  hasDeck: 0
+  cardSlotsSpawned: 0
+  deck: {fileID: 0}
+  passiveManager: {fileID: 0}
+  passive: {fileID: 0}
+  passiveName: 
+  playerCheck: []
+  cardSlots: []
 --- !u!114 &-3502643074226097910
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -106,3 +122,17 @@ MonoBehaviour:
   showGizmos: 0
   showOverlay: 0
   overlayColor: {r: 0, g: 0, b: 0, a: 0.5}
+--- !u!114 &8524307546103027209
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9144617900700018491}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56e81466a692fef4cb1a1d825057b208, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1

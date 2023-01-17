@@ -1,0 +1,8 @@
+CardName,Effect,Stat
+CardName1,Effect1,Stat1
+CardName2,Effect2,Stat2
+CardName3,Effect3,Stat3
+CardName4,Effect4,Stat4
+CardName5,Effect5,Stat5
+CardName6,Effect6,Stat6
+CardName7,Effect7,Stat7
