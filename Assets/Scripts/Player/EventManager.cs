@@ -118,6 +118,40 @@ public class EventManager : NetworkBehaviour
                 TwoThree.GetComponent<Text>().text = "Player 2 and 3's Total: " + TwoThreeTotal;
                 if (turnsInARow == 3)
                 {
+                    if(OneFourTotal > TwoThreeTotal)
+                    {
+                        RpcSpawnPassives(playerList.players[0].connectionToClient, playerList.players[0]);
+                        RpcSpawnPassives(playerList.players[3].connectionToClient, playerList.players[3]);
+
+                        playerList.players[0].passive2 = playerList.players[0].passive.passiveName;
+                        playerList.players[3].passive2 = playerList.players[3].passive.passiveName;
+                        playerList.players[0].passiveManager.CmdSelectPassive(playerList.players[0].highest, playerList.players[0]);
+                        playerList.players[3].passiveManager.CmdSelectPassive(playerList.players[3].highest, playerList.players[3]);
+                    }
+                    else if (OneFourTotal < TwoThreeTotal)
+                    {
+                        RpcSpawnPassives(playerList.players[1].connectionToClient, playerList.players[1]);
+                        RpcSpawnPassives(playerList.players[2].connectionToClient, playerList.players[2]);
+                        playerList.players[1].passive2 = playerList.players[1].passive.passiveName;
+                        playerList.players[2].passive2 = playerList.players[2].passive.passiveName;
+                        playerList.players[1].passiveManager.CmdSelectPassive(playerList.players[1].highest, playerList.players[1]);
+                        playerList.players[2].passiveManager.CmdSelectPassive(playerList.players[2].highest, playerList.players[2]);
+                    }
+                    else
+                    {
+                        RpcSpawnPassives(playerList.players[0].connectionToClient, playerList.players[0]);
+                        RpcSpawnPassives(playerList.players[3].connectionToClient, playerList.players[3]);
+                        RpcSpawnPassives(playerList.players[1].connectionToClient, playerList.players[1]);
+                        RpcSpawnPassives(playerList.players[2].connectionToClient, playerList.players[2]);
+                        playerList.players[0].passive2 = playerList.players[0].passive.passiveName;
+                        playerList.players[3].passive2 = playerList.players[3].passive.passiveName;
+                        playerList.players[1].passive2 = playerList.players[1].passive.passiveName;
+                        playerList.players[2].passive2 = playerList.players[2].passive.passiveName;
+                        playerList.players[0].passiveManager.CmdSelectPassive(playerList.players[0].highest, playerList.players[0]);
+                        playerList.players[3].passiveManager.CmdSelectPassive(playerList.players[3].highest, playerList.players[3]);
+                        playerList.players[1].passiveManager.CmdSelectPassive(playerList.players[1].highest, playerList.players[1]);
+                        playerList.players[2].passiveManager.CmdSelectPassive(playerList.players[2].highest, playerList.players[2]);
+                    }
                     CmdEndEvent();
                 }
                 break;
@@ -125,6 +159,13 @@ public class EventManager : NetworkBehaviour
             default:
                 break;
         }
+    }
+    [TargetRpc]
+    public void RpcSpawnPassives(NetworkConnection conn, PlayerScript p)
+    {
+        p.passiveOption1.SetActive(true);
+        p.passiveOption2.SetActive(true);
+        p.passiveOption3.SetActive(true);
     }
 
     [TargetRpc]
@@ -200,18 +241,6 @@ public class EventManager : NetworkBehaviour
         playerList.players[2].CheckGuess(playerList.players[2].connectionToClient);
         playerList.players[3].CheckGuess(playerList.players[3].connectionToClient);
 
-        playerList.players[0].setUntargetable(false);
-        playerList.players[1].setUntargetable(false);
-        playerList.players[2].setUntargetable(false);
-        playerList.players[3].setUntargetable(false);
-        playerList.players[0].CmdDisablePLoss(false);
-        playerList.players[1].CmdDisablePLoss(false);
-        playerList.players[2].CmdDisablePLoss(false);
-        playerList.players[3].CmdDisablePLoss(false);
-        playerList.players[0].CmdDisableSLoss(false);
-        playerList.players[1].CmdDisableSLoss(false);
-        playerList.players[2].CmdDisableSLoss(false);
-        playerList.players[3].CmdDisableSLoss(false);
     }
 
     [ClientRpc]

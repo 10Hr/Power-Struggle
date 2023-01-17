@@ -349,9 +349,12 @@ public class DeckScript : NetworkBehaviour
     {
         Debug.Log("CHANGE TO NET");
 
+        if (currentPlayer.powerLost > 0)
+            currentPlayer.ModifyPower(currentPlayer.powerLost);
+        else
+            currentPlayer.ModifyPower(-100);
         currentPlayer.DiscardCard(index, currentPlayer.cardSlots);
         currentPlayer.CmdturnIncrease();
-        
     }
     public void trggainhalfP()
     {
@@ -360,7 +363,7 @@ public class DeckScript : NetworkBehaviour
         {
             case true:
                 readytrg = false;
-                targetPlayer.ModifyStats(targetPlayer.Highest, -1);
+                currentPlayer.ModifyPower(Mathf.RoundToInt(targetPlayer.powerGained/2));
                 currentPlayer.hideButtons();
                 currentPlayer.DiscardCard(index, currentPlayer.cardSlots);
                 currentPlayer.CmdturnIncrease();
@@ -459,7 +462,11 @@ public class DeckScript : NetworkBehaviour
     }
     public void losePMult25RAllE()
     {
-        Debug.Log("Later");
+        Debug.Log("Reveal your hand to all opponents, gain 100 power");
+        foreach (PlayerScript p in enemies)
+        {
+            
+        }
         currentPlayer.DiscardCard(index, currentPlayer.cardSlots);
         currentPlayer.CmdturnIncrease();
         
@@ -508,6 +515,12 @@ public class DeckScript : NetworkBehaviour
         
     }
         public void bgainhalfPlostbef() { //You and your allies gain half the power you lost before playing this card
+        foreach (PlayerScript p in enemies)
+        {
+            if (p.Highest == currentPlayer.allyStat)
+                p.ModifyPower(Mathf.RoundToInt(p.powerLost/2));
+        }
+        currentPlayer.ModifyPower(Mathf.RoundToInt(currentPlayer.powerLost / 2));
         currentPlayer.DiscardCard(index, currentPlayer.cardSlots);
         currentPlayer.CmdturnIncrease();
         
@@ -531,7 +544,7 @@ public class DeckScript : NetworkBehaviour
         currentPlayer.CmdturnIncrease();
         
     }
-        public void trgalygain25Plose3stat() { //Target an ally they gain 25 power and lose 3 points of their highest stat
+        public void trgalygain25Plose3stat() { //Target all allies they gain 25 power and lose 2 points of their highest stat
         foreach (PlayerScript p in enemies)
         {
             if (p.Highest != currentPlayer.allyStat)
@@ -665,6 +678,10 @@ public class DeckScript : NetworkBehaviour
     }
     public void trgAloseP() { // Target all players make them lose power = 2*(GAINER) the amount of strength points you have
         Debug.Log("Target all players make them lose power = 2*(GAINER) the amount of strength points you have");
+        foreach (PlayerScript p in enemies)
+        {
+            p.ModifyPower(-5*currentPlayer.Strength);
+        }
         currentPlayer.DiscardCard(index, currentPlayer.cardSlots);
         currentPlayer.CmdturnIncrease();
         
@@ -673,6 +690,10 @@ public class DeckScript : NetworkBehaviour
     }
     public void GPpeqstr() { //Gain performance points = strength points 
         Debug.Log("Gain performance points = strength points");
+        currentPlayer.passiveManager.CmdSelectPassive(currentPlayer.Highest, currentPlayer);
+        currentPlayer.passiveOption1.SetActive(true);
+        currentPlayer.passiveOption2.SetActive(true);
+        currentPlayer.passiveOption3.SetActive(true);
         currentPlayer.DiscardCard(index, currentPlayer.cardSlots);
         currentPlayer.CmdturnIncrease();
         

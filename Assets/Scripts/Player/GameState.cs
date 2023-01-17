@@ -125,6 +125,18 @@ public class GameState : NetworkBehaviour
             case GameStates.Turn:
                 if (turn == 12) {
                     turn = 0;
+                    playerList.players[0].setUntargetable(false);
+                    playerList.players[1].setUntargetable(false);
+                    playerList.players[2].setUntargetable(false);
+                    playerList.players[3].setUntargetable(false);
+                    playerList.players[0].CmdDisablePLoss(false);
+                    playerList.players[1].CmdDisablePLoss(false);
+                    playerList.players[2].CmdDisablePLoss(false);
+                    playerList.players[3].CmdDisablePLoss(false);
+                    playerList.players[0].CmdDisableSLoss(false);
+                    playerList.players[1].CmdDisableSLoss(false);
+                    playerList.players[2].CmdDisableSLoss(false);
+                    playerList.players[3].CmdDisableSLoss(false);
                     currentState = GameStates.Event;
                 } else {
                     currentPlayer = playerList.players[turn % 4];
