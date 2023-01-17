@@ -100,6 +100,7 @@ public class EventManager : NetworkBehaviour
                 }
                 break;
             case "Two":
+
                 break;
             case "Three":
                 if (isServer)
@@ -179,15 +180,15 @@ public class EventManager : NetworkBehaviour
     [Command (requiresAuthority = false)]
     public void GetEvents()
     {
-        eventList.Add("One");
-        eventList.Add("Two");
         eventList.Add("Three");
+        eventList.Add("Two");
+        eventList.Add("One");
     }
 
     [Command (requiresAuthority = false)]
     public void SelectEvent()
     {
-        currentEvent = eventList[2];
+        currentEvent = eventList[0];
         RunEvent();
     }
 
@@ -208,6 +209,8 @@ public class EventManager : NetworkBehaviour
                     }
                     break;
                 case "Two":
+                    FSM.EventTwo = true;
+                    CmdEndEvent();
                     break;
                 case "Three":
                     RpcSpawnLabels();

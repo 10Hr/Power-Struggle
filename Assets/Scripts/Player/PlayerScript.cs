@@ -884,11 +884,24 @@ public class PlayerScript : NetworkBehaviour
     [Command(requiresAuthority = false)]
     public void DiscardCard(int index, GameObject[] slots)
     {
-        int rand = UnityEngine.Random.Range(0, cards.Count - 1);
-        cards.Add(hand[index]);
-        hand[index] = cards[rand];
-        cards.Remove(cards[rand]);
-        RpcFillSlot(connectionToClient, slots, hand[index][1], hand[index][0], hand[index][4]);
+        if (!FSM.EventTwo) {
+            int rand = UnityEngine.Random.Range(0, cards.Count - 1);
+            cards.Add(hand[index]);
+            hand[index] = cards[rand];
+            cards.Remove(cards[rand]);
+            RpcFillSlot(connectionToClient, slots, hand[index][1], hand[index][0], hand[index][4]);
+        }
+        else
+        {
+            PlayerScript[] enemies = { enemy1, enemy2, enemy3 };
+            int randEnemy = UnityEngine.Random.Range(0, 3);
+            PlayerScript temp = enemies[randEnemy];
+            int rand = UnityEngine.Random.Range(0, cards.Count - 1);
+            cards.Add(hand[index]);
+            hand[index] = temp.cards[rand];
+            temp.cards.Remove(cards[rand]);
+            RpcFillSlot(connectionToClient, slots, hand[index][1], hand[index][0], hand[index][4]);
+        }
     }
 
     [Command(requiresAuthority = false)]

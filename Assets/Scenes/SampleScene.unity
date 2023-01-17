@@ -743,6 +743,7 @@ MonoBehaviour:
   second: {fileID: 0}
   third: {fileID: 0}
   fourth: {fileID: 0}
+  called: 0
 --- !u!114 &60312355
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17620,6 +17621,7 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0.1
   currentState: 0
+  EventTwo: 0
   currentPlayer: {fileID: 0}
   EndEvent: 0
   playerList: {fileID: 0}
@@ -17738,7 +17740,7 @@ MonoBehaviour:
   offlineScene: 
   onlineScene: 
   transport: {fileID: 2133326651}
-  networkAddress: localhost
+  networkAddress: 
   maxConnections: 100
   authenticator: {fileID: 0}
   playerPrefab: {fileID: 9144617900700018491, guid: a4439a46e7be21b468b5558b58a5b35e, type: 3}

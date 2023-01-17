@@ -122,14 +122,14 @@ public class CardScript : NetworkBehaviour
         Enlarge();
 
         if (Input.GetKeyDown(KeyCode.Mouse1) && hovered && gameState.currentState == GameStates.LoadEnemyCards) {
-            Debug.Log("Right Clicked");
-           NetworkClient.localPlayer.GetComponent<PlayerScript>().ModifyPower(-25);
+            //Debug.Log("Right Clicked");
+           //NetworkClient.localPlayer.GetComponent<PlayerScript>().ModifyPower(-25);
             if (NetworkClient.localPlayer.GetComponent<PlayerScript>().passive.passiveName == "Blackmarket" || NetworkClient.localPlayer.GetComponent<PlayerScript>().passive2 == "Blackmarket") {
                 int index = 0;
-                Debug.Log("Blackmarket");
+                //Debug.Log("Blackmarket");
                 foreach (GameObject g in NetworkClient.localPlayer.GetComponent<PlayerScript>().cardSlots) {
                     if (g.GetComponent<CardScript>().ID == this.ID) {
-                        Debug.Log("Discarding" + index);
+                        //Debug.Log("Discarding" + index);
                         //NetworkClient.localPlayer.GetComponent<PlayerScript>().DiscardCard(index, NetworkClient.localPlayer.GetComponent<PlayerScript>().cardSlots);
                        // NetworkClient.localPlayer.GetComponent<PlayerScript>().ModifyPower(-25);
                         break;

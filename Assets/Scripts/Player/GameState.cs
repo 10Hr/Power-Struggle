@@ -22,6 +22,9 @@ public class GameState : NetworkBehaviour
     public GameStates currentState;
 
     [SyncVar]
+    public bool EventTwo = false;
+
+    [SyncVar]
     public PlayerScript currentPlayer;
 
     [SyncVar]
@@ -156,7 +159,10 @@ public class GameState : NetworkBehaviour
                     break;
                 }
                 if (eMan.currentEvent == "")
+                {
+                    EventTwo = false;
                     eMan.SelectEvent();
+                }
                 break;
 
         }
