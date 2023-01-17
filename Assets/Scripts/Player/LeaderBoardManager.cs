@@ -19,6 +19,7 @@ public class LeaderBoardManager : NetworkBehaviour
     string secondString;
     string thirdString;
     string fourthString;
+    public bool called = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -27,6 +28,10 @@ public class LeaderBoardManager : NetworkBehaviour
         second = GameObject.Find("second").GetComponent<Text>();
         third = GameObject.Find("third").GetComponent<Text>();
         fourth = GameObject.Find("fourth").GetComponent<Text>();
+
+
+
+
     }
 
     // Update is called once per frame
@@ -38,10 +43,14 @@ public class LeaderBoardManager : NetworkBehaviour
             return;
         }
 
+        if (!called) {
         firstPlace = playerList.players[0];
         secondPlace = playerList.players[1];
         thirdPlace = playerList.players[2];
         fourthPlace = playerList.players[3];
+        called = true;
+        }
+
 
         if (secondPlace.Power > firstPlace.Power)
         {
@@ -87,5 +96,7 @@ public class LeaderBoardManager : NetworkBehaviour
         second.text = secondString;
         third.text = thirdString;
         fourth.text = fourthString;
+
+
     }
 }
