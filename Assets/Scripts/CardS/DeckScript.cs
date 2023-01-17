@@ -396,22 +396,13 @@ public class DeckScript : NetworkBehaviour
     }
     public void trganyrevhndgain50P()
     {
-        Debug.Log("Later");
-        switch (readytrg)
+        Debug.Log("Gain stat points = to revealed cards");
+        foreach (PlayerScript p in enemies)
         {
-            case true:
-                readytrg = false;
-                targetPlayer.ModifyStats(targetPlayer.Highest, -1);
-                currentPlayer.hideButtons();
-                currentPlayer.DiscardCard(index, currentPlayer.cardSlots);
-                currentPlayer.CmdturnIncrease();
-        
-                break;
-            case false:
-                trgbntActive("trganyrevhndgain50P");
-                break;
+            currentPlayer.AddPoints(GetRevealedIndexes(p).Count);
         }
-
+        currentPlayer.DiscardCard(index, currentPlayer.cardSlots);
+        currentPlayer.CmdturnIncrease();
     }
     public void trglosePeq20xrev()
     {
@@ -462,12 +453,13 @@ public class DeckScript : NetworkBehaviour
     }
     public void losePMult25RAllE()
     {
-        Debug.Log("Reveal your hand to all opponents, gain 100 power");
-        foreach (PlayerScript p in enemies)
-        {
-            
-        }
-        currentPlayer.DiscardCard(index, currentPlayer.cardSlots);
+        Debug.Log("Discard all cards, draw 6 more");
+        currentPlayer.DiscardCard(0, currentPlayer.cardSlots);
+        currentPlayer.DiscardCard(1, currentPlayer.cardSlots);
+        currentPlayer.DiscardCard(2, currentPlayer.cardSlots);
+        currentPlayer.DiscardCard(3, currentPlayer.cardSlots);
+        currentPlayer.DiscardCard(4, currentPlayer.cardSlots);
+        currentPlayer.DiscardCard(5, currentPlayer.cardSlots);
         currentPlayer.CmdturnIncrease();
         
 
@@ -901,4 +893,10 @@ public class DeckScript : NetworkBehaviour
                 break;
         }
     }
+
+    //[TargetRpc]
+    //public void RpcReveal(NetworkConnection conn, PlayerScript p, PlayerScript me)
+    //{
+    //    RevealCards(p, 6);
+    //}
 }
