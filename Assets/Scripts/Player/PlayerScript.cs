@@ -27,6 +27,9 @@ public class PlayerScript : NetworkBehaviour
     public bool untargetable = false;
 
     [SyncVar]
+    public bool selectedTrg = false;
+
+    [SyncVar]
     public int powerGained = 0;
 
     [SyncVar]
@@ -515,6 +518,8 @@ public class PlayerScript : NetworkBehaviour
     public void CmdUnlock()
     {
         LockedIn = false;
+        threeSelected = false;
+        numSelected = 0;
     }
 
     [Command(requiresAuthority = false)]
@@ -815,10 +820,10 @@ public class PlayerScript : NetworkBehaviour
     public void hideButtons() {
         if (bntRight.activeInHierarchy == true)  //enemy1
             bntRight.SetActive(false);
-        if (bntLeft.activeInHierarchy == true)  //enemy2
-            bntLeft.SetActive(false);
-        if (bntTop.activeInHierarchy == true)  //enemy3
+        if (bntTop.activeInHierarchy == true)  //enemy2
             bntTop.SetActive(false);
+        if (bntLeft.activeInHierarchy == true)  //enemy3
+            bntLeft.SetActive(false);
     }
 
         [Command(requiresAuthority = false)]
@@ -937,6 +942,7 @@ public class PlayerScript : NetworkBehaviour
         if (passive.passiveName == "SeeDeck" || passive2 == "SeeDeck")
         {
             deck.SeeDeck();
+            CmdSetSawDeck(true);
         }
     }
 
@@ -1005,5 +1011,17 @@ public class PlayerScript : NetworkBehaviour
                 enemy3.ModifyPower(50);
                 ModifyPower(-50);
             }
+    }
+
+    [Command (requiresAuthority = false)]
+    public void CmdSetSawDeck(bool b)
+    {
+        sawDeck = b;
+    }
+
+    [Command(requiresAuthority = false)]
+    public void CmdSelectedTrg(bool b)
+    {
+        selectedTrg = b;
     }
 }

@@ -163,26 +163,30 @@ public class CardScript : NetworkBehaviour
 
     public void OnMouseDown()
     {
-        if (cardBack != null && gameObject.tag == "CardSlot" && gameState.currentState == GameStates.LoadEnemyCards && !NetworkClient.localPlayer.GetComponent<PlayerScript>().LockedIn)
+        PlayerScript currentP = NetworkClient.localPlayer.GetComponent<PlayerScript>();
+        if (cardBack != null && gameObject.tag == "CardSlot" && gameState.currentState == GameStates.LoadEnemyCards && !currentP.LockedIn)
         {
             prevSelected = selected;
             selected = !selected;
         }
-        else if ((cardBack != null && gameObject.tag == "CardSlot" && gameState.currentState == GameStates.Turn) && gameState.currentPlayer.netId == NetworkClient.localPlayer.netId && selected && !NetworkClient.localPlayer.GetComponent<PlayerScript>().turnTaken)
+        else if ((cardBack != null && gameObject.tag == "CardSlot" && gameState.currentState == GameStates.Turn) 
+            && gameState.currentPlayer.netId == currentP.netId && selected && !currentP.turnTaken)
         {
-            CmdDisplayCard(int.Parse(this.id), NetworkClient.localPlayer.GetComponent<PlayerScript>());
-            gameState.currentPlayer.deck.pullEff(title, this.id);
-            title = "";
-            description = "";
-            cost = "";
-            id = "1000";
-            type = "";
-            selected = false;
-            prevSelected = false;
-            revealable = false;
-            revealed = false;
-            gameObject.GetComponent<SpriteRenderer>().color = Color.white;
-            //CmdResetCard(this);
+            if ((currentP.passive.passiveName == "SeeDeck" || currentP.passive2 == "SeeDeck") && !currentP.selectedTrg)
+                    return;
+                CmdDisplayCard(int.Parse(this.id), NetworkClient.localPlayer.GetComponent<PlayerScript>());
+                gameState.currentPlayer.deck.pullEff(title, this.id);
+                title = "";
+                description = "";
+                cost = "";
+                id = "1000";
+                type = "";
+                selected = false;
+                prevSelected = false;
+                revealable = false;
+                revealed = false;
+                gameObject.GetComponent<SpriteRenderer>().color = Color.white;
+                //CmdResetCard(this);
         }
     }
 

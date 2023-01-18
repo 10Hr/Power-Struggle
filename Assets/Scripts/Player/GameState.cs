@@ -140,6 +140,14 @@ public class GameState : NetworkBehaviour
                     playerList.players[1].CmdDisableSLoss(false);
                     playerList.players[2].CmdDisableSLoss(false);
                     playerList.players[3].CmdDisableSLoss(false);
+                    playerList.players[0].CmdSetSawDeck(false);
+                    playerList.players[1].CmdSetSawDeck(false);
+                    playerList.players[2].CmdSetSawDeck(false);
+                    playerList.players[3].CmdSetSawDeck(false);
+                    playerList.players[0].CmdSelectedTrg(false);
+                    playerList.players[1].CmdSelectedTrg(false);
+                    playerList.players[2].CmdSelectedTrg(false);
+                    playerList.players[3].CmdSelectedTrg(false);
                     currentState = GameStates.Event;
                 } else {
                     currentPlayer = playerList.players[turn % 4];

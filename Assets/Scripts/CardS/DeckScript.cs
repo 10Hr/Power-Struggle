@@ -832,7 +832,10 @@ public class DeckScript : NetworkBehaviour
     public void getTarget(PlayerScript tP) {
         targetPlayer = tP;
         readytrg = true;
-        pullEff(currentMethod, currentID);
+        if (currentMethod == "SeeDeck")
+            SeeDeck();
+        else
+            pullEff(currentMethod, currentID);
 
     }
 
@@ -884,8 +887,9 @@ public class DeckScript : NetworkBehaviour
         {
             case true:
                 readytrg = false;
+                currentPlayer = NetworkClient.localPlayer.GetComponent<PlayerScript>();
                 RevealCards(targetPlayer, 6);
-                NetworkClient.localPlayer.GetComponent<PlayerScript>().sawDeck = true;
+                NetworkClient.localPlayer.GetComponent<PlayerScript>().CmdSelectedTrg(true);
                 NetworkClient.localPlayer.GetComponent<PlayerScript>().hideButtons();
                 break;
             case false:
