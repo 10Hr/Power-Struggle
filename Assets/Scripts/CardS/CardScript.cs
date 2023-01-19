@@ -142,12 +142,7 @@ public class CardScript : NetworkBehaviour
     }
 
     public void Enlarge() {
-        if (hovered && cardBack != null && gameObject.tag != "CardSlot")
-        {
-
-        }
         if (hovered && cardBack != null && gameObject.tag == "CardSlot") {
-            //CmdEnhance(id);
             gameObject.transform.localScale = new Vector3(75f, 75f, 0);
             gameObject.transform.localPosition = new Vector3(gameObject.transform.localPosition.x, defaultY + 100, 0);
             gameObject.GetComponent<SpriteRenderer>().sortingOrder = 7;
@@ -160,21 +155,29 @@ public class CardScript : NetworkBehaviour
     }
 
     [Command (requiresAuthority = false)]
-    public void CmdEnhance(string id)
+    public void CmdEnhance(string id, PlayerScript p)
     {
-        RpcEnhance(NetworkClient.localPlayer.connectionToClient, int.Parse(id));
+        RpcEnhance(p.connectionToClient, int.Parse(id));
     }
-
+    
     [TargetRpc]
     public void RpcEnhance(NetworkConnection conn, int id)
     {
         CardScript enhance = GameObject.Find("Enhanced").GetComponent<CardScript>();
-        gameObject.transform.localScale = new Vector3(3f, 3f, 0);
+        gameObject.transform.localScale = new Vector3(150f, 150f, 0);
         enhance.cardBack = sprArray[id];
     }
 
     public void OnMouseEnter() {
-            hovered = true;
+        if (cardBack != null && gameObject.tag == "CardSlot")
+        {
+            CardScript enhance = GameObject.Find("Enhanced").GetComponent<CardScript>();
+            gameObject.transform.localScale = new Vector3(150f, 150f, 0);
+            enhance.cardBack = sprArray[int.Parse(id)];
+        }
+        //if (cardBack != null && gameObject.tag == "CardSlot")
+            //CmdEnhance(id, NetworkClient.localPlayer.GetComponent<PlayerScript>());
+        hovered = true;
     }
     public void OnMouseExit() {
             hovered = false;
@@ -218,20 +221,6 @@ public class CardScript : NetworkBehaviour
         p.turnTaken = true;
         RpcDisplayCard(id);
     }  
-
-    [Command(requiresAuthority = false)]
-    public void CmdResetCard(CardScript card)
-    {
-        card.title = "";
-        card.description = "";
-        card.cost = "";
-        card.id = "1000";
-        card.type = "";
-        card.selected = false;
-        card.prevSelected = false;
-        card.revealable = false;
-        card.revealed = false;
-    }
 
     [ClientRpc]
     public void RpcDisplayCard(int id)
