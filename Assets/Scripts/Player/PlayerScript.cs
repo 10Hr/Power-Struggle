@@ -14,6 +14,8 @@ public class PlayerScript : NetworkBehaviour
     //Fields
     public GameState FSM;
 
+    public MessageLogManager Logger;
+
     public EventManager eMan;
 
     public bool added = false;
@@ -254,6 +256,7 @@ public class PlayerScript : NetworkBehaviour
     {
         playerList = GameObject.Find("PlayerList").GetComponent<PlayerList>();
         FSM = GameObject.Find("FSM").GetComponent<GameState>();
+        Logger = GameObject.Find("LogManager").GetComponent<MessageLogManager>();
 
         passive = gameObject.GetComponent<Passive>();
 
@@ -302,7 +305,6 @@ public class PlayerScript : NetworkBehaviour
             lockInButton.SetActive(false);
             turnToken.SetActive(false);
         }
-
     }
 
     public void Update()

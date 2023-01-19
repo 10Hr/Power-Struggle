@@ -142,7 +142,12 @@ public class CardScript : NetworkBehaviour
     }
 
     public void Enlarge() {
+        if (hovered && cardBack != null && gameObject.tag != "CardSlot")
+        {
+
+        }
         if (hovered && cardBack != null && gameObject.tag == "CardSlot") {
+            //CmdEnhance(id);
             gameObject.transform.localScale = new Vector3(75f, 75f, 0);
             gameObject.transform.localPosition = new Vector3(gameObject.transform.localPosition.x, defaultY + 100, 0);
             gameObject.GetComponent<SpriteRenderer>().sortingOrder = 7;
@@ -152,6 +157,20 @@ public class CardScript : NetworkBehaviour
             gameObject.transform.localPosition = new Vector3(gameObject.transform.localPosition.x, defaultY, 0);
             gameObject.GetComponent<SpriteRenderer>().sortingOrder = sortingDefault;
         }
+    }
+
+    [Command (requiresAuthority = false)]
+    public void CmdEnhance(string id)
+    {
+        RpcEnhance(NetworkClient.localPlayer.connectionToClient, int.Parse(id));
+    }
+
+    [TargetRpc]
+    public void RpcEnhance(NetworkConnection conn, int id)
+    {
+        CardScript enhance = GameObject.Find("Enhanced").GetComponent<CardScript>();
+        gameObject.transform.localScale = new Vector3(3f, 3f, 0);
+        enhance.cardBack = sprArray[id];
     }
 
     public void OnMouseEnter() {
@@ -175,7 +194,7 @@ public class CardScript : NetworkBehaviour
             if ((currentP.passive.passiveName == "SeeDeck" || currentP.passive2 == "SeeDeck") && !currentP.selectedTrg)
                     return;
                 CmdDisplayCard(int.Parse(this.id), NetworkClient.localPlayer.GetComponent<PlayerScript>());
-                gameState.currentPlayer.deck.pullEff(title, this.id);
+                gameState.currentPlayer.deck.pullEff(title, id);
                 title = "";
                 description = "";
                 cost = "";
