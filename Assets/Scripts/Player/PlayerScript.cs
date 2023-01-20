@@ -152,8 +152,6 @@ public class PlayerScript : NetworkBehaviour
 
     #endregion
 
-    private GameObject readyButton;
-
     [SyncVar]
     public PlayerList playerList;
 
@@ -282,8 +280,6 @@ public class PlayerScript : NetworkBehaviour
         enemySlots2 = GameObject.FindGameObjectsWithTag("2");
         enemySlots3 = GameObject.FindGameObjectsWithTag("3");
 
-        readyButton = GameObject.Find("Ready");
-
         passiveManager = GameObject.Find("PassiveManager").GetComponent<PassiveManager>();
 
         bntTop = GameObject.Find("PlayerTop");
@@ -334,9 +330,6 @@ public class PlayerScript : NetworkBehaviour
                 }
                 break;
             case GameStates.Passive:
-                if (isLocalPlayer)
-                    readyButton.SetActive(false);
-
                 //calculate players highest stat
                 CalcHighest();
                 CalcLowest();
@@ -491,18 +484,7 @@ public class PlayerScript : NetworkBehaviour
                 b.SetActive(false);
             }
         }
-        else if (availablePoints == 0)
-        {
-            foreach (GameObject b in subButtons)
-            {
-                b.SetActive(false);
-            }
-            foreach (GameObject b in addButtons)
-            {
-                b.SetActive(false);
-            }
-        }
-        else if (availablePoints < 0)
+        else if (availablePoints <= 0)
         {
             foreach (GameObject b in subButtons)
             {
@@ -529,11 +511,6 @@ public class PlayerScript : NetworkBehaviour
     {
         cards.Clear();
         hand.Clear();
-    }
-    [Command(requiresAuthority = false)]
-    public void CmdConfirm()
-    {
-        Debug.Log("");
     }
 
     [TargetRpc]
@@ -780,36 +757,19 @@ public class PlayerScript : NetworkBehaviour
     }
 
     public void UnhideButtons() {
-        if ((passive.passiveName == "Precise" || passive2 == "Precise") 
-            || ((!enemy1.untargetable) && ((enemy1.passive.passiveName != "Scrapper" && enemy1.passive2 != "Scrapper") 
-            || ((enemy1.passive.passiveName == "Scrapper" || enemy1.passive2 == "Scrapper")  && enemy1.Power >= power))
-            && !((passive.passiveName == "StrongAllies" || passive2 == "StrongAllies") && enemy1.Highest == "strength")
-            && !((passive.passiveName == "SmartAllies" || passive2 == "SmartAllies") && enemy1.Highest == "intelligence")
-            && !((passive.passiveName == "StrongAllies" || passive2 == "StrongAllies") && enemy1.Highest == "cunning")
-            && !((enemy1.passiveName == "StrongAllies" || enemy1.passive2 == "StrongAllies") && Highest == "strength")
-            && !((enemy1.passiveName == "SmartAllies" || enemy1.passive2 == "SmartAllies") && Highest == "intelligence")
-            && !((enemy1.passiveName == "ShadyAllies" || enemy1.passive2 == "ShadyAllies") && Highest == "cunning")))//enemy1
-            bntRight.SetActive(true);
-        if ((passive.passiveName == "Precise" || passive2 == "Precise")
-            || ((!enemy2.untargetable) && ((enemy2.passive.passiveName != "Scrapper" && enemy2.passive2 != "Scrapper")
-            || ((enemy2.passive.passiveName == "Scrapper" || enemy2.passive2 == "Scrapper") && enemy2.Power >= power))
-            && !((passive.passiveName == "StrongAllies" || passive2 == "StrongAllies") && enemy2.Highest == "strength")
-            && !((passive.passiveName == "SmartAllies" || passive2 == "SmartAllies") && enemy2.Highest == "intelligence")
-            && !((passive.passiveName == "StrongAllies" || passive2 == "StrongAllies") && enemy2.Highest == "cunning")
-            && !((enemy2.passiveName == "StrongAllies" || enemy2.passive2 == "StrongAllies") && Highest == "strength")
-            && !((enemy2.passiveName == "SmartAllies" || enemy2.passive2 == "SmartAllies") && Highest == "intelligence")
-            && !((enemy2.passiveName == "ShadyAllies" || enemy2.passive2 == "ShadyAllies") && Highest == "cunning")))//enemy2
-            bntLeft.SetActive(true);
-        if ((passive.passiveName == "Precise" || passive2 == "Precise")
-            || ((!enemy3.untargetable) && ((enemy3.passive.passiveName != "Scrapper" && enemy3.passive2 != "Scrapper")
-            || ((enemy3.passive.passiveName == "Scrapper" || enemy3.passive2 == "Scrapper") && enemy3.Power >= power))
-            && !((passive.passiveName == "StrongAllies" || passive2 == "StrongAllies") && enemy3.Highest == "strength")
-            && !((passive.passiveName == "SmartAllies" || passive2 == "SmartAllies") && enemy3.Highest == "intelligence")
-            && !((passive.passiveName == "StrongAllies" || passive2 == "StrongAllies") && enemy3.Highest == "cunning")
-            && !((enemy3.passiveName == "StrongAllies" || enemy3.passive2 == "StrongAllies") && Highest == "strength")
-            && !((enemy3.passiveName == "SmartAllies" || enemy3.passive2 == "SmartAllies") && Highest == "intelligence")
-            && !((enemy3.passiveName == "ShadyAllies" || enemy3.passive2 == "ShadyAllies") && Highest == "cunning")))  //enemy3
-            bntTop.SetActive(true);
+        PlayerScript[] enemies = { enemy1, enemy2, enemy3 };
+        GameObject[] btns = {bntRight, bntTop, bntLeft };
+        for (int i = 0; i < 3; i++)
+            if ((passive.passiveName == "Precise" || passive2 == "Precise")
+            || ((!enemies[i].untargetable) && ((enemies[i].passive.passiveName != "Scrapper" && enemies[i].passive2 != "Scrapper")
+            || ((enemies[i].passive.passiveName == "Scrapper" || enemies[i].passive2 == "Scrapper") && enemies[i].Power >= power))
+            && !((passive.passiveName == "StrongAllies" || passive2 == "StrongAllies") && enemies[i].Highest == "strength")
+            && !((passive.passiveName == "SmartAllies" || passive2 == "SmartAllies") && enemies[i].Highest == "intelligence")
+            && !((passive.passiveName == "StrongAllies" || passive2 == "StrongAllies") && enemies[i].Highest == "cunning")
+            && !((enemies[i].passiveName == "StrongAllies" || enemies[i].passive2 == "StrongAllies") && Highest == "strength")
+            && !((enemies[i].passiveName == "SmartAllies" || enemies[i].passive2 == "SmartAllies") && Highest == "intelligence")
+            && !((enemies[i].passiveName == "ShadyAllies" || enemies[i].passive2 == "ShadyAllies") && Highest == "cunning")))//enemy1
+                btns[i].SetActive(true);
 
         if(!bntLeft.activeSelf && !bntRight.activeSelf && !bntTop.activeSelf)
         {
@@ -820,12 +780,10 @@ public class PlayerScript : NetworkBehaviour
     }
 
     public void hideButtons() {
-        if (bntRight.activeInHierarchy == true)  //enemy1
-            bntRight.SetActive(false);
-        if (bntTop.activeInHierarchy == true)  //enemy2
-            bntTop.SetActive(false);
-        if (bntLeft.activeInHierarchy == true)  //enemy3
-            bntLeft.SetActive(false);
+        GameObject[] btns = { bntRight, bntTop, bntLeft };
+        for (int i = 0; i < 3; i++)
+            if (btns[i].activeInHierarchy)
+                btns[i].SetActive(false);
     }
 
         [Command(requiresAuthority = false)]

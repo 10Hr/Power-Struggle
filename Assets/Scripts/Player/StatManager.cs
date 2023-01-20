@@ -32,6 +32,8 @@ public class StatManager : NetworkBehaviour
     public void ReadyUp()
     {
         PlayerScript p = GetPlayer();
+        if (p.AvailablePoints == 0)
+            GameObject.Find("Ready").SetActive(false);
         CmdReadyUp(p);
     }
 

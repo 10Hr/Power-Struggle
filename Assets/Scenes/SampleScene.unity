@@ -5295,7 +5295,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 2, y: -471.34723}
+  m_AnchoredPosition: {x: 1816, y: -471.34723}
   m_SizeDelta: {x: 608.05426, y: 151.49448}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &607581560
@@ -10344,7 +10344,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -1003.99695, y: 376.6513}
+  m_AnchoredPosition: {x: -1003.99695, y: 333}
   m_SizeDelta: {x: 1, y: 1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1203109282
@@ -10398,8 +10398,8 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 2.4858758, y: 3.4761906}
-    newSize: {x: 5.2203393, y: 7.3}
+    oldSize: {x: 2.4764318, y: 3.4666665}
+    newSize: {x: 2.4764318, y: 3.4666665}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
@@ -10496,15 +10496,15 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingLayerID: -81007481
+  m_SortingLayer: 1
+  m_SortingOrder: 10
   m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 5.2203393, y: 7.3}
+  m_Size: {x: 2.4764318, y: 3.4666665}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 0
@@ -13630,7 +13630,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -7.0000076, y: -310.5}
+  m_AnchoredPosition: {x: 1806, y: -310.5}
   m_SizeDelta: {x: 500.00006, y: 155.00003}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1490825006

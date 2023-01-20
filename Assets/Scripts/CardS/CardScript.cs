@@ -142,6 +142,9 @@ public class CardScript : NetworkBehaviour
     }
 
     public void Enlarge() {
+        if (gameObject.tag == "Display")
+            return;
+
         if (hovered && cardBack != null && gameObject.tag == "CardSlot") {
             gameObject.transform.localScale = new Vector3(75f, 75f, 0);
             gameObject.transform.localPosition = new Vector3(gameObject.transform.localPosition.x, defaultY + 100, 0);
@@ -154,29 +157,20 @@ public class CardScript : NetworkBehaviour
         }
     }
 
-    [Command (requiresAuthority = false)]
-    public void CmdEnhance(string id, PlayerScript p)
-    {
-        RpcEnhance(p.connectionToClient, int.Parse(id));
-    }
-    
-    [TargetRpc]
-    public void RpcEnhance(NetworkConnection conn, int id)
-    {
-        CardScript enhance = GameObject.Find("Enhanced").GetComponent<CardScript>();
-        gameObject.transform.localScale = new Vector3(150f, 150f, 0);
-        enhance.cardBack = sprArray[id];
-    }
-
     public void OnMouseEnter() {
-        if (cardBack != null && gameObject.tag == "CardSlot")
+        Debug.Log(NetworkClient.localPlayer.netId);
+        if (cardBack != null && (gameObject.tag == "CardSlot" || revealed))
         {
             CardScript enhance = GameObject.Find("Enhanced").GetComponent<CardScript>();
-            gameObject.transform.localScale = new Vector3(150f, 150f, 0);
+            enhance.transform.localScale = new Vector3(140f, 140f, 0);
             enhance.cardBack = sprArray[int.Parse(id)];
         }
-        //if (cardBack != null && gameObject.tag == "CardSlot")
-            //CmdEnhance(id, NetworkClient.localPlayer.GetComponent<PlayerScript>());
+        else if (cardBack != null && gameObject.tag != "CardSlot" && !revealed)
+        {
+            CardScript enhance = GameObject.Find("Enhanced").GetComponent<CardScript>();
+            enhance.transform.localScale = new Vector3(140f, 140f, 0);
+            enhance.cardBack = cardBack;
+        }
         hovered = true;
     }
     public void OnMouseExit() {
