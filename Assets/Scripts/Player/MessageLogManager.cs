@@ -12,7 +12,7 @@ public class MessageLogManager : NetworkBehaviour
     [SerializeField]
     public TextMeshProUGUI log;
 
-    public int currentFirst = -1;
+    //public int currentFirst = -1;
 
     // Update is called once per frame
     void Update()
@@ -23,7 +23,7 @@ public class MessageLogManager : NetworkBehaviour
             messages.Remove(messages[10]);
 
         log.text = "";
-        for (int i = currentFirst - 11; i < currentFirst; i++)
+        for (int i = 0; i < 10; i++)
         {
             if (i >= 0 && i < messages.Count)
                 log.text = log.text + "\n" + messages[i];

@@ -158,16 +158,20 @@ public class CardScript : NetworkBehaviour
     }
 
     public void OnMouseEnter() {
-        Debug.Log(NetworkClient.localPlayer.netId);
+        CardScript enhance = GameObject.Find("Enhanced").GetComponent<CardScript>();
         if (cardBack != null && (gameObject.tag == "CardSlot" || revealed))
         {
-            CardScript enhance = GameObject.Find("Enhanced").GetComponent<CardScript>();
             enhance.transform.localScale = new Vector3(140f, 140f, 0);
             enhance.cardBack = sprArray[int.Parse(id)];
         }
+        else if (cardBack != null && gameObject.tag == "Display")
+        {
+            enhance.transform.localScale = new Vector3(140f, 140f, 0);
+            enhance.cardBack = cardFront;
+        }
         else if (cardBack != null && gameObject.tag != "CardSlot" && !revealed)
         {
-            CardScript enhance = GameObject.Find("Enhanced").GetComponent<CardScript>();
+
             enhance.transform.localScale = new Vector3(140f, 140f, 0);
             enhance.cardBack = cardBack;
         }
@@ -202,12 +206,8 @@ public class CardScript : NetworkBehaviour
                 revealable = false;
                 revealed = false;
                 gameObject.GetComponent<SpriteRenderer>().color = Color.white;
-                //CmdResetCard(this);
         }
     }
-
-
-
 
     [Command(requiresAuthority = false)]
     public void CmdDisplayCard(int id, PlayerScript p)
@@ -220,7 +220,6 @@ public class CardScript : NetworkBehaviour
     public void RpcDisplayCard(int id)
     {
         CardScript display = GameObject.Find("LastPlayed").GetComponent<CardScript>();
-        //display.cardBack = card.cardFront;
         display.cardBack = sprArray[id];
     }
 }

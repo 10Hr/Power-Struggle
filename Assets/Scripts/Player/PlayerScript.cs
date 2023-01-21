@@ -14,7 +14,7 @@ public class PlayerScript : NetworkBehaviour
     //Fields
     public GameState FSM;
 
-    public MessageLogManager Logger;
+    public MessageLogManager logger;
 
     public EventManager eMan;
 
@@ -254,7 +254,7 @@ public class PlayerScript : NetworkBehaviour
     {
         playerList = GameObject.Find("PlayerList").GetComponent<PlayerList>();
         FSM = GameObject.Find("FSM").GetComponent<GameState>();
-        Logger = GameObject.Find("LogManager").GetComponent<MessageLogManager>();
+        logger = GameObject.Find("LogManager").GetComponent<MessageLogManager>();
 
         passive = gameObject.GetComponent<Passive>();
 
@@ -454,46 +454,37 @@ public class PlayerScript : NetworkBehaviour
         if (FSM.CurrentState == GameStates.Event && eMan.currentEvent == "Three")
         {
             foreach (GameObject b in addButtons)
-            {
                 b.SetActive(false);
-            }
             foreach (GameObject b in subButtons)
-            {
                 b.SetActive(true);
-            }
         }
         else if (availablePoints > 0 && availablePoints < maxPoints)
         {
             foreach (GameObject b in addButtons)
-            {
                 b.SetActive(true);
-            }
             foreach (GameObject b in subButtons)
-            {
                 b.SetActive(true);
-            }
         }
         else if (availablePoints == maxPoints)
         {
             foreach (GameObject b in addButtons)
-            {
                 b.SetActive(true);
-            }
             foreach (GameObject b in subButtons)
-            {
                 b.SetActive(false);
-            }
         }
         else if (availablePoints <= 0)
         {
             foreach (GameObject b in subButtons)
-            {
                 b.SetActive(true);
-            }
             foreach (GameObject b in addButtons)
-            {
                 b.SetActive(false);
-            }
+        }
+        if (ready)
+        {
+            foreach (GameObject b in subButtons)
+                b.SetActive(false);
+            foreach (GameObject b in addButtons)
+                b.SetActive(false);
         }
         #endregion
     }
@@ -516,6 +507,7 @@ public class PlayerScript : NetworkBehaviour
     [TargetRpc]
     public void SwapDeck(string h)
     {
+        logger.AppendMessage(playerName + " is swapping decks");
         deck.CreateDeck(h);
         CmdResetCards();
 
@@ -805,6 +797,7 @@ public class PlayerScript : NetworkBehaviour
                     break;
             }
             MaxPoints = amount;
+        logger.AppendMessage(String.Format("{0} gained {1} {2}", playerName, amount, type));
         CalcLowest();
         CalcHighest();
     }
@@ -812,6 +805,7 @@ public class PlayerScript : NetworkBehaviour
     [Command(requiresAuthority = false)]
     public void ResetStats()
     {
+        logger.AppendMessage(String.Format("{0} is resetting their stats", playerName));
         AvailablePoints = Charisma + Strength + Cunning + Intelligence;
         Strength = 0;
         Charisma = 0;
@@ -822,6 +816,7 @@ public class PlayerScript : NetworkBehaviour
     [Command(requiresAuthority = false)]
     public void ModifyPower(int amount)
     {
+        logger.AppendMessage(String.Format("{0} gained {1} power", playerName, amount));
         if (cantLosePower && amount < 0)
             return;
         if (amount < 0 && (passive.passiveName == "Taunt" || passive2 == "Taunt"))
@@ -842,6 +837,7 @@ public class PlayerScript : NetworkBehaviour
     [Command(requiresAuthority = false)]
     public void AddPoints(int amount)
     {
+        logger.AppendMessage(String.Format("{0} gained {1} available points", playerName, amount));
         maxPoints = amount;
         availablePoints = amount;
     }
