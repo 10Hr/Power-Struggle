@@ -26,6 +26,7 @@ public class EventManager : NetworkBehaviour
     [SyncVar]
     public int TwoThreeTotal = 0;
 
+    [SerializeField]
     public PlayerList playerList;
     GameObject ReadyButton;
     GameObject[] gos;
@@ -43,7 +44,7 @@ public class EventManager : NetworkBehaviour
 
     private void Start()
     {
-        playerList = GameObject.Find("PlayerList").GetComponent<PlayerList>();
+//        playerList = GameObject.Find("PlayerList").GetComponent<PlayerList>();
         ReadyButton = GameObject.Find("Ready");
         gos = GameObject.FindGameObjectsWithTag("eventLabels");
         e1gs = GameObject.FindGameObjectsWithTag("e1g");
