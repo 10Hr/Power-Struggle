@@ -95,7 +95,7 @@ public class CardScript : NetworkBehaviour
         defaultY = gameObject.transform.localPosition.y;
         gameObject.GetComponent<SpriteRenderer>().sprite = cardBack;
         sortingDefault = gameObject.GetComponent<SpriteRenderer>().sortingOrder;
-        gameState = GameObject.Find("FSM").GetComponent<GameState>();
+//        gameState = GameObject.Find("FSM").GetComponent<GameState>();
 
         sprArray = Resources.LoadAll<Sprite>("PlayTestSprites");
     }

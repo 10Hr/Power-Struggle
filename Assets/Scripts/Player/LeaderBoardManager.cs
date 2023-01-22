@@ -30,12 +30,12 @@ public class LeaderBoardManager : NetworkBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        FSM = GameObject.Find("FSM").GetComponent<GameState>();
-        playerList = GameObject.Find("PlayerList").GetComponent<PlayerList>();
-        first = GameObject.Find("first").GetComponent<Text>();
-        second = GameObject.Find("second").GetComponent<Text>();
-        third = GameObject.Find("third").GetComponent<Text>();
-        fourth = GameObject.Find("fourth").GetComponent<Text>();
+     //   FSM = GameObject.Find("FSM").GetComponent<GameState>();
+     //   playerList = GameObject.Find("PlayerList").GetComponent<PlayerList>();
+     //   first = GameObject.Find("first").GetComponent<Text>();
+     //   second = GameObject.Find("second").GetComponent<Text>();
+     //   third = GameObject.Find("third").GetComponent<Text>();
+     //   fourth = GameObject.Find("fourth").GetComponent<Text>();
     }
 
     // Update is called once per frame
