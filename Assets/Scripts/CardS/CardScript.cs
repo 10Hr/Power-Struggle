@@ -35,6 +35,7 @@ public class CardScript : NetworkBehaviour
     public int sortingDefault;
     public float defaultY;
 
+    [SerializeField]
     public GameState gameState;
 
     public string Cost

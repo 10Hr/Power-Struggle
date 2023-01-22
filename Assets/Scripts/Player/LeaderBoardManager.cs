@@ -6,10 +6,15 @@ using UnityEngine.UI;
 
 public class LeaderBoardManager : NetworkBehaviour
 {
+    [SerializeField]
     public PlayerList playerList;
+    [SerializeField]
     public Text first;
+    [SerializeField]
     public Text second;
+    [SerializeField]
     public Text third;
+    [SerializeField]
     public Text fourth;
     PlayerScript firstPlace;
     PlayerScript secondPlace;
@@ -20,6 +25,7 @@ public class LeaderBoardManager : NetworkBehaviour
     string thirdString;
     string fourthString;
     public bool called = false;
+    [SerializeField]
     GameState FSM;
     // Start is called before the first frame update
     void Start()
