@@ -2,12 +2,15 @@ using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Mirror;
+using Unity.Services.Core;
+using Unity.Services.Authentication;
 
 /*
 	Documentation: https://mirror-networking.gitbook.io/docs/components/network-manager
 	API Reference: https://mirror-networking.com/docs/api/Mirror.NetworkManager.html
 */
-
+namespace Network 
+{
 public class NewNetworkManager : NetworkManager
 {
     // Overrides the base singleton so we don't
@@ -272,4 +275,5 @@ public class NewNetworkManager : NetworkManager
     public override void OnStopClient() { }
 
     #endregion
+}
 }

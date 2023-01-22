@@ -12,6 +12,23 @@ using TMPro;
 public class PlayerScript : NetworkBehaviour
 {
 
+//----------------------Relay Testing---------------------------------
+    [SyncVar]
+    public string sessionId = "";
+
+    public string username;
+
+    public string ip;
+
+    public string platform;
+
+    public void Awake() {
+        username = SystemInfo.deviceName;
+        platform = Application.platform.ToString();
+        ip = NetworkManager.singleton.networkAddress;
+    }
+//--------------------------------------------------------------------
+
     //Fields
     public GameState FSM;
 
