@@ -6,6 +6,7 @@ using System.IO;
 using Mirror;
 using System;
 using System.Linq;
+using TMPro;
 
 //CLIENT SCRIPT
 public class PlayerScript : NetworkBehaviour
@@ -238,6 +239,7 @@ public class PlayerScript : NetworkBehaviour
     GameObject bntLeft;
     GameObject bntRight;
     GameObject lockInButton;
+    TextMeshProUGUI instructions;
 
     Text pLabel1;
     Text pLabel2;
@@ -255,6 +257,7 @@ public class PlayerScript : NetworkBehaviour
         playerList = GameObject.Find("PlayerList").GetComponent<PlayerList>();
         FSM = GameObject.Find("FSM").GetComponent<GameState>();
         logger = GameObject.Find("LogManager").GetComponent<MessageLogManager>();
+        instructions = GameObject.Find("Instructions").GetComponent<TextMeshProUGUI>();
 
         passive = gameObject.GetComponent<Passive>();
 
@@ -327,10 +330,12 @@ public class PlayerScript : NetworkBehaviour
                 if (playerList.players.Count == 4)
                 {
                     CmdSetPlayer();
+                    instructions.text = "Allocate points to your stats,\n you have 8 points to start with.";
                 }
                 break;
             case GameStates.Passive:
                 //calculate players highest stat
+                instructions.text = "Choose a Passive from 1 of the 3 listed.";
                 CalcHighest();
                 CalcLowest();
 
@@ -374,6 +379,7 @@ public class PlayerScript : NetworkBehaviour
                 break;
 
             case GameStates.LoadEnemyCards:
+                instructions.text = "Select three cards and press lock in.";
                 TransferEnemyData();
                 switch (passive2)
                 {
@@ -418,7 +424,6 @@ public class PlayerScript : NetworkBehaviour
                     CmdThreeSelected(true);
                     lockInButton.SetActive(true);
                 }
-
                 else
                 {
                     CmdThreeSelected(false);
@@ -427,6 +432,7 @@ public class PlayerScript : NetworkBehaviour
                 break;
 
             case GameStates.Turn:
+                instructions.text = "When it is your turn, select a card to play it.";
                 if (LockedIn)
                     CmdUnlock();
                 if (enemy1.hand.Count == 6)
@@ -748,19 +754,32 @@ public class PlayerScript : NetworkBehaviour
         return playerslots;
     }
 
+    public bool CheckPassive(string s)
+    {
+        if (passive.passiveName == s || passive2 == s)
+            return true;
+        else
+            return false;
+    }
+
     public void UnhideButtons() {
         PlayerScript[] enemies = { enemy1, enemy2, enemy3 };
         GameObject[] btns = {bntRight, bntTop, bntLeft };
+        /*
+         So bascially, we only want an enemy to be targetable if they are targetable.
+        To be targetable, players cant be 'untargetable', they're passive and second passive cannot be 'Scrapper' (unless you are below them on the leaderboard),
+        and they're highest stat is not the same as the charisma players allyStat passive or second passive (and vice versa.)
+        */
         for (int i = 0; i < 3; i++)
-            if ((passive.passiveName == "Precise" || passive2 == "Precise")
+            if (CheckPassive("Precise")
             || ((!enemies[i].untargetable) && ((enemies[i].passive.passiveName != "Scrapper" && enemies[i].passive2 != "Scrapper")
-            || ((enemies[i].passive.passiveName == "Scrapper" || enemies[i].passive2 == "Scrapper") && enemies[i].Power >= power))
-            && !((passive.passiveName == "StrongAllies" || passive2 == "StrongAllies") && enemies[i].Highest == "strength")
-            && !((passive.passiveName == "SmartAllies" || passive2 == "SmartAllies") && enemies[i].Highest == "intelligence")
-            && !((passive.passiveName == "StrongAllies" || passive2 == "StrongAllies") && enemies[i].Highest == "cunning")
-            && !((enemies[i].passiveName == "StrongAllies" || enemies[i].passive2 == "StrongAllies") && Highest == "strength")
-            && !((enemies[i].passiveName == "SmartAllies" || enemies[i].passive2 == "SmartAllies") && Highest == "intelligence")
-            && !((enemies[i].passiveName == "ShadyAllies" || enemies[i].passive2 == "ShadyAllies") && Highest == "cunning")))//enemy1
+            || (CheckPassive("Scrapper") && enemies[i].Power >= power))
+            && !(CheckPassive("StrongAllies") && enemies[i].Highest == "strength")
+            && !(CheckPassive("SmartAllies") && enemies[i].Highest == "intelligence")
+            && !(CheckPassive("ShadyAllies") && enemies[i].Highest == "cunning")
+            && !(CheckPassive("StrongAllies") && Highest == "strength")
+            && !(CheckPassive("SmartAllies") && Highest == "intelligence")
+            && !(CheckPassive("ShadyAllies") && Highest == "cunning")))
                 btns[i].SetActive(true);
 
         if(!bntLeft.activeSelf && !bntRight.activeSelf && !bntTop.activeSelf)
