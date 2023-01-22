@@ -51,7 +51,7 @@ public class EventManager : NetworkBehaviour
         e1gs = GameObject.FindGameObjectsWithTag("e1g");
         e2gs = GameObject.FindGameObjectsWithTag("e2g");
         e3gs = GameObject.FindGameObjectsWithTag("e3g");
-//        FSM = GameObject.Find("FSM").GetComponent<GameState>();
+//      //  FSM = GameObject.Find("FSM").GetComponent<GameState>();
 
         OneFour = GameObject.Find("1and4");
         TwoThree = GameObject.Find("2and3");
