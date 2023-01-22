@@ -2742,6 +2742,7 @@ MonoBehaviour:
   OneFourTotal: 0
   TwoThreeTotal: 0
   playerList: {fileID: 1752536911}
+  FSM: {fileID: 2118885772}
   BetButton: {fileID: 0}
   BetSub: {fileID: 0}
   BetAdd: {fileID: 0}
