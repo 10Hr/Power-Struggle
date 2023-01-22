@@ -249,6 +249,7 @@ public class PlayerScript : NetworkBehaviour
 
     int g = 0;
     public readonly SyncList<string[]> cards = new SyncList<string[]>();
+    //public List<string[]> cards = new List<string[]>();
     public readonly SyncList<string[]> hand = new SyncList<string[]>();
     public readonly SyncList<Passive> choicesList = new SyncList<Passive>();
 
@@ -359,12 +360,15 @@ public class PlayerScript : NetworkBehaviour
                 //create deck and get cards data
                 if (!hasDeck && hasHighest)
                 {
+                    //logger.AppendMessage(playerName + "!hasDeck && hasHighest");
                     hasDeck = true;
                     deck = new DeckScript();
                     deck.CreateDeck(highest);
                     if (deck.cardData.Count > 7)
                     {
-                        CmdFillDeck(deck.cardData);
+                        //logger.AppendMessage(playerName + "deck.cardData.Count > 7");
+                        //CmdFillDeck(deck.cardData);
+                        fillDeck(deck.cardData);
                     }
                 }
 
@@ -536,7 +540,8 @@ public class PlayerScript : NetworkBehaviour
 
       while (deck.cardData.Count < 40) {}
 
-      CmdFillDeck(deck.cardData);
+      //CmdFillDeck(deck.cardData);
+      fillDeck(deck.cardData);
 
       for (int i = 0; i < 6; i++)
             CmdDrawCard();
@@ -605,10 +610,13 @@ public class PlayerScript : NetworkBehaviour
         int rand = UnityEngine.Random.Range(0, cards.Count - 1);
         if (hand.Count < 6)
         {
+          //  Debug.Log(rand);
+          //  Debug.Log(cards.Count);
             hand.Add(cards[rand]);
             cards.Remove(cards[rand]);
         }
     }
+    
 
     public void UpdateData(GameObject[] slots, PlayerScript p)
     {
@@ -738,6 +746,15 @@ public class PlayerScript : NetworkBehaviour
     [Command(requiresAuthority = false)]
     public void CmdFillDeck(List<string[]> cardData)
     {
+        logger.AppendMessage(playerName + " " + cardData.Count);
+        print(cardData.Count);
+        foreach (string[] s in cardData)
+            cards.Add(s);
+    }
+    public void fillDeck(List<string[]> cardData)
+    {
+        logger.AppendMessage(playerName + " " + cardData.Count);
+        print(cardData.Count);
         foreach (string[] s in cardData)
             cards.Add(s);
     }

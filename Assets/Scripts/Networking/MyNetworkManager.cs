@@ -142,16 +142,16 @@ namespace Network
             m_SessionId = "";
         }
 
-        public override void OnClientConnect(NetworkConnection conn)
-        {
-            Debug.Log($"MyNetworkManager: {m_Username} Connected to Server!");
-        }
-
-        public override void OnClientDisconnect(NetworkConnection conn)
-        {
-            base.OnClientDisconnect(conn);
-            Debug.Log("MyNetworkManager: Disconnected from Server!");
-        }
+      //  public override void OnClientConnect(NetworkConnection conn)
+      //  {
+      //      Debug.Log($"MyNetworkManager: {m_Username} Connected to Server!");
+      //  }
+//
+      //  public override void OnClientDisconnect(NetworkConnection conn)
+      //  {
+      //      base.OnClientDisconnect(conn);
+      //      Debug.Log("MyNetworkManager: Disconnected from Server!");
+      //  }
 
         /// <summary>
         /// Finds the local player if they are spawned in the scene.
