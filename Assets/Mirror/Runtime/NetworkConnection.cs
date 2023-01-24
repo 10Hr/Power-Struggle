@@ -108,7 +108,7 @@ namespace Mirror
         protected static bool ValidatePacketSize(ArraySegment<byte> segment, int channelId)
         {
             //int max = Transport.activeTransport.GetMaxPacketSize(channelId);
-            int max = 5000; // 1MB
+            int max = 50000; // 1MB
             if (segment.Count > max)
             {
                 Debug.LogError($"NetworkConnection.ValidatePacketSize: cannot send packet larger than {max} bytes, was {segment.Count} bytes");

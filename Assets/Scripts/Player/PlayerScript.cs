@@ -354,21 +354,22 @@ public class PlayerScript : NetworkBehaviour
             case GameStates.Passive:
                 //calculate players highest stat
                 instructions.text = "Choose a Passive from 1 of the 3 listed.";
-                CalcHighest();
+                CalcHighest(); //finds highest and sets has highesst to true
                 CalcLowest();
 
                 //create deck and get cards data
                 if (!hasDeck && hasHighest)
                 {
-                    //logger.AppendMessage(playerName + "!hasDeck && hasHighest");
                     hasDeck = true;
                     deck = new DeckScript();
                     deck.CreateDeck(highest);
-                    if (deck.cardData.Count > 7)
+                    //logger.AppendMessage(playerName + " Made it before");//works for all clients
+                    if (deck.cardData.Count > 30)
                     {
-                        //logger.AppendMessage(playerName + "deck.cardData.Count > 7");
-                        //CmdFillDeck(deck.cardData);
-                        fillDeck(deck.cardData);
+                        CmdConfirm();//works for all clients
+                        //logger.AppendMessage(playerName + " " + deck.cardData.Count + " " + deck.cardData[0][0]);
+                        foreach (string[] s in deck.cardData)
+                            CmdFillDeck(s);//works for host, no clients
                     }
                 }
 
@@ -531,6 +532,12 @@ public class PlayerScript : NetworkBehaviour
         hand.Clear();
     }
 
+    [Command(requiresAuthority = false)]
+    public void CmdConfirm()
+    {
+        print(playerName + " Made it 2");
+    }
+
     [TargetRpc]
     public void SwapDeck(string h)
     {
@@ -541,7 +548,7 @@ public class PlayerScript : NetworkBehaviour
       while (deck.cardData.Count < 40) {}
 
       //CmdFillDeck(deck.cardData);
-      fillDeck(deck.cardData);
+      CmdFillDeck(deck.cardData[0]);
 
       for (int i = 0; i < 6; i++)
             CmdDrawCard();
@@ -744,12 +751,14 @@ public class PlayerScript : NetworkBehaviour
     }
 
     [Command(requiresAuthority = false)]
-    public void CmdFillDeck(List<string[]> cardData)
+    public void CmdFillDeck(string[] cardData)
     {
-        logger.AppendMessage(playerName + " " + cardData.Count);
-        print(cardData.Count);
-        foreach (string[] s in cardData)
-            cards.Add(s);
+        logger.AppendMessage(playerName + " " + cardData[0]); //runs on host, not on clients
+        print(playerName + " " + cardData[0]);//runs on host, not on clients
+        cards.Add(cardData);
+        //foreach (string s in cardData)//runs on host, not on clients
+        //    print(cardData[0]);
+            //cards.Add(s);//runs on host, not on clients
     }
     public void fillDeck(List<string[]> cardData)
     {
