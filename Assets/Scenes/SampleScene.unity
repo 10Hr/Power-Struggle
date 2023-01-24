@@ -17853,7 +17853,7 @@ MonoBehaviour:
   Port: 7777
   LoggerLevel: 3
   TimeoutMS: 1000
-  useRelay: 0
+  useRelay: 1
 --- !u!114 &2014259935
 MonoBehaviour:
   m_ObjectHideFlags: 0
