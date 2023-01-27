@@ -15,6 +15,7 @@ public class DeckScript : NetworkBehaviour
 
     public PlayerScript targetPlayer;
     public PlayerScript currentPlayer;
+    public MessageLogManager logger;
 
     public List<PlayerScript> enemies;
 
@@ -27,6 +28,11 @@ public class DeckScript : NetworkBehaviour
     private NetworkIdentity thisID;
 
     // Start is called before the first frame update
+    private void Start()
+    {
+        logger = GameObject.Find("LogManager").GetComponent<MessageLogManager>();    
+    }
+
     public void CreateDeck(string highest) {
 
         //reset deck in case of switching
@@ -665,8 +671,6 @@ public class DeckScript : NetworkBehaviour
         currentPlayer.ModifyStats("strength", currentPlayer.Strength);
         currentPlayer.DiscardCard(index, currentPlayer.cardSlots);
         currentPlayer.CmdturnIncrease();
-        
-
     }
     public void trgAloseP() { // Target all players make them lose power = 2*(GAINER) the amount of strength points you have
         Debug.Log("Target all players make them lose power = 2*(GAINER) the amount of strength points you have");
@@ -676,9 +680,6 @@ public class DeckScript : NetworkBehaviour
         }
         currentPlayer.DiscardCard(index, currentPlayer.cardSlots);
         currentPlayer.CmdturnIncrease();
-        
-
-        //ModifyStats("strength", 1, currentPlayer);
     }
     public void GPpeqstr() { //Gain performance points = strength points 
         Debug.Log("Gain performance points = strength points");
@@ -841,6 +842,7 @@ public class DeckScript : NetworkBehaviour
 
     public void RevealCards(PlayerScript p, int amount)
     {
+        logger.AppendMessage(string.Format("{0} revealed {1} cards in {2}'s hand", currentPlayer.playerName, amount, p.playerName));
         foreach (GameObject g in GetEnemySlots(p))
         {
             if (!g.GetComponent<CardScript>().revealed && amount > 0)

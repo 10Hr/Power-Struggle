@@ -19,9 +19,6 @@ public class MessageLogManager : NetworkBehaviour
     {
         //if (currentFirst == messages.Count - 1)
         //    currentFirst = messages.Count;
-        if (messages.Count >= 11)
-            messages.Remove(messages[10]);
-
         log.text = "";
         for (int i = 0; i < 10; i++)
         {
@@ -34,6 +31,8 @@ public class MessageLogManager : NetworkBehaviour
     public void AppendMessage(string message)
     {
         messages.Add(message);
+        if (messages.Count >= 11)
+            messages.Remove(messages[10]);
         //RpcSetFirst();
     }
 

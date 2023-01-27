@@ -27,16 +27,6 @@ public class LeaderBoardManager : NetworkBehaviour
     public bool called = false;
     [SerializeField]
     GameState FSM;
-    // Start is called before the first frame update
-    void Start()
-    {
-     //   FSM = GameObject.Find("FSM").GetComponent<GameState>();
-     //   playerList = GameObject.Find("PlayerList").GetComponent<PlayerList>();
-     //   first = GameObject.Find("first").GetComponent<Text>();
-     //   second = GameObject.Find("second").GetComponent<Text>();
-     //   third = GameObject.Find("third").GetComponent<Text>();
-     //   fourth = GameObject.Find("fourth").GetComponent<Text>();
-    }
 
     // Update is called once per frame
     void Update()
@@ -52,6 +42,12 @@ public class LeaderBoardManager : NetworkBehaviour
             fourthPlace = playerList.players[3];
             called = true;
         }
+
+        PlayerScript current = NetworkClient.localPlayer.GetComponent<PlayerScript>();
+        first.color = current.netId == firstPlace.netId ? Color.green : Color.red;
+        second.color = current.netId == secondPlace.netId ? Color.green : Color.red;
+        third.color = current.netId == thirdPlace.netId ? Color.green : Color.red;
+        fourth.color = current.netId == fourthPlace.netId ? Color.green : Color.red;
 
         if (firstPlace != null && secondPlace != null && thirdPlace != null && fourthPlace != null)
         {

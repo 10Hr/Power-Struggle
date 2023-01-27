@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Mirror;
 using UnityEngine.UI;
+using TMPro;
 
 public class EventManager : NetworkBehaviour
 {
@@ -203,6 +204,8 @@ public class EventManager : NetworkBehaviour
             switch (currentEvent)
             {
                 case "One":
+                    GameObject.Find("Instructions").GetComponent<TextMeshProUGUI>().text = "Relocate all your stat points, then guess what each players new highest stat is." +
+                        " For every one you guess correct you gain 50 power, and the enemy loses 50 power.";
                     RpcSpawnReady();
                     foreach (PlayerScript p in playerList.players)
                     {
@@ -211,10 +214,12 @@ public class EventManager : NetworkBehaviour
                     }
                     break;
                 case "Two":
+                    GameObject.Find("Instructions").GetComponent<TextMeshProUGUI>().text = ""; // Make GameRule box
                     FSM.EventTwo = true;
                     CmdEndEvent();
                     break;
                 case "Three":
+                    GameObject.Find("Instructions").GetComponent<TextMeshProUGUI>().text = "Rework this one";
                     RpcSpawnLabels();
                     currentBetter = playerList.players[0];
                     break;

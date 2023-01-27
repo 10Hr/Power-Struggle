@@ -26,6 +26,8 @@ public class PlayerScript : NetworkBehaviour
         username = SystemInfo.deviceName;
         platform = Application.platform.ToString();
         ip = NetworkManager.singleton.networkAddress;
+        instructions = GameObject.Find("Instructions").GetComponent<TextMeshProUGUI>();
+        instructions.text = "DON'T TOUCH ANYTHING!!!!!";
     }
 //--------------------------------------------------------------------
 
@@ -275,7 +277,6 @@ public class PlayerScript : NetworkBehaviour
         playerList = GameObject.Find("PlayerList").GetComponent<PlayerList>();
         FSM = GameObject.Find("FSM").GetComponent<GameState>();
         logger = GameObject.Find("LogManager").GetComponent<MessageLogManager>();
-        instructions = GameObject.Find("Instructions").GetComponent<TextMeshProUGUI>();
 
         passive = gameObject.GetComponent<Passive>();
 
@@ -366,10 +367,10 @@ public class PlayerScript : NetworkBehaviour
                     //logger.AppendMessage(playerName + " Made it before");//works for all clients
                     if (deck.cardData.Count > 30)
                     {
-                        CmdConfirm();//works for all clients
+                        //CmdConfirm();//works for all clients
                         //logger.AppendMessage(playerName + " " + deck.cardData.Count + " " + deck.cardData[0][0]);
-                        foreach (string[] s in deck.cardData)
-                            CmdFillDeck(s);//works for host, no clients
+                        //foreach (string[] s in deck.cardData)
+                        CmdFillDeck(deck.cardData);//works for host, no clients
                     }
                 }
 
@@ -548,7 +549,7 @@ public class PlayerScript : NetworkBehaviour
       while (deck.cardData.Count < 40) {}
 
       //CmdFillDeck(deck.cardData);
-      CmdFillDeck(deck.cardData[0]);
+      CmdFillDeck(deck.cardData);
 
       for (int i = 0; i < 6; i++)
             CmdDrawCard();
@@ -751,14 +752,13 @@ public class PlayerScript : NetworkBehaviour
     }
 
     [Command(requiresAuthority = false)]
-    public void CmdFillDeck(string[] cardData)
+    public void CmdFillDeck(List<string[]> cardData)
     {
-        logger.AppendMessage(playerName + " " + cardData[0]); //runs on host, not on clients
-        print(playerName + " " + cardData[0]);//runs on host, not on clients
-        cards.Add(cardData);
-        //foreach (string s in cardData)//runs on host, not on clients
-        //    print(cardData[0]);
-            //cards.Add(s);//runs on host, not on clients
+        //logger.AppendMessage(playerName + " " + cardData[0]); //runs on host, not on clients
+        //print(playerName + " " + cardData[0]);//runs on host, not on clients
+        //cards.Add(cardData[]);
+        foreach (string[] s in cardData)//runs on host, not on clients
+            cards.Add(s);//runs on host, not on clients
     }
     public void fillDeck(List<string[]> cardData)
     {
@@ -899,7 +899,7 @@ public class PlayerScript : NetworkBehaviour
     [Command(requiresAuthority = false)]
     public void AddPoints(int amount)
     {
-        logger.AppendMessage(String.Format("{0} gained {1} available points", playerName, amount));
+        logger.AppendMessage(string.Format("{0} gained {1} available points", playerName, amount));
         maxPoints = amount;
         availablePoints = amount;
     }
@@ -916,13 +916,14 @@ public class PlayerScript : NetworkBehaviour
         }
         else
         {
-            PlayerScript[] enemies = { enemy1, enemy2, enemy3 };
-            int randEnemy = UnityEngine.Random.Range(0, 3);
-            PlayerScript temp = enemies[randEnemy];
-            int rand = UnityEngine.Random.Range(0, cards.Count - 1);
-            cards.Add(hand[index]);
-            hand[index] = temp.cards[rand];
-            temp.cards.Remove(cards[rand]);
+            //PlayerScript[] enemies = { enemy1, enemy2, enemy3 };
+            //int randEnemy = UnityEngine.Random.Range(0, 3);
+            //PlayerScript temp = enemies[randEnemy];
+            //PlayerScript temp = sendPlayerData()[randEnemy];
+            //int rand = UnityEngine.Random.Range(0, sendPlayerData()[randEnemy].cards.Count - 1);
+            //cards.Add(hand[index]);
+            //hand[index] = sendPlayerData()[randEnemy].cards[rand];
+            //sendPlayerData()[randEnemy].cards.Remove(sendPlayerData()[randEnemy].cards[rand]);
             RpcFillSlot(connectionToClient, slots, hand[index][1], hand[index][0], hand[index][4]);
         }
     }

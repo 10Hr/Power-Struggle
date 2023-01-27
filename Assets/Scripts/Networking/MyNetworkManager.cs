@@ -77,22 +77,22 @@ namespace Network
             m_SessionId = System.Guid.NewGuid().ToString();
         }
 
-        public override void OnServerAddPlayer(NetworkConnectionToClient conn)
-        {
-            base.OnServerAddPlayer(conn);
+//        public override void OnServerAddPlayer(NetworkConnectionToClient conn)
+//        {
+//            base.OnServerAddPlayer(conn);
 
-          //  foreach (KeyValuePair<uint, NetworkIdentity> kvp in NetworkServer.spawned)
-          //  {
-          //      PlayerScript comp = kvp.Value.GetComponent<PlayerScript>();
-//
-          //      // Add to player list if new
-          //      if (comp != null && !m_Players.Contains(comp))
-          //      {
-          //          comp.sessionId = m_SessionId;
-          //          m_Players.Add(comp);
-          //      }
-          //  }
-        }
+//            foreach (KeyValuePair<uint, NetworkIdentity> kvp in NetworkServer.spawned)
+//            {
+//                PlayerScript comp = kvp.Value.GetComponent<PlayerScript>();
+////         
+//                // Add to player list if new
+//                if (comp != null && !m_Players.Contains(comp))
+//                {
+//                    comp.sessionId = m_SessionId;
+//                    m_Players.Add(comp);
+//                }
+//            }
+//        }
 
         public override void OnStopServer()
         {
