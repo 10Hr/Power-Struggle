@@ -43,6 +43,17 @@ public class PlayerScript : NetworkBehaviour
     public GameObject turnToken;
 
     [SyncVar]
+    public int Praise = 8;
+    [SyncVar]
+    public int Censure = 8;
+    [SyncVar]
+    public int e1Total = 0;
+    [SyncVar]
+    public int e2Total = 0;
+    [SyncVar]
+    public int e3Total = 0;
+
+    [SyncVar]
     public string playerName = "";
 
     [SyncVar]

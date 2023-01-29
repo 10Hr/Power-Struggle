@@ -79,19 +79,47 @@ public class StatManager : NetworkBehaviour
     {
         GameObject thisButton = UnityEngine.EventSystems.EventSystem.current.currentSelectedGameObject;
         string thisButName = thisButton.name;
+        string buttontag = UnityEngine.EventSystems.EventSystem.current.currentSelectedGameObject.tag;
         PlayerScript p = GetPlayer();
-        switch (thisButName)
+        switch (buttontag)
         {
-            case "Add":
-                if (p.currentBet < p.Power)
-                    p.currentBet += 25;
+            case "add":
+                if (p.Praise > 0)
+                {
+                    p.Praise--;
+                    switch (thisButName)
+                    {
+                        case "e1a":
+                            p.e1Total++;
+                            break;
+                        case "e2a":
+                            p.e1Total++;
+                            break;
+                        case "e3a":
+                            p.e1Total++;
+                            break;
+                    }
+                }
                 break;
-            case "Sub":
-                if (p.currentBet > 0)
-                    p.currentBet -= 25;
+            case "sub":
+                if (p.Censure > 0)
+                {
+                    p.Censure--;
+                    switch (thisButName)
+                    {
+                        case "e1s":
+                            p.e1Total--;
+                            break;
+                        case "e2s":
+                            p.e1Total--;
+                            break;
+                        case "e3s":
+                            p.e1Total--;
+                            break;
+                    }
+                }
                 break;
         }
-        GameObject.Find("Bet").GetComponentInChildren<TextMeshProUGUI>().text = "Bet: " + p.currentBet;
     }
 
     public void Guess()

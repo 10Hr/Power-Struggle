@@ -36,13 +36,20 @@ public class EventManager : NetworkBehaviour
     GameObject[] e3gs;
     [SerializeField]
     GameState FSM;
-    public GameObject BetButton;
-    public GameObject BetSub;
-    public GameObject BetAdd;
+    public GameObject e1Button;
+    public GameObject e1Sub;
+    public GameObject e1Add;
+    public GameObject e2Button;
+    public GameObject e2Sub;
+    public GameObject e2Add;
+    public GameObject e3Button;
+    public GameObject e3Sub;
+    public GameObject e3Add;
+
     private bool ran = false;
 
-    public GameObject OneFour;
-    public GameObject TwoThree;
+    public GameObject Praise;
+    public GameObject Censure;
 
     private void Start()
     {
@@ -54,16 +61,28 @@ public class EventManager : NetworkBehaviour
         e3gs = GameObject.FindGameObjectsWithTag("e3g");
 //      //  FSM = GameObject.Find("FSM").GetComponent<GameState>();
 
-        OneFour = GameObject.Find("1and4");
-        TwoThree = GameObject.Find("2and3");
+        Praise = GameObject.Find("Praise");
+        Censure = GameObject.Find("Censure");
 
-        BetButton = GameObject.Find("Bet");
-        BetAdd = GameObject.Find("Add");
-        BetSub = GameObject.Find("Sub");
+        e1Button = GameObject.Find("Enemy1Votes");
+        e1Add = GameObject.Find("e1a");
+        e1Sub = GameObject.Find("e1b");
+        e2Button = GameObject.Find("Enemy1Votes");
+        e2Add = GameObject.Find("e2a");
+        e2Sub = GameObject.Find("e2b");
+        e3Button = GameObject.Find("Enemy3Votes");
+        e3Add = GameObject.Find("e3a");
+        e3Sub = GameObject.Find("e3b");
 
-        BetButton.SetActive(false);
-        BetAdd.SetActive(false);
-        BetSub.SetActive(false);
+        e1Button.SetActive(false);
+        e2Button.SetActive(false);
+        e3Button.SetActive(false);
+        e1Add.SetActive(false);
+        e1Sub.SetActive(false);
+        e2Add.SetActive(false);
+        e2Sub.SetActive(false);
+        e3Add.SetActive(false);
+        e3Sub.SetActive(false);
 
         foreach (GameObject g in e1gs)
             g.SetActive(false);
@@ -74,8 +93,8 @@ public class EventManager : NetworkBehaviour
         foreach (GameObject g in gos)
             g.SetActive(false);
 
-        TwoThree.SetActive(false);
-        OneFour.SetActive(false);
+        Praise.SetActive(false);
+        Censure.SetActive(false);
     }
 
     private void Update()
@@ -108,53 +127,27 @@ public class EventManager : NetworkBehaviour
             case "Three":
                 if (isServer)
                 {
-                    RpcSpawnBet(currentBetter.connectionToClient);
                     foreach (PlayerScript p in playerList.players)
                     {
-                        if (p.netId != currentBetter.netId)
-                            RpcDespawnBet(p.connectionToClient);
+                        RpcUpdateLabels(p.connectionToClient, p);
                     }
                 }
-                if (currentIndex == 4)
-                    currentIndex = 0;
-                currentBetter = playerList.players[currentIndex];
-                OneFour.GetComponent<Text>().text = "Player 1 and 4's Total: " + OneFourTotal;
-                TwoThree.GetComponent<Text>().text = "Player 2 and 3's Total: " + TwoThreeTotal;
-                if (turnsInARow == 3)
+                if (playerList.players[0].Praise == 0 && playerList.players[0].Censure == 0
+                    && playerList.players[1].Praise == 0 && playerList.players[1].Censure == 0
+                    && playerList.players[2].Praise == 0 && playerList.players[2].Censure == 0
+                    && playerList.players[3].Praise == 0 && playerList.players[3].Censure == 0)
                 {
-                    if(OneFourTotal > TwoThreeTotal)
+                    int p1T = 0;
+                    int p2T = 0;
+                    int p3T = 0;
+                    int p4T = 0;
+                    foreach (PlayerScript p in playerList.players)
                     {
-                        RpcSpawnPassives(playerList.players[0].connectionToClient, playerList.players[0]);
-                        RpcSpawnPassives(playerList.players[3].connectionToClient, playerList.players[3]);
-
-                        playerList.players[0].passive2 = playerList.players[0].passive.passiveName;
-                        playerList.players[3].passive2 = playerList.players[3].passive.passiveName;
-                        playerList.players[0].passiveManager.CmdSelectPassive(playerList.players[0].highest, playerList.players[0]);
-                        playerList.players[3].passiveManager.CmdSelectPassive(playerList.players[3].highest, playerList.players[3]);
-                    }
-                    else if (OneFourTotal < TwoThreeTotal)
-                    {
-                        RpcSpawnPassives(playerList.players[1].connectionToClient, playerList.players[1]);
-                        RpcSpawnPassives(playerList.players[2].connectionToClient, playerList.players[2]);
-                        playerList.players[1].passive2 = playerList.players[1].passive.passiveName;
-                        playerList.players[2].passive2 = playerList.players[2].passive.passiveName;
-                        playerList.players[1].passiveManager.CmdSelectPassive(playerList.players[1].highest, playerList.players[1]);
-                        playerList.players[2].passiveManager.CmdSelectPassive(playerList.players[2].highest, playerList.players[2]);
-                    }
-                    else
-                    {
-                        RpcSpawnPassives(playerList.players[0].connectionToClient, playerList.players[0]);
-                        RpcSpawnPassives(playerList.players[3].connectionToClient, playerList.players[3]);
-                        RpcSpawnPassives(playerList.players[1].connectionToClient, playerList.players[1]);
-                        RpcSpawnPassives(playerList.players[2].connectionToClient, playerList.players[2]);
-                        playerList.players[0].passive2 = playerList.players[0].passive.passiveName;
-                        playerList.players[3].passive2 = playerList.players[3].passive.passiveName;
-                        playerList.players[1].passive2 = playerList.players[1].passive.passiveName;
-                        playerList.players[2].passive2 = playerList.players[2].passive.passiveName;
-                        playerList.players[0].passiveManager.CmdSelectPassive(playerList.players[0].highest, playerList.players[0]);
-                        playerList.players[3].passiveManager.CmdSelectPassive(playerList.players[3].highest, playerList.players[3]);
-                        playerList.players[1].passiveManager.CmdSelectPassive(playerList.players[1].highest, playerList.players[1]);
-                        playerList.players[2].passiveManager.CmdSelectPassive(playerList.players[2].highest, playerList.players[2]);
+                        //foreach (PlayerScript o in p.sendPlayerData())
+                        //{
+                        //    if (p.enemy1.netId == o)
+                        //        p1T += p.e1Total;
+                        //}
                     }
                     CmdEndEvent();
                 }
@@ -164,20 +157,23 @@ public class EventManager : NetworkBehaviour
                 break;
         }
     }
+
+    [TargetRpc]
+    public void RpcUpdateLabels(NetworkConnection conn, PlayerScript p)
+    {
+        e1Button.GetComponentInChildren<TextMeshProUGUI>().text = "Enemy1: " + p.e1Total;
+        e2Button.GetComponentInChildren<TextMeshProUGUI>().text = "Enemy2: " + p.e2Total;
+        e3Button.GetComponentInChildren<TextMeshProUGUI>().text = "Enemy3: " + p.e3Total;
+        Praise.GetComponent<Text>().text = "Praise Votes: " + p.Praise;
+        Censure.GetComponent<Text>().text = "Censure Votes: " + p.Censure;
+    }
+
     [TargetRpc]
     public void RpcSpawnPassives(NetworkConnection conn, PlayerScript p)
     {
         p.passiveOption1.SetActive(true);
         p.passiveOption2.SetActive(true);
         p.passiveOption3.SetActive(true);
-    }
-
-    [TargetRpc]
-    public void RpcDespawnBet(NetworkConnection conn)
-    {
-        BetButton.SetActive(false);
-        BetAdd.SetActive(false);
-        BetSub.SetActive(false);
     }
 
     [Command (requiresAuthority = false)]
@@ -220,6 +216,7 @@ public class EventManager : NetworkBehaviour
                     break;
                 case "Three":
                     GameObject.Find("Instructions").GetComponent<TextMeshProUGUI>().text = "Rework this one";
+                    RpcSpawnBet();
                     RpcSpawnLabels();
                     currentBetter = playerList.players[0];
                     break;
@@ -232,8 +229,8 @@ public class EventManager : NetworkBehaviour
     [ClientRpc]
     public void RpcSpawnLabels()
     {
-        OneFour.SetActive(true);
-        TwoThree.SetActive(true);
+        Praise.SetActive(true);
+        Censure.SetActive(true);
     }
 
     [Command(requiresAuthority = false)]
@@ -271,18 +268,30 @@ public class EventManager : NetworkBehaviour
         foreach (GameObject g in gos)
             g.SetActive(false);
 
-        OneFour.SetActive(false);
-        TwoThree.SetActive(false);
-        BetButton.SetActive(false);
-        BetAdd.SetActive(false);
-        BetSub.SetActive(false);
+        Praise.SetActive(false);
+        Censure.SetActive(false);
+        e1Button.SetActive(false);
+        e2Button.SetActive(false);
+        e3Button.SetActive(false);
+        e1Add.SetActive(false);
+        e1Sub.SetActive(false);
+        e2Add.SetActive(false);
+        e2Sub.SetActive(false);
+        e3Add.SetActive(false);
+        e3Sub.SetActive(false);
     }
 
-    [TargetRpc]
-    public void RpcSpawnBet(NetworkConnection conn)
+    [ClientRpc]
+    public void RpcSpawnBet()
     {
-        BetButton.SetActive(true);
-        BetAdd.SetActive(true);
-        BetSub.SetActive(true);
+        e1Button.SetActive(true);
+        e2Button.SetActive(true);
+        e3Button.SetActive(true);
+        e1Add.SetActive(true);
+        e1Sub.SetActive(true);
+        e2Add.SetActive(true);
+        e2Sub.SetActive(true);
+        e3Add.SetActive(true);
+        e3Sub.SetActive(true);
     }
 }
