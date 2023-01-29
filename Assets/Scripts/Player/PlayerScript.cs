@@ -632,8 +632,6 @@ public class PlayerScript : NetworkBehaviour
         int rand = UnityEngine.Random.Range(0, cards.Count - 1);
         if (hand.Count < 6)
         {
-          //  Debug.Log(rand);
-          //  Debug.Log(cards.Count);
             hand.Add(cards[rand]);
             cards.Remove(cards[rand]);
         }
