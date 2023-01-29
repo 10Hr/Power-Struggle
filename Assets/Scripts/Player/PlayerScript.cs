@@ -402,7 +402,10 @@ public class PlayerScript : NetworkBehaviour
                 break;
 
             case GameStates.LoadEnemyCards:
-                instructions.text = "Select three cards and press lock in.";
+                if (!FSM.EventTwo)
+                    instructions.text = "Select three cards and press lock in.";
+                else
+                    instructions.text = "Select three cards and press lock in." + "\nDue to he last event gamerule, you don't discard cards you play this turn";
                 TransferEnemyData();
                 switch (passive2)
                 {
@@ -455,7 +458,10 @@ public class PlayerScript : NetworkBehaviour
                 break;
 
             case GameStates.Turn:
-                instructions.text = "When it is your turn, select a card to play it.";
+                if (!FSM.EventTwo)
+                    instructions.text = "When it is your turn, select a card to play it.";
+                else
+                    instructions.text = "When it is your turn, select a card to play it." + "\nDue to he last event gamerule, you don't discard cards you play this turn";
                 if (LockedIn)
                     CmdUnlock();
                 if (enemy1.hand.Count == 6)
@@ -548,7 +554,6 @@ public class PlayerScript : NetworkBehaviour
 
       while (deck.cardData.Count < 40) {}
 
-      //CmdFillDeck(deck.cardData);
       CmdFillDeck(deck.cardData);
 
       for (int i = 0; i < 6; i++)
