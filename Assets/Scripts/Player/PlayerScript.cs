@@ -249,6 +249,8 @@ public class PlayerScript : NetworkBehaviour
     public PlayerScript enemy2;
     public PlayerScript enemy3;
 
+    public LeaderBoardManager leaderBoard;
+
     int g = 0;
     public readonly SyncList<string[]> cards = new SyncList<string[]>();
     //public List<string[]> cards = new List<string[]>();
@@ -274,6 +276,7 @@ public class PlayerScript : NetworkBehaviour
 
     public void Start()
     {
+        leaderBoard = GameObject.Find("Leaderboard").GetComponent<LeaderBoardManager>();
         playerList = GameObject.Find("PlayerList").GetComponent<PlayerList>();
         FSM = GameObject.Find("FSM").GetComponent<GameState>();
         logger = GameObject.Find("LogManager").GetComponent<MessageLogManager>();
@@ -349,6 +352,7 @@ public class PlayerScript : NetworkBehaviour
                 if (playerList.players.Count == 4)
                 {
                     CmdSetPlayer();
+                    leaderBoard.CmdUpdateLeaderBoard();
                     instructions.text = "Allocate points to your stats,\n you have 8 points to start with.";
                 }
                 break;
@@ -402,6 +406,7 @@ public class PlayerScript : NetworkBehaviour
                 break;
 
             case GameStates.LoadEnemyCards:
+                leaderBoard.CmdUpdateLeaderBoard();
                 if (!FSM.EventTwo)
                     instructions.text = "Select three cards and press lock in.";
                 else
@@ -476,6 +481,10 @@ public class PlayerScript : NetworkBehaviour
                     turnToken.SetActive(true);
                 else
                     turnToken.SetActive(false);
+                break;
+
+            case GameStates.Event:
+                leaderBoard.CmdUpdateLeaderBoard();
                 break;
         }
 
@@ -820,14 +829,14 @@ public class PlayerScript : NetworkBehaviour
         */
         for (int i = 0; i < 3; i++)
             if (CheckPassive("Precise")
-            || ((!enemies[i].untargetable) && ((enemies[i].passive.passiveName != "Scrapper" && enemies[i].passive2 != "Scrapper")
-            || (CheckPassive("Scrapper") && enemies[i].Power >= power))
+            || ((!enemies[i].untargetable) 
+            && !(enemies[i].CheckPassive("Scrapper") && enemies[i].Power < power)
             && !(CheckPassive("StrongAllies") && enemies[i].Highest == "strength")
             && !(CheckPassive("SmartAllies") && enemies[i].Highest == "intelligence")
             && !(CheckPassive("ShadyAllies") && enemies[i].Highest == "cunning")
-            && !(CheckPassive("StrongAllies") && Highest == "strength")
-            && !(CheckPassive("SmartAllies") && Highest == "intelligence")
-            && !(CheckPassive("ShadyAllies") && Highest == "cunning")))
+            && !(enemies[i].CheckPassive("StrongAllies") && Highest == "strength")
+            && !(enemies[i].CheckPassive("SmartAllies") && Highest == "intelligence")
+            && !(enemies[i].CheckPassive("ShadyAllies") && Highest == "cunning")))
                 btns[i].SetActive(true);
 
         if(!bntLeft.activeSelf && !bntRight.activeSelf && !bntTop.activeSelf)

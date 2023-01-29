@@ -29,7 +29,8 @@ public class LeaderBoardManager : NetworkBehaviour
     GameState FSM;
 
     // Update is called once per frame
-    void Update()
+
+    private void Update()
     {
         if (playerList.players.Count != 4)
             return;
@@ -77,7 +78,11 @@ public class LeaderBoardManager : NetworkBehaviour
             third.text = thirdString;
             fourth.text = fourthString;
         }
+    }
 
+    [Command (requiresAuthority = false)]
+    public void CmdUpdateLeaderBoard()
+    {
         if (!(FSM.turn == 0 && FSM.currentState == GameStates.Event))
         {
             return;

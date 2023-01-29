@@ -18441,6 +18441,7 @@ MonoBehaviour:
   EndEvent: 0
   playerList: {fileID: 0}
   eMan: {fileID: 0}
+  leaderBoard: {fileID: 60312354}
   turn: 0
 --- !u!114 &2118885773
 MonoBehaviour:

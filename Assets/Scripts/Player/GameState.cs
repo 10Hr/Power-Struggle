@@ -36,6 +36,7 @@ public class GameState : NetworkBehaviour
     private bool allDrawn = false;
     private bool passivesSelected = false;
     private bool allConnected = false;
+    public LeaderBoardManager leaderBoard;
 
     [SyncVar]
     public int turn = 0;
