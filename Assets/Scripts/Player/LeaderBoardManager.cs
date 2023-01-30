@@ -80,7 +80,6 @@ public class LeaderBoardManager : NetworkBehaviour
         }
     }
 
-    [Command (requiresAuthority = false)]
     public void CmdUpdateLeaderBoard()
     {
         if (!(FSM.turn == 0 && FSM.currentState == GameStates.Event))

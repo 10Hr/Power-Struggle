@@ -1,9 +1,9 @@
-strength,gainstr1,0,Gain 1 point in strength,23
-strength,gainstr2,1,gain 2 strength points,24
-strength,trglose1,1,Target 1 player make them lose 1 of their highest stat,25
-strength,trglose1,1,Target 1 player make them lose 1 of their highest stat,26
+strength,gainstr2,0,Gain 2 stat points,23
+strength,gainstr2,1,gain 2 stat points,24
+strength,trglose1,1,Target 1 player make them lose 2 of their highest stat,25
+strength,trglose1,1,Target 1 player make them lose 2 of their highest stat,26
 strength,gainstr6,6,gain 4 strength points,27
-strength,losePG1str,1,lose power and gain 1 strength point per 30 power lost,28
+strength,losePG1str,1,lose power and gain 1 strength point per 30 power lost,28 //left off here
 strength,losePG1str,1,lose power and gain 1 strength point per 30 power lost,29
 strength,trglosePGP,4,Target 1 player make them lose (GAINER) power then gain power = .5 of what player lost,30
 strength,trglosePGP,4,Target 1 player make them lose (GAINER) power then gain power = .5 of what player lost,31

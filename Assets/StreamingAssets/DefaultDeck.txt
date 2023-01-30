@@ -1,23 +1,20 @@
-strength,gainstr1,0,Gain 1 point in Strength,0
-charisma,gainchr1,0,Gain 1 point in Charisma,1
-intelligence,gainint1,0,Gain 1 point in Intelligence,2
-cunning,gaincun1,0,Gain 1 point in Cunning,3
-strength,trgLPSX10,1,Target an opponent - they lose power equal to 10 x Strength,4
-strength,trgLPSX10,1,Target an opponent - they lose power equal to 10 x Strength,5
-intelligence,trgRevI,1,Look at cards in an opponents hand up to how many intelligence points you have (max 6),6
-intelligence,trgRevI,1,Look at cards in an opponents hand up to how many intelligence points you have (max 6),7
-charisma,gainPCHX10,1,Gain power equal to 10 x Charisma,8
-charisma,gainPCHX10,1,Gain power equal to 10 x Charisma,9
-cunning,loseCUGP,1,lose a point in cunning - gain 75 power,10
-cunning,loseCUGP,1,lose a point in cunning - gain 75 power,11
+strength,gainstr2,0,Gain 2 point in Strength,0
+charisma,gainchr2,0,Gain 2 point in Charisma,1
+intelligence,gainint2,0,Gain 2 point in Intelligence,2
+cunning,gaincun2,0,Gain 2 point in Cunning,3
+strength,trgLPSX10,1,Target an opponent - they lose power equal to 5 x half of your highest + Strength,4
+strength,trgLPSX10,1,Target an opponent - they lose power equal to 5 x half of your highest + Strength,5
+intelligence,trgRevI,1,Spend 1 intelligence - Look at all cards in an opponents hand,6
+intelligence,trgRevI,1,Spend 1 intelligence - Look at all cards in an opponents hand,7
+charisma,gainPCHX10,1,Gain power equal to 5 x half of your highest + Charisma,8
+charisma,gainPCHX10,1,Gain power equal to 5 x half of your highest + Charisma,9
+cunning,loseCUGP,1,lose a point in cunning - gain 75 power and a point in a random stat,10
+cunning,loseCUGP,1,lose a point in cunning - gain 75 power and a point in a random stat,11
 intelligence,prevSLoss,0,prevent any stat point loss after this card is played,12
 intelligence,prevPLoss,0,prevent any power loss after this card is played,13
 cunning,trgLoseHighest,0,opponent loses stat point of their highest,14
 cunning,trgLoseHighest,0,opponent loses stat point of their highest,15
-cunning,trgLoseHighest,0,opponent loses stat point of their highest,16
 strength,trgLoseP50,0,opponent loses 50 power,17
 strength,trgLoseP50,0,opponent loses 50 power,18
-strength,trgLoseP50,0,opponent loses 50 power,19
 charisma,gainPower50,0,gain 50 power,20
 charisma,gainPower50,0,gain 50 power,21
-charisma,gainPower50,0,gain 50 power,22

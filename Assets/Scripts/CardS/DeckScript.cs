@@ -601,21 +601,19 @@ public class DeckScript : NetworkBehaviour
         currentPlayer.CmdturnIncrease();
         
     }
-    public void losePG1str() { // lose power and gain 1 strength point per X power lost
-        Debug.Log("lose power and gain 1 strength point per 30 power lost");
-        int X = -30; // power lost per strength gained
+    public void losePG1str() { // lose all stat points except strength, gain power = to them x 30
+        Debug.Log("lose all stat points except strength, gain power = to them x 30");
+        int X = 30; // power lost per strength gained
         int am = 0; // amount of strength points player wants to gain
 
+        // need to make input for am
         am += currentPlayer.Charisma;
         am += currentPlayer.Intelligence;
         am += currentPlayer.Cunning;
-
-        // need to make input for am
-        if (currentPlayer.Power > am * -X)
-        {
-            currentPlayer.ModifyStats("strength", am);
-            currentPlayer.ModifyPower(X * am);
-        }
+        currentPlayer.ModifyStats("charisma", -currentPlayer.Charisma);
+        currentPlayer.ModifyStats("intelligence", -currentPlayer.Intelligence);
+        currentPlayer.ModifyStats("cunning", -currentPlayer.Cunning);
+        currentPlayer.ModifyPower(X * am);
         currentPlayer.DiscardCard(index, currentPlayer.cardSlots);
         currentPlayer.CmdturnIncrease();
         
@@ -667,8 +665,9 @@ public class DeckScript : NetworkBehaviour
     }
     public void loseHGP() { // lose half your strength points and gain power = 20 * lost points
         Debug.Log("lose half your strength points and gain power = X * lost points");
-        currentPlayer.AddPoints(Mathf.RoundToInt(currentPlayer.Strength / 2));
-        currentPlayer.ModifyStats("strength", currentPlayer.Strength);
+        int str = currentPlayer.Strength;
+        currentPlayer.ModifyStats("strength", -currentPlayer.Strength);
+        currentPlayer.AddPoints(Mathf.RoundToInt(str / 2));
         currentPlayer.DiscardCard(index, currentPlayer.cardSlots);
         currentPlayer.CmdturnIncrease();
     }
@@ -899,10 +898,4 @@ public class DeckScript : NetworkBehaviour
                 break;
         }
     }
-
-    //[TargetRpc]
-    //public void RpcReveal(NetworkConnection conn, PlayerScript p, PlayerScript me)
-    //{
-    //    RevealCards(p, 6);
-    //}
 }

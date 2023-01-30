@@ -66,13 +66,13 @@ public class EventManager : NetworkBehaviour
 
         e1Button = GameObject.Find("Enemy1Votes");
         e1Add = GameObject.Find("e1a");
-        e1Sub = GameObject.Find("e1b");
-        e2Button = GameObject.Find("Enemy1Votes");
+        e1Sub = GameObject.Find("e1s");
+        e2Button = GameObject.Find("Enemy2Votes");
         e2Add = GameObject.Find("e2a");
-        e2Sub = GameObject.Find("e2b");
+        e2Sub = GameObject.Find("e2s");
         e3Button = GameObject.Find("Enemy3Votes");
         e3Add = GameObject.Find("e3a");
-        e3Sub = GameObject.Find("e3b");
+        e3Sub = GameObject.Find("e3s");
 
         e1Button.SetActive(false);
         e2Button.SetActive(false);
@@ -137,18 +137,18 @@ public class EventManager : NetworkBehaviour
                     && playerList.players[2].Praise == 0 && playerList.players[2].Censure == 0
                     && playerList.players[3].Praise == 0 && playerList.players[3].Censure == 0)
                 {
-                    int p1T = 0;
-                    int p2T = 0;
-                    int p3T = 0;
-                    int p4T = 0;
+                    int currentHigh = playerList.players[0].eVotes;
+                    PlayerScript currentWinner = playerList.players[0];
                     foreach (PlayerScript p in playerList.players)
                     {
-                        //foreach (PlayerScript o in p.sendPlayerData())
-                        //{
-                        //    if (p.enemy1.netId == o)
-                        //        p1T += p.e1Total;
-                        //}
+                        if (p.eVotes > currentHigh)
+                        {
+                            currentHigh = p.eVotes;
+                            currentWinner = p;
+                        }
                     }
+                    currentWinner.ModifyPower(100);
+                    currentWinner.AddPoints(3);
                     CmdEndEvent();
                 }
                 break;

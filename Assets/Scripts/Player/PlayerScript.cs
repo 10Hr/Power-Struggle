@@ -47,6 +47,8 @@ public class PlayerScript : NetworkBehaviour
     [SyncVar]
     public int Censure = 8;
     [SyncVar]
+    public int eVotes = 0;
+    [SyncVar]
     public int e1Total = 0;
     [SyncVar]
     public int e2Total = 0;
@@ -417,7 +419,6 @@ public class PlayerScript : NetworkBehaviour
                 break;
 
             case GameStates.LoadEnemyCards:
-                leaderBoard.CmdUpdateLeaderBoard();
                 if (!FSM.EventTwo)
                     instructions.text = "Select three cards and press lock in.";
                 else
@@ -471,6 +472,7 @@ public class PlayerScript : NetworkBehaviour
                     CmdThreeSelected(false);
                     lockInButton.SetActive(false);
                 }
+                leaderBoard.CmdUpdateLeaderBoard();
                 break;
 
             case GameStates.Turn:

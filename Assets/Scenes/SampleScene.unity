@@ -1923,19 +1923,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 224298103}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1882713756}
-        m_TargetAssemblyTypeName: StatManager, Assembly-CSharp
-        m_MethodName: Bet
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &224298103
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3184,11 +3172,17 @@ MonoBehaviour:
   TwoThreeTotal: 0
   playerList: {fileID: 1752536911}
   FSM: {fileID: 2118885772}
-  BetButton: {fileID: 0}
-  BetSub: {fileID: 0}
-  BetAdd: {fileID: 0}
-  OneFour: {fileID: 0}
-  TwoThree: {fileID: 0}
+  e1Button: {fileID: 0}
+  e1Sub: {fileID: 0}
+  e1Add: {fileID: 0}
+  e2Button: {fileID: 0}
+  e2Sub: {fileID: 0}
+  e2Add: {fileID: 0}
+  e3Button: {fileID: 0}
+  e3Sub: {fileID: 0}
+  e3Add: {fileID: 0}
+  Praise: {fileID: 0}
+  Censure: {fileID: 0}
 --- !u!114 &380471792
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4343,19 +4337,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 466276247}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1882713756}
-        m_TargetAssemblyTypeName: StatManager, Assembly-CSharp
-        m_MethodName: Bet
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &466276247
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11976,19 +11958,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1237303469}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1882713756}
-        m_TargetAssemblyTypeName: StatManager, Assembly-CSharp
-        m_MethodName: Bet
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &1237303469
 MonoBehaviour:
   m_ObjectHideFlags: 0

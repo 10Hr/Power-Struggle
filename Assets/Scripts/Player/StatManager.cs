@@ -37,50 +37,9 @@ public class StatManager : NetworkBehaviour
         CmdReadyUp(p);
     }
 
-    public void Bet()
+    [Command (requiresAuthority = false)]
+    public void CmdModifyBet(PlayerScript p, string buttontag, string thisButName, PlayerScript e1, PlayerScript e2, PlayerScript e3)
     {
-        GameObject thisButton = UnityEngine.EventSystems.EventSystem.current.currentSelectedGameObject;
-        //TextMeshProUGUI txt = thisButton.GetComponentInChildren<TextMeshProUGUI>();
-        PlayerScript p = GetPlayer();
-        CmdBet(p, thisButton, p.currentBet);
-        p.currentBet = 0;
-        thisButton.GetComponentInChildren<TextMeshProUGUI>().text = "Bet: 0";
-    }
-
-    [Command(requiresAuthority = false)]
-    public void CmdBet(PlayerScript p, GameObject button, int bet)
-    {
-        switch (p.playerName)
-        {
-            case "Player 1":
-            case "Player 4":
-                p.Power = -bet;
-                eMan.OneFourTotal += bet;
-                break;
-
-            case "Player 2":
-            case "Player 3":
-                p.Power = -bet;
-                eMan.TwoThreeTotal += bet;
-                break;
-        }
-        eMan.currentIndex++;
-        if (bet == 0)
-        {
-            eMan.turnsInARow++;
-        }
-        else
-        {
-            eMan.turnsInARow = 0;
-        }
-    }
-
-    public void ModifyBet()
-    {
-        GameObject thisButton = UnityEngine.EventSystems.EventSystem.current.currentSelectedGameObject;
-        string thisButName = thisButton.name;
-        string buttontag = UnityEngine.EventSystems.EventSystem.current.currentSelectedGameObject.tag;
-        PlayerScript p = GetPlayer();
         switch (buttontag)
         {
             case "add":
@@ -91,12 +50,15 @@ public class StatManager : NetworkBehaviour
                     {
                         case "e1a":
                             p.e1Total++;
+                            e1.eVotes++;
                             break;
                         case "e2a":
-                            p.e1Total++;
+                            p.e2Total++;
+                            e2.eVotes++;
                             break;
                         case "e3a":
-                            p.e1Total++;
+                            p.e3Total++;
+                            e3.eVotes++;
                             break;
                     }
                 }
@@ -109,17 +71,29 @@ public class StatManager : NetworkBehaviour
                     {
                         case "e1s":
                             p.e1Total--;
+                            e1.eVotes--;
                             break;
                         case "e2s":
-                            p.e1Total--;
+                            p.e2Total--;
+                            e2.eVotes--;
                             break;
                         case "e3s":
-                            p.e1Total--;
+                            p.e3Total--;
+                            e3.eVotes--;
                             break;
                     }
                 }
                 break;
         }
+    }
+
+    public void ModifyBet()
+    {
+        GameObject thisButton = UnityEngine.EventSystems.EventSystem.current.currentSelectedGameObject;
+        string thisButName = thisButton.name;
+        string buttontag = UnityEngine.EventSystems.EventSystem.current.currentSelectedGameObject.tag;
+        PlayerScript p = GetPlayer();
+        CmdModifyBet(p, buttontag, thisButName, p.enemy1, p.enemy2, p.enemy3);
     }
 
     public void Guess()
