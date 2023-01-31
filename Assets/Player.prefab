@@ -49,28 +49,70 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
-  playerHand: []
-  playerDeck: []
+  sessionId: 
+  username: 
+  ip: 
+  platform: 
   FSM: {fileID: 0}
-  GUI: []
+  logger: {fileID: 0}
+  eMan: {fileID: 0}
   added: 0
+  turnToken: {fileID: 0}
+  Praise: 8
+  Censure: 8
+  eVotes: 0
+  e1Total: 0
+  e2Total: 0
+  e3Total: 0
+  playerName: 
+  untargetable: 0
+  selectedTrg: 0
+  powerGained: 0
+  powerLost: 0
+  turnTaken: 0
+  currentBet: 0
+  cantLosePower: 0
+  guess1: 
+  guess2: 
+  guess3: 
+  passive2: 
+  cantLoseStats: 0
+  numSelected: 0
+  numToReveal: 0
+  allyStat: strength
   charismaText: {fileID: 0}
   strengthText: {fileID: 0}
   intelligenceText: {fileID: 0}
   cunningText: {fileID: 0}
+  passiveOption1: {fileID: 0}
+  passiveOption2: {fileID: 0}
+  passiveOption3: {fileID: 0}
   playerList: {fileID: 0}
   playerNumber: 0
   ready: 0
   highest: 
+  lowest: 
   hasHighest: 0
   hasDeck: 0
+  hasPassive: 0
+  sawDeck: 0
   cardSlotsSpawned: 0
+  cardsSpawned: 0
   deck: {fileID: 0}
   passiveManager: {fileID: 0}
   passive: {fileID: 0}
   passiveName: 
+  LockedIn: 0
+  threeSelected: 0
   playerCheck: []
   cardSlots: []
+  enemySlots1: []
+  enemySlots2: []
+  enemySlots3: []
+  enemy1: {fileID: 0}
+  enemy2: {fileID: 0}
+  enemy3: {fileID: 0}
+  leaderBoard: {fileID: 0}
 --- !u!114 &-3502643074226097910
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -100,7 +142,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f74aedd71d9a4f55b3ce499326d45fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  syncMode: 0
+  syncMode: 1
   syncInterval: 0.1
   clientAuthority: 1
   sendInterval: 0.05
@@ -136,3 +178,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
+  passiveType: 
+  passiveName: 

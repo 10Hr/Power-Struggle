@@ -387,11 +387,11 @@ public class PlayerScript : NetworkBehaviour
                     {
                         //CmdConfirm();//works for all clients
                         logger.AppendMessage(playerName + " " + deck.cardData.Count);
-                        foreach (string[] s in deck.cardData)
-                        {
-                            CmdFillDeck(s);//works for host, no clients
-                            logger.AppendMessage(playerName + " " + cards.Count);
-                        }
+                        CmdFillDeck(deck.cardData[0]);//works for host, no clients
+                        //foreach (string[] s in deck.cardData)
+                        //{
+                        //    CmdFillDeck(s);//works for host, no clients
+                        //}
                     }
                 }
 
@@ -790,7 +790,8 @@ public class PlayerScript : NetworkBehaviour
         //print(playerName + " " + cardData[0]);//runs on host, not on clients
         //cards.Add(cardData[]);
         //foreach (string[] s in cardData)//runs on host, not on clients
-            cards.Add(cardData);//runs on host, not on clients
+        logger.AppendMessage(playerName + " " + cards.Count);
+        cards.Add(cardData);//runs on host, not on clients
     }
     public void fillDeck(List<string[]> cardData)
     {
@@ -809,6 +810,8 @@ public class PlayerScript : NetworkBehaviour
     [Command(requiresAuthority = false)]
     public void CmdSetPlayer()
     {
+        //string[] gamer = { "hi", "bye" };
+        //cards.Add(gamer);
         RpcSetPlayer();
     }
 
