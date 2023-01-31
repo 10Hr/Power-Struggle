@@ -7,7 +7,7 @@ using Mirror;
 
 public class DeckScript : NetworkBehaviour
 {
-    public List<CardScript> cards = new List<CardScript>();
+    //public List<string[]> cards = new List<string[]>();
     public List<string[]> cardData = new List<string[]>();
 
     private delegate void GetEffects();
@@ -36,7 +36,7 @@ public class DeckScript : NetworkBehaviour
     public void CreateDeck(string highest) {
 
         //reset deck in case of switching
-        cards.Clear();
+        //cards.Clear();
         cardData.Clear();
 
         string path = null;
@@ -68,13 +68,13 @@ public class DeckScript : NetworkBehaviour
             while ((line = input.ReadLine()) != null)
             {
                 string[] data = line.Split(',');
-                cards.Add(new CardScript());
+                //cards.Add(new CardScript());
                 cardData.Add(data);
-                cards[cards.Count - 1].Type = data[0];
-                cards[cards.Count - 1].Title = data[1];
-                cards[cards.Count - 1].Cost = data[2];
-                cards[cards.Count - 1].Description = data[3];
-                cards[cards.Count - 1].ID = data[4];
+                //cards[cards.Count - 1].Type = data[0];
+                //cards[cards.Count - 1].Title = data[1];
+                //cards[cards.Count - 1].Cost = data[2];
+                //cards[cards.Count - 1].Description = data[3];
+                //cards[cards.Count - 1].ID = data[4];
             }
 
         path = null;
@@ -86,13 +86,13 @@ public class DeckScript : NetworkBehaviour
         while ((line = input.ReadLine()) != null)
         {
             string[] data = line.Split(',');
-            cards.Add(new CardScript());
+            //cards.Add(new CardScript());
             cardData.Add(data);
-            cards[cards.Count - 1].Type = data[0];
-            cards[cards.Count - 1].Title = data[1];
-            cards[cards.Count - 1].Cost = data[2];
-            cards[cards.Count - 1].Description = data[3];
-            cards[cards.Count - 1].ID = data[4];
+            //cards[cards.Count - 1].Type = data[0];
+            //cards[cards.Count - 1].Title = data[1];
+            //cards[cards.Count - 1].Cost = data[2];
+            //cards[cards.Count - 1].Description = data[3];
+            //cards[cards.Count - 1].ID = data[4];
         }
 
         input.Close();

@@ -379,15 +379,19 @@ public class PlayerScript : NetworkBehaviour
                 if (!hasDeck && hasHighest)
                 {
                     hasDeck = true;
-                    deck = new DeckScript();
+                    //deck = new DeckScript();
+                    DeckScript deck = gameObject.AddComponent(typeof(DeckScript)) as DeckScript;
                     deck.CreateDeck(highest);
                     //logger.AppendMessage(playerName + " Made it before");//works for all clients
-                    if (deck.cardData.Count > 30)
+                    if (deck.cardData.Count > 36)
                     {
                         //CmdConfirm();//works for all clients
-                        //logger.AppendMessage(playerName + " " + deck.cardData.Count + " " + deck.cardData[0][0]);
-                        //foreach (string[] s in deck.cardData)
-                        CmdFillDeck(deck.cardData);//works for host, no clients
+                        logger.AppendMessage(playerName + " " + deck.cardData.Count);
+                        foreach (string[] s in deck.cardData)
+                        {
+                            CmdFillDeck(s);//works for host, no clients
+                            logger.AppendMessage(playerName + " " + cards.Count);
+                        }
                     }
                 }
 
@@ -407,14 +411,14 @@ public class PlayerScript : NetworkBehaviour
 
             case GameStates.DrawCards:
                 //CmdSwapFalse();
-                CmdDrawCard();
-                if (hand.Count == 6 && !cardsSpawned)
-                {
-                    //ran = true;
-                    TransferData(cardSlots, this);
-                    if (cardSlots[5].GetComponent<CardScript>().Title != "")
-                        CmdSpawnedCards();
-                }
+                //CmdDrawCard();
+                //if (hand.Count == 6 && !cardsSpawned)
+                //{
+                //    //ran = true;
+                //    TransferData(cardSlots, this);
+                //    if (cardSlots[5].GetComponent<CardScript>().Title != "")
+                //        CmdSpawnedCards();
+                //}
 
                 break;
 
@@ -576,9 +580,11 @@ public class PlayerScript : NetworkBehaviour
 
       while (deck.cardData.Count < 40) {}
 
-      CmdFillDeck(deck.cardData);
+        //CmdFillDeck(deck.cardData);
+        foreach (string[] s in deck.cardData)
+            CmdFillDeck(s);
 
-      for (int i = 0; i < 6; i++)
+        for (int i = 0; i < 6; i++)
             CmdDrawCard();
 
       foreach (GameObject g in cardSlots)
@@ -777,13 +783,14 @@ public class PlayerScript : NetworkBehaviour
     }
 
     [Command(requiresAuthority = false)]
-    public void CmdFillDeck(List<string[]> cardData)
+    public void CmdFillDeck(string[] cardData)
     {
+        //Debug.Break();
         //logger.AppendMessage(playerName + " " + cardData[0]); //runs on host, not on clients
         //print(playerName + " " + cardData[0]);//runs on host, not on clients
         //cards.Add(cardData[]);
-        foreach (string[] s in cardData)//runs on host, not on clients
-            cards.Add(s);//runs on host, not on clients
+        //foreach (string[] s in cardData)//runs on host, not on clients
+            cards.Add(cardData);//runs on host, not on clients
     }
     public void fillDeck(List<string[]> cardData)
     {

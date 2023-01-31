@@ -32,7 +32,7 @@ public class MessageLogManager : NetworkBehaviour
     {
         messages.Add(message);
         if (messages.Count >= 11)
-            messages.Remove(messages[10]);
+            messages.Remove(messages[0]);
         //RpcSetFirst();
     }
 
