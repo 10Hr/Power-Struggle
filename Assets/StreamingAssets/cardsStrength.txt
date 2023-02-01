@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 strength,gainstr2,0,Gain 2 stat points,20
 strength,gainstr2,1,gain 2 stat points,21
 strength,trglose1,1,Target 1 player make them lose 2 of their highest stat,22
@@ -16,22 +15,3 @@ strength,loseHGP,12,lose half your strength points and gain power = 20 * lost po
 strength,loseHGP,12,lose half your strength points and gain power = 20 * lost points,34
 strength,trgAloseP,20,Target all players make them lose power = 2*(GAINER) the amount of strength points you have,35
 strength,GPpeqstr,2,Gain performance points = strength points,36
-=======
-strength,gainstr2,0,Gain 2 stat points,23
-strength,gainstr2,1,gain 2 stat points,24
-strength,trglose1,1,Target 1 player make them lose 2 of their highest stat,25
-strength,trglose1,1,Target 1 player make them lose 2 of their highest stat,26
-strength,gainstr6,6,gain 4 strength points,27
-strength,losePG1str,1,lose power and gain 1 strength point per 30 power lost,28
-strength,losePG1str,1,lose power and gain 1 strength point per 30 power lost,29
-strength,trglosePGP,4,Target 1 player make them lose (GAINER) power then gain power = .5 of what player lost,30
-strength,trglosePGP,4,Target 1 player make them lose (GAINER) power then gain power = .5 of what player lost,31
-strength,trglosePG1str,6,Target 1 player make them lose (GAINER) power then gain 1 strength point,32
-strength,trglosePG1str,6,Target 1 player make them lose (GAINER) power then gain 1 strength point,33
-strength,loseqstrGP,8,lose a quarter your strength points and gain power = 12 * lost points,34
-strength,loseqstrGP,8,lose a quarter your strength points and gain power = 12 * lost points,35
-strength,loseHGP,12,lose half your strength points and gain power = 20 * lost points,36
-strength,loseHGP,12,lose half your strength points and gain power = 20 * lost points,37
-strength,trgAloseP,20,Target all players make them lose power = 2*(GAINER) the amount of strength points you have,38
-strength,GPpeqstr,2,Gain performance points = strength points,39
->>>>>>> dd0600dc4de7706a3ec13f68e89fefddbcddabd9
