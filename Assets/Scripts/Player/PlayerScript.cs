@@ -7,6 +7,7 @@ using Mirror;
 using System;
 using System.Linq;
 using TMPro;
+using Utp;
 
 //CLIENT SCRIPT
 public class PlayerScript : NetworkBehaviour
@@ -387,6 +388,7 @@ public class PlayerScript : NetworkBehaviour
                     {
                         //CmdConfirm();//works for all clients
                         logger.AppendMessage(playerName + " " + deck.cardData.Count);
+<<<<<<< HEAD
                         foreach (int i in deck.cardDataIDs)
                         {
                             CmdFillDeck(i);//works for host, no clients
@@ -396,6 +398,29 @@ public class PlayerScript : NetworkBehaviour
                         //{
                         //    CmdFillDeck(s);//works for host, no clients
                         //}
+=======
+                        
+                        //CmdFillDeck(deck.cardData[0]);
+                        //CmdFillDeck(deck.cardData[1]);
+                        //CmdFillDeck(deck.cardData[2]);
+                        //CmdFillDeck(deck.cardData[3]);
+                        //CmdFillDeck(deck.cardData[4]);
+                        //CmdFillDeck(deck.cardData[5]);
+                        //CmdFillDeck(deck.cardData[6]);
+                        //CmdFillDeck(deck.cardData[7]);
+                        //CmdFillDeck(deck.cardData[8]);
+                        //CmdFillDeck(deck.cardData[9]);
+                        //CmdFillDeck(deck.cardData[10]);
+                        //CmdFillDeck(deck.cardData[11]);
+                        //CmdFillDeck(deck.cardData[12]);
+                        //CmdFillDeck(deck.cardData[13]);
+                        //CmdFillDeck(deck.cardData[14]); //breaks
+                        //works for host, no clients
+                        foreach (string[] s in deck.cardData)
+                        {
+                            CmdFillDeck(s);//works for host, no clients
+                        }
+>>>>>>> dd0600dc4de7706a3ec13f68e89fefddbcddabd9
                     }
                 }
 
@@ -797,11 +822,16 @@ public class PlayerScript : NetworkBehaviour
         //print(playerName + " " + cardData[0]);//runs on host, not on clients
         //cards.Add(cardData[]);
         //foreach (string[] s in cardData)//runs on host, not on clients
+<<<<<<< HEAD
         logger.AppendMessage(playerName + " " + cards.Count + " " + cardID);
 
         cards.Add(cardID);
         
 
+=======
+        logger.AppendMessage(playerName + " " + cards.Count);
+        cards.Add(cardData);//runs on host, not on clients
+>>>>>>> dd0600dc4de7706a3ec13f68e89fefddbcddabd9
     }
 
     [Command(requiresAuthority = false)]
