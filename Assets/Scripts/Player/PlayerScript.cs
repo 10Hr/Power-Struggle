@@ -689,6 +689,7 @@ public class PlayerScript : NetworkBehaviour
             if (g.GetComponent<CardScript>().Title == "")
             {
                 Debug.Log(p.hand[index]);
+                Debug.Log(deck.sendCardName(p.hand[index]));
                 g.GetComponent<CardScript>().Title = deck.sendCardName(p.hand[index]);
                 g.GetComponent<CardScript>().Type = deck.sendCardType(p.hand[index]);
                 g.GetComponent<CardScript>().ID = p.hand[index].ToString();
