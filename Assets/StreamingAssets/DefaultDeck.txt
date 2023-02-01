@@ -14,7 +14,7 @@ intelligence,prevSLoss,0,prevent any stat point loss after this card is played,1
 intelligence,prevPLoss,0,prevent any power loss after this card is played,13
 cunning,trgLoseHighest,0,opponent loses stat point of their highest,14
 cunning,trgLoseHighest,0,opponent loses stat point of their highest,15
+strength,trgLoseP50,0,opponent loses 50 power,16
 strength,trgLoseP50,0,opponent loses 50 power,17
-strength,trgLoseP50,0,opponent loses 50 power,18
-charisma,gainPower50,0,gain 50 power,20
-charisma,gainPower50,0,gain 50 power,21
+charisma,gainPower50,0,gain 50 power,18
+charisma,gainPower50,0,gain 50 power,19

@@ -9,6 +9,7 @@ public class DeckScript : NetworkBehaviour
 {
     //public List<string[]> cards = new List<string[]>();
     public List<string[]> cardData = new List<string[]>();
+    public List<int> cardDataIDs = new List<int>();
 
     private delegate void GetEffects();
     private List<GetEffects> effects = new List<GetEffects>();
@@ -27,10 +28,14 @@ public class DeckScript : NetworkBehaviour
 
     private NetworkIdentity thisID;
 
+    Dictionary<int, string> nameDict = new Dictionary<int, string>();
+    Dictionary<int, string> typeDict = new Dictionary<int, string>();
+
     // Start is called before the first frame update
     private void Start()
     {
         logger = GameObject.Find("LogManager").GetComponent<MessageLogManager>();    
+        LoadDicts();
     }
 
     public void CreateDeck(string highest) {
@@ -70,6 +75,7 @@ public class DeckScript : NetworkBehaviour
                 string[] data = line.Split(',');
                 //cards.Add(new CardScript());
                 cardData.Add(data);
+                cardDataIDs.Add(int.Parse(data[4]));
                 //cards[cards.Count - 1].Type = data[0];
                 //cards[cards.Count - 1].Title = data[1];
                 //cards[cards.Count - 1].Cost = data[2];
@@ -88,6 +94,7 @@ public class DeckScript : NetworkBehaviour
             string[] data = line.Split(',');
             //cards.Add(new CardScript());
             cardData.Add(data);
+            cardDataIDs.Add(int.Parse(data[4]));
             //cards[cards.Count - 1].Type = data[0];
             //cards[cards.Count - 1].Title = data[1];
             //cards[cards.Count - 1].Cost = data[2];
@@ -101,6 +108,62 @@ public class DeckScript : NetworkBehaviour
             // type,title,cost,Description
             createEffectList();
     }
+
+    public void LoadDicts() {
+
+
+        for (int i = 1; i < 6; i++) {
+            string path = null;
+            string line = null;
+            StreamReader input = null;
+            switch (i)
+            {
+                case 1:
+                    path = Application.dataPath + " /StreamingAssets/cardsCunning.txt";
+                    break;
+
+                case 2:
+                    path = Application.dataPath + " /StreamingAssets/cardsCharisma.txt";
+                    break;
+
+                case 3:
+                    path = Application.dataPath + " /StreamingAssets/cardsIntelligence.txt";
+                    break;
+
+                case 4:
+                    path = Application.dataPath + " /StreamingAssets/cardsStrength.txt";
+                    break;
+                case 5:
+                    path = Application.dataPath + " /StreamingAssets/DefaultDeck.txt";
+                    break;
+            }
+
+            input = new StreamReader(path);
+            line = null;
+            while ((line = input.ReadLine()) != null)
+            {
+                string[] data = line.Split(',');
+                nameDict.Add(int.Parse(data[4]), data[1]);
+                typeDict.Add(int.Parse(data[4]), data[0]);
+
+                //cards[cards.Count - 1].Type = data[0];
+                //cards[cards.Count - 1].Title = data[1];
+                //cards[cards.Count - 1].Cost = data[2];
+                //cards[cards.Count - 1].Description = data[3];
+                //cards[cards.Count - 1].ID = data[4];
+            }
+            input.Close();  //close the file
+        }
+        
+
+    }
+
+    public string sendCardName(int id) {
+        return nameDict[id];
+    }
+    public string sendCardType(int id) {
+        return typeDict[id];
+    } 
    
     public void pullEff(string title, string id) {
         currentID = id;

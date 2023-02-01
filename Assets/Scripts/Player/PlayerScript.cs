@@ -265,9 +265,9 @@ public class PlayerScript : NetworkBehaviour
     public LeaderBoardManager leaderBoard;
 
     int g = 0;
-    public readonly SyncList<string[]> cards = new SyncList<string[]>();
+    public readonly SyncList<int> cards = new SyncList<int>();
     //public List<string[]> cards = new List<string[]>();
-    public readonly SyncList<string[]> hand = new SyncList<string[]>();
+    public readonly SyncList<int> hand = new SyncList<int>();
     public readonly SyncList<Passive> choicesList = new SyncList<Passive>();
 
     GameObject bntTop;
@@ -383,11 +383,15 @@ public class PlayerScript : NetworkBehaviour
                     DeckScript deck = gameObject.AddComponent(typeof(DeckScript)) as DeckScript;
                     deck.CreateDeck(highest);
                     //logger.AppendMessage(playerName + " Made it before");//works for all clients
-                    if (deck.cardData.Count > 36)
+                    if (deck.cardDataIDs.Count > 36)
                     {
                         //CmdConfirm();//works for all clients
                         logger.AppendMessage(playerName + " " + deck.cardData.Count);
-                        CmdFillDeck(deck.cardData[0]);//works for host, no clients
+                        foreach (int i in deck.cardDataIDs)
+                        {
+                            CmdFillDeck(i);//works for host, no clients
+                        }
+                        //CmdFillDeck();//works for host, no clients
                         //foreach (string[] s in deck.cardData)
                         //{
                         //    CmdFillDeck(s);//works for host, no clients
@@ -411,14 +415,14 @@ public class PlayerScript : NetworkBehaviour
 
             case GameStates.DrawCards:
                 //CmdSwapFalse();
-                //CmdDrawCard();
-                //if (hand.Count == 6 && !cardsSpawned)
-                //{
-                //    //ran = true;
-                //    TransferData(cardSlots, this);
-                //    if (cardSlots[5].GetComponent<CardScript>().Title != "")
-                //        CmdSpawnedCards();
-                //}
+                CmdDrawCard();
+                if (hand.Count == 6 && !cardsSpawned)
+                {
+                    //ran = true;
+                    TransferData(cardSlots, this);
+                    if (cardSlots[5].GetComponent<CardScript>().Title != "")
+                        CmdSpawnedCards();
+                }
 
                 break;
 
@@ -581,8 +585,11 @@ public class PlayerScript : NetworkBehaviour
       while (deck.cardData.Count < 40) {}
 
         //CmdFillDeck(deck.cardData);
-        foreach (string[] s in deck.cardData)
-            CmdFillDeck(s);
+
+        foreach (int i in deck.cardDataIDs)
+        {
+            CmdFillDeck(i);//works for host, no clients
+        }
 
         for (int i = 0; i < 6; i++)
             CmdDrawCard();
@@ -662,13 +669,13 @@ public class PlayerScript : NetworkBehaviour
         int index = 0;
         foreach (GameObject g in slots)
         {
-            if (g.GetComponent<CardScript>().Title != p.hand[index][1])
+            if (g.GetComponent<CardScript>().Title != p.deck.sendCardName(p.hand[index]))
             {
                 g.GetComponent<CardScript>().revealed = false;
             }
-            g.GetComponent<CardScript>().Title = p.hand[index][1];
-            g.GetComponent<CardScript>().Type = p.hand[index][0];
-            g.GetComponent<CardScript>().ID = p.hand[index][4];
+            g.GetComponent<CardScript>().Title = p.deck.sendCardName(p.hand[index]);
+            g.GetComponent<CardScript>().Type = p.deck.sendCardType(p.hand[index]);
+            g.GetComponent<CardScript>().ID = p.hand[index].ToString();
             index++;
         }
     }
@@ -680,9 +687,9 @@ public class PlayerScript : NetworkBehaviour
         {
             if (g.GetComponent<CardScript>().Title == "")
             {
-                g.GetComponent<CardScript>().Title = p.hand[index][1];
-                g.GetComponent<CardScript>().Type = p.hand[index][0];
-                g.GetComponent<CardScript>().ID = p.hand[index][4];
+                g.GetComponent<CardScript>().Title = p.deck.sendCardName(p.hand[index]);
+                g.GetComponent<CardScript>().Type = p.deck.sendCardType(p.hand[index]);
+                g.GetComponent<CardScript>().ID = p.hand[index].ToString();
                 break;
             }
             index++;
@@ -783,22 +790,18 @@ public class PlayerScript : NetworkBehaviour
     }
 
     [Command(requiresAuthority = false)]
-    public void CmdFillDeck(string[] cardData)
+    public void CmdFillDeck(int cardID)
     {
         //Debug.Break();
         //logger.AppendMessage(playerName + " " + cardData[0]); //runs on host, not on clients
         //print(playerName + " " + cardData[0]);//runs on host, not on clients
         //cards.Add(cardData[]);
         //foreach (string[] s in cardData)//runs on host, not on clients
-        logger.AppendMessage(playerName + " " + cards.Count);
-        cards.Add(cardData);//runs on host, not on clients
-    }
-    public void fillDeck(List<string[]> cardData)
-    {
-        logger.AppendMessage(playerName + " " + cardData.Count);
-        print(cardData.Count);
-        foreach (string[] s in cardData)
-            cards.Add(s);
+        logger.AppendMessage(playerName + " " + cards.Count + " " + cardID);
+
+        cards.Add(cardID);
+        
+
     }
 
     [Command(requiresAuthority = false)]
@@ -947,7 +950,7 @@ public class PlayerScript : NetworkBehaviour
             cards.Add(hand[index]);
             hand[index] = cards[rand];
             cards.Remove(cards[rand]);
-            RpcFillSlot(connectionToClient, slots, hand[index][1], hand[index][0], hand[index][4]);
+            RpcFillSlot(connectionToClient, slots, hand[index]);
         }
         else
         {
@@ -959,7 +962,7 @@ public class PlayerScript : NetworkBehaviour
             //cards.Add(hand[index]);
             //hand[index] = sendPlayerData()[randEnemy].cards[rand];
             //sendPlayerData()[randEnemy].cards.Remove(sendPlayerData()[randEnemy].cards[rand]);
-            RpcFillSlot(connectionToClient, slots, hand[index][1], hand[index][0], hand[index][4]);
+            RpcFillSlot(connectionToClient, slots, hand[index]);
         }
     }
 
@@ -972,20 +975,20 @@ public class PlayerScript : NetworkBehaviour
                 targetPlayer.cards.Add(targetPlayer.hand[indexes[i]]);
                 targetPlayer.hand[indexes[i]] = targetPlayer.cards[rand];
                 targetPlayer.cards.Remove(targetPlayer.cards[rand]);
-                RpcFillSlot(targetPlayer.connectionToClient, slots, targetPlayer.hand[indexes[i]][1], targetPlayer.hand[indexes[i]][0], targetPlayer.hand[indexes[i]][4]);
+                RpcFillSlot(targetPlayer.connectionToClient, slots, targetPlayer.hand[indexes[i]]);
         }
     }
 
     [TargetRpc]
-    public void RpcFillSlot(NetworkConnection conn, GameObject[] slots, string title, string type, string id)
+    public void RpcFillSlot(NetworkConnection conn, GameObject[] slots, int id)
     {
         foreach (GameObject g in slots)
         {
             if (g.GetComponent<CardScript>().Title == "")
             {
-                g.GetComponent<CardScript>().Title = title;
-                g.GetComponent<CardScript>().Type = type;
-                g.GetComponent<CardScript>().ID = id;
+                g.GetComponent<CardScript>().Title = deck.sendCardName(id);
+                g.GetComponent<CardScript>().Type = deck.sendCardType(id);
+                g.GetComponent<CardScript>().ID = id.ToString();
             }
         }
     }

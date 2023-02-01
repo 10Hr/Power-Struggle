@@ -89,9 +89,14 @@ public class CardScript : NetworkBehaviour
         }
     }
 
+
+
+
     // Start is called before the first frame update
     void Start()
     {
+
+
         defaultY = gameObject.transform.localPosition.y;
         gameObject.GetComponent<SpriteRenderer>().sprite = cardBack;
         sortingDefault = gameObject.GetComponent<SpriteRenderer>().sortingOrder;
@@ -223,4 +228,7 @@ public class CardScript : NetworkBehaviour
         CardScript display = GameObject.Find("LastPlayed").GetComponent<CardScript>();
         display.cardBack = sprArray[id];
     }
+
+
+  
 }
