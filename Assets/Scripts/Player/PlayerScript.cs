@@ -387,7 +387,6 @@ public class PlayerScript : NetworkBehaviour
                     if (deck.cardDataIDs.Count > 36)
                     {
                         //CmdConfirm();//works for all clients
-                        logger.AppendMessage(playerName + " " + deck.cardData.Count);
                         foreach (int i in deck.cardDataIDs)
                         {
                             CmdFillDeck(i);//works for host, no clients
@@ -670,12 +669,12 @@ public class PlayerScript : NetworkBehaviour
         int index = 0;
         foreach (GameObject g in slots)
         {
-            if (g.GetComponent<CardScript>().Title != deck.sendCardName(p.hand[index]))
+            if (g.GetComponent<CardScript>().Title != gameObject.GetComponent<DeckScript>().sendCardName(p.hand[index]))
             {
                 g.GetComponent<CardScript>().revealed = false;
             }
-            g.GetComponent<CardScript>().Title = deck.sendCardName(p.hand[index]);
-            g.GetComponent<CardScript>().Type = deck.sendCardType(p.hand[index]);
+            g.GetComponent<CardScript>().Title = gameObject.GetComponent<DeckScript>().sendCardName(p.hand[index]);
+            g.GetComponent<CardScript>().Type = gameObject.GetComponent<DeckScript>().sendCardType(p.hand[index]);
             g.GetComponent<CardScript>().ID = p.hand[index].ToString();
             index++;
         }
@@ -689,9 +688,9 @@ public class PlayerScript : NetworkBehaviour
             if (g.GetComponent<CardScript>().Title == "")
             {
                 Debug.Log(p.hand[index]);
-                Debug.Log(deck.sendCardName(p.hand[index]));
-                g.GetComponent<CardScript>().Title = deck.sendCardName(p.hand[index]);
-                g.GetComponent<CardScript>().Type = deck.sendCardType(p.hand[index]);
+                //Debug.Log(deck.sendCardName(p.hand[index]));
+                g.GetComponent<CardScript>().Title = gameObject.GetComponent<DeckScript>().sendCardName(p.hand[index]);
+                g.GetComponent<CardScript>().Type = gameObject.GetComponent<DeckScript>().sendCardType(p.hand[index]);
                 g.GetComponent<CardScript>().ID = p.hand[index].ToString();
                 break;
             }
@@ -900,7 +899,7 @@ public class PlayerScript : NetworkBehaviour
                     break;
             }
             MaxPoints = amount;
-        logger.AppendMessage(String.Format("{0} gained {1} {2}", playerName, amount, type));
+        logger.AppendMessage(string.Format("{0} gained {1} {2}", playerName, amount, type));
         CalcLowest();
         CalcHighest();
     }
@@ -908,7 +907,7 @@ public class PlayerScript : NetworkBehaviour
     [Command(requiresAuthority = false)]
     public void ResetStats()
     {
-        logger.AppendMessage(String.Format("{0} is resetting their stats", playerName));
+        logger.AppendMessage(string.Format("{0} is resetting their stats", playerName));
         AvailablePoints = Charisma + Strength + Cunning + Intelligence;
         Strength = 0;
         Charisma = 0;
@@ -919,7 +918,7 @@ public class PlayerScript : NetworkBehaviour
     [Command(requiresAuthority = false)]
     public void ModifyPower(int amount)
     {
-        logger.AppendMessage(String.Format("{0} gained {1} power", playerName, amount));
+        logger.AppendMessage(string.Format("{0} gained {1} power", playerName, amount));
         if (cantLosePower && amount < 0)
             return;
         if (amount < 0 && (passive.passiveName == "Taunt" || passive2 == "Taunt"))
@@ -989,8 +988,8 @@ public class PlayerScript : NetworkBehaviour
         {
             if (g.GetComponent<CardScript>().Title == "")
             {
-                g.GetComponent<CardScript>().Title = deck.sendCardName(id);
-                g.GetComponent<CardScript>().Type = deck.sendCardType(id);
+                g.GetComponent<CardScript>().Title = gameObject.GetComponent<DeckScript>().sendCardName(id);
+                g.GetComponent<CardScript>().Type = gameObject.GetComponent<DeckScript>().sendCardType(id);
                 g.GetComponent<CardScript>().ID = id.ToString();
             }
         }
@@ -1001,7 +1000,7 @@ public class PlayerScript : NetworkBehaviour
     {
         if (passive.passiveName == "SeeDeck" || passive2 == "SeeDeck")
         {
-            deck.SeeDeck();
+            gameObject.GetComponent<DeckScript>().SeeDeck();
             CmdSetSawDeck(true);
         }
     }

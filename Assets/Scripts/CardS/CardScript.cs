@@ -201,7 +201,7 @@ public class CardScript : NetworkBehaviour
             if ((currentP.passive.passiveName == "SeeDeck" || currentP.passive2 == "SeeDeck") && !currentP.selectedTrg)
                     return;
                 CmdDisplayCard(int.Parse(this.id), NetworkClient.localPlayer.GetComponent<PlayerScript>());
-                gameState.currentPlayer.deck.pullEff(title, id);
+                gameState.currentPlayer.GetComponent<DeckScript>().pullEff(title, id);
                 title = "";
                 description = "";
                 cost = "";
