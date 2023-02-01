@@ -670,12 +670,12 @@ public class PlayerScript : NetworkBehaviour
         int index = 0;
         foreach (GameObject g in slots)
         {
-            if (g.GetComponent<CardScript>().Title != p.deck.sendCardName(p.hand[index]))
+            if (g.GetComponent<CardScript>().Title != deck.sendCardName(p.hand[index]))
             {
                 g.GetComponent<CardScript>().revealed = false;
             }
-            g.GetComponent<CardScript>().Title = p.deck.sendCardName(p.hand[index]);
-            g.GetComponent<CardScript>().Type = p.deck.sendCardType(p.hand[index]);
+            g.GetComponent<CardScript>().Title = deck.sendCardName(p.hand[index]);
+            g.GetComponent<CardScript>().Type = deck.sendCardType(p.hand[index]);
             g.GetComponent<CardScript>().ID = p.hand[index].ToString();
             index++;
         }
@@ -688,8 +688,9 @@ public class PlayerScript : NetworkBehaviour
         {
             if (g.GetComponent<CardScript>().Title == "")
             {
-                g.GetComponent<CardScript>().Title = p.deck.sendCardName(p.hand[index]);
-                g.GetComponent<CardScript>().Type = p.deck.sendCardType(p.hand[index]);
+                Debug.Log(p.hand[index]);
+                g.GetComponent<CardScript>().Title = deck.sendCardName(p.hand[index]);
+                g.GetComponent<CardScript>().Type = deck.sendCardType(p.hand[index]);
                 g.GetComponent<CardScript>().ID = p.hand[index].ToString();
                 break;
             }
