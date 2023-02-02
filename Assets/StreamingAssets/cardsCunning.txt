@@ -1,17 +1,20 @@
-cunning,gainstreqcun,0,Gain strength equal to cunning,74
-cunning,gaininteqcun,0,Gain intelligence equal to cunning,75
-cunning,gainchreqcun,0,Gain charisma equal to cunning,76
-cunning,trggain4cun,0,Target an opponent they gain 4 cunning,77
-cunning,trggain4cun,0,Target an opponent they gain 4 cunning,78
-cunning,trggain4str,0,Target an opponent they gain 4 strength,79
-cunning,trggain4str,0,Target an opponent they gain 4 strength,80
-cunning,trggain4chr,0,Target an opponent they gain 4 charisma,81
-cunning,trggain4chr,0,Target an opponent they gain 4 charisma,82
-cunning,trggain4int,0,Target an opponent they gain 4 intelligence,83
-cunning,trggain4int,0,Target an opponent they gain 4 intelligence,84
-cunning,bcuntrg,0,Become untargetable for the rest of this turn,85
-cunning,bcuntrg,0,Become untargetable for the rest of this turn,86
-cunning,selpaslowstat,0,Select a passive from your lowest stat,87
-cunning,gainPeq5xallstat,0,Gain power equal to 5x all your stat points,88
-cunning,gainPeq5xallstat,0,Gain power equal to 5x all your stat points,89
-cunning,relocateAllStats,0,Relocate all your stat points,90
+cunning,cun1,0,Gain strength equal to cunning,80
+cunning,cun2,0,Gain intelligence equal to cunning,81
+cunning,cun3,0,Gain charisma equal to cunning,82
+cunning,cun4,0,Target an opponent they gain 4 cunning,83
+cunning,cun4,0,Target an opponent they gain 4 cunning,84
+cunning,cun5,0,Target an opponent they gain 4 strength,85
+cunning,cun5,0,Target an opponent they gain 4 strength,86
+cunning,cun6,0,Target an opponent they gain 4 charisma,87
+cunning,cun6,0,Target an opponent they gain 4 charisma,88
+cunning,cun7,0,Target an opponent they gain 4 intelligence,89
+cunning,cun7,0,Target an opponent they gain 4 intelligence,90
+cunning,cun8,0,Become untargetable for the rest of this turn,91
+cunning,cun8,0,Become untargetable for the rest of this turn,92
+cunning,cun9,0,Select a passive from your lowest stat,93
+cunning,cun10,0,Gain power equal to 5x all your stat points,94
+cunning,cun10,0,Gain power equal to 5x all your stat points,95
+cunning,cun11,0,All opponents lose power equal to 5x all their stat points,96
+cunning,cun11,0,All opponents lose power equal to 5x all their stat points,97
+cunning,cun11,0,All opponents lose power equal to 5x all their stat points,98
+cunning,cun12,0,Relocate all your stat points,99

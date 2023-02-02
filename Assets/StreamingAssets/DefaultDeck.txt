@@ -1,20 +1,20 @@
-strength,gainstr2,0,Gain 2 point in Strength,0
-charisma,gainchr2,0,Gain 2 point in Charisma,1
-intelligence,gainint2,0,Gain 2 point in Intelligence,2
-cunning,gaincun2,0,Gain 2 point in Cunning,3
-strength,trgLPSX10,1,Target an opponent - they lose power equal to 5 x half of your highest + Strength,4
-strength,trgLPSX10,1,Target an opponent - they lose power equal to 5 x half of your highest + Strength,5
-intelligence,trgRevI,1,Spend 1 intelligence - Look at all cards in an opponents hand,6
-intelligence,trgRevI,1,Spend 1 intelligence - Look at all cards in an opponents hand,7
-charisma,gainPCHX10,1,Gain power equal to 5 x half of your highest + Charisma,8
-charisma,gainPCHX10,1,Gain power equal to 5 x half of your highest + Charisma,9
-cunning,loseCUGP,1,lose a point in cunning - gain 75 power and a point in a random stat,10
-cunning,loseCUGP,1,lose a point in cunning - gain 75 power and a point in a random stat,11
-intelligence,prevSLoss,0,prevent any stat point loss after this card is played,12
-intelligence,prevPLoss,0,prevent any power loss after this card is played,13
-cunning,trgLoseHighest,0,opponent loses stat point of their highest,14
-cunning,trgLoseHighest,0,opponent loses stat point of their highest,15
-strength,trgLoseP50,0,opponent loses 50 power,16
-strength,trgLoseP50,0,opponent loses 50 power,17
-charisma,gainPower50,0,gain 50 power,18
-charisma,gainPower50,0,gain 50 power,19
+strength,def1,0,Gain 2 point in Strength,0
+charisma,def2,0,Gain 2 point in Charisma,1
+intelligence,def3,0,Gain 2 point in Intelligence,2
+cunning,def4,0,Gain 2 point in Cunning,3
+strength,def5,1,Target an opponent - they lose power equal to 5 x half of your highest + Strength,4
+strength,def5,1,Target an opponent - they lose power equal to 5 x half of your highest + Strength,5
+intelligence,def6,1,Spend 1 intelligence - Look at all cards in an opponents hand,6
+intelligence,def6,1,Spend 1 intelligence - Look at all cards in an opponents hand,7
+charisma,def7,1,Gain power equal to 5 x half of your highest + Charisma,8
+charisma,def7,1,Gain power equal to 5 x half of your highest + Charisma,9
+cunning,def8,1,lose a point in cunning - gain 75 power and a point in a random stat,10
+cunning,def8,1,lose a point in cunning - gain 75 power and a point in a random stat,11
+intelligence,def9,0,prevent any stat point loss after this card is played,12
+intelligence,def10,0,prevent any power loss after this card is played,13
+cunning,def11,0,opponent loses stat point of their highest,14
+cunning,def11,0,opponent loses stat point of their highest,15
+strength,def12,0,opponent loses 50 power,16
+strength,def12,0,opponent loses 50 power,17
+charisma,def13,0,gain 50 power,18
+charisma,def13,0,gain 50 power,19

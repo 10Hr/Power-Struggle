@@ -1,17 +1,20 @@
-strength,gainstr2,0,Gain 2 stat points,20
-strength,gainstr2,1,gain 2 stat points,21
-strength,trglose1,1,Target 1 player make them lose 2 of their highest stat,22
-strength,trglose1,1,Target 1 player make them lose 2 of their highest stat,23
-strength,gainstr6,6,gain 4 strength points,24
-strength,losePG1str,1,lose power and gain 1 strength point per 30 power lost,25
-strength,losePG1str,1,lose power and gain 1 strength point per 30 power lost,26
-strength,trglosePGP,4,Target 1 player make them lose (GAINER) power then gain power = .5 of what player lost,27
-strength,trglosePGP,4,Target 1 player make them lose (GAINER) power then gain power = .5 of what player lost,28
-strength,trglosePG1str,6,Target 1 player make them lose (GAINER) power then gain 1 strength point,29
-strength,trglosePG1str,6,Target 1 player make them lose (GAINER) power then gain 1 strength point,30
-strength,loseqstrGP,8,lose a quarter your strength points and gain power = 12 * lost points,31
-strength,loseqstrGP,8,lose a quarter your strength points and gain power = 12 * lost points,32
-strength,loseHGP,12,lose half your strength points and gain power = 20 * lost points,33
-strength,loseHGP,12,lose half your strength points and gain power = 20 * lost points,34
-strength,trgAloseP,20,Target all players make them lose power = 2*(GAINER) the amount of strength points you have,35
-strength,GPpeqstr,2,Gain performance points = strength points,36
+strength,str1,0,Gain 2 stat points,20
+strength,str1,1,gain 2 stat points,21
+strength,str2,1,Target 1 player make them lose 2 of their highest stat,22
+strength,str2,1,Target 1 player make them lose 2 of their highest stat,23
+strength,str3,6,gain 4 strength points,24
+strength,str4,1,lose all stat points except strength - gain power = to them x 20,25
+strength,str4,1,lose all stat points except strength - gain power = to them x 20,26
+strength,str5,4,Target 1 player make them lose (GAINER) power then gain power = .5 of what player lost,27
+strength,str5,4,Target 1 player make them lose (GAINER) power then gain power = .5 of what player lost,28
+strength,str6,6,Target 1 player make them lose (GAINER) power then gain 1 strength point,29
+strength,str6,6,Target 1 player make them lose (GAINER) power then gain 1 strength point,30
+strength,str7,8,lose half of your strength points and gain power = 10 x lost points,31
+strength,str7,8,lose half of your strength points and gain power = 10 x lost points,32
+strength,str8,12,lose all of your strength and gain available points = to that,33
+strength,str8,12,lose all of your strength and gain available points = to that,34
+strength,str9,20,Target all opponents make them lose power = 2*(GAINER) the amount of strength points you have,35
+strength,str10,0,Target all players including yourself - they lose 2 stat points of their highest,36
+strength,str10,0,Target all players including yourself - they lose 2 stat points of their highest,37
+strength,str11,0,Lose all of your power - gain strength = to that value / 25,38
+strength,str12,2,Select a new passive,39

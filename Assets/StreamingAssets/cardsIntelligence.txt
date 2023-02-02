@@ -1,20 +1,20 @@
-intelligence,gainint1,0,Reveal 2 card in an opponents hand and gain 2 stat points,37
-intelligence,gainint1,0,Reveal 2 card in an opponents hand and gain 2 stat points,38
-intelligence,gainint1,0,Reveal 2 card in an opponents hand and gain 2 stat points,39
-intelligence,trglosePeq20xrev,3,Target a player they lose power equal to 20 x the amount of cards in their hand that are revealed,40
-intelligence,trglosePeq20xrev,3,Target a player they lose power equal to 20 x the amount of cards in their hand that are revealed,41
-intelligence,trggainhalfP,4,Target a player gain half the power they have gained this turn,42
-intelligence,trggainhalfP,4,Target a player gain half the power they have gained this turn,43
-intelligence,trgdisallrev,2,Target a player discard all their revealed cards then reveal 3 more,44
-intelligence,trgdisallrev,2,Target a player discard all their revealed cards then reveal 3 more,45
-intelligence,trganyrevhndgain50P,7,Gain stat points equal to all revealed cards,46
-intelligence,trgRevI,1,Look at cards in an opponents hand up to how many intelligence points you have (max 6),47
-intelligence,trgRevI,1,Look at cards in an opponents hand up to how many intelligence points you have (max 6),48
-intelligence,trgRevI,1,Look at cards in an opponents hand up to how many intelligence points you have (max 6),49
-intelligence,trgLS2R,3,Target a player they lose stat points of their highest for every 2 revealed cards in their hand,50
-intelligence,trgLS2R,3,Target a player they lose stat points of their highest for every 2 revealed cards in their hand,51
-intelligence,gainP10XRAllE,3,Gain power equal to 10 x the amount of revealed cards in all your opponents hands,52
-intelligence,gainP10XRAllE,3,Gain power equal to 10 x the amount of revealed cards in all your opponents hands,53
-intelligence,iflostPgainPrethalfelselose100,4,If you lost power so far this turn gain it back - return half of the loses to all players. if you haven't - lose 100 power,54
-intelligence,mulligan,0,Discard all your cards then draw 6 new ones,55
-intelligence,selectNP,2,Select a new passive,56
+intelligence,int1,0,Reveal 2 card in an opponents hand and gain 2 stat points,40
+intelligence,int1,0,Reveal 2 card in an opponents hand and gain 2 stat points,41
+intelligence,int1,0,Reveal 2 card in an opponents hand and gain 2 stat points,42
+intelligence,int2,3,Target a player they lose power equal to 15 x the amount of cards in their hand that are revealed,43
+intelligence,int2,3,Target a player they lose power equal to 15 x the amount of cards in their hand that are revealed,44
+intelligence,int3,4,Target a player gain half the power they have gained this turn,45
+intelligence,int3,4,Target a player gain half the power they have gained this turn,46
+intelligence,int4,2,Target a player discard all their revealed cards then reveal 3 more,47
+intelligence,int4,2,Target a player discard all their revealed cards then reveal 3 more,48
+intelligence,int5,7,Gain stat points equal to all revealed cards,49
+intelligence,int6,1,Look at cards in an opponents hand up to how many intelligence points you have (max 6),50
+intelligence,int6,1,Look at cards in an opponents hand up to how many intelligence points you have (max 6),51
+intelligence,int6,1,Look at cards in an opponents hand up to how many intelligence points you have (max 6),52
+intelligence,int7,3,Target a player they lose stat points of their highest for every 2 revealed cards in their hand,53
+intelligence,int7,3,Target a player they lose stat points of their highest for every 2 revealed cards in their hand,54
+intelligence,int8,3,Gain power equal to 10 x the amount of revealed cards in all your opponents hands,55
+intelligence,int8,3,Gain power equal to 10 x the amount of revealed cards in all your opponents hands,56
+intelligence,int9,4,If you lost power so far this turn gain it back - return half of the loses to all players. if you haven't - lose 100 power,57
+intelligence,int10,0,Discard all your cards then draw 6 new ones,58
+intelligence,str11,2,Select a new passive,59

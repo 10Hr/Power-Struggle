@@ -89,20 +89,14 @@ public class CardScript : NetworkBehaviour
         }
     }
 
-
-
-
     // Start is called before the first frame update
     void Start()
     {
-
-
         defaultY = gameObject.transform.localPosition.y;
         gameObject.GetComponent<SpriteRenderer>().sprite = cardBack;
         sortingDefault = gameObject.GetComponent<SpriteRenderer>().sortingOrder;
-//        gameState = GameObject.Find("FSM").GetComponent<GameState>();
 
-        sprArray = Resources.LoadAll<Sprite>("PlayTestSprites");
+        sprArray = Resources.LoadAll<Sprite>("PlayTest2SpriteSheet");
     }
 
     // Update is called once per frame

@@ -857,12 +857,12 @@ public class PlayerScript : NetworkBehaviour
             if (CheckPassive("Precise")
             || ((!enemies[i].untargetable) 
             && !(enemies[i].CheckPassive("Scrapper") && enemies[i].Power < power)
-            && !(CheckPassive("StrongAllies") && enemies[i].Highest == "strength")
-            && !(CheckPassive("SmartAllies") && enemies[i].Highest == "intelligence")
-            && !(CheckPassive("ShadyAllies") && enemies[i].Highest == "cunning")
-            && !(enemies[i].CheckPassive("StrongAllies") && Highest == "strength")
-            && !(enemies[i].CheckPassive("SmartAllies") && Highest == "intelligence")
-            && !(enemies[i].CheckPassive("ShadyAllies") && Highest == "cunning")))
+            && !(allyStat == "strength" && enemies[i].Highest == "strength")
+            && !(allyStat == "intelligence" && enemies[i].Highest == "intelligence")
+            && !(allyStat == "cunning" && enemies[i].Highest == "cunning")
+            && !(enemies[i].allyStat == "strength" && Highest == "strength")
+            && !(enemies[i].allyStat == "intelligence" && Highest == "intelligence")
+            && !(enemies[i].allyStat == "cunning" && Highest == "cunning")))
                 btns[i].SetActive(true);
 
         if(!bntLeft.activeSelf && !bntRight.activeSelf && !bntTop.activeSelf)
@@ -956,14 +956,6 @@ public class PlayerScript : NetworkBehaviour
         }
         else
         {
-            //PlayerScript[] enemies = { enemy1, enemy2, enemy3 };
-            //int randEnemy = UnityEngine.Random.Range(0, 3);
-            //PlayerScript temp = enemies[randEnemy];
-            //PlayerScript temp = sendPlayerData()[randEnemy];
-            //int rand = UnityEngine.Random.Range(0, sendPlayerData()[randEnemy].cards.Count - 1);
-            //cards.Add(hand[index]);
-            //hand[index] = sendPlayerData()[randEnemy].cards[rand];
-            //sendPlayerData()[randEnemy].cards.Remove(sendPlayerData()[randEnemy].cards[rand]);
             RpcFillSlot(connectionToClient, slots, hand[index]);
         }
     }

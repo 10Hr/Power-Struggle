@@ -1,0 +1,2322 @@
+fileFormatVersion: 2
+guid: 63ef183b74efdf54c850a0388ad7529e
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 11
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMasterTextureLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 210
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: PlayTest2SpriteSheet_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 6552
+        width: 520
+        height: 728
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3bdaa8e86d160cf4b9e24afd88d87da6
+      internalID: -177051690
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayTest2SpriteSheet_1
+      rect:
+        serializedVersion: 2
+        x: 520
+        y: 6552
+        width: 520
+        height: 728
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: da3d6bb63cfdd574d8718e34d23d8a7b
+      internalID: 358153710
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayTest2SpriteSheet_2
+      rect:
+        serializedVersion: 2
+        x: 1040
+        y: 6552
+        width: 520
+        height: 728
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f056198802d70084abaf0d09c5825833
+      internalID: 582194885
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayTest2SpriteSheet_3
+      rect:
+        serializedVersion: 2
+        x: 1560
+        y: 6552
+        width: 520
+        height: 728
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e684ac04978f1c048a8fc047f23e901a
+      internalID: -2048659936
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayTest2SpriteSheet_4
+      rect:
+        serializedVersion: 2
+        x: 2080
+        y: 6552
+        width: 520
+        height: 728
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 24cb797938e86d94aafe531691fefde8
+      internalID: -1303285510
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayTest2SpriteSheet_5
+      rect:
+        serializedVersion: 2
+        x: 2600
+        y: 6552
+        width: 520
+        height: 728
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a7ef2837b2d7f4e4d8bee106bded162d
+      internalID: -1548282765
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayTest2SpriteSheet_6
+      rect:
+        serializedVersion: 2
+        x: 3120
+        y: 6552
+        width: 520
+        height: 728
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9374128d57ca3674e85a0bbcd1e83298
+      internalID: -1436218917
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayTest2SpriteSheet_7
+      rect:
+        serializedVersion: 2
+        x: 3640
+        y: 6552
+        width: 520
+        height: 728
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a4ca53ed7f3ff7c4bb7c091436912266
+      internalID: 674311009
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayTest2SpriteSheet_8
+      rect:
+        serializedVersion: 2
+        x: 4160
+        y: 6552
+        width: 520
+        height: 728
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4ccb17fc5b4cc3a4cb7506a74562e74c
+      internalID: 1014532457
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayTest2SpriteSheet_9
+      rect:
+        serializedVersion: 2
+        x: 4680
+        y: 6552
+        width: 520
+        height: 728
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: da05424af679bda45ba6f76f67f50768
+      internalID: 1780157289
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayTest2SpriteSheet_10
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 5824
+        width: 520
+        height: 728
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e8f0791359861ee4fbcb5438d61ab8e2
+      internalID: 1058117749
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayTest2SpriteSheet_11
+      rect:
+        serializedVersion: 2
+        x: 520
+        y: 5824
+        width: 520
+        height: 728
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 41cb700e92f7d324a970c0ad84deff2e
+      internalID: 1264442367
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayTest2SpriteSheet_12
+      rect:
+        serializedVersion: 2
+        x: 1040
+        y: 5824
+        width: 520
+        height: 728
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ad6f82979bc4d3344bc41517df5d7aaa
+      internalID: -543686494
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayTest2SpriteSheet_13
+      rect:
+        serializedVersion: 2
+        x: 1560
+        y: 5824
+        width: 520
+        height: 728
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d74ba8e85d3b3134381e7d0a4fad4a36
+      internalID: -757737497
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayTest2SpriteSheet_14
+      rect:
+        serializedVersion: 2
+        x: 2080
+        y: 5824
+        width: 520
+        height: 728
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 054bc424d47cadd4aa9eef926d9f90da
+      internalID: 650306593
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayTest2SpriteSheet_15
+      rect:
+        serializedVersion: 2
+        x: 2600
+        y: 5824
+        width: 520
+        height: 728
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6706f10ab7b31784581c63cbf0987543
+      internalID: 83264763
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayTest2SpriteSheet_16
+      rect:
+        serializedVersion: 2
+        x: 3120
+        y: 5824
+        width: 520
+        height: 728
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bce8656f36843bc448189c36b288c9e6
+      internalID: -661957133
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayTest2SpriteSheet_17
+      rect:
+        serializedVersion: 2
+        x: 3640
+        y: 5824
+        width: 520
+        height: 728
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 529abc691e19ee94d8828cec856165d9
+      internalID: -2009495695
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayTest2SpriteSheet_18
+      rect:
+        serializedVersion: 2
+        x: 4160
+        y: 5824
+        width: 520
+        height: 728
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5beeba63ec4cf0c43aefc5e0951732bd
+      internalID: -844987063
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayTest2SpriteSheet_19
+      rect:
+        serializedVersion: 2
+        x: 4680
+        y: 5824
+        width: 520
+        height: 728
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3d81aeb33cad2074a8f3deb1c9558cba
+      internalID: -1359294326
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayTest2SpriteSheet_20
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 5096
+        width: 520
+        height: 728
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4aff11aadb9e46e4888511f6c0d98769
+      internalID: 493840053
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayTest2SpriteSheet_21
+      rect:
+        serializedVersion: 2
+        x: 520
+        y: 5096
+        width: 520
+        height: 728
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e154dd3cd318e7b45a5c8db76b95db34
+      internalID: 1272663076
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayTest2SpriteSheet_22
+      rect:
+        serializedVersion: 2
+        x: 1040
+        y: 5096
+        width: 520
+        height: 728
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4e0cd171fe575eb419f8069cf5004c0d
+      internalID: 1829695497
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayTest2SpriteSheet_23
+      rect:
+        serializedVersion: 2
+        x: 1560
+        y: 5096
+        width: 520
+        height: 728
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: edf38982f88c0824cbf95fa7cc0ae1a5
+      internalID: -706856391
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayTest2SpriteSheet_24
+      rect:
+        serializedVersion: 2
+        x: 2080
+        y: 5096
+        width: 520
+        height: 728
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fe85b6391896c354e95e07840b5fe130
+      internalID: -1632163740
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayTest2SpriteSheet_25
+      rect:
+        serializedVersion: 2
+        x: 2600
+        y: 5096
+        width: 520
+        height: 728
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a671d0357f9e10c439dfe63aeb16b09f
+      internalID: 587083812
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayTest2SpriteSheet_26
+      rect:
+        serializedVersion: 2
+        x: 3120
+        y: 5096
+        width: 520
+        height: 728
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4448982280508d945826b63e34ccb781
+      internalID: 497534454
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayTest2SpriteSheet_27
+      rect:
+        serializedVersion: 2
+        x: 3640
+        y: 5096
+        width: 520
+        height: 728
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ba040bdc649cbf24d8e37557d54c979c
+      internalID: 1920806949
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayTest2SpriteSheet_28
+      rect:
+        serializedVersion: 2
+        x: 4160
+        y: 5096
+        width: 520
+        height: 728
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4bed8bde5886f5742a32dff5d95dfbcc
+      internalID: -684860962
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayTest2SpriteSheet_29
+      rect:
+        serializedVersion: 2
+        x: 4680
+        y: 5096
+        width: 520
+        height: 728
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 980feed0f8172e44fa85a684867b16e4
+      internalID: -845783151
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayTest2SpriteSheet_30
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 4368
+        width: 520
+        height: 728
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c336aa5b875b1b2488149e63becae6fb
+      internalID: 1453238423
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayTest2SpriteSheet_31
+      rect:
+        serializedVersion: 2
+        x: 520
+        y: 4368
+        width: 520
+        height: 728
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 40d85046f3fe2a44cbe31f83fe48d536
+      internalID: 1112521848
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayTest2SpriteSheet_32
+      rect:
+        serializedVersion: 2
+        x: 1040
+        y: 4368
+        width: 520
+        height: 728
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0fa101b00c96beb439602cebfe566f06
+      internalID: 652966952
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayTest2SpriteSheet_33
+      rect:
+        serializedVersion: 2
+        x: 1560
+        y: 4368
+        width: 520
+        height: 728
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d6e7b3151fbc3dc41bd2db8b976aaac9
+      internalID: 1849484012
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayTest2SpriteSheet_34
+      rect:
+        serializedVersion: 2
+        x: 2080
+        y: 4368
+        width: 520
+        height: 728
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3dbcf05f4101a2e4f954c802a15bddc2
+      internalID: 5713634
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayTest2SpriteSheet_35
+      rect:
+        serializedVersion: 2
+        x: 2600
+        y: 4368
+        width: 520
+        height: 728
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 76219b4cba8568e4999a3fba03dda868
+      internalID: 1323597829
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayTest2SpriteSheet_36
+      rect:
+        serializedVersion: 2
+        x: 3120
+        y: 4368
+        width: 520
+        height: 728
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fd1a51cf5c5be1c4ca76511deb09a3af
+      internalID: -2004759884
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayTest2SpriteSheet_37
+      rect:
+        serializedVersion: 2
+        x: 3640
+        y: 4368
+        width: 520
+        height: 728
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7bfd3c589b04f1840b3e22c48e182859
+      internalID: 85581786
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayTest2SpriteSheet_38
+      rect:
+        serializedVersion: 2
+        x: 4160
+        y: 4368
+        width: 520
+        height: 728
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a0f2a00d2b23d3d4cbe12aa5ee0d8d98
+      internalID: 328437938
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayTest2SpriteSheet_39
+      rect:
+        serializedVersion: 2
+        x: 4680
+        y: 4368
+        width: 520
+        height: 728
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d1e47b54d5e93bb4cb7a0dd33e3ec530
+      internalID: -1847143637
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayTest2SpriteSheet_40
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 3640
+        width: 520
+        height: 728
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 17f6b90e4ed0acf46bdbb4374537be39
+      internalID: 1041704515
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayTest2SpriteSheet_41
+      rect:
+        serializedVersion: 2
+        x: 520
+        y: 3640
+        width: 520
+        height: 728
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b6fb2fd53ad7ac640be262b31931e3b9
+      internalID: 891202797
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayTest2SpriteSheet_42
+      rect:
+        serializedVersion: 2
+        x: 1040
+        y: 3640
+        width: 520
+        height: 728
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 02360a8c6d415c7439f8df588419aad0
+      internalID: 595694401
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayTest2SpriteSheet_43
+      rect:
+        serializedVersion: 2
+        x: 1560
+        y: 3640
+        width: 520
+        height: 728
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 29284072165959547a37fb6ca7e208e0
+      internalID: -1847804942
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayTest2SpriteSheet_44
+      rect:
+        serializedVersion: 2
+        x: 2080
+        y: 3640
+        width: 520
+        height: 728
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5adff49be358b044db2ca76b1dfe4a20
+      internalID: 333239623
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayTest2SpriteSheet_45
+      rect:
+        serializedVersion: 2
+        x: 2600
+        y: 3640
+        width: 520
+        height: 728
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9e307d73dd3036f44b3fc2c2937ba6e5
+      internalID: 966768533
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayTest2SpriteSheet_46
+      rect:
+        serializedVersion: 2
+        x: 3120
+        y: 3640
+        width: 520
+        height: 728
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bf0683c966868324c8a04853afa9f07a
+      internalID: 1586635663
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayTest2SpriteSheet_47
+      rect:
+        serializedVersion: 2
+        x: 3640
+        y: 3640
+        width: 520
+        height: 728
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 07ca63d3fe0a9e040be64510c5bd131b
+      internalID: -1167485605
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayTest2SpriteSheet_48
+      rect:
+        serializedVersion: 2
+        x: 4160
+        y: 3640
+        width: 520
+        height: 728
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7c03afb4e2c11d34d84eb62ca27e3c62
+      internalID: -1977547226
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayTest2SpriteSheet_49
+      rect:
+        serializedVersion: 2
+        x: 4680
+        y: 3640
+        width: 520
+        height: 728
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e2fcde5169d7fb8469b8eb6ed79f16d4
+      internalID: 340853027
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayTest2SpriteSheet_50
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 2912
+        width: 520
+        height: 728
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c1b1eee828f56eb4d8c9421db242e3bd
+      internalID: 1375343220
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayTest2SpriteSheet_51
+      rect:
+        serializedVersion: 2
+        x: 520
+        y: 2912
+        width: 520
+        height: 728
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b8048289b0bb4f2479573e4ba3d9b525
+      internalID: -713878915
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayTest2SpriteSheet_52
+      rect:
+        serializedVersion: 2
+        x: 1040
+        y: 2912
+        width: 520
+        height: 728
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ffae0394815fc9b418c2d238c8d74d77
+      internalID: -2048353766
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayTest2SpriteSheet_53
+      rect:
+        serializedVersion: 2
+        x: 1560
+        y: 2912
+        width: 520
+        height: 728
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3100b8859e861b646b062e78a4819454
+      internalID: 1333348026
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayTest2SpriteSheet_54
+      rect:
+        serializedVersion: 2
+        x: 2080
+        y: 2912
+        width: 520
+        height: 728
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fde579f36f2b0244e8177253fa7058b7
+      internalID: 841895436
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayTest2SpriteSheet_55
+      rect:
+        serializedVersion: 2
+        x: 2600
+        y: 2912
+        width: 520
+        height: 728
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f808045259b9fa54ea07e7677e77d874
+      internalID: 1315900631
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayTest2SpriteSheet_56
+      rect:
+        serializedVersion: 2
+        x: 3120
+        y: 2912
+        width: 520
+        height: 728
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f042ff97f0662ad4d8a04454777a13aa
+      internalID: 2076911338
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayTest2SpriteSheet_57
+      rect:
+        serializedVersion: 2
+        x: 3640
+        y: 2912
+        width: 520
+        height: 728
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 810c5f666eca0ba4e93cf3a87014ee2d
+      internalID: -456718849
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayTest2SpriteSheet_58
+      rect:
+        serializedVersion: 2
+        x: 4160
+        y: 2912
+        width: 520
+        height: 728
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d5ae62889dc25474b8877afe4e3edf8f
+      internalID: 989762187
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayTest2SpriteSheet_59
+      rect:
+        serializedVersion: 2
+        x: 4680
+        y: 2912
+        width: 520
+        height: 728
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3a16b7b771bde9041983562178f0555e
+      internalID: -377558518
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayTest2SpriteSheet_60
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 2184
+        width: 520
+        height: 728
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4bb4f6a4acfc04746accb8367a4910d9
+      internalID: -1839839657
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayTest2SpriteSheet_61
+      rect:
+        serializedVersion: 2
+        x: 520
+        y: 2184
+        width: 520
+        height: 728
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fdb820b0fc9ce00428509a47f517b936
+      internalID: 443865929
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayTest2SpriteSheet_62
+      rect:
+        serializedVersion: 2
+        x: 1040
+        y: 2184
+        width: 520
+        height: 728
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 672e269700a0eac418ee6031a3a85f2e
+      internalID: -986563967
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayTest2SpriteSheet_63
+      rect:
+        serializedVersion: 2
+        x: 1560
+        y: 2184
+        width: 520
+        height: 728
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4cde961934318bb4a8e2853fecfd8866
+      internalID: 1385342723
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayTest2SpriteSheet_64
+      rect:
+        serializedVersion: 2
+        x: 2080
+        y: 2184
+        width: 520
+        height: 728
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4ca876d0e6c85f041a1fab032777b9bf
+      internalID: 335955749
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayTest2SpriteSheet_65
+      rect:
+        serializedVersion: 2
+        x: 2600
+        y: 2184
+        width: 520
+        height: 728
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0555756db774bd240bd91b6044d88e08
+      internalID: -745895913
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayTest2SpriteSheet_66
+      rect:
+        serializedVersion: 2
+        x: 3120
+        y: 2184
+        width: 520
+        height: 728
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6f9fc23b6ba7cff43b5c22797334d6ab
+      internalID: -1768743832
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayTest2SpriteSheet_67
+      rect:
+        serializedVersion: 2
+        x: 3640
+        y: 2184
+        width: 520
+        height: 728
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9ef59af8507cf3e4ebcc93581818d11b
+      internalID: 1485412695
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayTest2SpriteSheet_68
+      rect:
+        serializedVersion: 2
+        x: 4160
+        y: 2184
+        width: 520
+        height: 728
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2f746389b43a1134e9e2cad882f17a4a
+      internalID: 723956319
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayTest2SpriteSheet_69
+      rect:
+        serializedVersion: 2
+        x: 4680
+        y: 2184
+        width: 520
+        height: 728
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b44feaf7773670c4a8fdfc0223111164
+      internalID: -1247703016
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayTest2SpriteSheet_70
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1456
+        width: 520
+        height: 728
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b1c8096f51beb524fa56509aadc01e09
+      internalID: -382673581
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayTest2SpriteSheet_71
+      rect:
+        serializedVersion: 2
+        x: 520
+        y: 1456
+        width: 520
+        height: 728
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 680cb895ed6986d44be5abca9cb0f49c
+      internalID: -1816147491
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayTest2SpriteSheet_72
+      rect:
+        serializedVersion: 2
+        x: 1040
+        y: 1456
+        width: 520
+        height: 728
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0b9c7c87f0ef0724fad647980466387f
+      internalID: -969771412
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayTest2SpriteSheet_73
+      rect:
+        serializedVersion: 2
+        x: 1560
+        y: 1456
+        width: 520
+        height: 728
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a1c18ad53aa7e774eb27181ca626f2e9
+      internalID: -574927923
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayTest2SpriteSheet_74
+      rect:
+        serializedVersion: 2
+        x: 2080
+        y: 1456
+        width: 520
+        height: 728
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 51af3e588cd62bb45ad9c4822ffbcecc
+      internalID: 2078418898
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayTest2SpriteSheet_75
+      rect:
+        serializedVersion: 2
+        x: 2600
+        y: 1456
+        width: 520
+        height: 728
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e87a5eee4078bb342adc07c227609d5e
+      internalID: -1878292358
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayTest2SpriteSheet_76
+      rect:
+        serializedVersion: 2
+        x: 3120
+        y: 1456
+        width: 520
+        height: 728
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 781e7a7d3cfe2ac489cf4535c0fc32d5
+      internalID: 250337964
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayTest2SpriteSheet_77
+      rect:
+        serializedVersion: 2
+        x: 3640
+        y: 1456
+        width: 520
+        height: 728
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4b87bf02b32a120498b6cae2199e3f9a
+      internalID: 1133908291
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayTest2SpriteSheet_78
+      rect:
+        serializedVersion: 2
+        x: 4160
+        y: 1456
+        width: 520
+        height: 728
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 833716edfe0a2774683f40e0f3cfefac
+      internalID: 1381898966
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayTest2SpriteSheet_79
+      rect:
+        serializedVersion: 2
+        x: 4680
+        y: 1456
+        width: 520
+        height: 728
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d8cdc79947717e24aae261492c787e06
+      internalID: 1066537397
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayTest2SpriteSheet_80
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 728
+        width: 520
+        height: 728
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 383a0e22c78213840b3a18ed0e7ed423
+      internalID: 801463427
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayTest2SpriteSheet_81
+      rect:
+        serializedVersion: 2
+        x: 520
+        y: 728
+        width: 520
+        height: 728
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 65dde64441bc0f646846307d70d67fb6
+      internalID: 553527667
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayTest2SpriteSheet_82
+      rect:
+        serializedVersion: 2
+        x: 1040
+        y: 728
+        width: 520
+        height: 728
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a289bef2485d29147b6ee28f3f67889e
+      internalID: -1313629834
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayTest2SpriteSheet_83
+      rect:
+        serializedVersion: 2
+        x: 1560
+        y: 728
+        width: 520
+        height: 728
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f5049a4297708eb4f830713aca9d477e
+      internalID: -2060155931
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayTest2SpriteSheet_84
+      rect:
+        serializedVersion: 2
+        x: 2080
+        y: 728
+        width: 520
+        height: 728
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b9bc87e02f3f6fb4a848dfa7e22164e3
+      internalID: -838027191
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayTest2SpriteSheet_85
+      rect:
+        serializedVersion: 2
+        x: 2600
+        y: 728
+        width: 520
+        height: 728
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c7d5a1ceb96d0084ea3fb98b1761a600
+      internalID: -1897361680
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayTest2SpriteSheet_86
+      rect:
+        serializedVersion: 2
+        x: 3120
+        y: 728
+        width: 520
+        height: 728
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f38389c9bca06514e9924c8c3c8b90e1
+      internalID: -1512513779
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayTest2SpriteSheet_87
+      rect:
+        serializedVersion: 2
+        x: 3640
+        y: 728
+        width: 520
+        height: 728
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: be10d4d87338ed54faab521665dde107
+      internalID: 1666093117
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayTest2SpriteSheet_88
+      rect:
+        serializedVersion: 2
+        x: 4160
+        y: 728
+        width: 520
+        height: 728
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2689d6c042d6429458f3906e9460e6fa
+      internalID: 1991700782
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayTest2SpriteSheet_89
+      rect:
+        serializedVersion: 2
+        x: 4680
+        y: 728
+        width: 520
+        height: 728
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e62bbb3e1856ccb4badef40c54f78cb7
+      internalID: -1974716859
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayTest2SpriteSheet_90
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 520
+        height: 728
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9c6b27dd1146bc04fa280883092c9797
+      internalID: 1836501167
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayTest2SpriteSheet_91
+      rect:
+        serializedVersion: 2
+        x: 520
+        y: 0
+        width: 520
+        height: 728
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8033aa25eecfeb749802f4b67512b5ec
+      internalID: 57616716
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayTest2SpriteSheet_92
+      rect:
+        serializedVersion: 2
+        x: 1040
+        y: 0
+        width: 520
+        height: 728
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ab5485b020c31b844a716c64c77dfe66
+      internalID: 1090866040
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayTest2SpriteSheet_93
+      rect:
+        serializedVersion: 2
+        x: 1560
+        y: 0
+        width: 520
+        height: 728
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 023a306223813344ca831159f0bf214c
+      internalID: -1882874367
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayTest2SpriteSheet_94
+      rect:
+        serializedVersion: 2
+        x: 2080
+        y: 0
+        width: 520
+        height: 728
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 72664f729016549468092628a14afc86
+      internalID: -1460601658
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayTest2SpriteSheet_95
+      rect:
+        serializedVersion: 2
+        x: 2600
+        y: 0
+        width: 520
+        height: 728
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bb7081254e46f9a40afba115203aed8b
+      internalID: 442837489
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayTest2SpriteSheet_96
+      rect:
+        serializedVersion: 2
+        x: 3120
+        y: 0
+        width: 520
+        height: 728
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 66301daf6123b454faca2e93b583377b
+      internalID: -454551088
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayTest2SpriteSheet_97
+      rect:
+        serializedVersion: 2
+        x: 3640
+        y: 0
+        width: 520
+        height: 728
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 87247afca62351546997ce958d5dbe97
+      internalID: 694361204
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayTest2SpriteSheet_98
+      rect:
+        serializedVersion: 2
+        x: 4160
+        y: 0
+        width: 520
+        height: 728
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 279070bf9451aec429e33d0a23cf4772
+      internalID: -204823165
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayTest2SpriteSheet_99
+      rect:
+        serializedVersion: 2
+        x: 4680
+        y: 0
+        width: 520
+        height: 728
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fec2e3b3cea43d449912017edd7120e1
+      internalID: -941024113
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      PlayTest2SpriteSheet_46: 1586635663
+      PlayTest2SpriteSheet_63: 1385342723
+      PlayTest2SpriteSheet_82: -1313629834
+      PlayTest2SpriteSheet_4: -1303285510
+      PlayTest2SpriteSheet_40: 1041704515
+      PlayTest2SpriteSheet_43: -1847804942
+      PlayTest2SpriteSheet_12: -543686494
+      PlayTest2SpriteSheet_42: 595694401
+      PlayTest2SpriteSheet_56: 2076911338
+      PlayTest2SpriteSheet_69: -1247703016
+      PlayTest2SpriteSheet_33: 1849484012
+      PlayTest2SpriteSheet_96: -454551088
+      PlayTest2SpriteSheet_53: 1333348026
+      PlayTest2SpriteSheet_86: -1512513779
+      PlayTest2SpriteSheet_72: -969771412
+      PlayTest2SpriteSheet_78: 1381898966
+      PlayTest2SpriteSheet_38: 328437938
+      PlayTest2SpriteSheet_18: -844987063
+      PlayTest2SpriteSheet_66: -1768743832
+      PlayTest2SpriteSheet_77: 1133908291
+      PlayTest2SpriteSheet_84: -838027191
+      PlayTest2SpriteSheet_97: 694361204
+      PlayTest2SpriteSheet_76: 250337964
+      PlayTest2SpriteSheet_36: -2004759884
+      PlayTest2SpriteSheet_93: -1882874367
+      PlayTest2SpriteSheet_3: -2048659936
+      PlayTest2SpriteSheet_89: -1974716859
+      PlayTest2SpriteSheet_45: 966768533
+      PlayTest2SpriteSheet_13: -757737497
+      PlayTest2SpriteSheet_14: 650306593
+      PlayTest2SpriteSheet_94: -1460601658
+      PlayTest2SpriteSheet_79: 1066537397
+      PlayTest2SpriteSheet_64: 335955749
+      PlayTest2SpriteSheet_55: 1315900631
+      PlayTest2SpriteSheet_22: 1829695497
+      PlayTest2SpriteSheet_41: 891202797
+      PlayTest2SpriteSheet_92: 1090866040
+      PlayTest2SpriteSheet_83: -2060155931
+      PlayTest2SpriteSheet_37: 85581786
+      PlayTest2SpriteSheet_31: 1112521848
+      PlayTest2SpriteSheet_88: 1991700782
+      PlayTest2SpriteSheet_6: -1436218917
+      PlayTest2SpriteSheet_87: 1666093117
+      PlayTest2SpriteSheet_95: 442837489
+      PlayTest2SpriteSheet_7: 674311009
+      PlayTest2SpriteSheet_25: 587083812
+      PlayTest2SpriteSheet_17: -2009495695
+      PlayTest2SpriteSheet_21: 1272663076
+      PlayTest2SpriteSheet_51: -713878915
+      PlayTest2SpriteSheet_19: -1359294326
+      PlayTest2SpriteSheet_8: 1014532457
+      PlayTest2SpriteSheet_32: 652966952
+      PlayTest2SpriteSheet_80: 801463427
+      PlayTest2SpriteSheet_67: 1485412695
+      PlayTest2SpriteSheet_23: -706856391
+      PlayTest2SpriteSheet_74: 2078418898
+      PlayTest2SpriteSheet_34: 5713634
+      PlayTest2SpriteSheet_16: -661957133
+      PlayTest2SpriteSheet_62: -986563967
+      PlayTest2SpriteSheet_11: 1264442367
+      PlayTest2SpriteSheet_27: 1920806949
+      PlayTest2SpriteSheet_71: -1816147491
+      PlayTest2SpriteSheet_75: -1878292358
+      PlayTest2SpriteSheet_85: -1897361680
+      PlayTest2SpriteSheet_48: -1977547226
+      PlayTest2SpriteSheet_68: 723956319
+      PlayTest2SpriteSheet_30: 1453238423
+      PlayTest2SpriteSheet_26: 497534454
+      PlayTest2SpriteSheet_47: -1167485605
+      PlayTest2SpriteSheet_81: 553527667
+      PlayTest2SpriteSheet_57: -456718849
+      PlayTest2SpriteSheet_1: 358153710
+      PlayTest2SpriteSheet_20: 493840053
+      PlayTest2SpriteSheet_54: 841895436
+      PlayTest2SpriteSheet_39: -1847143637
+      PlayTest2SpriteSheet_70: -382673581
+      PlayTest2SpriteSheet_61: 443865929
+      PlayTest2SpriteSheet_0: -177051690
+      PlayTest2SpriteSheet_44: 333239623
+      PlayTest2SpriteSheet_98: -204823165
+      PlayTest2SpriteSheet_52: -2048353766
+      PlayTest2SpriteSheet_90: 1836501167
+      PlayTest2SpriteSheet_24: -1632163740
+      PlayTest2SpriteSheet_91: 57616716
+      PlayTest2SpriteSheet_29: -845783151
+      PlayTest2SpriteSheet_15: 83264763
+      PlayTest2SpriteSheet_5: -1548282765
+      PlayTest2SpriteSheet_28: -684860962
+      PlayTest2SpriteSheet_49: 340853027
+      PlayTest2SpriteSheet_50: 1375343220
+      PlayTest2SpriteSheet_65: -745895913
+      PlayTest2SpriteSheet_35: 1323597829
+      PlayTest2SpriteSheet_10: 1058117749
+      PlayTest2SpriteSheet_2: 582194885
+      PlayTest2SpriteSheet_60: -1839839657
+      PlayTest2SpriteSheet_99: -941024113
+      PlayTest2SpriteSheet_9: 1780157289
+      PlayTest2SpriteSheet_59: -377558518
+      PlayTest2SpriteSheet_73: -574927923
+      PlayTest2SpriteSheet_58: 989762187
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
