@@ -488,18 +488,18 @@ public class DeckScript : NetworkBehaviour
                 break;
         }
     }
-    public void int4() // target player, discard all revealed cards, reveal 3 more
+    public void int4() // target player, discard all revealed cards
     {
         Debug.Log("target player, discard all revealed cards");
         switch (readytrg)
         {
             case true:
                 readytrg = false;
-                targetPlayer.DiscardRevealed(currentPlayer, GetEnemySlots(targetPlayer), targetPlayer, GetRevealedIndexes(targetPlayer));
-                RevealCards(targetPlayer, 3);
+                targetPlayer.DiscardRevealed(GetEnemySlots(targetPlayer), targetPlayer, GetRevealedIndexes(targetPlayer));
                 currentPlayer.hideButtons();
                 currentPlayer.DiscardCard(index, currentPlayer.cardSlots);
                 currentPlayer.CmdturnIncrease();
+                //RevealCards(targetPlayer, 3);
 
                 break;
             case false:
@@ -538,7 +538,7 @@ public class DeckScript : NetworkBehaviour
         {
             case true:
                 readytrg = false;
-                targetPlayer.ModifyStats(targetPlayer.Highest, Mathf.RoundToInt(GetRevealedIndexes(targetPlayer).Count / 2));
+                targetPlayer.ModifyStats(targetPlayer.Highest, -Mathf.RoundToInt(GetRevealedIndexes(targetPlayer).Count / 2));
                 currentPlayer.hideButtons();
                 currentPlayer.DiscardCard(index, currentPlayer.cardSlots);
                 currentPlayer.CmdturnIncrease();
@@ -577,6 +577,7 @@ public class DeckScript : NetworkBehaviour
         currentPlayer.DiscardCard(4, currentPlayer.cardSlots);
         currentPlayer.DiscardCard(5, currentPlayer.cardSlots);
         currentPlayer.CmdturnIncrease();
+        logger.AppendMessage(currentPlayer.playerName + " discarded their hand");
     }
     #endregion
     //-----------------------------------------charisma-----------------------------------------
@@ -808,6 +809,7 @@ public class DeckScript : NetworkBehaviour
         currentPlayer.passiveOption3.SetActive(true);
         currentPlayer.DiscardCard(index, currentPlayer.cardSlots);
         currentPlayer.CmdturnIncrease();
+        logger.AppendMessage(currentPlayer.playerName + " is choosing a new passive");
     }
     #endregion
     //-----------------------------------------cunning-----------------------------------------
@@ -1019,6 +1021,7 @@ public class DeckScript : NetworkBehaviour
                 RevealCards(targetPlayer, 3);
                 NetworkClient.localPlayer.GetComponent<PlayerScript>().CmdSelectedTrg(true);
                 NetworkClient.localPlayer.GetComponent<PlayerScript>().hideButtons();
+                logger.AppendMessage(NetworkClient.localPlayer.GetComponent<PlayerScript>().playerName + " used SeeDeck");
                 break;
             case false:
                 trgbntActive("SeeDeck");

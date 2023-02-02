@@ -42,6 +42,9 @@ public class CardScript : NetworkBehaviour
     public GameState gameState;
 
     [SerializeField]
+    MessageLogManager logger;
+
+    [SerializeField]
     public PlayerList plist;
 
     public string Cost
@@ -129,15 +132,15 @@ public class CardScript : NetworkBehaviour
 
         if (Input.GetKeyDown(KeyCode.Mouse1) && hovered && gameState.currentState == GameStates.LoadEnemyCards) {
             //Debug.Log("Right Clicked");
-           //NetworkClient.localPlayer.GetComponent<PlayerScript>().ModifyPower(-25);
             if (NetworkClient.localPlayer.GetComponent<PlayerScript>().passive.passiveName == "Blackmarket" || NetworkClient.localPlayer.GetComponent<PlayerScript>().passive2 == "Blackmarket") {
                 int index = 0;
                 //Debug.Log("Blackmarket");
                 foreach (GameObject g in NetworkClient.localPlayer.GetComponent<PlayerScript>().cardSlots) {
                     if (g.GetComponent<CardScript>().ID == this.ID) {
                         //Debug.Log("Discarding" + index);
-                        //NetworkClient.localPlayer.GetComponent<PlayerScript>().DiscardCard(index, NetworkClient.localPlayer.GetComponent<PlayerScript>().cardSlots);
-                       // NetworkClient.localPlayer.GetComponent<PlayerScript>().ModifyPower(-25);
+                        NetworkClient.localPlayer.GetComponent<PlayerScript>().DiscardCard(index, NetworkClient.localPlayer.GetComponent<PlayerScript>().cardSlots);
+                        NetworkClient.localPlayer.GetComponent<PlayerScript>().ModifyPower(-25);
+                        logger.AppendMessage(NetworkClient.localPlayer.GetComponent<PlayerScript>().playerName + " used BlackMarket");
                         break;
                     }
                     index++;
@@ -168,12 +171,12 @@ public class CardScript : NetworkBehaviour
         if (cardBack != null && (gameObject.tag == "CardSlot" || revealed) && id != "1000")
         {
             enhance.transform.localScale = new Vector3(140f, 140f, 0);
-            enhance.cardBack = sprArray[int.Parse(id)]; //broken for some reason? index was out of bound of array
+            enhance.cardBack = sprArray[int.Parse(id)];
         }
-        else if (cardBack != null && gameObject.tag == "Display")
+        else if (cardBack != null && gameObject.tag == "Display" && gameObject.name != "Enhanced")
         {
             enhance.transform.localScale = new Vector3(140f, 140f, 0);
-            enhance.cardBack = cardFront;
+            enhance.cardBack = sprArray[int.Parse(ID)];
         }
         else if (cardBack != null && gameObject.tag != "CardSlot" && !revealed)
         {
@@ -186,10 +189,6 @@ public class CardScript : NetworkBehaviour
     public void OnMouseExit() {
             hovered = false;
     }
-
-
-
-
 
     [Command(requiresAuthority = false)]
     public void CmdDisableCard(PlayerScript enemy, int index) {
@@ -206,30 +205,40 @@ public class CardScript : NetworkBehaviour
         PlayerScript currentP = NetworkClient.localPlayer.GetComponent<PlayerScript>();
 
         if (currentP.passive.passiveName == "Tactician" && gameObject.tag != "CardSlot" && gameObject.tag != "Display" && gameState.currentState == GameStates.LoadEnemyCards && currentP.disabled1 < 2) {
-            PlayerScript[] eList = {currentP.enemy1, currentP.enemy2, currentP.enemy3};
+            List<PlayerScript> eList = currentP.sendPlayerData();
+            foreach (PlayerScript p in plist.players)
+            {
+                if (p.netId != currentP.netId)
+                {
+                    if (eList[0] == null)
+                        eList.Add(p);
+                    else if (eList[1] == null)
+                        eList.Add(p);
+                    else if (eList[2] == null)
+                        eList.Add(p);
+                }
+            }
             PlayerScript e = null;
             string thisSlot = "";
-            for (int i = 0; i < 4; i++)  //gets cardslot id
+            for (int i = 1; i < 4; i++)  //gets cardslot id
                 if (gameObject.tag == i.ToString()) // 1 2 or 3
-                    for (int j = 0; j < 3; j++)
-                        if (eList[j] == plist.players[i]) 
-                            e = eList[j]; // gets enemy player
+                {
+                    //for (int j = 0; j < 3; j++)
+                    // if (eList[i] == plist.players[i]) 
+                    e = eList[i - 1]; // gets enemy player
+                    logger.AppendMessage(currentP.playerName + " is trying to disable a card of " + e.playerName);
+                }
             
 
             for (int i = 0; i < 6; i++)
-                if (e.cardSlots[i].GetComponent<CardScript>().ID == this.ID) { //problem child
+                if (e.cardSlots[i].GetComponent<CardScript>().ID == ID) { //problem child
+                    logger.AppendMessage("disabled");
                     thisSlot = e.cardSlots[i].GetComponent<CardScript>().ID;
                     e.cardSlots[i].GetComponent<SpriteRenderer>().color = Color.gray;
                     CmdDisableCard(e, i);
                     currentP.disabled1++;
                     break;
                 }
-  
-
-                    
-
-                
-            
         }
 
         
@@ -278,8 +287,6 @@ public class CardScript : NetworkBehaviour
     {
         CardScript display = GameObject.Find("LastPlayed").GetComponent<CardScript>();
         display.cardBack = sprArray[id];
+        display.ID = id.ToString();
     }
-
-
-  
 }

@@ -421,10 +421,13 @@ public class PlayerScript : NetworkBehaviour
                 break;
 
             case GameStates.LoadEnemyCards:
-                if (!FSM.EventTwo)
-                    instructions.text = "Select three cards and press lock in.";
-                else
-                    instructions.text = "Select three cards and press lock in." + "\nDue to he last event gamerule, you don't discard cards you play this turn";
+                instructions.text = "Select three cards and press lock in.";
+                if (passive.passiveName == "Blackmarket")
+                    instructions.text = "Select 3, to lock in. Right click card to use BlackMarket";
+                if (passive.passiveName == "Tactician")
+                    instructions.text = "Click enemy cards to disable, then select 3 cards and lock in";
+                if (FSM.EventTwo)
+                    instructions.text =  instructions.text + " Due to he last event gamerule, you don't discard cards you play this turn";
                 TransferEnemyData();
                 switch (passive2)
                 {
@@ -475,6 +478,14 @@ public class PlayerScript : NetworkBehaviour
                     lockInButton.SetActive(false);
                 }
                 leaderBoard.CmdUpdateLeaderBoard();
+                if (enemy1.hand.Count == 6)
+                    UpdateData(enemySlots1, enemy1);
+                if (enemy2.hand.Count == 6)
+                    UpdateData(enemySlots2, enemy2);
+                if (enemy3.hand.Count == 6)
+                    UpdateData(enemySlots3, enemy3);
+                if (hand.Count == 6)
+                    UpdateData(cardSlots, this);
                 break;
 
             case GameStates.Turn:
@@ -791,16 +802,7 @@ public class PlayerScript : NetworkBehaviour
     [Command(requiresAuthority = false)]
     public void CmdFillDeck(int cardID)
     {
-        //Debug.Break();
-        //logger.AppendMessage(playerName + " " + cardData[0]); //runs on host, not on clients
-        //print(playerName + " " + cardData[0]);//runs on host, not on clients
-        //cards.Add(cardData[]);
-        //foreach (string[] s in cardData)//runs on host, not on clients
-        logger.AppendMessage(playerName + " " + cards.Count + " " + cardID);
-
         cards.Add(cardID);
-        
-
     }
 
     [Command(requiresAuthority = false)]
@@ -881,6 +883,8 @@ public class PlayerScript : NetworkBehaviour
         public void ModifyStats(string type, int amount) {
         if (cantLoseStats && amount < 0)
             return;
+        if (netId != FSM.currentPlayer.netId && FSM.turn < 4 && FSM.currentPlayer.passive.passiveName == "DoubleDown")
+            amount *= 2;
         switch (type) {
                 case "strength":
                    Strength = amount;
@@ -963,15 +967,15 @@ public class PlayerScript : NetworkBehaviour
     }
 
     [Command(requiresAuthority = false)]
-    public void DiscardRevealed(PlayerScript p, GameObject[] slots, PlayerScript targetPlayer, List<int> indexes)
+    public void DiscardRevealed(GameObject[] slots, PlayerScript targetPlayer, List<int> indexes)
     {
-        for (int i = 0; i < 6; i++)
+        for (int i = 0; i < indexes.Count; i++)
         {
-                int rand = UnityEngine.Random.Range(0, 33);
-                targetPlayer.cards.Add(targetPlayer.hand[indexes[i]]);
-                targetPlayer.hand[indexes[i]] = targetPlayer.cards[rand];
-                targetPlayer.cards.Remove(targetPlayer.cards[rand]);
-                RpcFillSlot(targetPlayer.connectionToClient, slots, targetPlayer.hand[indexes[i]]);
+                int rand = UnityEngine.Random.Range(0, cards.Count - 1);
+                discardDeck.Add(hand[indexes[i]]);
+                hand[indexes[i]] = cards[rand];
+                cards.Remove(cards[rand]);
+                RpcFillSlot(connectionToClient, slots, hand[indexes[i]]);
         }
     }
 
@@ -1027,6 +1031,7 @@ public class PlayerScript : NetworkBehaviour
     public void CmdSetAllyStat(string s)
     {
         allyStat = s;
+        logger.AppendMessage(NetworkClient.localPlayer.GetComponent<PlayerScript>().playerName + " changed their allyStat to " + s);
     }
 
     [TargetRpc]

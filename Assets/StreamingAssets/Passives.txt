@@ -9,4 +9,4 @@ strength,Taunt,Every time a player makes you lose power - gain 1 strength
 strength,Unstable,Double all point income and double all point losses
 cunning,ShadyBusiness,Everytime you switch decks, you gain 50 power
 cunning,Blackmarket,You can put a card from your hand back in the deck and draw a new one. The first time is free. but every time after that costs 25 power
-cunning,WireTapping,At the start of a trimester. Choose 1 event from a random 5 that will be in the trimester
+cunning,DoubleDown,If the first card you play during a turn modifys someones stats, double its amount.
