@@ -35,8 +35,14 @@ public class CardScript : NetworkBehaviour
     public int sortingDefault;
     public float defaultY;
 
+    [SyncVar]
+    public bool disabled = false;
+
     [SerializeField]
     public GameState gameState;
+
+    [SerializeField]
+    public PlayerList plist;
 
     public string Cost
     {
@@ -184,6 +190,23 @@ public class CardScript : NetworkBehaviour
     public void OnMouseDown()
     {
         PlayerScript currentP = NetworkClient.localPlayer.GetComponent<PlayerScript>();
+
+        if (currentP.passive.passiveName == "Tactician" && gameObject.tag != "CardSlot" && gameObject.tag != "Display" && gameState.currentState == GameStates.LoadEnemyCards) {
+            PlayerScript[] eList = {currentP.enemy1, currentP.enemy2, currentP.enemy3};
+            PlayerScript e = null;
+            for (int i = 0; i < 4; i++)  //gets cardslot id
+                if (gameObject.tag == (i - 1).ToString()) 
+                    for (int j = 0; j < 3; j++)
+                        if (eList[j] == plist.players[i]) 
+                            e = eList[j];
+                      
+
+                    
+
+                
+            
+        }
+        
         if (cardBack != null && gameObject.tag == "CardSlot" && gameState.currentState == GameStates.LoadEnemyCards && !currentP.LockedIn)
         {
             prevSelected = selected;
@@ -193,7 +216,7 @@ public class CardScript : NetworkBehaviour
             && gameState.currentPlayer.netId == currentP.netId && selected && !currentP.turnTaken)
         {
             if ((currentP.passive.passiveName == "SeeDeck" || currentP.passive2 == "SeeDeck") && !currentP.selectedTrg)
-                    return;
+                return;
                 CmdDisplayCard(int.Parse(this.id), NetworkClient.localPlayer.GetComponent<PlayerScript>());
                 gameState.currentPlayer.GetComponent<DeckScript>().pullEff(title, id);
                 title = "";

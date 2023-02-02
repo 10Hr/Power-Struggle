@@ -479,7 +479,10 @@ public class PlayerScript : NetworkBehaviour
                 if (!FSM.EventTwo)
                     instructions.text = "When it is your turn, select a card to play it.";
                 else
-                    instructions.text = "When it is your turn, select a card to play it." + "\nDue to he last event gamerule, you don't discard cards you play this turn";
+                    instructions.text = "When it is your turn, select a card to play it." + "\nDue to the last event gamerule, you don't discard cards you play this turn";
+                //if (passive.passiveName == "Tactician") {
+                    
+               // }
                 if (LockedIn)
                     CmdUnlock();
                 if (enemy1.hand.Count == 6)
