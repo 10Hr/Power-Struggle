@@ -382,22 +382,14 @@ public class PlayerScript : NetworkBehaviour
                 if (!hasDeck && hasHighest)
                 {
                     hasDeck = true;
-                    //deck = new DeckScript();
                     DeckScript deck = gameObject.AddComponent(typeof(DeckScript)) as DeckScript;
                     deck.CreateDeck(highest);
-                    //logger.AppendMessage(playerName + " Made it before");//works for all clients
                     if (deck.cardDataIDs.Count > 36)
                     {
-                        //CmdConfirm();//works for all clients
                         foreach (int i in deck.cardDataIDs)
                         {
-                            CmdFillDeck(i);//works for host, no clients
+                            CmdFillDeck(i);
                         }
-                        //CmdFillDeck();//works for host, no clients
-                        //foreach (string[] s in deck.cardData)
-                        //{
-                        //    CmdFillDeck(s);//works for host, no clients
-                        //}
                     }
                 }
 
@@ -416,11 +408,9 @@ public class PlayerScript : NetworkBehaviour
                 break;
 
             case GameStates.DrawCards:
-                //CmdSwapFalse();
                 CmdDrawCard();
                 if (hand.Count == 6 && !cardsSpawned)
                 {
-                    //ran = true;
                     TransferData(cardSlots, this);
                     if (cardSlots[5].GetComponent<CardScript>().Title != "")
                         CmdSpawnedCards();
@@ -518,14 +508,7 @@ public class PlayerScript : NetworkBehaviour
         intelligenceText.text = "Intelligence: " + intelligence;
         cunningText.text = "Cunning: " + cunning;
 
-        if (FSM.CurrentState == GameStates.Event && eMan.currentEvent == "Three")
-        {
-            foreach (GameObject b in addButtons)
-                b.SetActive(false);
-            foreach (GameObject b in subButtons)
-                b.SetActive(true);
-        }
-        else if (availablePoints > 0 && availablePoints < maxPoints)
+        if (availablePoints > 0 && availablePoints < maxPoints)
         {
             foreach (GameObject b in addButtons)
                 b.SetActive(true);
@@ -546,13 +529,22 @@ public class PlayerScript : NetworkBehaviour
             foreach (GameObject b in addButtons)
                 b.SetActive(false);
         }
-        if (ready)
+        if (ready && availablePoints == 0)
         {
             foreach (GameObject b in subButtons)
                 b.SetActive(false);
             foreach (GameObject b in addButtons)
                 b.SetActive(false);
         }
+        if (!ready && availablePoints == 0 && FSM.CurrentState == GameStates.Turn)
+        {
+            ready = true;
+            foreach (GameObject b in subButtons)
+                b.SetActive(false);
+            foreach (GameObject b in addButtons)
+                b.SetActive(false);
+        }
+            
         #endregion
     }
 
@@ -588,15 +580,6 @@ public class PlayerScript : NetworkBehaviour
 
         foreach (int i in gameObject.GetComponent<DeckScript>().cardDataIDs)
             CmdFillDeck(i);//works for host, no clients
-
-       // for (int i = 0; i < 6; i++)
-        //    CmdDrawCard();
-
-      //foreach (GameObject g in cardSlots)
-        //  g.GetComponent<CardScript>().Title = "";
-
-      //foreach (GameObject g in cardSlots)
-        //  TransferData(cardSlots, this);
     }
 
     [Command (requiresAuthority = false)]

@@ -118,6 +118,7 @@ public class EventManager : NetworkBehaviour
                     playerList.players[2].guess1 != "" && playerList.players[2].guess2 != "" && playerList.players[2].guess3 != "" &&
                     playerList.players[3].guess1 != "" && playerList.players[3].guess2 != "" && playerList.players[3].guess3 != "")
                 {
+                    CmdCheckGuess();
                     CmdEndEvent();
                 }
                 break;
@@ -156,6 +157,15 @@ public class EventManager : NetworkBehaviour
             default:
                 break;
         }
+    }
+
+    [Command(requiresAuthority = false)]
+    public void CmdCheckGuess()
+    {
+        playerList.players[0].CheckGuess(playerList.players[0].connectionToClient);
+        playerList.players[1].CheckGuess(playerList.players[1].connectionToClient);
+        playerList.players[2].CheckGuess(playerList.players[2].connectionToClient);
+        playerList.players[3].CheckGuess(playerList.players[3].connectionToClient);
     }
 
     [TargetRpc]
@@ -242,12 +252,6 @@ public class EventManager : NetworkBehaviour
         ran = false;
 
         RpcDespawnAll();
-
-        playerList.players[0].CheckGuess(playerList.players[0].connectionToClient);
-        playerList.players[1].CheckGuess(playerList.players[1].connectionToClient);
-        playerList.players[2].CheckGuess(playerList.players[2].connectionToClient);
-        playerList.players[3].CheckGuess(playerList.players[3].connectionToClient);
-
     }
 
     [ClientRpc]

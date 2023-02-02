@@ -319,10 +319,13 @@ public class DeckScript : NetworkBehaviour
         Debug.Log("Lose 1 Intelligence, reveal all card in enemy hand");
         switch(readytrg) {
             case true:
-                readytrg = false;
-                RevealCards(targetPlayer, 6);
-                currentPlayer.ModifyStats("intelligence", -1);
-                currentPlayer.hideButtons();      
+                if (currentPlayer.Intelligence > 0)
+                {
+                    readytrg = false;
+                    RevealCards(targetPlayer, 6);
+                    currentPlayer.ModifyStats("intelligence", -1);
+                    currentPlayer.hideButtons();
+                }
                 currentPlayer.DiscardCard(index, currentPlayer.cardSlots);
                 currentPlayer.CmdturnIncrease();
         
@@ -794,6 +797,7 @@ public class DeckScript : NetworkBehaviour
     {
         Debug.Log("Lose all of your power - gain strength = to that value / 25");
         currentPlayer.ModifyStats("strength", Mathf.RoundToInt(currentPlayer.Power / 25));
+        currentPlayer.ModifyPower(-currentPlayer.Power);
     }
     public void str12()
     { //Select new passive
@@ -931,7 +935,7 @@ public class DeckScript : NetworkBehaviour
         Debug.Log("All opponents lose power equal to 5x all their stat points");
         foreach (PlayerScript p in enemies)
         {
-            p.ModifyPower((p.Strength + p.Cunning + p.Charisma + p.Intelligence) * 5);
+            p.ModifyPower(-(p.Strength + p.Cunning + p.Charisma + p.Intelligence) * 5);
         }
         currentPlayer.DiscardCard(index, currentPlayer.cardSlots);
         currentPlayer.CmdturnIncrease();
@@ -1012,7 +1016,7 @@ public class DeckScript : NetworkBehaviour
             case true:
                 readytrg = false;
                 currentPlayer = NetworkClient.localPlayer.GetComponent<PlayerScript>();
-                RevealCards(targetPlayer, 6);
+                RevealCards(targetPlayer, 3);
                 NetworkClient.localPlayer.GetComponent<PlayerScript>().CmdSelectedTrg(true);
                 NetworkClient.localPlayer.GetComponent<PlayerScript>().hideButtons();
                 break;
