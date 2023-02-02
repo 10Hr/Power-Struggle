@@ -106,7 +106,7 @@ public class PlayerScript : NetworkBehaviour
     [SyncVar]
     private int cunning;
     [SyncVar]
-    public string allyStat = "strength";
+    public string allyStat = "";
 
     public int Charisma
     {
