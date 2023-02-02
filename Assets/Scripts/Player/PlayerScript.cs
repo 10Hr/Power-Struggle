@@ -267,6 +267,8 @@ public class PlayerScript : NetworkBehaviour
 
     int g = 0;
     public readonly SyncList<int> cards = new SyncList<int>();
+    public readonly SyncList<int> discardDeck = new SyncList<int>();
+
     //public List<string[]> cards = new List<string[]>();
     public readonly SyncList<int> hand = new SyncList<int>();
     public readonly SyncList<Passive> choicesList = new SyncList<Passive>();
@@ -566,7 +568,7 @@ public class PlayerScript : NetworkBehaviour
     public void CmdResetCards()
     {
         cards.Clear();
-        hand.Clear();
+        //hand.Clear();
     }
 
     [Command(requiresAuthority = false)]
@@ -579,26 +581,22 @@ public class PlayerScript : NetworkBehaviour
     public void SwapDeck(string h)
     {
         logger.AppendMessage(playerName + " is swapping decks");
-        deck.CreateDeck(h);
+        gameObject.GetComponent<DeckScript>().CreateDeck(h);
         CmdResetCards();
 
-      while (deck.cardData.Count < 40) {}
+        while (gameObject.GetComponent<DeckScript>().cardDataIDs.Count < 40) {}
 
-        //CmdFillDeck(deck.cardData);
-
-        foreach (int i in deck.cardDataIDs)
-        {
+        foreach (int i in gameObject.GetComponent<DeckScript>().cardDataIDs)
             CmdFillDeck(i);//works for host, no clients
-        }
 
-        for (int i = 0; i < 6; i++)
-            CmdDrawCard();
+       // for (int i = 0; i < 6; i++)
+        //    CmdDrawCard();
 
-      foreach (GameObject g in cardSlots)
-          g.GetComponent<CardScript>().Title = "";
+      //foreach (GameObject g in cardSlots)
+        //  g.GetComponent<CardScript>().Title = "";
 
-      foreach (GameObject g in cardSlots)
-          TransferData(cardSlots, this);
+      //foreach (GameObject g in cardSlots)
+        //  TransferData(cardSlots, this);
     }
 
     [Command (requiresAuthority = false)]
@@ -949,9 +947,14 @@ public class PlayerScript : NetworkBehaviour
     {
         if (!FSM.EventTwo) {
             int rand = UnityEngine.Random.Range(0, cards.Count - 1);
-            cards.Add(hand[index]);
+            discardDeck.Add(hand[index]);
             hand[index] = cards[rand];
             cards.Remove(cards[rand]);
+
+            if (cards.Count == 0)
+                foreach (int i in gameObject.GetComponent<DeckScript>().cardDataIDs)
+                    CmdFillDeck(i);//works for host, no clients
+
             RpcFillSlot(connectionToClient, slots, hand[index]);
         }
         else

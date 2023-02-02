@@ -84,46 +84,32 @@ namespace UI
 			GUILayout.EndArea();
 		}
 
+		public void CopyToClipboard(string s)
+		{
+			TextEditor te = new TextEditor();
+			te.text = s;
+			te.SelectAll();
+			te.Copy();
+		}
+
 		void StartButtons()
 		{
 			if (!NetworkClient.active)
 			{
-				// Server Only
-				if (Application.platform == RuntimePlatform.WebGLPlayer)
-				{
-					// cant be a server in webgl build
-					GUILayout.Box("(  WebGL cannot be server  )");
-				}
-				else
-				{
-					if (GUILayout.Button("Server Only")) m_Manager.StartStandardServer();
-				}
-
 				if (m_Manager.isLoggedIn)
 				{
 					// Server + Client
 					if (Application.platform != RuntimePlatform.WebGLPlayer)
 					{
-						if (GUILayout.Button("Standard Host (Server + Client)"))
-						{
-							m_Manager.StartStandardHost();
-						}
-
 						if (GUILayout.Button("Relay Host (Server + Client)"))
 						{
-							int maxPlayers = 8;
+							int maxPlayers = 4;
 							m_Manager.StartRelayHost(maxPlayers);
+
 						}
 					}
 
-					// Client + IP
-					GUILayout.BeginHorizontal();
-					if (GUILayout.Button("Client (without Relay)"))
-					{
-						m_Manager.JoinStandardServer();
-					}
-					m_Manager.networkAddress = GUILayout.TextField(m_Manager.networkAddress);
-					GUILayout.EndHorizontal();
+
 
 					// Client + Relay Join Code
 					GUILayout.BeginHorizontal();
@@ -134,30 +120,6 @@ namespace UI
 					m_Manager.relayJoinCode = GUILayout.TextField(m_Manager.relayJoinCode);
 					GUILayout.EndHorizontal();
 
-					if (GUILayout.Button("Get Relay Regions"))
-					{
-						// Note: We are not doing anything with these regions in this example, we are just illustrating how you would go about fetching these regions
-						m_Manager.GetRelayRegions((List<Region> regions) =>
-						{
-							if (regions.Count > 0)
-							{
-								for (int i = 0; i < regions.Count; i++)
-								{
-									Region region = regions[i];
-									Debug.Log("Found region. ID: " + region.Id + ", Name: " + region.Description);
-								}
-							}
-							else
-							{
-								Debug.LogWarning("No regions received");
-							}
-						},
-
-						() =>
-						{
-							Debug.LogError("Failed to retrieve the list of Relay regions.");
-						});
-					}
 				}
 				else
 				{
@@ -188,11 +150,12 @@ namespace UI
 				{
 					GUILayout.Label("Relay enabled. Join code: " + m_Manager.relayJoinCode);
 				}
+				if (GUILayout.Button("Copy Join Code"))
+				{
+					CopyToClipboard(m_Manager.relayJoinCode);
+				}
 			}
-			if (NetworkClient.isConnected)
-			{
-				GUILayout.Label("Client: address=" + m_Manager.networkAddress);
-			}
+
 		}
 
 		void StopButtons()

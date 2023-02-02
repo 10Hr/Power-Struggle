@@ -34,7 +34,9 @@ public class DeckScript : NetworkBehaviour
     // Start is called before the first frame update
     private void Start()
     {
-        logger = GameObject.Find("LogManager").GetComponent<MessageLogManager>();    
+        
+        logger = GameObject.Find("LogManager").GetComponent<MessageLogManager>(); 
+        LoadDicts();   
     }
 
     public void CreateDeck(string highest) {
@@ -92,7 +94,7 @@ public class DeckScript : NetworkBehaviour
             // when writing a new card
             // type,title,cost,Description
         createEffectList();
-        LoadDicts();
+        //LoadDicts();
     }
 
     public void LoadDicts() {

@@ -159,10 +159,10 @@ public class CardScript : NetworkBehaviour
 
     public void OnMouseEnter() {
         CardScript enhance = GameObject.Find("Enhanced").GetComponent<CardScript>();
-        if (cardBack != null && (gameObject.tag == "CardSlot" || revealed))
+        if (cardBack != null && (gameObject.tag == "CardSlot" || revealed) && id != "1000")
         {
             enhance.transform.localScale = new Vector3(140f, 140f, 0);
-            enhance.cardBack = sprArray[int.Parse(id)];
+            enhance.cardBack = sprArray[int.Parse(id)]; //broken for some reason? index was out of bound of array
         }
         else if (cardBack != null && gameObject.tag == "Display")
         {
