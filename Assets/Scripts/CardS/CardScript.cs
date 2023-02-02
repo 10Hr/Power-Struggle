@@ -187,25 +187,51 @@ public class CardScript : NetworkBehaviour
             hovered = false;
     }
 
+
+
+
+
+    [Command(requiresAuthority = false)]
+    public void CmdDisableCard(PlayerScript enemy, int index) {
+        DisableCard(enemy.connectionToClient, index);
+    }
+
+    [TargetRpc]
+    public void DisableCard(NetworkConnection conn, int index) {
+        NetworkClient.localPlayer.GetComponent<PlayerScript>().cardSlots[index].GetComponent<CardScript>().disabled = true;
+    }
+
     public void OnMouseDown()
     {
         PlayerScript currentP = NetworkClient.localPlayer.GetComponent<PlayerScript>();
 
-        if (currentP.passive.passiveName == "Tactician" && gameObject.tag != "CardSlot" && gameObject.tag != "Display" && gameState.currentState == GameStates.LoadEnemyCards) {
+        if (currentP.passive.passiveName == "Tactician" && gameObject.tag != "CardSlot" && gameObject.tag != "Display" && gameState.currentState == GameStates.LoadEnemyCards && currentP.disabled1 < 2) {
             PlayerScript[] eList = {currentP.enemy1, currentP.enemy2, currentP.enemy3};
             PlayerScript e = null;
+            string thisSlot = "";
             for (int i = 0; i < 4; i++)  //gets cardslot id
-                if (gameObject.tag == (i - 1).ToString()) 
+                if (gameObject.tag == i.ToString()) // 1 2 or 3
                     for (int j = 0; j < 3; j++)
                         if (eList[j] == plist.players[i]) 
-                            e = eList[j];
-                      
+                            e = eList[j]; // gets enemy player
+            
+
+            for (int i = 0; i < 6; i++)
+                if (e.cardSlots[i].GetComponent<CardScript>().ID == this.ID) { //problem child
+                    thisSlot = e.cardSlots[i].GetComponent<CardScript>().ID;
+                    e.cardSlots[i].GetComponent<SpriteRenderer>().color = Color.gray;
+                    CmdDisableCard(e, i);
+                    currentP.disabled1++;
+                    break;
+                }
+  
 
                     
 
                 
             
         }
+
         
         if (cardBack != null && gameObject.tag == "CardSlot" && gameState.currentState == GameStates.LoadEnemyCards && !currentP.LockedIn)
         {
@@ -215,10 +241,18 @@ public class CardScript : NetworkBehaviour
         else if ((cardBack != null && gameObject.tag == "CardSlot" && gameState.currentState == GameStates.Turn) 
             && gameState.currentPlayer.netId == currentP.netId && selected && !currentP.turnTaken)
         {
+   
+
             if ((currentP.passive.passiveName == "SeeDeck" || currentP.passive2 == "SeeDeck") && !currentP.selectedTrg)
                 return;
-                CmdDisplayCard(int.Parse(this.id), NetworkClient.localPlayer.GetComponent<PlayerScript>());
+
+            CmdDisplayCard(int.Parse(this.id), NetworkClient.localPlayer.GetComponent<PlayerScript>());
+
+            if (disabled)
+                gameState.currentPlayer.GetComponent<DeckScript>().pullEff(title, "3"); 
+            else
                 gameState.currentPlayer.GetComponent<DeckScript>().pullEff(title, id);
+
                 title = "";
                 description = "";
                 cost = "";

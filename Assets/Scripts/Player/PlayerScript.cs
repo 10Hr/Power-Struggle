@@ -283,6 +283,8 @@ public class PlayerScript : NetworkBehaviour
     Text pLabel2;
     Text pLabel3;
 
+    public int disabled1 = 0;
+
     //Properties
     //Methods
     public override void OnStartLocalPlayer()
@@ -455,7 +457,7 @@ public class PlayerScript : NetworkBehaviour
                 numSelected = 0;
                 foreach (GameObject g in cardSlots)
                 {
-                    if (g.GetComponent<CardScript>().selected && !g.GetComponent<CardScript>().prevSelected)
+                    if (g.GetComponent<CardScript>().selected && !g.GetComponent<CardScript>().prevSelected )
                     {
                         g.GetComponent<SpriteRenderer>().color = Color.green;
                         numSelected++;
@@ -500,6 +502,17 @@ public class PlayerScript : NetworkBehaviour
                 break;
 
             case GameStates.Event:
+                
+                foreach (GameObject g in cardSlots)
+                {
+                    if (g.GetComponent<CardScript>().disabled)
+                    {
+                        g.GetComponent<CardScript>().disabled = false;
+                    }
+
+                }
+                disabled1 = 0;
+
                 leaderBoard.CmdUpdateLeaderBoard();
                 break;
         }
