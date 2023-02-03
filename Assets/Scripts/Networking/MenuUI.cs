@@ -146,15 +146,13 @@ namespace UI
 		public void JoinGame() {
 
 			try {
-				joinCodeInput = GameObject.Find("joinCodeInput");
-				m_Manager.relayJoinCode = joinCodeInput.GetComponent<TMP_InputField>().text;
+					joinCodeInput = GameObject.Find("joinCodeInput");
+					m_Manager.relayJoinCode = joinCodeInput.GetComponent<TMP_InputField>().text;
+					m_Manager.JoinRelayServer();
+					
 
-				m_Manager.JoinRelayServer();
-				//if (NetworkClient.localPlayer.GetComponent<PlayerScript>().added == false)
-				//playerList.GetComponent<PlayerList>().CmdAddPlayers(NetworkClient.localPlayer.GetComponent<PlayerScript>());
-				
-			} catch {
-				Debug.Log("No Relay server found with code: " + joinCodeInput.GetComponent<TMP_InputField>().text);
+			} catch (InvalidOperationException e) {
+				Debug.Log("No Relay server found with code: " + joinCodeInput.GetComponent<TMP_InputField>().text + " " + e);
 			}
 
 		}
@@ -234,6 +232,7 @@ namespace UI
 					joinCodeLbl = GameObject.Find("joinCodeLbl");
 					if (joinCodeLbl != null)
 						joinCodeLbl.GetComponent<TextMeshProUGUI>().text = "JOIN CODE: " + m_Manager.relayJoinCode; // not working?
+					
 				}
 					
 			}
