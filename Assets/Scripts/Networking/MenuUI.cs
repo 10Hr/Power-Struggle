@@ -30,6 +30,7 @@ namespace UI
 		
 		public GameObject joinCodeLbl;
 		public GameObject joinCodeInput;
+		public GameObject waitingforplayers;
 
 		[SerializeField]
 		public PlayerList playerList;
@@ -147,9 +148,10 @@ namespace UI
 
 			try {
 					joinCodeInput = GameObject.Find("joinCodeInput");
+					waitingforplayers = GameObject.Find("waitingforplayers");
 					m_Manager.relayJoinCode = joinCodeInput.GetComponent<TMP_InputField>().text;
 					m_Manager.JoinRelayServer();
-					
+					waitingforplayers.GetComponent<TMP_Text>().text = "Waiting for players...";
 
 			} catch (InvalidOperationException e) {
 				Debug.Log("No Relay server found with code: " + joinCodeInput.GetComponent<TMP_InputField>().text + " " + e);
