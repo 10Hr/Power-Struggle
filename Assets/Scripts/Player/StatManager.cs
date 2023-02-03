@@ -141,20 +141,20 @@ public class StatManager : NetworkBehaviour
                 switch (thisButName)
                 {
                     case "Charisma":
-                        p.Charisma = 8;
-                        p.AvailablePoints = -8;
+                        p.Charisma = 1;
+                        p.AvailablePoints = -1;
                         break;
                     case "Strength":
-                        p.Strength = 8;
-                        p.AvailablePoints = -8;
+                        p.Strength = 1;
+                        p.AvailablePoints = -1;
                         break;
                     case "Intelligence":
-                        p.Intelligence = 8;
-                        p.AvailablePoints = -8;
+                        p.Intelligence = 1;
+                        p.AvailablePoints = -1;
                         break;
                     case "Cunning":
-                        p.Cunning = 8;
-                        p.AvailablePoints = -8;
+                        p.Cunning = 1;
+                        p.AvailablePoints = -1;
                         break;
                 }
                 break;

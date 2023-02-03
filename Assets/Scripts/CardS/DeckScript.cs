@@ -658,6 +658,8 @@ public class DeckScript : NetworkBehaviour
         public void chr9() { //lose ally for turn
         Debug.Log("Lose ally for turn");
         currentPlayer.CmdSetAllyStat("");
+        currentPlayer.DiscardCard(index, currentPlayer.cardSlots);
+        currentPlayer.CmdturnIncrease();
 
     }
     public void chr10()
@@ -771,7 +773,7 @@ public class DeckScript : NetworkBehaviour
         Debug.Log("lose all of your strength andgain available points = to that");
         int str = currentPlayer.Strength;
         currentPlayer.ModifyStats("strength", -currentPlayer.Strength);
-        currentPlayer.AddPoints(Mathf.RoundToInt(str / 2));
+        currentPlayer.AddPoints(str);
         currentPlayer.DiscardCard(index, currentPlayer.cardSlots);
         currentPlayer.CmdturnIncrease();
     }
@@ -791,6 +793,7 @@ public class DeckScript : NetworkBehaviour
         {
             p.ModifyStats(p.Highest, -2);
         }
+        currentPlayer.ModifyStats(p.Highest, -2);
         currentPlayer.DiscardCard(index, currentPlayer.cardSlots);
         currentPlayer.CmdturnIncrease();
     }

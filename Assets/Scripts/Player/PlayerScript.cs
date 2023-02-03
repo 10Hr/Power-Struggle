@@ -442,30 +442,19 @@ public class PlayerScript : NetworkBehaviour
                 if (FSM.EventTwo)
                     instructions.text =  instructions.text + " Due to he last event gamerule, you don't discard cards you play this turn";
                 TransferEnemyData();
-                switch (passive2)
-                {
-                    case "StrongAllies":
-                        CmdSetAllyStat("strength");
-                        break;
-                    case "SmartAllies":
-                        CmdSetAllyStat("intelligence");
-                        break;
-                    case "ShadyAllies":
-                        CmdSetAllyStat("cunning");
-                        break;
-                    default:
-                        break;
-                }
                 switch (passive.passiveName)
                 {
                     case "StrongAllies":
-                        CmdSetAllyStat("strength");
+                        if (allyStat != "strength")
+                            CmdSetAllyStat("strength");
                         break;
                     case "SmartAllies":
-                        CmdSetAllyStat("intelligence");
+                        if (allyStat != "intelligence")
+                            CmdSetAllyStat("intelligence");
                         break;
                     case "ShadyAllies":
-                        CmdSetAllyStat("cunning");
+                        if (allyStat != "cunning")
+                            CmdSetAllyStat("cunning");
                         break;
                     default:
                         break;
@@ -1044,7 +1033,7 @@ public class PlayerScript : NetworkBehaviour
     public void CmdSetAllyStat(string s)
     {
         allyStat = s;
-        logger.AppendMessage(NetworkClient.localPlayer.GetComponent<PlayerScript>().playerName + " changed their allyStat to " + s);
+        logger.AppendMessage(playerName + " changed their allyStat to " + s);
     }
 
     [TargetRpc]
