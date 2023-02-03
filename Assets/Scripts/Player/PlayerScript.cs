@@ -708,7 +708,7 @@ public class PlayerScript : NetworkBehaviour
         {
             if (g.GetComponent<CardScript>().Title == "")
             {
-                Debug.Log(p.hand[index]);
+                Debug.Log(p.hand[index]); 
                 //Debug.Log(deck.sendCardName(p.hand[index]));
                 g.GetComponent<CardScript>().Title = gameObject.GetComponent<DeckScript>().sendCardName(p.hand[index]);
                 g.GetComponent<CardScript>().Type = gameObject.GetComponent<DeckScript>().sendCardType(p.hand[index]);
@@ -1095,4 +1095,21 @@ public class PlayerScript : NetworkBehaviour
     {
         selectedTrg = b;
     }
+
+    [Command(requiresAuthority = false)]
+    public void CmdDisableCard(PlayerScript e, string ID) {
+        for (int i = 0; i < 6; i++) {
+            if (e.cardSlots[i].GetComponent<CardScript>().ID == ID) { 
+                logger.AppendMessage(string.Format("{0} disabled a card in {1}'s hand", playerName, e.playerName));
+                DisableCard(e.connectionToClient, i);
+                break;
+            }    
+        }
+    }
+
+    [TargetRpc]
+    public void DisableCard(NetworkConnection conn, int index) {
+        NetworkClient.localPlayer.GetComponent<PlayerScript>().cardSlots[index].GetComponent<CardScript>().disabled = true;
+    }
+
 }

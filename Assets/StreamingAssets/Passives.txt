@@ -1,7 +1,7 @@
 charisma,StrongAllies,All players with strength as their highest stat become your ally - you cannot harm allies
 charisma,SmartAllies,All players with intelligence as their highest stat become your ally - you cannot harm allies
 charisma,ShadyAllies,All players with cunning as their highest stat become your ally - you cannot harm allies
-intelligence,Tactician,Nullify 2 cards en emies hand
+intelligence,Tactician,Nullify 2 cards enemies hand
 intelligence,Precise,Your attacks never miss their target
 intelligence,SeeDeck,See another person's hand once per turn
 strength,Scrapper,Players higher than you on the leaderboard can not target you

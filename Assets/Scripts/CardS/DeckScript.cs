@@ -968,6 +968,21 @@ public class DeckScript : NetworkBehaviour
 
     }
 
+
+    public void NullifyCards(string cSlot, string ID) {
+        PlayerScript e = null;
+        PlayerScript p = NetworkClient.localPlayer.GetComponent<PlayerScript>();
+
+        for (int i = 1; i < 4; i++)  //gets cardslot id
+            if (cSlot == i.ToString()) // 1 2 or 3
+            {
+                e = p.sendPlayerData()[i - 1]; // gets enemy player
+                p.disabled1++; // increments disabled cards;
+            }
+        p.CmdDisableCard(e, ID); //smasher
+
+    }
+
     public void RevealCards(PlayerScript p, int amount)
     {
         logger.AppendMessage(string.Format("{0} revealed {1} cards in {2}'s hand", currentPlayer.playerName, amount, p.playerName));

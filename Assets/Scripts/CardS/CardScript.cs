@@ -190,55 +190,14 @@ public class CardScript : NetworkBehaviour
             hovered = false;
     }
 
-    [Command(requiresAuthority = false)]
-    public void CmdDisableCard(PlayerScript enemy, int index) {
-        DisableCard(enemy.connectionToClient, index);
-    }
-
-    [TargetRpc]
-    public void DisableCard(NetworkConnection conn, int index) {
-        NetworkClient.localPlayer.GetComponent<PlayerScript>().cardSlots[index].GetComponent<CardScript>().disabled = true;
-    }
-
     public void OnMouseDown()
     {
         PlayerScript currentP = NetworkClient.localPlayer.GetComponent<PlayerScript>();
-
+        
         if (currentP.passive.passiveName == "Tactician" && gameObject.tag != "CardSlot" && gameObject.tag != "Display" && gameState.currentState == GameStates.LoadEnemyCards && currentP.disabled1 < 2) {
-            List<PlayerScript> eList = currentP.sendPlayerData();
-            foreach (PlayerScript p in plist.players)
-            {
-                if (p.netId != currentP.netId)
-                {
-                    if (eList[0] == null)
-                        eList.Add(p);
-                    else if (eList[1] == null)
-                        eList.Add(p);
-                    else if (eList[2] == null)
-                        eList.Add(p);
-                }
-            }
-            PlayerScript e = null;
-            string thisSlot = "";
-            for (int i = 1; i < 4; i++)  //gets cardslot id
-                if (gameObject.tag == i.ToString()) // 1 2 or 3
-                {
-                    //for (int j = 0; j < 3; j++)
-                    // if (eList[i] == plist.players[i]) 
-                    e = eList[i - 1]; // gets enemy player
-                    logger.AppendMessage(currentP.playerName + " is trying to disable a card of " + e.playerName);
-                }
-            
-
-            for (int i = 0; i < 6; i++)
-                if (e.cardSlots[i].GetComponent<CardScript>().ID == ID) { //problem child
-                    logger.AppendMessage("disabled");
-                    thisSlot = e.cardSlots[i].GetComponent<CardScript>().ID;
-                    e.cardSlots[i].GetComponent<SpriteRenderer>().color = Color.gray;
-                    CmdDisableCard(e, i);
-                    currentP.disabled1++;
-                    break;
-                }
+            string cardTag = this.gameObject.tag;
+            string cardID = this.ID;
+            currentP.GetComponent<DeckScript>().NullifyCards(cardTag, cardID);
         }
 
         

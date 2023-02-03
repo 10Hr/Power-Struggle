@@ -82,10 +82,10 @@ namespace UI
 			if (!showGUI)
 				return;
 
-			if (NetworkClient.isConnected && NetworkServer.active) { 
+			if (!NetworkClient.isConnected && !NetworkServer.active) { 
+			} else {
 				StatusLabels();
-				
-			}				
+			}
 
 			// client ready
 			if (NetworkClient.isConnected && !NetworkClient.ready)
@@ -229,10 +229,11 @@ namespace UI
 			// server / client status message
 			if (NetworkServer.active)
 			{
-				if (m_Manager.IsRelayEnabled()) //?  
+				if (m_Manager.IsRelayEnabled() ) //?  
 				{
 					joinCodeLbl = GameObject.Find("joinCodeLbl");
-					joinCodeLbl.GetComponent<TextMeshProUGUI>().text = "JOIN CODE: " + m_Manager.relayJoinCode; // not working?
+					if (joinCodeLbl != null)
+						joinCodeLbl.GetComponent<TextMeshProUGUI>().text = "JOIN CODE: " + m_Manager.relayJoinCode; // not working?
 				}
 					
 			}
