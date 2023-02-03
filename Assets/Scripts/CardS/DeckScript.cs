@@ -319,9 +319,9 @@ public class DeckScript : NetworkBehaviour
         Debug.Log("Lose 1 Intelligence, reveal all card in enemy hand");
         switch(readytrg) {
             case true:
+                readytrg = false;
                 if (currentPlayer.Intelligence > 0)
                 {
-                    readytrg = false;
                     RevealCards(targetPlayer, 6);
                     currentPlayer.ModifyStats("intelligence", -1);
                     currentPlayer.hideButtons();
