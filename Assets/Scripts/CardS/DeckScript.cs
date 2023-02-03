@@ -793,7 +793,7 @@ public class DeckScript : NetworkBehaviour
         {
             p.ModifyStats(p.Highest, -2);
         }
-        currentPlayer.ModifyStats(p.Highest, -2);
+        currentPlayer.ModifyStats(currentPlayer.Highest, -2);
         currentPlayer.DiscardCard(index, currentPlayer.cardSlots);
         currentPlayer.CmdturnIncrease();
     }
