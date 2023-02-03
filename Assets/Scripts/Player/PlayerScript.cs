@@ -8,7 +8,7 @@ using System;
 using System.Linq;
 using TMPro;
 using Utp;
-
+using UnityEngine.SceneManagement;
 //CLIENT SCRIPT
 public class PlayerScript : NetworkBehaviour
 {
@@ -24,11 +24,15 @@ public class PlayerScript : NetworkBehaviour
     public string platform;
 
     public void Awake() {
-        username = SystemInfo.deviceName;
-        platform = Application.platform.ToString();
-        ip = NetworkManager.singleton.networkAddress;
-        instructions = GameObject.Find("Instructions").GetComponent<TextMeshProUGUI>();
-        instructions.text = "DON'T TOUCH ANYTHING!!!!!";
+        //username = SystemInfo.deviceName;
+       // platform = Application.platform.ToString();
+        //ip = NetworkManager.singleton.networkAddress;
+        //if (SceneManager.GetActiveScene().name == "Game")
+       // {
+            instructions = GameObject.Find("Instructions").GetComponent<TextMeshProUGUI>();
+            instructions.text = "DON'T TOUCH ANYTHING!!!!!";
+       // }
+
     }
 //--------------------------------------------------------------------
 
@@ -283,17 +287,24 @@ public class PlayerScript : NetworkBehaviour
     Text pLabel2;
     Text pLabel3;
 
+    public GameObject maincanvas;
+
+    public GameObject menucanvas;
+
     public int disabled1 = 0;
 
     //Properties
     //Methods
+
     public override void OnStartLocalPlayer()
     {
         base.OnStartLocalPlayer();
     }
 
+    
     public void Start()
     {
+        menucanvas = GameObject.Find("MenuCanvas");
         leaderBoard = GameObject.Find("Leaderboard").GetComponent<LeaderBoardManager>();
         playerList = GameObject.Find("PlayerList").GetComponent<PlayerList>();
         FSM = GameObject.Find("FSM").GetComponent<GameState>();
@@ -344,6 +355,7 @@ public class PlayerScript : NetworkBehaviour
             lockInButton.SetActive(false);
             turnToken.SetActive(false);
         }
+
     }
 
     public void Update()
@@ -372,6 +384,7 @@ public class PlayerScript : NetworkBehaviour
                     CmdSetPlayer();
                     leaderBoard.CmdUpdateLeaderBoard();
                     instructions.text = "Allocate points to your stats,\n you have 8 points to start with.";
+                    menucanvas.SetActive(false);
                 }
                 break;
             case GameStates.Passive:

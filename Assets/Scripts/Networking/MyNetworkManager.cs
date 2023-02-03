@@ -27,7 +27,7 @@ namespace Network
         /// <summary>
         /// List of players currently connected to the server.
         /// </summary>
-        private List<PlayerScript> m_Players;
+        public List<PlayerScript> m_Players;
 
         public override void Awake()
         {
@@ -77,22 +77,24 @@ namespace Network
             m_SessionId = System.Guid.NewGuid().ToString();
         }
 
-//        public override void OnServerAddPlayer(NetworkConnectionToClient conn)
-//        {
-//            base.OnServerAddPlayer(conn);
-
-//            foreach (KeyValuePair<uint, NetworkIdentity> kvp in NetworkServer.spawned)
-//            {
-//                PlayerScript comp = kvp.Value.GetComponent<PlayerScript>();
-////         
-//                // Add to player list if new
-//                if (comp != null && !m_Players.Contains(comp))
-//                {
-//                    comp.sessionId = m_SessionId;
-//                    m_Players.Add(comp);
-//                }
-//            }
-//        }
+       //public override void OnServerAddPlayer(NetworkConnectionToClient conn)
+      // {
+           // base.OnServerAddPlayer(conn);
+            
+//
+    //        foreach (KeyValuePair<uint, NetworkIdentity> kvp in NetworkServer.spawned)
+    //        {
+    //            PlayerScript comp = kvp.Value.GetComponent<PlayerScript>();
+    //    
+    //            // Add to player list if new
+    //            if (comp != null && !m_Players.Contains(comp))
+    //            {
+    //                comp.sessionId = m_SessionId;
+    //                m_Players.Add(comp);
+    //            }
+    //        }
+        //}
+    
 
         public override void OnStopServer()
         {
@@ -142,10 +144,10 @@ namespace Network
             m_SessionId = "";
         }
 
-      //  public override void OnClientConnect(NetworkConnection conn)
-      //  {
-      //      Debug.Log($"MyNetworkManager: {m_Username} Connected to Server!");
-      //  }
+    //    public override void OnClientConnect(NetworkConnection conn)
+     //   {
+            
+     //   }
 //
       //  public override void OnClientDisconnect(NetworkConnection conn)
       //  {

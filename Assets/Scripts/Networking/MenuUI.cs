@@ -1,11 +1,16 @@
 ﻿// vis2k: GUILayout instead of spacey += ...; removed Update hotkeys to avoid
 // confusion if someone accidentally presses one.
-using System.ComponentModel;
+//using System.ComponentModel;
 using System.Collections.Generic;
+using System.Collections;
+using System;
 using UnityEngine;
 using Network;
 using Mirror;
 using Unity.Services.Relay.Models;
+using UnityEngine.SceneManagement;
+using TMPro;
+
 
 namespace UI
 {
@@ -16,11 +21,21 @@ namespace UI
 	[DisallowMultipleComponent]
 	[AddComponentMenu("Network/MenuUI")]
 	[RequireComponent(typeof(MyNetworkManager))]
-	[EditorBrowsable(EditorBrowsableState.Never)]
+	//[EditorBrowsable(EditorBrowsableState.Never)]
 	[HelpURL("https://mirror-networking.com/docs/Components/NetworkManagerHUD.html")]
 	public class MenuUI : MonoBehaviour
 	{
+		[SerializeField]
 		private MyNetworkManager m_Manager;
+		
+		public GameObject joinCodeLbl;
+		public GameObject joinCodeInput;
+
+		[SerializeField]
+		public PlayerList playerList;
+
+		public GameObject maincanvas;
+		public GameObject menucanvas;
 
 		/// <summary>
 		/// Whether to show the default control HUD at runtime.
@@ -39,7 +54,17 @@ namespace UI
 
 		void Awake()
 		{
-			m_Manager = GetComponent<MyNetworkManager>();
+
+			//m_Manager = GetComponent<MyNetworkManager>();
+
+			maincanvas = GameObject.Find("Canvas");
+			menucanvas = GameObject.Find("MenuCanvas");
+			//maincanvas.SetActive(false);
+
+			joinCodeLbl = GameObject.Find("joinCodeLbl");
+			joinCodeInput = GameObject.Find("joinCodeInput");
+			//playerList = GameObject.Find("PlayerList").GetComponent<PlayerList>();
+
 		}
 
 		void OnGUI()
@@ -57,15 +82,10 @@ namespace UI
 			if (!showGUI)
 				return;
 
-			GUILayout.BeginArea(new Rect(10 + offsetX, 40 + offsetY, 215, 9999));
-			if (!NetworkClient.isConnected && !NetworkServer.active)
-			{
-				StartButtons();
-			}
-			else
-			{
+			if (NetworkClient.isConnected && NetworkServer.active) { 
 				StatusLabels();
-			}
+				
+			}				
 
 			// client ready
 			if (NetworkClient.isConnected && !NetworkClient.ready)
@@ -79,19 +99,81 @@ namespace UI
 
 			}
 
-			StopButtons();
+			//StopButtons();
 
-			GUILayout.EndArea();
 		}
-
-		public void CopyToClipboard(string s)
+		public void CopyToClipboard()
 		{
 			TextEditor te = new TextEditor();
-			te.text = s;
+			if (m_Manager.IsRelayEnabled())
+				te.text = m_Manager.relayJoinCode;
+			else 
+				te.text = "No relay join code available";
+			
 			te.SelectAll();
 			te.Copy();
 		}
 
+		public void AuthenticatePlayer() {
+			Debug.Log("logged in!");
+			if (!m_Manager.isLoggedIn)
+				m_Manager.UnityLogin();
+			
+		}
+
+		public void HostGame() {
+
+			
+			if (!NetworkClient.active)
+			{
+				if (m_Manager.isLoggedIn)
+				{
+					// Server + Client
+					if (Application.platform != RuntimePlatform.WebGLPlayer)
+					{
+						int maxPlayers = 4;
+						m_Manager.StartRelayHost(maxPlayers);
+						//playerList.GetComponent<PlayerList>().CmdAddPlayers(NetworkClient.localPlayer.GetComponent<PlayerScript>());
+						
+					}
+				} else
+					m_Manager.UnityLogin(); // add log in button
+			}
+
+
+		}
+
+		public void JoinGame() {
+
+			try {
+				joinCodeInput = GameObject.Find("joinCodeInput");
+				m_Manager.relayJoinCode = joinCodeInput.GetComponent<TMP_InputField>().text;
+
+				m_Manager.JoinRelayServer();
+				//if (NetworkClient.localPlayer.GetComponent<PlayerScript>().added == false)
+				//playerList.GetComponent<PlayerList>().CmdAddPlayers(NetworkClient.localPlayer.GetComponent<PlayerScript>());
+				
+			} catch {
+				Debug.Log("No Relay server found with code: " + joinCodeInput.GetComponent<TMP_InputField>().text);
+			}
+
+		}
+
+		public void QuitGame() {
+			Application.Quit();
+		}
+		
+
+		public void StartGame() {
+			//Debug.Log(playerList.GetComponent<PlayerList>().players.Count);
+			if (playerList.players.Count == 4) {
+				Debug.Log("Starting game RELAY STYLE!!!");
+
+			}
+
+			
+		}
+		// does nothing delete after finished
 		void StartButtons()
 		{
 			if (!NetworkClient.active)
@@ -101,12 +183,14 @@ namespace UI
 					// Server + Client
 					if (Application.platform != RuntimePlatform.WebGLPlayer)
 					{
-						if (GUILayout.Button("Relay Host (Server + Client)"))
+						GUILayout.BeginHorizontal();
+						if (GUILayout.Button("Relay Host"))
 						{
 							int maxPlayers = 4;
 							m_Manager.StartRelayHost(maxPlayers);
 
 						}
+						GUILayout.EndHorizontal();
 					}
 
 
@@ -145,15 +229,12 @@ namespace UI
 			// server / client status message
 			if (NetworkServer.active)
 			{
-				GUILayout.Label("Server: active. Transport: " + Transport.activeTransport);
-				if (m_Manager.IsRelayEnabled())
+				if (m_Manager.IsRelayEnabled()) //?  
 				{
-					GUILayout.Label("Relay enabled. Join code: " + m_Manager.relayJoinCode);
+					joinCodeLbl = GameObject.Find("joinCodeLbl");
+					joinCodeLbl.GetComponent<TextMeshProUGUI>().text = "JOIN CODE: " + m_Manager.relayJoinCode; // not working?
 				}
-				if (GUILayout.Button("Copy Join Code"))
-				{
-					CopyToClipboard(m_Manager.relayJoinCode);
-				}
+					
 			}
 
 		}

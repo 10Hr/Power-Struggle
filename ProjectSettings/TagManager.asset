@@ -25,6 +25,7 @@ TagManager:
   - e2g
   - e3g
   - eventLabels
+  - Host
   layers:
   - Default
   - TransparentFX

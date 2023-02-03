@@ -100,7 +100,7 @@ namespace Utp
 			(string joinCode) =>
 			{
 				relayJoinCode = joinCode;
-
+				
 				StartHost();
 			},
 			() =>

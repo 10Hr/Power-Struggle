@@ -225,9 +225,10 @@ public class StatManager : NetworkBehaviour
         string thisButName = thisButton.name;
         string buttontag = UnityEngine.EventSystems.EventSystem.current.currentSelectedGameObject.tag;
 
-        PlayerScript p = GetPlayer();
+        PlayerScript p = GetPlayer(); //null?
+        Debug.Log("Player: " + p + " Button: " + thisButName + " Tag: " + buttontag);
 
-        CmdChangeStats(p, thisButName, buttontag);
+        CmdChangeStats(p, thisButName, buttontag); //object reference not set to an instance of an object
     }
 
     public void LockIn()
