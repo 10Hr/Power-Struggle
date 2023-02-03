@@ -174,6 +174,7 @@ public class DeckScript : NetworkBehaviour
         Debug.Log("creating card effect list");
         effects.Clear();
 
+        effects.Add(Pranked);
     //-----------------------------------------default-----------------------------------------
         effects.Add(def1);
         effects.Add(def2);
@@ -460,7 +461,7 @@ public class DeckScript : NetworkBehaviour
         {
             case true:
                 readytrg = false;
-                targetPlayer.ModifyPower(15 * Mathf.RoundToInt(GetRevealedIndexes(targetPlayer).Count / 2));
+                targetPlayer.ModifyPower(-15 * GetRevealedIndexes(targetPlayer).Count);
                 currentPlayer.hideButtons();
                 currentPlayer.DiscardCard(index, currentPlayer.cardSlots);
                 currentPlayer.CmdturnIncrease();
@@ -802,6 +803,8 @@ public class DeckScript : NetworkBehaviour
         Debug.Log("Lose all of your power - gain strength = to that value / 25");
         currentPlayer.ModifyStats("strength", Mathf.RoundToInt(currentPlayer.Power / 25));
         currentPlayer.ModifyPower(-currentPlayer.Power);
+        currentPlayer.DiscardCard(index, currentPlayer.cardSlots);
+        currentPlayer.CmdturnIncrease();
     }
     public void str12()
     { //Select new passive
@@ -955,7 +958,12 @@ public class DeckScript : NetworkBehaviour
     }
     #endregion
     //---------------------------------General Methods-------------------------------------------
-
+    public void Pranked()
+    {
+        currentPlayer.ModifyPower(-1);
+        currentPlayer.DiscardCard(index, currentPlayer.cardSlots);
+        currentPlayer.CmdturnIncrease();
+    }
     public void trgbntActive(string meth) {
         NetworkClient.localPlayer.GetComponent<PlayerScript>().UnhideButtons();
         currentMethod = meth;

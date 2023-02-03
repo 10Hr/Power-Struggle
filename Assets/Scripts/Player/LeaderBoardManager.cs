@@ -28,6 +28,8 @@ public class LeaderBoardManager : NetworkBehaviour
     [SerializeField]
     GameState FSM;
 
+    public List<PlayerScript> TurnOrder = new List<PlayerScript>();
+
     // Update is called once per frame
 
     private void Update()
@@ -41,6 +43,10 @@ public class LeaderBoardManager : NetworkBehaviour
             secondPlace = playerList.players[1];
             thirdPlace = playerList.players[2];
             fourthPlace = playerList.players[3];
+            TurnOrder.Add(firstPlace);
+            TurnOrder.Add(secondPlace);
+            TurnOrder.Add(thirdPlace);
+            TurnOrder.Add(fourthPlace);
             called = true;
         }
 
@@ -52,6 +58,11 @@ public class LeaderBoardManager : NetworkBehaviour
 
         if (firstPlace != null && secondPlace != null && thirdPlace != null && fourthPlace != null)
         {
+            TurnOrder[0] = firstPlace;
+            TurnOrder[1] = secondPlace;
+            TurnOrder[2] = thirdPlace;
+            TurnOrder[3] = fourthPlace;
+
             for (int i = 0; i < 4; i++)
             {
                 if (firstPlace.netId == playerList.players[i].netId)
@@ -82,10 +93,10 @@ public class LeaderBoardManager : NetworkBehaviour
 
     public void CmdUpdateLeaderBoard()
     {
-        if (!(FSM.turn == 0 && FSM.currentState == GameStates.Event))
-        {
-            return;
-        }
+        //if (!(FSM.turn == 0 && FSM.currentState == GameStates.Event))
+        //{
+        //    return;
+        //}
 
         if (secondPlace.Power > firstPlace.Power)
         {

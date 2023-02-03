@@ -127,7 +127,33 @@ public class GameState : NetworkBehaviour
                 }
                 break;
             case GameStates.Turn:
-                if (turn == 12) {
+                if (turn == 12)
+                {
+                    turn = 24;
+                    foreach (PlayerScript p in playerList.players)
+                    {
+                        p.setUntargetable(false);
+                        p.CmdDisablePLoss(false);
+                        p.CmdDisableSLoss(false);
+                        p.CmdSetSawDeck(false);
+                        p.CmdSelectedTrg(false);
+                    }
+                    currentState = GameStates.LoadEnemyCards;
+                }
+                if (turn == 36)
+                {
+                    turn = 48;
+                    foreach (PlayerScript p in playerList.players)
+                    {
+                        p.setUntargetable(false);
+                        p.CmdDisablePLoss(false);
+                        p.CmdDisableSLoss(false);
+                        p.CmdSetSawDeck(false);
+                        p.CmdSelectedTrg(false);
+                    }
+                    currentState = GameStates.LoadEnemyCards;
+                }
+                if (turn == 60) {
                     turn = 0;
                     foreach (PlayerScript p in playerList.players)
                     {
@@ -139,7 +165,8 @@ public class GameState : NetworkBehaviour
                     }
                     currentState = GameStates.Event;
                 } else {
-                    currentPlayer = playerList.players[turn % 4];
+                    //currentPlayer = playerList.players[turn % 4];
+                    currentPlayer = playerList.players[0].leaderBoard.TurnOrder[turn % 4];
                     if (currentPlayer.sawDeck == false)
                     {
                         currentPlayer.Turn(currentPlayer.connectionToClient);

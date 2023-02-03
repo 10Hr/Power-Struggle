@@ -35,7 +35,6 @@ public class CardScript : NetworkBehaviour
     public int sortingDefault;
     public float defaultY;
 
-    [SyncVar]
     public bool disabled = false;
 
     [SerializeField]
@@ -217,7 +216,7 @@ public class CardScript : NetworkBehaviour
             CmdDisplayCard(int.Parse(this.id), NetworkClient.localPlayer.GetComponent<PlayerScript>());
 
             if (disabled)
-                gameState.currentPlayer.GetComponent<DeckScript>().pullEff(title, "3"); 
+                gameState.currentPlayer.GetComponent<DeckScript>().pullEff("Pranked", id); 
             else
                 gameState.currentPlayer.GetComponent<DeckScript>().pullEff(title, id);
 

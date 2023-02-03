@@ -883,6 +883,8 @@ public class PlayerScript : NetworkBehaviour
 
         [Command(requiresAuthority = false)]
         public void ModifyStats(string type, int amount) {
+        if (amount == 0)
+            return;
         if (cantLoseStats && amount < 0)
             return;
         if (netId != FSM.currentPlayer.netId && FSM.turn < 4 && FSM.currentPlayer.passive.passiveName == "DoubleDown")
@@ -1089,7 +1091,8 @@ public class PlayerScript : NetworkBehaviour
     [Command(requiresAuthority = false)]
     public void CmdDisableCard(PlayerScript e, string ID) {
         for (int i = 0; i < 6; i++) {
-            if (e.cardSlots[i].GetComponent<CardScript>().ID == ID) { 
+            //logger.AppendMessage(string.Format("EnemyID: {0} SearchID: {1}", e.hand[i], ID));
+            if (e.hand[i] == int.Parse(ID)) { 
                 logger.AppendMessage(string.Format("{0} disabled a card in {1}'s hand", playerName, e.playerName));
                 DisableCard(e.connectionToClient, i);
                 break;
@@ -1099,7 +1102,7 @@ public class PlayerScript : NetworkBehaviour
 
     [TargetRpc]
     public void DisableCard(NetworkConnection conn, int index) {
-        NetworkClient.localPlayer.GetComponent<PlayerScript>().cardSlots[index].GetComponent<CardScript>().disabled = true;
+            conn.identity.GetComponent<PlayerScript>().cardSlots[index].GetComponent<CardScript>().disabled = true;
     }
 
 }

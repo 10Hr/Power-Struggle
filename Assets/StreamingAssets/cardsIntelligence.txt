@@ -17,4 +17,4 @@ intelligence,int8,3,Gain power equal to 10 x the amount of revealed cards in all
 intelligence,int8,3,Gain power equal to 10 x the amount of revealed cards in all your opponents hands,56
 intelligence,int9,4,If you lost power so far this turn gain it back - return half of the loses to all players. if you haven't - lose 100 power,57
 intelligence,int10,0,Discard all your cards then draw 6 new ones,58
-intelligence,str11,2,Select a new passive,59
+intelligence,str12,2,Select a new passive,59
