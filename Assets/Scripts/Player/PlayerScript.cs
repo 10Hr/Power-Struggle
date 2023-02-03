@@ -1033,7 +1033,8 @@ public class PlayerScript : NetworkBehaviour
     public void CmdSetAllyStat(string s)
     {
         allyStat = s;
-        logger.AppendMessage(playerName + " changed their allyStat to " + s);
+        if (FSM.currentState != GameStates.LoadEnemyCards)
+            logger.AppendMessage(playerName + " changed their allyStat to " + s);
     }
 
     [TargetRpc]
