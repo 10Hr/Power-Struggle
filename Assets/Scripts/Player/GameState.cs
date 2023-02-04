@@ -55,8 +55,8 @@ public class GameState : NetworkBehaviour
     }
 
     void Awake() {
-        Debug.Log("Game Started!");
-        currentState = GameStates.FillingLobby;
+        //Debug.Log("Game Started!");
+        //currentState = GameStates.FillingLobby;
     }
 
     public override void OnStartServer()
@@ -129,7 +129,7 @@ public class GameState : NetworkBehaviour
             case GameStates.Turn:
                 if (turn == 12)
                 {
-                    turn = 24;
+                    turn = 0;//24
                     EventTwo = false;
                     foreach (PlayerScript p in playerList.players)
                     {
@@ -140,35 +140,36 @@ public class GameState : NetworkBehaviour
                         p.CmdSelectedTrg(false);
                         p.ResetTrackers();
                     }
-                    currentState = GameStates.LoadEnemyCards;
+                    currentState = GameStates.Event;//loadenemycards
                 }
-                if (turn == 36)
-                {
-                    turn = 48;
-                    foreach (PlayerScript p in playerList.players)
-                    {
-                        p.setUntargetable(false);
-                        p.CmdDisablePLoss(false);
-                        p.CmdDisableSLoss(false);
-                        p.CmdSetSawDeck(false);
-                        p.CmdSelectedTrg(false);
-                        p.ResetTrackers();
-                    }
-                    currentState = GameStates.LoadEnemyCards;
-                }
-                if (turn == 60) {
-                    turn = 0;
-                    foreach (PlayerScript p in playerList.players)
-                    {
-                        p.setUntargetable(false);
-                        p.CmdDisablePLoss(false);
-                        p.CmdDisableSLoss(false);
-                        p.CmdSetSawDeck(false);
-                        p.CmdSelectedTrg(false);
-                        p.ResetTrackers();
-                    }
-                    currentState = GameStates.Event;
-                } else {
+                //if (turn == 36)
+                //{
+                //    turn = 48;
+                //    foreach (PlayerScript p in playerList.players)
+                //    {
+                //        p.setUntargetable(false);
+                //        p.CmdDisablePLoss(false);
+                //        p.CmdDisableSLoss(false);
+                //        p.CmdSetSawDeck(false);
+                //        p.CmdSelectedTrg(false);
+                //        p.ResetTrackers();
+                //    }
+                //    currentState = GameStates.LoadEnemyCards;
+                //}
+                //if (turn == 60) {
+                //    turn = 0;
+                //    foreach (PlayerScript p in playerList.players)
+                //    {
+                //        p.setUntargetable(false);
+                //        p.CmdDisablePLoss(false);
+                //        p.CmdDisableSLoss(false);
+                //        p.CmdSetSawDeck(false);
+                //        p.CmdSelectedTrg(false);
+                //        p.ResetTrackers();
+                //    }
+                //    currentState = GameStates.Event;
+                //} 
+                else {
                     //currentPlayer = playerList.players[turn % 4];
                     currentPlayer = playerList.players[0].leaderBoard.TurnOrder[turn % 4];
                     if (currentPlayer.sawDeck == false)

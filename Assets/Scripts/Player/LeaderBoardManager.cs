@@ -30,6 +30,11 @@ public class LeaderBoardManager : NetworkBehaviour
 
     public List<PlayerScript> TurnOrder = new List<PlayerScript>();
 
+    public void Start()
+    {
+        DontDestroyOnLoad(transform.gameObject);
+    }
+
     // Update is called once per frame
 
     private void Update()

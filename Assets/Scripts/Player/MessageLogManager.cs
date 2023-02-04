@@ -14,6 +14,11 @@ public class MessageLogManager : NetworkBehaviour
 
     //public int currentFirst = -1;
 
+    public void Start()
+    {
+        DontDestroyOnLoad(transform.gameObject);
+    }
+
     // Update is called once per frame
     void Update()
     {

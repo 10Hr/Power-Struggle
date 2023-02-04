@@ -51,9 +51,13 @@ public class EventManager : NetworkBehaviour
     public GameObject Praise;
     public GameObject Censure;
 
+    [SerializeField]
+    NetworkManager NetMan;
+
     private void Start()
     {
-//        playerList = GameObject.Find("PlayerList").GetComponent<PlayerList>();
+        DontDestroyOnLoad(transform.gameObject);
+        //        playerList = GameObject.Find("PlayerList").GetComponent<PlayerList>();
         ReadyButton = GameObject.Find("Ready");
         gos = GameObject.FindGameObjectsWithTag("eventLabels");
         e1gs = GameObject.FindGameObjectsWithTag("e1g");
@@ -171,7 +175,7 @@ public class EventManager : NetworkBehaviour
     [TargetRpc]
     public void RpcUpdateLabels(NetworkConnection conn, PlayerScript p)
     {
-        e1Button.GetComponentInChildren<TextMeshProUGUI>().text = "Enemy1: " + p.e1Total;
+        e1Button.GetComponentInChildren<TextMeshProUGUI>().text = "Enemy1: " + p.e1Total; //?
         e2Button.GetComponentInChildren<TextMeshProUGUI>().text = "Enemy2: " + p.e2Total;
         e3Button.GetComponentInChildren<TextMeshProUGUI>().text = "Enemy3: " + p.e3Total;
         Praise.GetComponent<Text>().text = "Praise Votes: " + p.Praise;
@@ -225,6 +229,7 @@ public class EventManager : NetworkBehaviour
                     CmdEndEvent();
                     break;
                 case "Three":
+                    NetMan.ServerChangeScene("Event3");
                     GameObject.Find("Instructions").GetComponent<TextMeshProUGUI>().text = "Funny Vote";
                     RpcSpawnBet();
                     RpcSpawnLabels();

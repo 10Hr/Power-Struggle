@@ -12,6 +12,11 @@ public class PlayerList : NetworkBehaviour
         base.OnStartServer();
     }
 
+    public void Start()
+    {
+        DontDestroyOnLoad(transform.gameObject);
+    }
+
     [Command(requiresAuthority = false)]
     public void CmdAddPlayers(PlayerScript player)
     {

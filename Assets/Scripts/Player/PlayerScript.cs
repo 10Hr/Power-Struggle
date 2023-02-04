@@ -25,11 +25,12 @@ public class PlayerScript : NetworkBehaviour
 
     public void Awake() {
         //username = SystemInfo.deviceName;
-       // platform = Application.platform.ToString();
+        // platform = Application.platform.ToString();
         //ip = NetworkManager.singleton.networkAddress;
         //if (SceneManager.GetActiveScene().name == "Game")
-       // {
-            instructions = GameObject.Find("Instructions").GetComponent<TextMeshProUGUI>();
+        // {
+        //DontDestroyOnLoad(transform.gameObject);
+        instructions = GameObject.Find("Instructions").GetComponent<TextMeshProUGUI>();
             instructions.text = "DON'T TOUCH ANYTHING!!!!!";
        // }
 
@@ -300,10 +301,10 @@ public class PlayerScript : NetworkBehaviour
     {
         base.OnStartLocalPlayer();
     }
-
     
     public void Start()
     {
+        DontDestroyOnLoad(transform.gameObject);
         menucanvas = GameObject.Find("MenuCanvas");
         leaderBoard = GameObject.Find("Leaderboard").GetComponent<LeaderBoardManager>();
         playerList = GameObject.Find("PlayerList").GetComponent<PlayerList>();
@@ -384,6 +385,10 @@ public class PlayerScript : NetworkBehaviour
                     CmdSetPlayer();
                     leaderBoard.CmdUpdateLeaderBoard();
                     instructions.text = "Allocate points to your stats,\n you have 8 points to start with.";
+                    if (menucanvas.activeSelf == true)
+                    {
+                        CmdSetAllyStat("");
+                    }
                     menucanvas.SetActive(false);
                 }
                 break;
