@@ -50,7 +50,7 @@ public class PlayerScript : NetworkBehaviour
     [SyncVar]
     public int Praise = 8;
     [SyncVar]
-    public int Censure = 8;
+    public int Censure = 4;
     [SyncVar]
     public int eVotes = 0;
     [SyncVar]
