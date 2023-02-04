@@ -440,7 +440,7 @@ public class PlayerScript : NetworkBehaviour
                 if (passive.passiveName == "Tactician")
                     instructions.text = "Click enemy cards to disable, then select 3 cards and lock in";
                 if (FSM.EventTwo)
-                    instructions.text =  instructions.text + " Due to he last event gamerule, you don't discard cards you play this turn";
+                    instructions.text = instructions.text + " Due to he last event gamerule, you don't discard cards you play this turn";
                 TransferEnemyData();
                 switch (passive.passiveName)
                 {
@@ -462,7 +462,7 @@ public class PlayerScript : NetworkBehaviour
                 numSelected = 0;
                 foreach (GameObject g in cardSlots)
                 {
-                    if (g.GetComponent<CardScript>().selected && !g.GetComponent<CardScript>().prevSelected )
+                    if (g.GetComponent<CardScript>().selected && !g.GetComponent<CardScript>().prevSelected)
                     {
                         g.GetComponent<SpriteRenderer>().color = Color.green;
                         numSelected++;
@@ -496,8 +496,8 @@ public class PlayerScript : NetworkBehaviour
                 else
                     instructions.text = "When it is your turn, select a card to play it." + "\nDue to the last event gamerule, you don't discard cards you play this turn";
                 //if (passive.passiveName == "Tactician") {
-                    
-               // }
+
+                // }
                 if (LockedIn)
                     CmdUnlock();
                 if (enemy1.hand.Count == 6)
@@ -515,7 +515,7 @@ public class PlayerScript : NetworkBehaviour
                 break;
 
             case GameStates.Event:
-                
+
                 foreach (GameObject g in cardSlots)
                 {
                     if (g.GetComponent<CardScript>().disabled)
@@ -536,7 +536,6 @@ public class PlayerScript : NetworkBehaviour
         strengthText.text = "Strength: " + strength;
         intelligenceText.text = "Intelligence: " + intelligence;
         cunningText.text = "Cunning: " + cunning;
-
         if (availablePoints > 0 && availablePoints < maxPoints)
         {
             foreach (GameObject b in addButtons)
@@ -566,6 +565,21 @@ public class PlayerScript : NetworkBehaviour
                 b.SetActive(false);
         }
         if (!ready && availablePoints == 0 && FSM.CurrentState == GameStates.Turn)
+        {
+            ready = true;
+            foreach (GameObject b in subButtons)
+                b.SetActive(false);
+            foreach (GameObject b in addButtons)
+                b.SetActive(false);
+        }
+        if (!ready && FSM.currentState == GameStates.Event && availablePoints != 0)
+        {
+            foreach (GameObject b in subButtons)
+                b.SetActive(true);
+            foreach (GameObject b in addButtons)
+                b.SetActive(true);
+        }
+        else if (!ready && FSM.currentState == GameStates.Event && availablePoints == 0)
         {
             ready = true;
             foreach (GameObject b in subButtons)
@@ -1103,6 +1117,13 @@ public class PlayerScript : NetworkBehaviour
     [TargetRpc]
     public void DisableCard(NetworkConnection conn, int index) {
             conn.identity.GetComponent<PlayerScript>().cardSlots[index].GetComponent<CardScript>().disabled = true;
+    }
+
+    [Command (requiresAuthority = false)]
+    public void ResetTrackers()
+    {
+        powerGained = 0;
+        powerLost = 0;
     }
 
 }

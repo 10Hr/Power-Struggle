@@ -225,7 +225,7 @@ public class EventManager : NetworkBehaviour
                     CmdEndEvent();
                     break;
                 case "Three":
-                    GameObject.Find("Instructions").GetComponent<TextMeshProUGUI>().text = "Rework this one";
+                    GameObject.Find("Instructions").GetComponent<TextMeshProUGUI>().text = "Funny Vote";
                     RpcSpawnBet();
                     RpcSpawnLabels();
                     currentBetter = playerList.players[0];

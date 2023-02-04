@@ -130,6 +130,7 @@ public class GameState : NetworkBehaviour
                 if (turn == 12)
                 {
                     turn = 24;
+                    EventTwo = false;
                     foreach (PlayerScript p in playerList.players)
                     {
                         p.setUntargetable(false);
@@ -137,6 +138,7 @@ public class GameState : NetworkBehaviour
                         p.CmdDisableSLoss(false);
                         p.CmdSetSawDeck(false);
                         p.CmdSelectedTrg(false);
+                        p.ResetTrackers();
                     }
                     currentState = GameStates.LoadEnemyCards;
                 }
@@ -150,6 +152,7 @@ public class GameState : NetworkBehaviour
                         p.CmdDisableSLoss(false);
                         p.CmdSetSawDeck(false);
                         p.CmdSelectedTrg(false);
+                        p.ResetTrackers();
                     }
                     currentState = GameStates.LoadEnemyCards;
                 }
@@ -162,6 +165,7 @@ public class GameState : NetworkBehaviour
                         p.CmdDisableSLoss(false);
                         p.CmdSetSawDeck(false);
                         p.CmdSelectedTrg(false);
+                        p.ResetTrackers();
                     }
                     currentState = GameStates.Event;
                 } else {
