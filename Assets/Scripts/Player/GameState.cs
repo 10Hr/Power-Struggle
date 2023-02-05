@@ -32,6 +32,7 @@ public class GameState : NetworkBehaviour
 
     public PlayerList playerList;
     public EventManager eMan;
+    public NetworkManager NetMan;
     private bool allReady = false;
     private bool allDrawn = false;
     private bool passivesSelected = false;
@@ -185,6 +186,7 @@ public class GameState : NetworkBehaviour
                 {
                     currentState = GameStates.LoadEnemyCards;
                     EndEvent = false;
+                    NetMan.ServerChangeScene("Game");
                     break;
                 }
                 if (eMan.currentEvent == "")

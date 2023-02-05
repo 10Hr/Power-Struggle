@@ -65,28 +65,7 @@ public class EventManager : NetworkBehaviour
         e3gs = GameObject.FindGameObjectsWithTag("e3g");
 //      //  FSM = GameObject.Find("FSM").GetComponent<GameState>();
 
-        Praise = GameObject.Find("Praise");
-        Censure = GameObject.Find("Censure");
 
-        e1Button = GameObject.Find("Enemy1Votes");
-        e1Add = GameObject.Find("e1a");
-        e1Sub = GameObject.Find("e1s");
-        e2Button = GameObject.Find("Enemy2Votes");
-        e2Add = GameObject.Find("e2a");
-        e2Sub = GameObject.Find("e2s");
-        e3Button = GameObject.Find("Enemy3Votes");
-        e3Add = GameObject.Find("e3a");
-        e3Sub = GameObject.Find("e3s");
-
-        e1Button.SetActive(false);
-        e2Button.SetActive(false);
-        e3Button.SetActive(false);
-        e1Add.SetActive(false);
-        e1Sub.SetActive(false);
-        e2Add.SetActive(false);
-        e2Sub.SetActive(false);
-        e3Add.SetActive(false);
-        e3Sub.SetActive(false);
 
         foreach (GameObject g in e1gs)
             g.SetActive(false);
@@ -96,9 +75,6 @@ public class EventManager : NetworkBehaviour
             g.SetActive(false);
         foreach (GameObject g in gos)
             g.SetActive(false);
-
-        Praise.SetActive(false);
-        Censure.SetActive(false);
     }
 
     private void Update()
@@ -130,7 +106,7 @@ public class EventManager : NetworkBehaviour
 
                 break;
             case "Three":
-                if (isServer)
+                if (isServer && Censure != null)
                 {
                     foreach (PlayerScript p in playerList.players)
                     {
@@ -230,6 +206,17 @@ public class EventManager : NetworkBehaviour
                     break;
                 case "Three":
                     NetMan.ServerChangeScene("Event3");
+                    e1Button = GameObject.Find("Enemy1Votes");
+                    e1Add = GameObject.Find("e1a");
+                    e1Sub = GameObject.Find("e1s");
+                    e2Button = GameObject.Find("Enemy2Votes");
+                    e2Add = GameObject.Find("e2a");
+                    e2Sub = GameObject.Find("e2s");
+                    e3Button = GameObject.Find("Enemy3Votes");
+                    e3Add = GameObject.Find("e3a");
+                    e3Sub = GameObject.Find("e3s");
+                    Praise = GameObject.Find("Praise");
+                    Censure = GameObject.Find("Censure");
                     GameObject.Find("Instructions").GetComponent<TextMeshProUGUI>().text = "Funny Vote";
                     RpcSpawnBet();
                     RpcSpawnLabels();
@@ -244,8 +231,8 @@ public class EventManager : NetworkBehaviour
     [ClientRpc]
     public void RpcSpawnLabels()
     {
-        Praise.SetActive(true);
-        Censure.SetActive(true);
+        //Praise.SetActive(true);
+        //Censure.SetActive(true);
     }
 
     [Command(requiresAuthority = false)]
@@ -277,30 +264,30 @@ public class EventManager : NetworkBehaviour
         foreach (GameObject g in gos)
             g.SetActive(false);
 
-        Praise.SetActive(false);
-        Censure.SetActive(false);
-        e1Button.SetActive(false);
-        e2Button.SetActive(false);
-        e3Button.SetActive(false);
-        e1Add.SetActive(false);
-        e1Sub.SetActive(false);
-        e2Add.SetActive(false);
-        e2Sub.SetActive(false);
-        e3Add.SetActive(false);
-        e3Sub.SetActive(false);
+        //Praise.SetActive(false);
+        //Censure.SetActive(false);
+        //e1Button.SetActive(false);
+        //e2Button.SetActive(false);
+        //e3Button.SetActive(false);
+        //e1Add.SetActive(false);
+        //e1Sub.SetActive(false);
+        //e2Add.SetActive(false);
+        //e2Sub.SetActive(false);
+        //e3Add.SetActive(false);
+        //e3Sub.SetActive(false);
     }
 
     [ClientRpc]
     public void RpcSpawnBet()
     {
-        e1Button.SetActive(true);
-        e2Button.SetActive(true);
-        e3Button.SetActive(true);
-        e1Add.SetActive(true);
-        e1Sub.SetActive(true);
-        e2Add.SetActive(true);
-        e2Sub.SetActive(true);
-        e3Add.SetActive(true);
-        e3Sub.SetActive(true);
+        //e1Button.SetActive(true);
+        //e2Button.SetActive(true);
+        //e3Button.SetActive(true);
+        //e1Add.SetActive(true);
+        //e1Sub.SetActive(true);
+        //e2Add.SetActive(true);
+        //e2Sub.SetActive(true);
+        //e3Add.SetActive(true);
+        //e3Sub.SetActive(true);
     }
 }
