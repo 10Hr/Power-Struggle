@@ -6,6 +6,8 @@ This is a high-strategy card game with deck building aspects, where players plot
 
 Rules and more information about the gameplay can be found here: https://docs.google.com/document/d/1A_vSe1VZY7kPrL_xw2ga_0elhIPuovndT6nKo7hyewE/edit?usp=sharing
 
+Development has been paused until further notice.
+
 How to Run:
 
 Work in Progess (Networking still under development)
